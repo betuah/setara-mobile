@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const RefreshTokenSchema = new Schema({
+const refreshTokenSchema = new Schema({
     user: { 
         type: Schema.Types.ObjectId, 
         ref: 'users_Data' 
@@ -24,22 +24,22 @@ const RefreshTokenSchema = new Schema({
     }
 })
 
-RefreshTokenSchema.virtual('isExpired').get(() => {
-    return Date.now() >= this.expires;
+refreshTokenSchema.virtual('isExpired').get(function() {
+    return Date.now() >= this.expires
 })
 
-RefreshTokenSchema.virtual('isActive').get(() => {
-    return !this.revoked || !this.isExpired;
+refreshTokenSchema.virtual('isActive').get(function() {
+    return !this.revoked && !this.isExpired
 })
 
-RefreshTokenSchema.set('toJSON', {
+refreshTokenSchema.set('toJSON', {
     virtuals: true,
     versionKey: false,
-    transform: (doc, ret) => {
+    transform: function (doc, ret) {
         // remove these props when object is serialized
-        delete ret._id;
-        delete ret.user;
+        delete ret._id
+        delete ret.user
     }
 })
 
-module.exports = mongoose.model('token_Data', RefreshTokenSchema)
+module.exports = mongoose.model('token_Data', refreshTokenSchema)

@@ -4,7 +4,6 @@ const {
     generateJwtToken,
     generateRefreshToken,
     getRefreshTokens,
-    getRefreshToken,
     revokeToken,
     setTokenCookie
 } = require('../services/authService')
@@ -55,7 +54,7 @@ const signUp = async (req, res) => {
         const name              = req.body.name
         const email             = req.body.email
         const password          = req.body.password
-        const passwordHashed    = await bcrypt.hash(password, 8)
+        const passwordHashed    = await bcrypt.hash(password, 12)
 
         const dataBody = {
             uname: uname,
@@ -112,10 +111,9 @@ const signUp = async (req, res) => {
         }
         res.status(400).json(data);
     }
-    
 }
 
-const profile = async (req, res) => {
+const account = async (req, res) => {
     const id    = req.userId
     
     try {
@@ -136,7 +134,7 @@ const profile = async (req, res) => {
 }
 
 const signOut = async (req, res) => {
-    const token = req.body.token || req.cookies.refreshToken
+    const token = req.body.token || req.cookies.refToken
 
     if (!token) return res.status(400).json({ message: 'Token is required!' })
 
@@ -165,6 +163,6 @@ module.exports = {
     signIn,
     signUp,
     signOut,
-    profile,
+    account,
     getTokens
 }

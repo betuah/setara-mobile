@@ -29,7 +29,7 @@ const userDataSchema = new Schema({
 userDataSchema.set('toJSON', {
     virtuals: true,
     versionKey: false,
-    transform: (doc, ret) => {
+    transform: function (doc, ret) {
         // remove these props when object is serialized
         delete ret._id;
         delete ret.password;

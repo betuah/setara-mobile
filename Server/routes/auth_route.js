@@ -12,8 +12,8 @@ module.exports = (app) => {
     app.route('/api/v1/signout')
         .post(authMiddleware, Auth.signOut)
     
-    app.route('/api/v1/profile')
-        .get(authMiddleware, Auth.profile)
+    app.route('/api/v1/account')
+        .get(authMiddleware, Auth.account)
 
     app.route('/api/v1/refresh-tokens')
         .get(authMiddleware, Auth.getTokens)

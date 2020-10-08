@@ -1,4 +1,5 @@
 const jwt           = require('jsonwebtoken')
+const crypto        = require('crypto')
 const saltedMd5     = require('salted-md5')
 const env           = require('../env')
 const { isValidId } = require('../config/db_mongoDB')
@@ -6,10 +7,10 @@ const refTokenData  = require('../models/tokenData.model')
 const User          = require('../models/usersData.model')
 
 const getUser = async (id) => {
-    if (!isValidId(id)) throw 'User not found';
-    const user = await User.findById(id);
-    if (!user) throw 'User not found';
-    return user;
+    if (!isValidId(id)) throw 'User not found'
+    const user = await User.findById(id)
+    if (!user) throw 'User not found'
+    return user
 }
 
 const generateJwtToken = (user) => {
@@ -23,7 +24,7 @@ const generateJwtToken = (user) => {
         env.token_secret, 
         { 
             // expiresIn: '1h' 
-            expiresIn: '1h'
+            expiresIn: '30m'
         }
     )
 }
@@ -32,14 +33,14 @@ const generateRefreshToken = (user) => {
     // create a refresh token that expires in 90 days
     return new refTokenData({
         user: user._id, // User ID
-        token: saltedMd5(user._id, env.token_secret), // Generate Token with random string
+        token: saltedMd5(user._id, crypto.randomBytes(16)), // Generate Token with random string
         expires: new Date(Date.now() + 7*24*60*60*1000) // Expired date in 7 Days
-    });
+    })
 }
 
 const getRefreshTokens = async (userId) => {
     // check that user exists
-    await getUser(userId);
+    await getUser(userId)
 
     // return refresh tokens for user
     const refreshTokens = await refTokenData.find({ user: userId })
@@ -49,38 +50,40 @@ const getRefreshTokens = async (userId) => {
 const getRefreshToken = async (token) => {
     const refreshToken = await refTokenData.findOne({ token }).populate('users_Data')
     if (!refreshToken || !refreshToken.isActive) throw 'Invalid token'
-    return refreshToken;
+    return refreshToken
 }
 
 const revokeToken = async ({ token }) => {
-    const refreshToken = await getRefreshToken(token);
+    const refreshToken = await getRefreshToken(token)
 
     // revoke token and save
     refreshToken.revoked = Date.now()
-    await refreshToken.save();
+    await refreshToken.save()
 }
 
 const refreshToken = async ({ token }) => {
-    const refreshToken = await getRefreshToken(token);
-    const { user } = refreshToken;
+    try {
+        const refreshToken = await getRefreshToken(token)
+        const { user } = refreshToken
 
-    // replace old refresh token with a new one and save
-    const newRefreshToken = generateRefreshToken(user)
-    refreshToken.revoked = Date.now()
-    refreshToken.replacedByToken = newRefreshToken.token
-    await refreshToken.save()
-    await newRefreshToken.save()
+        // replace old refresh token with a new one and save
+        const newRefreshToken = generateRefreshToken(user)
+        refreshToken.revoked = Date.now()
+        refreshToken.replacedByToken = newRefreshToken.token
+        await refreshToken.save()
+        await newRefreshToken.save()
 
-    // generate new jwt
-    const jwtToken = generateJwtToken(user);
+        // generate new jwt
+        const jwtToken = generateJwtToken(user)
 
-    // return basic details and tokens
-    return { 
-        data: {
-            ...user
-        },
-        accessToken: jwtToken,
-        refreshToken: newRefreshToken.token
+        // return basic details and tokens
+        return { 
+            accessToken: jwtToken,
+            refreshToken: newRefreshToken.token
+        }
+    } catch (error) {
+        res.status(500).json({ status: 'Internal Server Error', message: 'Ops... Something when wrong!' })
+        console.log('error', error)
     }
 }
 
@@ -90,7 +93,7 @@ const setTokenCookie = async (res, token) => {
         httpOnly: true,
         expires: new Date(Date.now() + 7*24*60*60*1000)
     }
-    res.cookie('refreshToken', token, cookieOptions);
+    res.cookie('refToken', token, cookieOptions);
 }
 
 module.exports = {

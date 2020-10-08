@@ -1,6 +1,10 @@
-const jwt       = require('jsonwebtoken')
-const env       = require('../env')
-const secret    = env.token_secret
+const jwt               = require('jsonwebtoken')
+const env               = require('../env')
+const secret            = env.token_secret
+const { 
+    refreshToken,
+    setTokenCookie
+}  = require('../services/authService')
 
 const authMiddleware = async (req, res, next) => {
     try {
@@ -20,11 +24,25 @@ const authMiddleware = async (req, res, next) => {
             next()
         }
     } catch (error) {
-        console.log(error)
-
         if (error.name === 'TokenExpiredError') {
-            res.send('test')
+            const token = req.cookies.refToken
+            refreshToken({ token })
+                .then((tokenData) => {
+                    setTokenCookie(res, token)
+                        .then(() => {
+                            res.status(200).json(tokenData)
+                        })
+                        .catch(err => {
+                            console.log(new Error(err))
+                            res.status(500).send('Internal Server Error')
+                        })
+                })
+                .catch(err => {
+                    console.log(new Error(err))
+                    res.status(404).json({ status: 'Error', message: err })
+                })
         } else {
+            console.log(new Error(err))
             res.status(500).json({ status: error.name, code: 406, msg: error.message})
         }
     }
