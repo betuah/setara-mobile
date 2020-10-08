@@ -3,21 +3,18 @@ const Auth = require('../controllers/auth_controller')
 
 module.exports = (app) => {
     
-    app.route('/rTsc2@12I')
-        .get(Auth.getCsrf)
-
-    app.route('/api/tokenverify')
-        .get(authMiddleware, Auth.tokenVerify)
-
-    app.route('/api/signin')
+    app.route('/api/v1/signin')
         .post(Auth.signIn)
     
-    app.route('/api/signup')
+    app.route('/api/v1/signup')
         .post(Auth.signUp)
 
-    app.route('/api/signout')
+    app.route('/api/v1/signout')
         .post(authMiddleware, Auth.signOut)
     
-    app.route('/api/profile')
+    app.route('/api/v1/profile')
         .get(authMiddleware, Auth.profile)
+
+    app.route('/api/v1/refresh-tokens')
+        .get(authMiddleware, Auth.getTokens)
 }

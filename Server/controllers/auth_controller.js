@@ -1,137 +1,84 @@
-const userSettingModel      = require('../models/usersData_model')
-const jwt                   = require('jsonwebtoken')
-const env                   = require('../env')
-const bcrypt                = require('bcryptjs')
-const hash                  = require('../config/hash_config')
-const firebaseAdmin         = require('../config/firebaseAdminConfig')
-const firebaseAuth          = firebaseAdmin.auth()
-const firebaseDatabaseAdmin = firebaseAdmin.database()
+const bcrypt  = require('bcryptjs')
+const User    = require('../models/usersData.model')
+const { 
+    generateJwtToken,
+    generateRefreshToken,
+    getRefreshTokens,
+    getRefreshToken,
+    revokeToken,
+    setTokenCookie
+} = require('../services/authService')
 
-const secret                = env.token_secret
-
-exports.tokenVerify = (req, res) => {
-    res.status(202).json({'status': 'Token Verified', code: 202, test: req.cookie})
-}
-
-exports.getCsrf = (req, res) => {
-    const csrf = req.csrfToken()
-
-    res.cookie('xsrfToken', csrf)
-    res.send('OK')
-}
-
-exports.signIn = async (req, res) => {
+const signIn = async (req, res) => {
     try {
-        firebaseAuth.verifyIdToken(req.body.token, true)
-        .then(decodedToken => {
-            const databaseRef   = firebaseDatabaseAdmin.ref('users/' + decodedToken.uid)
+        const username      = req.query.username ? req.query.username : (req.body.username ? req.body.username : req.params.username);
+        const password      = req.query.password ? req.query.password : (req.body.password ? req.body.password : req.params.password);
 
-            databaseRef.once('value').then(snapshot => {
-                const getPerson = snapshot.val().personalData
-                const getRoles  = snapshot.val().roles
+        const user = await User.findOne({ uname: username })
 
-                const saltRounds    = 10
-                const salt          = bcrypt.genSaltSync(saltRounds)
-                const rolesHash     = bcrypt.hashSync(`${getRoles.id}`, salt)
-
-                const token     = jwt.sign({ uid: decodedToken.uid, roles: `${rolesHash}`, refresh_token: req.body.token}, secret, { expiresIn: '2h' });
-                const userData  = {
-                    signin: 1,
-                    dataProfile: {
-                        uid: decodedToken.uid,
-                        fullName: getPerson.fullName,
-                        email: getPerson.email,
-                        photoUrl: getPerson.photoUrl,
-                        gender: getPerson.gender,
-                        profession: getPerson.profession,
-                        organization: getPerson.organization,
-                        address: getPerson.address
-                    }
-                }
-
-                const encryptedToken = hash.encrypt(token)
-
-                res.cookie('sthingToken', encryptedToken, { httpOnly: true, secure: env.node_env === 'production' ? true : false })
-                res.status(200).json(userData)
-            }).catch(err => {
-                console.log(new Error(err))
-                res.status(404).json({ code: 404, msg: 'DATA NOT FOUND!' })
-            })
-        }).catch(err => {
-            res.status(401).json({status: 'UNAUTHORIZED', code: 401, msg: 'You are not authenticated!'})
-            console.log(new Error(err))
-        })
-    } catch (error) {
-        console.log(new Error(error))
-        res.status(500).send({status: 'INTERNAL_SERVER_ERROR', code: 500, msg: 'Something wrong in the server!'})
-    }
-}
-
-exports.signUp = async (req, res) => {
-    try {
-        const fireDatabase = firebaseDatabaseAdmin.ref(`users/${req.body.uid}`)
-        const userDataBody = {
-            personalData : {
-                fullName: req.body.fullName,
-                email: req.body.email,
-                photoUrl: req.body.photoUrl,
-                gender: '',
-                profession: '',
-                organization: '',
-                address: ''
-            },
-            roles : {
-                id: 1,
-                title: "user"
-            }
+        // Check if user exist and password is valid
+        if (!user || !bcrypt.compareSync(password, user.password)) {
+            console.log(new Error('Username or password is incorrect'))
+            res.status(400).send('Username or Password Incorrect')
         }
 
-        fireDatabase.set({
-            ...userDataBody
-        }).then(() => {
-            const userSetData = {
-                userId   : req.body.uid,
-                ...userDataBody,
-                timeZone : 'Asia/Jakarta',
-                smtp     : {
-                    host: '',
-                    port: '',
-                    secure: 1,
-                    tls: 1,
-                    username: '',
-                    password: ''
-                }
-            }
+        // authentication successful so generate jwt and refresh tokens
+        const jwtToken      = generateJwtToken(user) // Generate Access Token
+        const refreshToken  = generateRefreshToken(user) // Generate Refresh Token
 
-            userSettingModel.create(userSetData)
-            .then(result => {
-                const msg = {
-                    status: "Success",
-                    code: "200",
-                    msg: "Success Saving Data!"
-                }
-                res.status(200).json(msg)
-            })
-            .catch(err => {
-                console.log(new Error(err))
-                const msg = {
-                    status: "INTERNAL_SERVER_ERROR",
-                    code: 500,
-                    msg: "Internal Server Error! Something wrong in firebase backend!"
-                }
-                res.status(500).json(msg)
-            })
-        }).catch(err => {
+        // save refresh token
+        await refreshToken.save()
+
+        // return basic details and tokens
+        const resData = { 
+            data: {
+                username: user.uname,
+                name: user.name,
+                email: user.email
+            },
+            accessToken : jwtToken,
+            refreshToken: refreshToken.token
+        }
+
+        setTokenCookie(res, refreshToken.token)
+        res.status(200).json(resData)
+    } catch (error) {
+        if (error) throw error
+        res.status(400).json('error')
+    }
+    
+}
+
+const signUp = async (req, res) => {
+    try {
+        const uname             = req.body.username
+        const name              = req.body.name
+        const email             = req.body.email
+        const password          = req.body.password
+        const passwordHashed    = await bcrypt.hash(password, 8)
+
+        const dataBody = {
+            uname: uname,
+            name: name,
+            email: email,
+            password: passwordHashed,
+            role: 'admin'
+        }
+
+        User.create(dataBody)
+        .then(data => {
+            res.status(201).json({ status: 'Success', code: 200, 'msg': 'SignUp Success!', data: data})
+        })
+        .catch(err => {
             console.log(new Error(err))
-            const msg = {
-                status: "INTERNAL_SERVER_ERROR",
-                code: 500,
-                msg: "Internal Server Error! Something wrong in firebase backend!"
+            if (err.code === 11000) {
+                res.status(500).json({ status: 'error', code: 400, 'msg' : 'Username already exist!' })
+            } else {
+                res.status(500).json({ status: 'error', code: 400, 'msg' : 'Failed to saving data!' })
             }
-            res.status(500).json(msg)
         })
     } catch (error) {
-        console.log(new Error(error));
+        console.log(error);
         const data = {
             status: 'ERROR',
             code: 400,
@@ -143,7 +90,7 @@ exports.signUp = async (req, res) => {
                     unique: 'true',
                     data_type: 'varchar(50)'
                 },
-                fullName: {
+                name: {
                     type: 'text',
                     required: 'true',
                     unique: 'true',
@@ -154,37 +101,70 @@ exports.signUp = async (req, res) => {
                     required: 'true',
                     unique: 'true',
                     data_type: 'varchar(50)'
+                },
+                password: {
+                    type: 'password',
+                    required: 'true',
+                    unique: 'false',
+                    data_type: 'varchar(50)'
                 }
             }
         }
         res.status(400).json(data);
-    }    
+    }
+    
 }
 
-exports.signOut = async (req, res) => {
-    const token          = req.token
-    const decryptedToken = hash.decrypt(token)
-    const decoded        = jwt.verify(decryptedToken, secret)
-
-    res.clearCookie('sthingToken')
-    res.clearCookie('_sthing')
-
-    firebaseAuth.revokeRefreshTokens(decoded.uid).then(Response => {
-        res.status(200).json({msg: 'Success Revoke Refresh Token!', res: Response})
-    }).catch(err => {
+const profile = async (req, res) => {
+    const id    = req.userId
+    
+    try {
+        User.findById({ _id: id }).then((user) => {
+            if(user) {
+                res.status(200).json(user)
+            } else {
+                res.status(404).json({ status: 'Error', code: 404, msg: 'User Not Found!'})
+            }            
+        }).catch((err) => {
+            res.status(400).json({ status: 'Error', code: 500, msg: 'Internal Server Error' })
+            console.log(new Error(err))
+        })
+    } catch (error) {
+        res.status(400).json({ status: 'Error', code: 500, msg: 'Internal Server Error' })
         console.log(new Error(err))
-        res.status(500).json({msg: 'Cannot revoke token! '+err})
-    })
+    }
 }
 
-exports.profile = async (req, res) => {
-    const databaseRef   = firebaseDatabaseAdmin.ref('users/' + req.uid)
+const signOut = async (req, res) => {
+    const token = req.body.token || req.cookies.refreshToken
 
-    databaseRef.once('value').then(snapshot => {
-        const getPerson = snapshot.val().personalData
-        res.status(200).json(getPerson);
-    }).catch(err => {
-        console.log(new Error(err))
-        res.status(500).send({status: 'INTERNAL_SERVER_ERROR', code: 500, msg: 'Something wrong in the server!'})
-    })
+    if (!token) return res.status(400).json({ message: 'Token is required!' })
+
+    revokeToken({ token })
+        .then(() => {
+            res.status(200).json({ status: 'Success', mgs: 'Token Revoked' })
+        })
+        .catch(err => {
+            console.log(new Error(err))
+            res.status(500).json({ status: 'Error', mgs: err})
+        })
+}
+
+const getTokens = async (req, res) => {
+    getRefreshTokens(req.userId)
+        .then(tokens => {
+            res.json(tokens)
+        })
+        .catch(err => {
+            console.log(new Error(err))
+            res.send('error')
+        })
+}
+
+module.exports = {
+    signIn,
+    signUp,
+    signOut,
+    profile,
+    getTokens
 }

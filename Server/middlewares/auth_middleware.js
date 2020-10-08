@@ -1,26 +1,32 @@
-const jwt           = require('jsonwebtoken')
-const env           = require('../env')
-const bcrypt        = require('bcryptjs')
-const hash          = require('../config/hash_config')
-const secret        = env.token_secret
+const jwt       = require('jsonwebtoken')
+const env       = require('../env')
+const secret    = env.token_secret
 
 const authMiddleware = async (req, res, next) => {
     try {
-        const token          = req.cookies['sthingToken']
-        const decryptedToken = hash.decrypt(token)
-        const decoded        = jwt.verify(decryptedToken, secret)
+        res.setHeader( 'X-Powered-By', 'Setara Daring' )
 
-        const userRoles = await bcrypt.compare('1', decoded.roles)
+        const token     = req.header('Authorization').replace('Bearer ','')
+        const decoded   = jwt.verify(token, secret)
 
-        req.token   = token
-        req.id_user = decoded.uid
-        req.role    = userRoles ? 1 : false
-        req.uid     = decoded.uid
+        if (!decoded) {
+            res.status(406).json({ status: 'Not Acceptable', code: 406, msg: "Invalid Access Token Request."})
+        } else {
+            req.token    = token
+            req.userId   = decoded.id
+            req.username = decoded.username
+            req.role     = decoded.roles
 
-        next()
+            next()
+        }
     } catch (error) {
-        console.log(new Error(error))
-        res.status(406).json({ status: 'Not Acceptable', code: 406, msg: "Invalid Token request."})
+        console.log(error)
+
+        if (error.name === 'TokenExpiredError') {
+            res.send('test')
+        } else {
+            res.status(500).json({ status: error.name, code: 406, msg: error.message})
+        }
     }
 }
 

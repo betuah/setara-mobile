@@ -11,6 +11,7 @@
   "author": "Betuah Anugerah",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -20,8 +21,9 @@
     "express-validator": "^5.3.0",
     "helmet": "^3.23.3",
     "jsonwebtoken": "^8.3.0",
-    "mongoose": "^5.9.26",
-    "multer": "^1.4.2"
+    "mongoose": "^5.10.8",
+    "multer": "^1.4.2",
+    "salted-md5": "^4.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"

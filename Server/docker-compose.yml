@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+    mongo_db:
+        image: mongo:latest
+        container_name: setara_db
+        environment: 
+            - MONGO_INITDB_ROOT_USERNAME=betuah
+            - MONGO_INITDB_ROOT_PASSWORD=H3r0es!@#
+        volumes: 
+            - ./db/init_mongo.js:/docker-entrypoint-initdb.d/init_mongo.js:ro
+            - mongo_data:/data/db
+        ports:
+            - 27017:27017
+        networks: 
+            - setaralms_network
+    redis:
+        image: redis:alpine
+        container_name: setara_redis
+        volumes:
+            - redis_data:/data
+        ports:
+            - 6379:6379
+        networks: 
+            - setaralms_network
+        command: redis-server --requirepass br4v0Sth!ingS!@#
+
+volumes: 
+    mongo_data:
+        name: setaralms_mongo_data
+    redis_data:
+        name: setaralms_redis_data
+
+networks: 
+    setaralms_network:
+        name: setaralms_network
