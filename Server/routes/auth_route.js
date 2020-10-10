@@ -1,20 +1,20 @@
-const authMiddleware = require('../middlewares/auth_middleware')
-const Auth = require('../controllers/auth_controller')
+const authMiddleware = require('../middlewares/auth_middleware') // Import Middlewares
+const Auth = require('../controllers/auth_controller') // Import Auth Controller
 
 module.exports = (app) => {
     
-    app.route('/api/v1/signin')
-        .post(Auth.signIn)
+    app.route('/api/v1/signin') // SingIn End Point
+        .post(Auth.signIn) // Bypass Auth Middleware
     
-    app.route('/api/v1/signup')
-        .post(Auth.signUp)
+    app.route('/api/v1/signup') // SIgnUp End Point
+        .post(Auth.signUp) // Bypass Auth Middleware
 
-    app.route('/api/v1/signout')
-        .post(authMiddleware, Auth.signOut)
+    app.route('/api/v1/signout') // SignOut End Point
+        .post(authMiddleware, Auth.signOut) // Set middleware
     
-    app.route('/api/v1/account')
-        .get(authMiddleware, Auth.account)
+    app.route('/api/v1/account') // Get Profile End Point
+        .get(authMiddleware, Auth.account) // Set Middleware
 
-    app.route('/api/v1/refresh-tokens')
-        .get(authMiddleware, Auth.getTokens)
+    // app.route('/api/v1/refresh-tokens')
+    //     .get(authMiddleware, Auth.getTokens)
 }
