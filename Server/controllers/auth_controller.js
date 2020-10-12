@@ -9,7 +9,6 @@ const User    = require('../models/usersData.model') // Import User Model
 const { 
     generateJwtToken,
     generateRefreshToken,
-    getRefreshTokens,
     revokeToken,
     setTokenCookie
 } = require('../services/authService')
