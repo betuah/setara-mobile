@@ -43,7 +43,7 @@ const authMiddleware = async (req, res, next) => {
                 })
                 .catch(err => { // If create new token and refresh token error
                     console.log(new Error(err))
-                    res.status(404).json({ status: 'Error', message: err })
+                    res.status(406).json({ status: 'Error', message: err })
                 })
         } else { // If any error
             console.log(new Error(err))
