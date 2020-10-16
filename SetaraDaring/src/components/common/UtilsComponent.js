@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Text, View } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, HelperText, Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../constants/colors';
 
@@ -23,34 +23,39 @@ const Texts = props => {
 }
 
 const Input = props => {
+    const hasErrors = () => {
+        return !text.includes('@');
+    };
+
     return (
-        <TextInput
-            {...props}
-            mode="flat"
-            selectionColor={colors.light}
-            underlineColor={colors.light}
-            left={
-                <TextInput.Icon 
-                    {...props.Icon}
-                    name={props.IconName}
-                    color={colors.light} 
-                    size={20}
-                />
-            }
-            style={{
-                backgroundColor: 'transparent',
-                fontSize: 15,
-                ...props.style
-            }}
-            theme={{ 
-                colors: { 
-                text: colors.white,
-                placeholder: colors.light,
-                error: 'red',
-                primary: colors.light
-                } 
-            }}
-        />
+        
+            <TextInput
+                {...props}
+                mode="flat"
+                selectionColor={colors.light}
+                underlineColor={colors.light}
+                left={
+                    <TextInput.Icon 
+                        {...props.Icon}
+                        name={props.IconName}
+                        color={colors.light} 
+                        size={20}
+                    />
+                }
+                style={{
+                    backgroundColor: 'transparent',
+                    fontSize: 15,
+                    ...props.style
+                }}
+                theme={{ 
+                    colors: { 
+                    text: colors.white,
+                    placeholder: colors.light,
+                    error: 'red',
+                    primary: colors.light
+                    } 
+                }}
+            />
     );
 }
 

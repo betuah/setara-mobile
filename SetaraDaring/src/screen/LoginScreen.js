@@ -14,6 +14,7 @@ import {
     StatusBar,
 } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { BottomNavigation } from 'react-native-paper';
 
 const LoginScreen = ({ navigation }) => {
     const date = new Date();
@@ -49,6 +50,7 @@ const LoginScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
             <SafeAreaView style={styles.screen}>
+                {/* <StatusBar barStyle='light-content' backgroundColor={colors.darkBlue} animated /> */}
                 <View style={styles.body}>
                     <ScrollView style={{height: '50%', maxHeight: '100%'}}>
                         <View style={styles.LogoBrand}>

@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         paddingVertical: Dimensions.get('window').height > 600 ? 10 : 10
     },
     body: {
-        flex: 10
+        flex: 13
     },
     footer: {
         flex: 1,

@@ -1,31 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { Input, Btn, Texts } from '../components/common/UtilsComponent';
-import LogoBrand from '../components/LogoComponent';
+import React, { Fragment } from 'react';
 import colors from '../constants/colors';
-import LottieView from 'lottie-react-native';
 import { 
     View, 
     Text,
     StyleSheet, 
     SafeAreaView, 
-    TouchableWithoutFeedback, 
-    Keyboard,
-    Dimensions, 
-    ScrollView,
-    StatusBar,
+    Dimensions,
+    StatusBar, 
 } from 'react-native';
 
 const Test = ({ navigation }) => {
     return (
-        <View>  
-        <StatusBar  
-            backgroundColor = "#b3e6ff"  
-            barStyle = "dark-content"   
-        />  
-            <View>
-                <Text>Hello word</Text>
-            </View>
-        </View>  
+        <Fragment>
+            <StatusBar barStyle="default" />
+            <SafeAreaView style={{ flex: 0, backgroundColor: 'red' }} />
+            <SafeAreaView style={{ flex: 1, backgroundColor: 'blue' }}>
+                <View style={styles.container}>
+                    <Text style={styles.welcome}>Welcome to React Native!</Text>
+                    <Text style={styles.instructions}>To get started, edit App.js</Text>
+                </View>
+            </SafeAreaView>
+        </Fragment>
         
     )
 }

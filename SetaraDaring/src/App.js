@@ -8,18 +8,18 @@ import { Provider } from 'react-redux';
 import LoginScreen from './screen/LoginScreen';
 import SignUpScreen from './screen/SignUpScreen';
 import Test from './screen/Test.js';
+import colors from './constants/colors';
 
 
 const Stack = createStackNavigator();
 
 const App = () => {
   useEffect(() => {
-    // StatusBar.setBarStyle("light-content");
-    // if (Platform.OS === "android") {
-      // StatusBar.setBackgroundColor("rgba(0,0,0,0)");
-      // StatusBar.setTranslucent(true);
-    // }
-    // changeNavigationBarColor('transparent', true)
+    StatusBar.setBarStyle('light-content');
+    if (Platform.OS === 'android') {
+      StatusBar.setBackgroundColor(colors.darkBlue2);
+    }
+    changeNavigationBarColor(colors.darkBlue2, true)
   })
 
   return(
