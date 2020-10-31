@@ -17,6 +17,8 @@ const WargaBelajarForm = props => {
                     IconName='qrcode'
                     style={{ width: '100%' }}
                     onChangeText={e => props.onInputChange(e, 'kode_kelas')}
+                    errorVisible={props.err.kode_kelas ? true : false}
+                    errorMassage={props.err.kode_kelas}
                 />
                 <Input
                     label="Nama Lengkap"
@@ -25,6 +27,8 @@ const WargaBelajarForm = props => {
                     IconName='card-account-details'
                     style={{ width: '100%' }}
                     onChangeText={e => props.onInputChange(e, 'name')}
+                    errorVisible={props.err.name ? true : false}
+                    errorMassage={props.err.name}
                 />
                 <Input
                     label="Username"
@@ -33,6 +37,8 @@ const WargaBelajarForm = props => {
                     IconName='account-box'
                     style={{ width: '100%' }}
                     onChangeText={e => props.onInputChange(e, 'uname')}
+                    errorVisible={props.err.uname ? true : false}
+                    errorMassage={props.err.uname}
                 />
                 <Input
                     label="Password"
@@ -44,6 +50,8 @@ const WargaBelajarForm = props => {
                         width: '100%'
                     }}
                     onChangeText={e => props.onInputChange(e, 'password')}
+                    errorVisible={props.err.password ? true : false}
+                    errorMassage={props.err.password}
                 />
                 <Input
                     label="Konfirmasi Password"
@@ -55,6 +63,8 @@ const WargaBelajarForm = props => {
                         width: '100%'
                     }}
                     onChangeText={e => props.onInputChange(e, 'confirmPass')}
+                    errorVisible={props.err.confirmPass ? true : false}
+                    errorMassage={props.err.confirmPass}
                 />
             </View>
             <View style={styles.button}>
@@ -71,13 +81,14 @@ const WargaBelajarForm = props => {
 
 const styles = StyleSheet.create({
     form: {
-        alignItems: 'center',
-        paddingVertical: Dimensions.get('window').height > 600 ? 10 : 10
+        // alignItems: 'center',
+        // paddingVertical: Dimensions.get('window').height > 600 ? 10 : 10
+        paddingTop: 10
     },
     button: {
         flex: 1,
         flexDirection: 'column',
-        paddingTop: Dimensions.get('window').height > 600 ? 10 : 10,
+        paddingTop: Dimensions.get('window').height > 600 ? 20 : 10,
         alignItems: "center"
     },
 });

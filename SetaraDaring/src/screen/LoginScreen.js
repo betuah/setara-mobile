@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Input, Btn, Texts } from '../components/common/UtilsComponent';
 import LogoBrand from '../components/LogoComponent';
 import colors from '../constants/colors';
 import LottieView from 'lottie-react-native';
+import { validate } from 'validate.js';
+import { signinConstrains } from '../constants/constrains'
+
 import { 
     View, 
     StyleSheet, 
@@ -10,47 +14,63 @@ import {
     TouchableWithoutFeedback, 
     Keyboard,
     Dimensions, 
-    ScrollView,
-    StatusBar,
+    ScrollView
 } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { BottomNavigation } from 'react-native-paper';
 
 const LoginScreen = ({ navigation }) => {
-    const date = new Date();
+    const date = new Date()
+
+    const login = useSelector(state => state.signIn)
+
+    const [loading, setLoading] = useState(false)
+
     const [loginData, setLoginForm] = useState({
         uname: '',
         password: ''
     })
 
-    useEffect(() => console.log('Hellow! its Me'), []);
+    const [errData, setErr] = useState({
+        uname: '',
+        password: ''
+    })
 
-    const onInputChange = (value, input) => {
-        console.log(value, input)
-        setLoginForm({
-            ...loginData,
-            [input]: value
-        })
-    }
-
-    const signIn = () => {
-        const uname = loginData.uname.trim()
-        const password = loginData.password.trim()
-
-        if ( !uname || !password ) return alert('Username atau password kosong!')
-
+    useEffect(() => {
         setLoginForm({
             uname: '',
             password: ''
         })
+        setErr({})
 
-        alert(`${loginData.uname} dan ${loginData.password}`)
+        console.log(login.isSignIn)
+    }, []);
+
+    const onInputChange = (value, input) => {
+        setLoginForm({
+            ...loginData,
+            [input]: value
+        })
+
+        setErr({})
+    }
+
+    const signIn = () => {
+        setLoading(true)
+
+        setTimeout(() => {
+            const valRes = validate(loginData, signinConstrains)
+
+            setErr({...valRes})
+
+            if (!valRes)
+                alert(`${loginData.uname} dan ${loginData.password}`)
+                setLoading(false)
+        }, 3000);
+        
     }
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
             <SafeAreaView style={styles.screen}>
-                {/* <StatusBar barStyle='light-content' backgroundColor={colors.darkBlue} animated /> */}
                 <View style={styles.body}>
                     <ScrollView style={{height: '50%', maxHeight: '100%'}}>
                         <View style={styles.LogoBrand}>
@@ -66,34 +86,44 @@ const LoginScreen = ({ navigation }) => {
                             />
                         </View>
                         <View style={styles.form}>
-                            <Input
-                                label="Username"
-                                placeholder="Username"
-                                value={loginData.uname}
-                                IconName='account-circle'
-                                style={{ width: '80%' }}
-                                onChangeText={e => onInputChange(e, 'uname')}
-                            />
-                            <Input
-                                label="Password"
-                                name={'password'}
-                                placeholder="Password"
-                                value={loginData.password}
-                                secureTextEntry={true}
-                                IconName='lock'
-                                style={{
-                                    width: '80%'
-                                }}
-                                onChangeText={e => onInputChange(e, 'password')}
-                            />
+                            <View style={{ width: '80%' }}>
+                                <Input
+                                    label="Username"
+                                    placeholder="Username"
+                                    value={loginData.uname}
+                                    IconName='account-circle'                                    
+                                    onChangeText={e => onInputChange(e, 'uname')}
+                                    errorVisible={errData.uname ? true : false}
+                                    errorMassage={errData.uname}
+                                />
+                            </View>
+                            <View style={{ width: '80%' }}>
+                                <Input
+                                    label="Password"
+                                    name={'password'}
+                                    placeholder="Password"
+                                    value={loginData.password}
+                                    secureTextEntry={true}
+                                    IconName='lock'
+                                    errorVisible={errData.password ? true : false}
+                                    errorMassage={errData.password}
+                                    onChangeText={e => onInputChange(e, 'password')}
+                                />
+                            </View>
                         </View>
-                        
+
                         <View style={styles.button}>
                             <Btn 
-                                Icon={{name:"send", size: 15, color: "#2A9FC4"}}
+                                Icon={{name:"send", size: 15, color: colors.primary}}
                                 title="Masuk" 
                                 onPress={signIn}
                                 style={{ width: '80%' }}
+                                disabled={loading}
+                                loading={{
+                                    size: '15',
+                                    color: colors.primary
+                                }}
+                                isLoading={loading}
                             />
                         </View>
                         <View style={styles.signup}>
@@ -145,7 +175,6 @@ const styles = StyleSheet.create({
     },
     form: {
         alignItems: 'center',
-        paddingVertical: 10
     },
     body: {
         flex: 13

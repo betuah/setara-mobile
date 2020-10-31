@@ -26,8 +26,8 @@ const signIn = async (req, res) => {
 
         // Check if user exist and password is valid
         if (!user || !bcrypt.compareSync(password, user.password)) {
-            console.log(new Error('Username or password is incorrect')) // Show error to log status
-            res.status(400).send('Username or Password Incorrect') // Response error to front end 
+            console.log(new Error('Username or password is incorrect!')) // Show error to log status
+            res.status(400).json({code: 'INCORRECT_USER_PASS', message: 'Username dan Password salah!'}) // Response error to front end 
         }
 
         // authentication successful so generate jwt and refresh tokens
@@ -40,9 +40,10 @@ const signIn = async (req, res) => {
         // return user details and tokens
         const resData = { 
             data: {
-                username: user.uname,
+                username: user.username,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                status: user.status
             },
             accessToken : jwtToken,
             refreshToken: refreshToken.token
@@ -51,7 +52,7 @@ const signIn = async (req, res) => {
         setTokenCookie(res, refreshToken.token) // Set refresh token to cookie
         res.status(200).json(resData) // Response success status with User and token data
     } catch (error) { // Catch Error
-        if (error) console.log(new Error(error)) // Show error in log
+        // if (error) console.log(new Error(error)) // Show error in log
         res.status(400).json('error') // Give error status response to front end
     }
     
@@ -62,19 +63,20 @@ const signIn = async (req, res) => {
 const signUp = async (req, res) => {
     try {
         // Get user data from API body Raw or form from front end request
-        const uname             = req.body.username
-        const name              = req.body.name
+        const username          = req.body.username
+        const nama              = req.body.nama
+        const status            = req.body.status
         const email             = req.body.email
         const password          = req.body.password
         const passwordHashed    = await bcrypt.hash(password, 12) // Hasing password with auto generate salt
 
         // Create oject/json data
         const dataBody = {
-            uname: uname,
-            name: name,
-            email: email,
+            username,
+            nama,
+            email,
             password: passwordHashed,
-            role: 'admin'
+            status
         }
 
         // Send and create user with user data Oject

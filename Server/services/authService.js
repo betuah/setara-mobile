@@ -22,8 +22,8 @@ const generateJwtToken = (user) => {
         // Start Data PayLoad
         { 
             id : user._id,
-            username: user.uname,
-            role: user.role 
+            username: user.username,
+            status: user.status 
         }, 
         // End Data PayLoad
         env.token_secret, // Set jwt secret

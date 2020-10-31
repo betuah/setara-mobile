@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { TextInput, HelperText, Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../constants/colors';
+import { Chase } from 'react-native-animated-spinkit';
 
 const Texts = props => {
     return (
@@ -23,14 +24,12 @@ const Texts = props => {
 }
 
 const Input = props => {
-    const hasErrors = () => {
-        return !text.includes('@');
-    };
-
     return (
-        
+        <Fragment>
             <TextInput
                 {...props}
+                value={props.value}
+                onChange={props.onChange}
                 mode="flat"
                 selectionColor={colors.light}
                 underlineColor={colors.light}
@@ -38,8 +37,8 @@ const Input = props => {
                     <TextInput.Icon 
                         {...props.Icon}
                         name={props.IconName}
-                        color={colors.light} 
-                        size={20}
+                        color={props.IconColor ? props.IconColor : colors.light} 
+                        size={props.IconSize ? props.IconSize : 20}
                     />
                 }
                 style={{
@@ -49,13 +48,22 @@ const Input = props => {
                 }}
                 theme={{ 
                     colors: { 
-                    text: colors.white,
-                    placeholder: colors.light,
-                    error: 'red',
-                    primary: colors.light
+                        text: colors.white,
+                        placeholder: colors.light,
+                        error: colors.light,
+                        primary: colors.light
                     } 
                 }}
             />
+            {
+                props.errorVisible 
+                &&
+                <HelperText style={props.errorStyle} type="error" visible={props.errorVisible}>
+                    {props.errorMassage}
+                </HelperText> 
+            }
+            
+        </Fragment>
     );
 }
 
@@ -67,17 +75,35 @@ const Btn = props => {
             color={colors.white} 
             mode={props.mode ? props.mode : 'contained'}
             contentStyle={props.contentStyle}
+            disabled={props.disabled ? true : false}
         >
-            { props.Icon && <Icon {...props.Icon} /> }
-            <View style={{ width: props.space ? props.space : 5 }} />
-            <Texts 
-                style={{
-                    fontWeight: "bold", 
-                    color: colors.primary,
-                    ...props.style
-                }}
-                text={props.title}
-            />
+            { props.isLoading ? 
+                    <Fragment>
+                        <View><Chase size={18} color={colors.primary} /></View>
+                        <View style={{ width: props.space ? props.space : 5 }} />
+                        <Texts 
+                            style={{
+                                fontWeight: "bold", 
+                                color: colors.primary,
+                                ...props.style
+                            }}
+                            text={'LOADING'}
+                        />
+                    </Fragment>
+                : 
+                    <Fragment>
+                        { props.Icon && <Icon {...props.Icon} /> }
+                        <View style={{ width: props.space ? props.space : 5 }} />
+                        <Texts 
+                            style={{
+                                fontWeight: "bold", 
+                                color: colors.primary,
+                                ...props.style
+                            }}
+                            text={props.title}
+                        />
+                    </Fragment>
+            }
         </Button>
     )
 }

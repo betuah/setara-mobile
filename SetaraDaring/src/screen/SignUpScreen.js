@@ -3,6 +3,9 @@ import { TabView, SceneMap, TabBar  } from 'react-native-tab-view';
 import { Texts } from '../components/common/UtilsComponent';
 import LogoBrand from '../components/LogoComponent';
 import colors from '../constants/colors';
+import { validate } from 'validate.js';
+import { signupWbConstrains } from '../constants/constrains';
+import { signupTutorConstrains } from '../constants/constrains';
 import { 
     View, 
     StyleSheet, 
@@ -36,7 +39,11 @@ const SignUpScreen = ({ navigation }) => {
         confirmPass: ''
     })
 
+    const [errWb, setErrWb] = useState({})
+    const [errTutor, setErrTutor] = useState({})
+
     const wbInputChange = (value, input) => {
+        setErrWb({})
         setWbData({
             ...wbData,
             [input]: value
@@ -44,6 +51,7 @@ const SignUpScreen = ({ navigation }) => {
     }
 
     const tutorInputChange = (value, input) => {
+        setErrTutor({})
         setTutorData({
             ...tutorData,
             [input]: value
@@ -51,11 +59,46 @@ const SignUpScreen = ({ navigation }) => {
     }
 
     const signUpWb = () => {
-        alert('wb')
+        const err = validate(wbData, signupWbConstrains)
+        setErrWb({...err})
+
+        // console.log(err, '---------' + JSON.stringify(errWb))
+
+        if (!err && (wbData.password === wbData.confirmPass )) {
+            setWbData({
+                kode_kelas: '',
+                name: '',
+                uname: '',
+                password: '',
+                confirmPass: ''
+            })
+            alert('wb')
+        } else {
+            if (wbData.password || wbData.confirmPass)
+                setErrWb({
+                    ...errWb,
+                    confirmPass: ['Konfirmasi password tidak sesuai.']
+                })
+        }
     }
 
     const signUpTutor = () => {
-        alert('tutor')
+        const err = validate(tutorData, signupTutorConstrains)
+        setErrTutor({...err})
+        if (!err && (tutorData.password === tutorData.confirmPass )) {
+            setTutorData({
+                email: '',
+                name: '',
+                uname: '',
+                password: '',
+                confirmPass: ''
+            })
+            alert('tutor')
+        } else {
+            setErrWb({
+                confirmPass: ['Konfirmasi password tidak sesuai.']
+            })
+        }
     }
 
     // Tab View Setup
@@ -72,12 +115,14 @@ const SignUpScreen = ({ navigation }) => {
                     data={wbData}
                     onInputChange={wbInputChange}
                     signUp={signUpWb}
+                    err={errWb}
                 />;
             case '2':
                 return <TutorForm 
                     data={tutorData}
                     onInputChange={tutorInputChange}
                     signUp={signUpTutor}
+                    err={errTutor}
                 />;
             default:
                 return null;
@@ -115,14 +160,6 @@ const SignUpScreen = ({ navigation }) => {
                             />
                         </View>
                         
-
-                        {/* <WargaBelajarForm 
-                            data={wbData}
-                            onInputChange={wbInputChange}
-                            signUp={signUpWb}
-                            style={{width: '80%'}}
-                        /> */}
-
                         <View style={styles.signup}>
                             <View>
                                 <Texts 
