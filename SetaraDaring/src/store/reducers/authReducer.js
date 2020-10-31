@@ -4,6 +4,7 @@ const initState = {
     token: null,
     refToken: null,
     userId: null,
+    username: null,
     error: null,
     isLoading: false
 }
@@ -18,6 +19,7 @@ const auth = (state = initState, actions) => {
                 token: actions.token,
                 refToken: actions.refToken,
                 userId: actions.userId,
+                username: actions.username,
                 isLoading: false
             }
 

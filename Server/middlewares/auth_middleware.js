@@ -38,7 +38,7 @@ const authMiddleware = async (req, res, next) => {
                         })
                         .catch(err => { // If set cookie failed
                             console.log(new Error(err))
-                            res.status(500).json(code: 'INTERNAL_SERVER_ERROR', message: 'Internal Server Error')
+                            res.status(500).json({code: 'INTERNAL_SERVER_ERROR', message: 'Internal Server Error'})
                         })
                 })
                 .catch(err => { // If create new token and refresh token error

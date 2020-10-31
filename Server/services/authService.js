@@ -97,6 +97,7 @@ const setTokenCookie = async (res, token) => {
     // create http only cookie with refresh token that expires in 7 days
     const cookieOptions = {
         httpOnly: true, // Set http only
+        maxAge : 7 * 24 * 60 * 60 * 1000,
         expires: new Date(Date.now() + 7*24*60*60*1000) // Set expire
     }
     res.cookie('refToken', token, cookieOptions)

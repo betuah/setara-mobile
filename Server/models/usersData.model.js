@@ -16,8 +16,7 @@ const userDataSchema = new Schema({
     },
     email : { 
         type: String, 
-        trim: true,
-        required: true,
+        trim: true
     },
     jk : { 
         type: String, 
