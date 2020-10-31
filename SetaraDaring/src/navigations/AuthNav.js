@@ -1,23 +1,18 @@
-import React, { useEffect } from 'react';
-import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
+import React, {useEffect} from 'react';
+import {Text,View} from 'react-native';
 
-import { StatusBar } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import changeNavigationBarColor from 'react-native-navigation-bar-color'
+import Toast from 'react-native-toast-message';
 
-import signInReducers from './store/reducers/signInReducer'
+import {StatusBar} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
-import LoginScreen from './screen/LoginScreen';
-import SignUpScreen from './screen/SignUpScreen';
-import colors from './constants/colors';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-const rootReducer = combineReducers({
-  signIn: signInReducers
-});
-
-const store = createStore(rootReducer);
+import LoginScreen from '../screen/LoginScreen';
+import SignUpScreen from '../screen/SignUpScreen'
+import colors from '../constants/colors';
 
 const Stack = createStackNavigator();
 
@@ -25,24 +20,24 @@ const AuthNav = () => {
     useEffect(() => {
         StatusBar.setBarStyle('light-content');
         if (Platform.OS === 'android') {
-        StatusBar.setBackgroundColor(colors.darkBlue2);
+            StatusBar.setBackgroundColor(colors.darkBlue2);
+            changeNavigationBarColor(colors.darkBlue2, true);
         }
-        changeNavigationBarColor(colors.darkBlue2, true)
-    })
+    });
 
-    return(
-        <Provider store={store}>
+    return (
+        <SafeAreaProvider>
             <NavigationContainer>
                 <Stack.Navigator
-                screenOptions={{
-                    headerShown: false
-                }}
+                    screenOptions={{headerShown: false}}
                 >
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="SignUp" component={SignUpScreen} />
+                    <Stack.Screen name="Login" component={LoginScreen} />
+                    <Stack.Screen name="SignUp" component={SignUpScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
-        </Provider>
-    )
-}
+            <Toast ref={(ref) => Toast.setRef(ref)} />
+        </SafeAreaProvider>
+    );
+};
+
 export default AuthNav;

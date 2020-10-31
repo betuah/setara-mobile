@@ -11,9 +11,12 @@ npm i --save react-native-tab-view
 npm i --save validate.js
 npm i --save redux
 npm i --save react-redux
-npm i --save react-hook-form
+npm i --save redux-thunk
+npm i --save react-native-safe-area-context
+npm i --save react-native-toast-message
 
 react-native link
 react-native link react-native-vector-icons
 react-native link lottie-ios
-react-native link lottie-react-native
+react-native link lottie-react-
+react-native link react-native-safe-area-context

@@ -1,71 +1,90 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Input, Btn, Texts } from '../components/common/UtilsComponent';
 import LogoBrand from '../components/LogoComponent';
 import colors from '../constants/colors';
 import LottieView from 'lottie-react-native';
+import Toast from 'react-native-toast-message';
 import { validate } from 'validate.js';
 import { signinConstrains } from '../constants/constrains'
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { 
     View, 
     StyleSheet, 
-    SafeAreaView, 
     TouchableWithoutFeedback, 
     Keyboard,
     Dimensions, 
     ScrollView
 } from 'react-native';
 
+// Actions
+import * as authActions from '../store/actions/authAction';
+
 const LoginScreen = ({ navigation }) => {
     const date = new Date()
 
-    const login = useSelector(state => state.signIn)
+    const authData = useSelector(state => state.auth)
+    const dispatch = useDispatch()
 
-    const [loading, setLoading] = useState(false)
+    const loading = authData.isLoading
 
     const [loginData, setLoginForm] = useState({
         uname: '',
-        password: ''
+        password: '',
+        error: {
+            uname: '',
+            password: ''
+        }
     })
 
-    const [errData, setErr] = useState({
-        uname: '',
-        password: ''
-    })
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         setLoginForm({
             uname: '',
-            password: ''
+            password: '',
+            error: {}
         })
-        setErr({})
 
-        console.log(login.isSignIn)
-    }, []);
+        if (authData.token) alert('loged in')
+
+        if (authData.error) {
+            Toast.show({
+                type: 'error',
+                text1: 'Gagal Masuk!',
+                text2: authData.error
+            });
+
+            dispatch(authActions.error(false))
+        }
+
+        console.log(authData, 'login screen')
+    }, [authData, error]);
 
     const onInputChange = (value, input) => {
         setLoginForm({
             ...loginData,
-            [input]: value
+            [input]: value,
+            error: {}
         })
-
-        setErr({})
     }
 
-    const signIn = () => {
-        setLoading(true)
+    const submitHandler = async () => {
+        const valRes = validate(loginData, signinConstrains)
 
-        setTimeout(() => {
-            const valRes = validate(loginData, signinConstrains)
+        if (!valRes) {
+            setLoginForm({
+                ...loginData,
+                error: {...valRes}
+            })
 
-            setErr({...valRes})
-
-            if (!valRes)
-                alert(`${loginData.uname} dan ${loginData.password}`)
-                setLoading(false)
-        }, 3000);
-        
+            dispatch(authActions.signIn(loginData))
+        } else {
+            setLoginForm({
+                ...loginData,
+                error: {...valRes}
+            })
+        }
     }
 
     return (
@@ -85,6 +104,7 @@ const LoginScreen = ({ navigation }) => {
                                 style={{width: '50%'}}
                             />
                         </View>
+
                         <View style={styles.form}>
                             <View style={{ width: '80%' }}>
                                 <Input
@@ -93,8 +113,8 @@ const LoginScreen = ({ navigation }) => {
                                     value={loginData.uname}
                                     IconName='account-circle'                                    
                                     onChangeText={e => onInputChange(e, 'uname')}
-                                    errorVisible={errData.uname ? true : false}
-                                    errorMassage={errData.uname}
+                                    errorVisible={loginData.error.uname ? true : false}
+                                    errorMassage={loginData.error.uname}
                                 />
                             </View>
                             <View style={{ width: '80%' }}>
@@ -105,8 +125,8 @@ const LoginScreen = ({ navigation }) => {
                                     value={loginData.password}
                                     secureTextEntry={true}
                                     IconName='lock'
-                                    errorVisible={errData.password ? true : false}
-                                    errorMassage={errData.password}
+                                    errorVisible={loginData.error.password ? true : false}
+                                    errorMassage={loginData.error.password}
                                     onChangeText={e => onInputChange(e, 'password')}
                                 />
                             </View>
@@ -116,7 +136,7 @@ const LoginScreen = ({ navigation }) => {
                             <Btn 
                                 Icon={{name:"send", size: 15, color: colors.primary}}
                                 title="Masuk" 
-                                onPress={signIn}
+                                onPress={submitHandler}
                                 style={{ width: '80%' }}
                                 disabled={loading}
                                 loading={{

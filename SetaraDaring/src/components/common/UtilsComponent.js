@@ -3,7 +3,6 @@ import { Text, View } from 'react-native';
 import { TextInput, HelperText, Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../constants/colors';
-import { Chase } from 'react-native-animated-spinkit';
 
 const Texts = props => {
     return (
@@ -76,10 +75,11 @@ const Btn = props => {
             mode={props.mode ? props.mode : 'contained'}
             contentStyle={props.contentStyle}
             disabled={props.disabled ? true : false}
+            animated={true}
+            loading={props.isLoading}
         >
             { props.isLoading ? 
                     <Fragment>
-                        <View><Chase size={18} color={colors.primary} /></View>
                         <View style={{ width: props.space ? props.space : 5 }} />
                         <Texts 
                             style={{
@@ -87,7 +87,7 @@ const Btn = props => {
                                 color: colors.primary,
                                 ...props.style
                             }}
-                            text={'LOADING'}
+                            text={'LOADING . . .'}
                         />
                     </Fragment>
                 : 
