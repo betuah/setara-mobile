@@ -14,9 +14,12 @@ npm i --save react-redux
 npm i --save redux-thunk
 npm i --save react-native-safe-area-context
 npm i --save react-native-toast-message
+npm i --save @react-native-async-storage/async-storage
+npm i --save @react-navigation/material-bottom-tabs
 
 react-native link
 react-native link react-native-vector-icons
 react-native link lottie-ios
 react-native link lottie-react-
 react-native link react-native-safe-area-context
+react-native link @react-native-async-storage/async-storage

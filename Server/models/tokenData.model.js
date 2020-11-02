@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const refreshTokenSchema = new Schema({
     user: { 
         type: Schema.Types.ObjectId, 
-        ref: 'users_Data' 
+        ref: 'user' 
     },
     token: { 
         type: String,

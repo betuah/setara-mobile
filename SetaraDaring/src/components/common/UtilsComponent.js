@@ -9,8 +9,9 @@ const Texts = props => {
         <Text 
             onPress={props.onPress}
             style={
-                { 
-                    fontFamily: 'Raleway-Regular',
+                {
+                    fontWeight: props.fontWeight ? props.fontWeight : "normal",
+                    fontFamily: props.fontFamily ? props.fontFamily : 'Raleway-Regular',
                     fontSize: props.size ? props.size : 15,
                     color: props.color ? props.color : colors.light,
                     ...props.style
@@ -30,6 +31,7 @@ const Input = props => {
                 value={props.value}
                 onChange={props.onChange}
                 mode="flat"
+                keyboardType={props.keyboardType}
                 selectionColor={colors.light}
                 underlineColor={colors.light}
                 left={

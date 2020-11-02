@@ -5,8 +5,7 @@ const initState = {
     refToken: null,
     userId: null,
     username: null,
-    error: null,
-    isLoading: false
+    fullName: null
 }
 
 const LOGOUT = 'LOGOUT'
@@ -17,26 +16,12 @@ const auth = (state = initState, actions) => {
             return {
                 ...state,
                 token: actions.token,
-                refToken: actions.refToken,
+                refToken: actions.refToken ? actions.refToken : null,
                 userId: actions.userId,
                 username: actions.username,
+                fullName: actions.fullName,
                 isLoading: false
             }
-
-        case ERROR: {
-            return {
-                ...state,
-                error: actions.error,
-                isLoading: false,
-            }
-        }
-
-        case SET_LOADING: {
-            return {
-                ...state,
-                isLoading: actions.loading
-            }
-        }
         
         case LOGOUT:
             return initState

@@ -24,9 +24,8 @@ const LoginScreen = ({ navigation }) => {
     const date = new Date()
 
     const authData = useSelector(state => state.auth)
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
-
-    const loading = authData.isLoading
 
     const [loginData, setLoginForm] = useState({
         uname: '',
@@ -37,29 +36,13 @@ const LoginScreen = ({ navigation }) => {
         }
     })
 
-    const [error, setError] = useState(null)
-
     useEffect(() => {
         setLoginForm({
             uname: '',
             password: '',
             error: {}
         })
-
-        if (authData.token) alert('loged in')
-
-        if (authData.error) {
-            Toast.show({
-                type: 'error',
-                text1: 'Gagal Masuk!',
-                text2: authData.error
-            });
-
-            dispatch(authActions.error(false))
-        }
-
-        console.log(authData, 'login screen')
-    }, [authData, error]);
+    }, []);
 
     const onInputChange = (value, input) => {
         setLoginForm({
@@ -78,7 +61,18 @@ const LoginScreen = ({ navigation }) => {
                 error: {...valRes}
             })
 
-            dispatch(authActions.signIn(loginData))
+            try {
+                setLoading(true)
+
+                await dispatch(authActions.signIn(loginData))
+            } catch (error) {
+                setLoading(false)
+                Toast.show({
+                    type: 'error',
+                    text1: 'Gagal Masuk!',
+                    text2: error
+                });
+            }
         } else {
             setLoginForm({
                 ...loginData,

@@ -1,10 +1,6 @@
 const jwt               = require('jsonwebtoken') // Import jwt
 const env               = require('../env') // Import environment var
 const secret            = env.token_secret // Get Token Secret from env var
-const { 
-    refreshToken,
-    setTokenCookie
-}  = require('../services/authService') // Get auth function
 
 // Start Auth Middlewares
 const authMiddleware = async (req, res, next) => {
@@ -15,7 +11,7 @@ const authMiddleware = async (req, res, next) => {
         const decoded   = jwt.verify(token, secret) // Verifying and Decoding jwt payload
 
         if (!decoded) {
-            res.status(406).json({ status: 'Not Acceptable', code: 406, msg: "Invalid Access Token Request."}) // If token not verified
+            res.status(406).json({ status: 'Not Acceptable', code: 'ERR_INVALID_TOKEN', message: "Invalid Access Token Request."}) // If token not verified
         } else {
             // If verified create new request header
             req.token    = token
@@ -27,27 +23,10 @@ const authMiddleware = async (req, res, next) => {
         }
     } catch (error) {
         if (error.name === 'TokenExpiredError') { // If token is expires
-            const token = req.cookies.refToken ? req.cookies.refToken : '' // Get refresh token from cookie
-
-            refreshToken({ token }) // Create new token and refresh token
-                .then((tokenData) => {
-                    // If creating token success
-                    setTokenCookie(res, tokenData.refreshToken) // Set refreshtoken to cookie
-                        .then(() => {
-                            res.status(200).json(tokenData) // Send Token and RefreshToken to front end
-                        })
-                        .catch(err => { // If set cookie failed
-                            console.log(new Error(err))
-                            res.status(500).json({code: 'INTERNAL_SERVER_ERROR', message: 'Internal Server Error'})
-                        })
-                })
-                .catch(err => { // If create new token and refresh token error
-                    console.log(new Error(err))
-                    res.status(406).json({ status: 'Error', message: err })
-                })
+            res.status(406).json({status: 'TokenExpiredError', code: 'ERR_TOKEN_EXPIRED', message: 'Token sudah kadaluarsa.' })
         } else { // If any error
-            console.log(new Error(err))
-            res.status(500).json({ status: error.name, code: 406, msg: error.message})
+            console.log(new Error(error))
+            res.status(500).json({ status: error.name, code: error.name, message: error.message})
         }
     }
 }

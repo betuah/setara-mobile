@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TabView, SceneMap, TabBar  } from 'react-native-tab-view';
+import { useDispatch, useSelector } from 'react-redux';
 import { Texts } from '../components/common/UtilsComponent';
-import LogoBrand from '../components/LogoComponent';
-import colors from '../constants/colors';
 import { validate } from 'validate.js';
 import { signupWbConstrains } from '../constants/constrains';
 import { signupTutorConstrains } from '../constants/constrains';
@@ -16,6 +15,13 @@ import {
     ScrollView,
 } from 'react-native';
 
+// Auth Actions
+import * as authActions from '../store/actions/authAction';
+
+import Toast from 'react-native-toast-message';
+import LogoBrand from '../components/LogoComponent';
+import colors from '../constants/colors';
+
 import WargaBelajarForm from '../components/auth/WargaBelajarForm';
 import TutorForm from '../components/auth/TutorForm';
 
@@ -23,12 +29,18 @@ const date = new Date();
 const initialLayout = { width: Dimensions.get('window').width };
 
 const SignUpScreen = ({ navigation }) => {
+    const authData = useSelector(state => state.auth)
+    const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
+
     const [wbData, setWbData] = useState({
         kode_kelas: '',
         name: '',
         uname: '',
         password: '',
-        confirmPass: ''
+        confirmPass: '',
+        status: 'siswa',
+        error: {}
     })
 
     const [tutorData, setTutorData] = useState({
@@ -36,68 +48,104 @@ const SignUpScreen = ({ navigation }) => {
         name: '',
         uname: '',
         password: '',
-        confirmPass: ''
+        confirmPass: '',
+        status: 'guru',
+        error: {}
     })
 
-    const [errWb, setErrWb] = useState({})
-    const [errTutor, setErrTutor] = useState({})
-
     const wbInputChange = (value, input) => {
-        setErrWb({})
         setWbData({
             ...wbData,
-            [input]: value
+            [input]: value,
         })
     }
 
     const tutorInputChange = (value, input) => {
-        setErrTutor({})
         setTutorData({
             ...tutorData,
-            [input]: value
+            [input]: value,
         })
     }
 
-    const signUpWb = () => {
-        const err = validate(wbData, signupWbConstrains)
-        setErrWb({...err})
+    useEffect(() => {
+        setWbData({
+            kode_kelas: '',
+            name: '',
+            uname: '',
+            password: '',
+            confirmPass: '',
+            status: 'siswa',
+            error: {}
+        })
 
-        // console.log(err, '---------' + JSON.stringify(errWb))
+        setTutorData({
+            email: '',
+            name: '',
+            uname: '',
+            password: '',
+            confirmPass: '',
+            status: 'guru',
+            error: {}
+        })
+
+        if (authData.token) alert('Berhasil daftar')
+
+    }, [])
+
+    const signUpWb = async () => {
+        const err = validate(wbData, signupWbConstrains)
+
+        setWbData({...wbData, error: {...err}})
 
         if (!err && (wbData.password === wbData.confirmPass )) {
-            setWbData({
-                kode_kelas: '',
-                name: '',
-                uname: '',
-                password: '',
-                confirmPass: ''
-            })
-            alert('wb')
+            try {
+                setLoading(true)
+                await dispatch(authActions.signUp(wbData))
+            } catch (error) {
+                setLoading(false)
+                Toast.show({
+                    type: 'error',
+                    text1: 'Gagal Mendaftar!',
+                    text2: error
+                });
+            }
         } else {
             if (wbData.password || wbData.confirmPass)
-                setErrWb({
-                    ...errWb,
-                    confirmPass: ['Konfirmasi password tidak sesuai.']
+                setWbData({
+                    ...wbData,
+                    error: {
+                        ...wbData.error,
+                        confirmPass: ['Konfirmasi password tidak sesuai.']
+                    },
                 })
         }
     }
 
-    const signUpTutor = () => {
+    const signUpTutor = async () => {
         const err = validate(tutorData, signupTutorConstrains)
-        setErrTutor({...err})
+        setTutorData({...tutorData, error: {...err}})
+
         if (!err && (tutorData.password === tutorData.confirmPass )) {
-            setTutorData({
-                email: '',
-                name: '',
-                uname: '',
-                password: '',
-                confirmPass: ''
-            })
-            alert('tutor')
+            try {
+                setLoading(true)
+                await dispatch(authActions.signUp(tutorData))
+            } catch (error) {
+                setLoading(false)
+                Toast.show({
+                    type: 'error',
+                    text1: 'Gagal Mendaftar!',
+                    text2: error
+                });
+            }
         } else {
-            setErrWb({
-                confirmPass: ['Konfirmasi password tidak sesuai.']
-            })
+            if (wbData.password || wbData.confirmPass)
+                setTutorData({
+                    ...tutorData,
+                    error: {
+                        ...tutorData.error,
+                        confirmPass: ['Konfirmasi password tidak sesuai.']
+                    }
+                })
         }
     }
 
@@ -115,14 +163,18 @@ const SignUpScreen = ({ navigation }) => {
                     data={wbData}
                     onInputChange={wbInputChange}
                     signUp={signUpWb}
-                    err={errWb}
+                    err={wbData.error}
+                    btnDisable={loading}
+                    btnLoading={loading}
                 />;
             case '2':
                 return <TutorForm 
                     data={tutorData}
                     onInputChange={tutorInputChange}
                     signUp={signUpTutor}
-                    err={errTutor}
+                    err={tutorData.error}
+                    btnDisable={loading}
+                    btnLoading={loading}
                 />;
             default:
                 return null;
@@ -168,7 +220,7 @@ const SignUpScreen = ({ navigation }) => {
                             </View>
                             <View>
                                 <Texts 
-                                    onPress={() => navigation.goBack()}
+                                    onPress={() => navigation.navigate('Login')}
                                     text=" Masuk"
                                     style={{fontWeight: 'bold', color: colors.white, fontSize: 18}}
                                 />

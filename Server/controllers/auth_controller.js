@@ -1,7 +1,7 @@
 const bcrypt  = require('bcryptjs') // Import bcrypt
 const User    = require('../models/usersData.model') // Import User Model
 const Kelas   = require('../models/kelasData.model') // Import Kelas Model
-const AnggotaKel = require('../models/anggotaKelas.model')
+const AnggotaKel = require('../models/anggotaKelas.model') // Import Anggota Kelas Model
 
 /*  
 * Start Import Auth Service
@@ -12,9 +12,14 @@ const {
     generateJwtToken,
     generateRefreshToken,
     revokeToken,
-    setTokenCookie
+    setTokenCookie,
+    refreshToken
 } = require('../services/authService')
 /* End Import Auth Service */
+
+const index = async (req, res) => {
+    res.status(200).send('I am alive')
+}
 
 /* Start signIn function */
 const signIn = async (req, res) => {
@@ -39,12 +44,13 @@ const signIn = async (req, res) => {
             await refreshToken.save()
 
             // return user details and tokens
-            const resData = { 
+            const resData = {
                 code: 'OK',
                 message: 'Berhasil Masuk.',
                 data: {
+                    id: user.id,
                     username: user.username,
-                    name: user.name,
+                    name: user.nama,
                     email: user.email,
                     status: user.status
                 },
@@ -124,10 +130,10 @@ const signUp = async (req, res) => {
             console.log(new Error(err)) // Show error log in log
             if (err.code === 11000) { 
                 // If user already exist
-                res.status(500).json({ status: 'error', code: 'ERR_USER_EXIST', 'msg' : 'Username already exist!' })
+                res.status(500).json({ status: 'error', code: 'ERR_USER_EXIST', 'message' : 'Username already exist!' })
             } else {
                 // If another error
-                res.status(500).json({ status: 'error', code: 'ERR_REGISTER', 'msg' : 'Failed to saving data!' })
+                res.status(500).json({ status: 'error', code: 'ERR_REGISTER', 'message' : 'Failed to saving data!' })
             }
         })
     } catch (error) { // Catch any error
@@ -137,12 +143,12 @@ const signUp = async (req, res) => {
         const err = {
             status: 'ERROR',
             code: 'ERR_BAD_REQUEST',
-            msg: 'Gagal Daftar!'
+            message: 'Gagal Daftar!'
         }
 
         // Send error data to front end
         if (error.code) { // If error code exist
-            res.status(404).json({ status: 'error', code: error.code, 'msg' : 'Kelas tidak ditemukan!' })
+            res.status(404).json({ status: 'error', code: error.code, 'message' : 'Kelas tidak ditemukan!' })
         } else {
             res.status(400).json(err) 
         }
@@ -161,14 +167,14 @@ const account = async (req, res) => {
             if(user) { // If User exist
                 res.status(200).json(user)
             } else { // If user data is null
-                res.status(404).json({ status: 'Error', code: 'ERR_USER_NOT_FOUND', msg: 'User Not Found!'})
+                res.status(404).json({ status: 'Error', code: 'ERR_USER_NOT_FOUND', message: 'User Not Found!'})
             }            
         }).catch((err) => { // Catch Error
-            res.status(400).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', msg: 'Internal Server Error' })
+            res.status(400).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
             console.log(new Error(err))
         })
     } catch (error) { // Catch any Error
-        res.status(400).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', msg: 'Internal Server Error' })
+        res.status(400).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
         console.log(new Error(err))
     }
 }
@@ -190,6 +196,28 @@ const signOut = async (req, res) => {
         })
 }
 
+// Get New Token
+const generateNewToken = async (req, res) => {
+    const token = req.cookies.refToken ? req.cookies.refToken : '' // Get refresh token from cookie
+
+    refreshToken({ token }) // Create new token and refresh token
+        .then((tokenData) => {
+            // If creating token success
+            setTokenCookie(res, tokenData.refreshToken) // Set refreshtoken to cookie
+                .then(() => {
+                    res.status(200).json({code: 'OK', ...tokenData}) // Send Token and RefreshToken to front end
+                })
+                .catch(err => { // If set cookie failed
+                    console.log(new Error(err))
+                    res.status(500).json({code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error'})
+                })
+        })
+        .catch(err => { // If create new token and refresh token error
+            console.log(new Error(err))
+            res.status(500).json({ status: 'Invalid', code: 'ERR_GENERATE_TOKEN', message: err })
+        })
+}
+
 // const getTokens = async (req, res) => {
 //     getRefreshTokens(req.userId)
 //         .then(tokens => {
@@ -203,9 +231,10 @@ const signOut = async (req, res) => {
 
 // Export All function
 module.exports = {
+    index,
     signIn,
     signUp,
     signOut,
     account,
-    // getTokens 
+    generateNewToken
 }

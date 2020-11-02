@@ -73,6 +73,8 @@ const WargaBelajarForm = props => {
                     title="Daftar" 
                     onPress={props.signUp}
                     style={{ width: '100%' }}
+                    disabled={props.btnDisable}
+                    isLoading={props.btnLoading}
                 />
             </View>
         </View>

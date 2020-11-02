@@ -26,6 +26,7 @@ const TutorForm = props => {
                         label="Username"
                         placeholder="Dapat berupa email, username atau NIK"
                         value={props.data.uname}
+                        keyboardType='email-address'
                         IconName='account-box'
                         onChangeText={e => props.onInputChange(e, 'uname')}
                         errorVisible={props.err.uname ? true : false}
@@ -74,6 +75,8 @@ const TutorForm = props => {
                     title="Daftar Tutor" 
                     onPress={props.signUp}
                     style={{ width: '100%' }}
+                    disabled={props.btnDisable}
+                    isLoading={props.btnLoading}
                 />
             </View>
         </View>
