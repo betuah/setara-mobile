@@ -7,17 +7,17 @@
 #### BackEnd Developer
 - **Name :** Pansera Oktasedu Kanaidi
 - **Email :** pansera.oktasedu@gmail.com
-- **Github :** [My Github Libraries](https://github.com/pansedo/)
+- **Github :** [Okta's Github Libraries](https://github.com/pansedo/)
 
 #### FrontEnd Developer
 - **Name :** Ihsan Fauzi
 - **Email :** ihsanfauzi.id@gmail.com
-- **Github :** [My Github Libraries](https://github.com/ihsan-fauzi/)
+- **Github :** [Ihsan's Github Libraries](https://github.com/ihsan-fauzi/)
 
 #### Mobile Developer
 - **Name :** Betuah Anugerah
 - **Email :** betuahanugerah@gmail.com
-- **Github :** [My Github Libraries](https://github.com/betuah/)
+- **Github :** [Betuah's Github Libraries](https://github.com/betuah/)
 
 <hr>
 
@@ -38,3 +38,5 @@ MONGO_PASSWORD=YOUT_MONGO_PASSWORD
 MONGO_HOST=YOUR_MONGO_HOST
 MONGO_PORT=YOUR_MONGO_PORT
 ```
+
+<hr>
