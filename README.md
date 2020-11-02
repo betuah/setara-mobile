@@ -39,4 +39,10 @@ MONGO_HOST=YOUR_MONGO_HOST
 MONGO_PORT=YOUR_MONGO_PORT
 ```
 
+## Running Server App
+```sh
+$ npm run dev # dev for Running development apps and prod for Running production apps
+
+```
+
 <hr>
