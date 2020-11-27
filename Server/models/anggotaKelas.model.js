@@ -9,24 +9,17 @@ const anggotaKelasSchema = new Schema({
         required: true
     },
     id_kelas : { 
-        type: String, 
-        trim: true,
-        required: true,
+        type: Schema.Types.ObjectId, ref: 'kelas' 
     },
     status : { 
         type: String, 
         trim: true,
         required: true,
-    },
+    }
 }, { 
     timestamps: true, 
     collection : 'anggota_kelas' 
 })
-
-anggotaKelasSchema.set('toJSON', {
-    virtuals: true,
-    versionKey: false
-});
 
 const anggotaKelas = mongoose.model('anggota_kelas', anggotaKelasSchema)
 

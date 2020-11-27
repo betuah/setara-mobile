@@ -25,8 +25,9 @@ const authMiddleware = async (req, res, next) => {
         if (error.name === 'TokenExpiredError') { // If token is expires
             res.status(406).json({status: 'TokenExpiredError', code: 'ERR_TOKEN_EXPIRED', message: 'Token sudah kadaluarsa.' })
         } else { // If any error
-            console.log(new Error(error))
-            res.status(500).json({ status: error.name, code: error.name, message: error.message})
+            // console.log(new Error(error))
+            // res.status(500).json({ status: error.name, code: error.name, message: error.message})
+            res.status(406).json({ status: 'Not Acceptable', code: 'ERR_AUTH_TOKEN', message: "Invalid Authentication."})
         }
     }
 }
