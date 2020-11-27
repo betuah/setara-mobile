@@ -1,14 +1,14 @@
-import { AUTHENTICATE, ERROR, SET_LOADING } from '../actions/authAction'
+import { AUTHENTICATE, ERROR, SET_LOADING, SIGN_OUT } from '../actions/authAction'
 
 const initState = {
     token: null,
     refToken: null,
     userId: null,
     username: null,
-    fullName: null
+    fullName: null,
+    foto: 'http://setara.kemdikbud.go.id/media/Assets/foto/aa61ff1b9_0110202020015.jpg',
+    status: 'Warga Belajar'
 }
-
-const LOGOUT = 'LOGOUT'
 
 const auth = (state = initState, actions) => {
     switch (actions.type) {
@@ -23,8 +23,11 @@ const auth = (state = initState, actions) => {
                 isLoading: false
             }
         
-        case LOGOUT:
-            return initState
+        case SIGN_OUT:
+            return {
+                ...state,
+                ...actions.data
+            }
     
         default:
             return state;

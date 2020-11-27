@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TabView, SceneMap, TabBar  } from 'react-native-tab-view';
 import { useDispatch, useSelector } from 'react-redux';
-import { Texts } from '../components/common/UtilsComponent';
+import { Text, Texts } from '../components/common/UtilsComponent';
 import { validate } from 'validate.js';
 import { signupWbConstrains } from '../constants/constrains';
 import { signupTutorConstrains } from '../constants/constrains';
@@ -214,22 +214,21 @@ const SignUpScreen = ({ navigation }) => {
                         
                         <View style={styles.signup}>
                             <View>
-                                <Texts 
-                                    text="Sudah punya akun ? "
-                                />                                
+                                <Text color={colors.white}>Sudah punya akun ? </Text>                                
                             </View>
                             <View>
-                                <Texts 
+                                <Text
                                     onPress={() => navigation.navigate('Login')}
-                                    text=" Masuk"
-                                    style={{fontWeight: 'bold', color: colors.white, fontSize: 18}}
-                                />
+                                    weight='bold'
+                                    color={colors.white}
+                                    size={18}
+                                >Masuk</Text>
                             </View>
                         </View>
                     </ScrollView>
                 </View>
                 <View style={styles.footer}>
-                    <Texts text={`Setara Daring All Right Reserved @ ${date.getFullYear()} `}></Texts>
+                <Text color={colors.white}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>

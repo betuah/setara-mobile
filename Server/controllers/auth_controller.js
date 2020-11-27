@@ -29,11 +29,12 @@ const signIn = async (req, res) => {
         const password      = req.query.password ? req.query.password : (req.body.password ? req.body.password : req.params.password)
 
         // Find and get User data from user model, reference from mongoose docs
-        const user = await User.findOne({ username: username }) 
+        const user = await User.findOne({ username: username })
 
         // Check if user exist and password is valid
         if (!user || !bcrypt.compareSync(password, user.password)) {
             // console.log(new Error('Username or password is incorrect!')) // Show error to log status
+
             res.status(400).json({code: 'ERR_INCORRECT_USER_PASS', message: 'Username dan Password salah!'}) // Response error to front end 
         } else {
             // authentication successful so generate jwt and refresh tokens
@@ -52,7 +53,8 @@ const signIn = async (req, res) => {
                     username: user.username,
                     name: user.nama,
                     email: user.email,
-                    status: user.status
+                    status: user.status,
+                    picture: `http://setara.kemdikbud.go.id/media/Assets/foto/${user.foto}`
                 },
                 accessToken : jwtToken,
                 refreshToken: refreshToken.token
@@ -63,7 +65,8 @@ const signIn = async (req, res) => {
         }
     } catch (error) { // Catch Error
     // if (error) console.log(new Error(error)) // Show error in log
-    res.status(400).json('error') // Give error status response to front end
+
+    res.status(400).json({code: 'ERR_INTERNAL_SERVER_ERROR', message: 'Ops... Ada yang salah dengan server!'}) // Give error status response to front end
 }
     
 }
@@ -86,7 +89,7 @@ const signUp = async (req, res) => {
             username,
             nama,
             email,
-            password: passwordHashed,
+            password: passwordHashed.replace(/^\$2y(.+)$/i, '\$2a$1'),
             status
         }
 
@@ -198,7 +201,9 @@ const signOut = async (req, res) => {
 
 // Get New Token
 const generateNewToken = async (req, res) => {
-    const token = req.cookies.refToken ? req.cookies.refToken : '' // Get refresh token from cookie
+    const token = req.cookies.refToken ? req.cookies.refToken : (req.body.refreshToken ? req.body.refreshToken : '') // Get refresh token from cookie
+
+    console.log(token, 'asdasd')
 
     refreshToken({ token }) // Create new token and refresh token
         .then((tokenData) => {

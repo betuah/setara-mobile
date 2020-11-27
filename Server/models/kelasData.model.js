@@ -37,7 +37,10 @@ const kelasSchema = new Schema({
         type: Number, 
         trim: true,
     },
-}, { timestamps: true })
+}, { 
+    timestamps: true, 
+    collection : 'kelas' 
+})
 
 kelasSchema.set('toJSON', {
     virtuals: true,

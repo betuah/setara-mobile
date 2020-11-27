@@ -1,0 +1,57 @@
+import React from 'react';
+import { View, Image } from 'react-native';
+import { Text } from '../common/UtilsComponent';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { Card, useTheme } from 'react-native-paper';
+
+const AnggotaComponent = props => {
+    const { colors, fonts } = useTheme()
+
+    return (
+        <TouchableWithoutFeedback>
+            <Card style={{
+                elevation: 0,
+                shadowOffset: { width: 0, height: 0 },
+                shadowOpacity: 0,
+                shadowRadius: 0,
+                borderRadius: 10,
+                marginHorizontal: 5,
+                marginBottom: 15,
+                width: 240,
+                backgroundColor: colors.bgSecondary,
+                padding: 13,
+            }}>
+                <View style={{
+                    flexDirection: 'row',
+                }}>
+                    <View style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'flex-start',
+                    }}>
+                        <Image 
+                            style={{
+                                width: 50,
+                                height: 50,
+                                borderRadius: 50,
+                                borderColor: colors.bgWhite,
+                            }}
+                            source={{ uri: props.data.picture }}   
+                        />
+                    </View>
+                    <View style={{
+                        flex: 3,
+                        paddingLeft: 5,
+                        alignItems: 'flex-start',
+                        justifyContent: 'center',
+                    }}>
+                        <Text style={{textAlign: 'center'}} fontWeight={fonts.semiBold} size={14} color={colors.textWhite}>{`${props.data.name}`}</Text>
+                        <Text style={{textAlign: 'center'}} fontWeight={fonts.regular} size={11} color={colors.textWhite}>{`${props.data.school}`}</Text>
+                    </View>
+                </View>
+            </Card>
+        </TouchableWithoutFeedback>
+    )
+}
+
+export default AnggotaComponent;

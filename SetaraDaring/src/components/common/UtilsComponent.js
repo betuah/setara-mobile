@@ -1,26 +1,27 @@
 import React, { Fragment } from 'react';
-import { Text, View } from 'react-native';
-import { TextInput, HelperText, Button } from 'react-native-paper';
+import { Text as NativeText, View } from 'react-native';
+import { TextInput, HelperText, Button, Text as PaperText } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import colors from '../../constants/colors';
+import IconIonic from 'react-native-vector-icons/Ionicons';
+import colors from '../../constants/colors'
 
-const Texts = props => {
+const Text = props => {
     return (
-        <Text 
+        <PaperText
+            theme={props.theme}
             onPress={props.onPress}
-            style={
-                {
-                    fontWeight: props.fontWeight ? props.fontWeight : "normal",
-                    fontFamily: props.fontFamily ? props.fontFamily : 'Raleway-Regular',
-                    fontSize: props.size ? props.size : 15,
-                    color: props.color ? props.color : colors.light,
-                    ...props.style
-                }
-            }
+            style={{
+                fontFamily: props.fontFamily,
+                fontWeight: props.weight,
+                fontSize: props.size ? props.size : 15,
+                color: props.color ? props.color : colors.primary,
+                ...props.fontWeight,
+                ...props.style
+            }}
         >
-            {props.text}
-        </Text>
-    );
+            {props.children}
+        </PaperText>
+    )
 }
 
 const Input = props => {
@@ -32,34 +33,37 @@ const Input = props => {
                 onChange={props.onChange}
                 mode="flat"
                 keyboardType={props.keyboardType}
-                selectionColor={colors.light}
-                underlineColor={colors.light}
+                selectionColor={props.defaultStyle ? props.defaultStyle.selectionColor : colors.light}
+                underlineColor={props.defaultStyle ? props.defaultStyle.underlineColor : colors.light}
                 left={
+                    props.IconName &&
                     <TextInput.Icon 
                         {...props.Icon}
                         name={props.IconName}
-                        color={props.IconColor ? props.IconColor : colors.light} 
-                        size={props.IconSize ? props.IconSize : 20}
+                        color={props.defaultStyle ? props.defaultStyle.IconColor : (props.IconColor ? props.IconColor : colors.light)} 
+                        size={props.defaultStyle ? props.defaultStyle.IconSize : (props.IconSize ? props.IconSize : 20) }
                     />
                 }
                 style={{
                     backgroundColor: 'transparent',
-                    fontSize: 15,
+                    fontSize: props.defaultStyle ? props.defaultStyle.fontSize : 15,
                     ...props.style
                 }}
-                theme={{ 
+                theme={{
                     colors: { 
                         text: colors.white,
                         placeholder: colors.light,
                         error: colors.light,
                         primary: colors.light
-                    } 
+                    },
+                    ...props.theme,
+                    ...props.defaultStyle && props.defaultStyle.theme
                 }}
             />
             {
                 props.errorVisible 
                 &&
-                <HelperText style={props.errorStyle} type="error" visible={props.errorVisible}>
+                <HelperText style={{...props.errorStyle, color: colors.white}} type="error" visible={props.errorVisible}>
                     {props.errorMassage}
                 </HelperText> 
             }
@@ -73,7 +77,7 @@ const Btn = props => {
         <Button 
             onPress={props.onPress}
             style={{ borderRadius: 20, ...props.style }}
-            color={colors.white} 
+            color={props.color ? props.color: colors.white} 
             mode={props.mode ? props.mode : 'contained'}
             contentStyle={props.contentStyle}
             disabled={props.disabled ? true : false}
@@ -82,32 +86,43 @@ const Btn = props => {
         >
             { props.isLoading ? 
                     <Fragment>
-                        <View style={{ width: props.space ? props.space : 5 }} />
-                        <Texts 
+                        <View style={{ width: 8, height: 1 }} />
+                        <Text 
+                            weight='bold'
+                            color={props.loadingColor ? props.loadingColor : colors.primary}
                             style={{
-                                fontWeight: "bold", 
-                                color: colors.primary,
                                 ...props.style
                             }}
-                            text={'LOADING . . .'}
-                        />
+                        >LOADING . . .</Text>
                     </Fragment>
                 : 
                     <Fragment>
-                        { props.Icon && <Icon {...props.Icon} /> }
-                        <View style={{ width: props.space ? props.space : 5 }} />
-                        <Texts 
-                            style={{
-                                fontWeight: "bold", 
-                                color: colors.primary,
-                                ...props.style
-                            }}
-                            text={props.title}
-                        />
+                        { props.Icon && (props.IconType === 'ionic' ? 
+                            <Fragment>
+                                <IconIonic name={props.IconName} size={props.IconSize} color={props.IconColor} {...props.Icon} />
+                                <View style={{ width: 5, height: 1 }} />
+                            </Fragment> 
+                            : 
+                            <Fragment>
+                                <Icon name={props.IconName} size={props.IconSize} color={props.IconColor} {...props.Icon} />
+                                <View style={{ width: 5, height: 1 }} />
+                            </Fragment>
+                            ) }
+                        { props.title && 
+                            <Text 
+                                fontWeight={props.fontWeight}
+                                weight={props.fontStyle ? props.fontStyle.weight : 'bold'}
+                                color={props.fontStyle ? props.fontStyle.color : (props.fontColor ? props.fontColor : colors.primary)}
+                                size={props.fontStyle ? props.fontStyle.size : props.fontSize}
+                                style={{...props.fontStyle}}
+                            >
+                                {props.title}
+                            </Text>
+                        }
                     </Fragment>
             }
         </Button>
     )
 }
 
-export { Texts, Input, Btn };
+export { Text, Input, Btn };

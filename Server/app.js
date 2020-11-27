@@ -26,9 +26,11 @@ app.use(cookieParser())
 app.use(cors({ origin: (origin, callback) => callback(null, true), credentials: true }));
 
 /* Start of Routing Import */
-const authRoute        = require('./routes/auth_route')
+const authRoute   = require('./routes/auth_route')
+const classRoute  = require('./routes/class_route')
 
 authRoute(app)
+classRoute(app)
 /* End of Routing Import */
 
 /* MongoDB Connection Check and running Apps */

@@ -1,9 +1,21 @@
 import { combineReducers } from 'redux';
 
-import AuthReducer from './authReducer';
+import ThemeReducer from './ThemeReducer';
+import AuthReducer from './AuthReducer';
+import HomeReducer from './HomeReducer';
+import LibraryReducer from './LibraryReducer';
+import NotifReducer from './NotifReducer';
+import ProfileReducer from './ProfileReducer';
+import ClassReducer from './ClassReducer';
 
 const rootReducer = combineReducers({
+    theme: ThemeReducer,
     auth: AuthReducer,
+    home: HomeReducer,
+    library: LibraryReducer,
+    notif: NotifReducer,
+    profile: ProfileReducer,
+    class: ClassReducer
 });
 
 export default rootReducer

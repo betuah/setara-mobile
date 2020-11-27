@@ -35,6 +35,10 @@ const userDataSchema = new Schema({
         trim: true,
         required: true,
     },
+    foto: {
+        type: String, 
+        trim: true,
+    },
     provinsi : { 
         type: String, 
         trim: true
@@ -43,12 +47,19 @@ const userDataSchema = new Schema({
         type: String, 
         trim: true
     },
+    update : {
+        type: String, 
+        trim: true
+    },
     program : { 
         type: String, 
         trim: true
     },
     sosmed : {},
-}, { timestamps: true })
+}, { 
+    timestamps: true, 
+    collection : 'user' 
+})
 
 userDataSchema.set('toJSON', {
     virtuals: true,

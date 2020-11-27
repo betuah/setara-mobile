@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Input, Btn, Texts } from '../components/common/UtilsComponent';
+import { Text, Input, Btn } from '../components/common/UtilsComponent';
 import LogoBrand from '../components/LogoComponent';
 import colors from '../constants/colors';
 import LottieView from 'lottie-react-native';
@@ -22,7 +22,6 @@ import * as authActions from '../store/actions/authAction';
 
 const LoginScreen = ({ navigation }) => {
     const date = new Date()
-
     const authData = useSelector(state => state.auth)
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
@@ -83,7 +82,7 @@ const LoginScreen = ({ navigation }) => {
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-            <SafeAreaView style={styles.screen}>
+            <SafeAreaView style={{...styles.screen, backgroundColor: colors.primary}}>
                 <View style={styles.body}>
                     <ScrollView style={{height: '50%', maxHeight: '100%'}}>
                         <View style={styles.LogoBrand}>
@@ -119,6 +118,7 @@ const LoginScreen = ({ navigation }) => {
                                     value={loginData.password}
                                     secureTextEntry={true}
                                     IconName='lock'
+                                    IconType='material'
                                     errorVisible={loginData.error.password ? true : false}
                                     errorMassage={loginData.error.password}
                                     onChangeText={e => onInputChange(e, 'password')}
@@ -129,6 +129,7 @@ const LoginScreen = ({ navigation }) => {
                         <View style={styles.button}>
                             <Btn 
                                 Icon={{name:"send", size: 15, color: colors.primary}}
+                                IconType='ionic'
                                 title="Masuk" 
                                 onPress={submitHandler}
                                 style={{ width: '80%' }}
@@ -142,22 +143,21 @@ const LoginScreen = ({ navigation }) => {
                         </View>
                         <View style={styles.signup}>
                             <View>
-                                <Texts 
-                                    text="Belum punya akun ? "
-                                />                                
+                                <Text color={colors.white} >Belum punya akun ? </Text>                                
                             </View>
                             <View>
-                                <Texts 
+                                <Text 
                                     onPress={() => navigation.navigate('SignUp')}
-                                    text=" Daftar"
-                                    style={{fontWeight: 'bold', color: colors.white, fontSize: 18}}
-                                />
+                                    size={18}
+                                    weight='bold'
+                                    color={colors.white}
+                                >Daftar</Text>
                             </View>
                         </View>
                     </ScrollView>
                 </View>
-                <View style={styles.footer}>
-                    <Texts text={`Setara Daring All Right Reserved @ ${date.getFullYear()} `}></Texts>
+                <View style={{...styles.footer, backgroundColor: colors.darkBlue,}}>
+                    <Text color={colors.white}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
@@ -168,7 +168,6 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: colors.primary
     },
     LogoBrand: {
         paddingTop: Dimensions.get('window').height > 600 ? 40 : 20,
@@ -197,7 +196,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: colors.darkBlue,
         position: 'relative'
     }
 });

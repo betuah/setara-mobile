@@ -18,7 +18,6 @@ module.exports = (app) => {
     app.route('/api/v1/signout') // SignOut End Point
         .post(authMiddleware, Auth.signOut) // Set middleware
     
-    app.route('/api/v1/account') // Get Profile End Point
+    app.route('/api/v1/profile') // Get Profile End Point
         .get(authMiddleware, Auth.account) // Set Middleware
-
 }

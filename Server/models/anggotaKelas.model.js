@@ -18,7 +18,10 @@ const anggotaKelasSchema = new Schema({
         trim: true,
         required: true,
     },
-}, { timestamps: true })
+}, { 
+    timestamps: true, 
+    collection : 'anggota_kelas' 
+})
 
 anggotaKelasSchema.set('toJSON', {
     virtuals: true,
