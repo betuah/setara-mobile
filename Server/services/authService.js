@@ -28,8 +28,8 @@ const generateJwtToken = (user) => {
         // End Data PayLoad
         env.token_secret, // Set jwt secret
         {
-            expiresIn: '30m' // Set token expire
-            // expiresIn: '30'
+            // expiresIn: '30m' // Set token expire
+            expiresIn: '3000'
         }
     )
 }

@@ -40,19 +40,19 @@ const Navigations = () => {
     const [splash, setSplash] = useState(true)
 
     const isUserSignIn = async() => {
-        setTimeout(() => {
-            dispatch(authActions.isUserSignIn()).then(() => {
-                setSplash(false)
-            }).catch(err => {
-                setSplash(false)
-            })
-        }, 2000);
+        dispatch(authActions.isUserSignIn()).then(() => {
+            setSplash(false)
+        }).catch(err => {
+            setSplash(false)
+        })
     }
 
     useEffect(() => {
         StatusBar.setBarStyle('light-content');
         if (Platform.OS === 'android') {
             StatusBar.setBackgroundColor(colors.darkBlue2);
+            StatusBar.setTranslucent;
+            StatusBar.setBarStyle("light-content");
             changeNavigationBarColor(colors.darkBlue2, true);
         }
         if (!authData.token) isUserSignIn()

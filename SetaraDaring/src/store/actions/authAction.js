@@ -13,7 +13,7 @@ const header  = {
     timeout: 10000
 }
 
-const AxiosApi = Axios.create();
+export const AxiosApi = Axios.create();
 
 AxiosApi.interceptors.request.use(
     async config => {
@@ -37,13 +37,13 @@ AxiosApi.interceptors.response.use((response) => {
     return response
 }, async (error) => {
     const originalRequest = error.config;
-    if (error.response.data.code === "ERR_TOKEN_EXPIRED") {
+    
+    if (error.response.data.code === "ERR_TOKEN_EXPIRED" && !originalRequest._retry) {
         originalRequest._retry = true;
 
-        console.log('asdsad')
-        // const accToken = await refreshToken()
+        const accToken = await refreshToken()
 
-        // Axios.defaults.headers.common['Authorization'] = 'Bearer ' + accToken;
+        Axios.defaults.headers.common['Authorization'] = 'Bearer ' + accToken;
         return AxiosApi(originalRequest);
     }
     return Promise.reject(error);
@@ -61,7 +61,8 @@ export const isUserSignIn = data => {
             token: userData.token,
             userId: userData.userId,
             username: userData.username,
-            fullName: userData.fullName
+            fullName: userData.fullName,
+            picture: userData.picture
         })
     }
 }
@@ -74,7 +75,7 @@ export const signIn = data => {
             const res = await Axios.post(`${config.base_url}/api/v1/signin`, bodyRaw, header)
             const resData = res.data
             
-            await saveData(resData.accessToken, resData.refreshToken, resData.data.id, resData.data.username, resData.data.name)
+            await saveData(resData.accessToken, resData.refreshToken, resData.data.id, resData.data.username, resData.data.name, resData.data.picture)
             dispatch({
                 type: AUTHENTICATE,
                 token: resData.accessToken,
@@ -160,13 +161,14 @@ export const signOut = (token) => {
                 userId: null,
                 username: null,
                 fullName: null,
+                picture: null,
             }
             
-            // await deleteData()
-            // dispatch({
-            //     type: SIGN_OUT,
-            //     data: data
-            // })
+            await deleteData()
+            dispatch({
+                type: SIGN_OUT,
+                data: data
+            })
         } catch (err) {
             const errRes = err.response ? err.response.data : false
 
@@ -182,10 +184,8 @@ export const signOut = (token) => {
                         throw ('Mohon maaf pendaftaran gagal. Silahkan ulangi kembali beberapa saat lagi ya!')
                     case 'ERR_BAD_REQUEST':
                         throw ('Mohon maaf sepertinya terjadi kesalahan pada applikasi. Kamu bisa menghubungi Admin untuk mendapatkan bantuan.')
-                    case 'ERR_TOKEN_EXPIRED':
-                        // console.log('test')
-                        // getToken()
-                        throw ('Token Sudah Kadaluarsa')
+                    case 'ERR_GENERATE_TOKEN':
+                        await deleteData()
                     default:
                         throw (errRes.message)
                 }
@@ -205,23 +205,41 @@ const refreshToken = () => {
             const userData = JSON.parse(userReq)
 
             const tokenData = await Axios.post(`${config.base_url}/api/v1/token`, { refreshToken: userData.refToken}, header)
-            console.log(tokenData)
 
-            resolve(tokenData.accessToken)
+            const localStorage = await AsyncStorage.getItem('userData')
+            const tmpData = JSON.parse(localStorage)
+
+            const data = {
+                ...tmpData,
+                token: tokenData.data.accessToken, 
+                refToken: tokenData.data.refreshToken
+            }
+
+            await updateData(data)
+
+            resolve(tokenData.data.accessToken)
         } catch (error) {
             reject(error)
         }
     })
 }
 
-const saveData = async (token, refToken, userId, username, fullName) => {
+const saveData = async (token, refToken, userId, username, fullName, picture) => {
     try {
-        return await AsyncStorage.setItem('userData', JSON.stringify({token, refToken, userId, username, fullName}))
+        return await AsyncStorage.setItem('userData', JSON.stringify({token, refToken, userId, username, fullName, picture}))
     } catch (error) {
         console.log(error)
         throw (error)
     }
-    
+}
+
+const updateData = async (objValue) => {
+    try {
+        await AsyncStorage.mergeItem('userData', JSON.stringify(objValue))
+    } catch (error) {
+        console.log(error)
+        throw (error)
+    }
 }
 
 const deleteData = async () => {

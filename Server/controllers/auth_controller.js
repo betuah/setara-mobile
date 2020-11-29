@@ -203,8 +203,6 @@ const signOut = async (req, res) => {
 const generateNewToken = async (req, res) => {
     const token = req.cookies.refToken ? req.cookies.refToken : (req.body.refreshToken ? req.body.refreshToken : '') // Get refresh token from cookie
 
-    console.log(token, 'asdasd')
-
     refreshToken({ token }) // Create new token and refresh token
         .then((tokenData) => {
             // If creating token success
