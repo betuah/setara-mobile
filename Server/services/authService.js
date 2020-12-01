@@ -29,6 +29,7 @@ const generateJwtToken = (user) => {
         env.token_secret, // Set jwt secret
         {
             expiresIn: '120m' // Set token expire
+        }
     )
 }
 // End generate token
