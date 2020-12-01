@@ -7,14 +7,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const MapelComponent = props => {
     const { colors, fonts } = useTheme()
-    const bgCard = ['#F88585','#E0BE99','#FF976B','#97BBEA','#FFBBAB']
 
     return (
         <TouchableOpacity
             onPress={() => console.log('ea')}
         >
             <Card style={{
-                backgroundColor: bgCard[Math.floor(Math.random() * 5)],
+                backgroundColor: colors.bgCardPrimary,
                 borderRadius: 15,
                 marginVertical: 7,
                 marginHorizontal: 5,
@@ -35,6 +34,19 @@ const MapelComponent = props => {
                         right: 0,
                         top: 0,
                         bottom: 0,
+                    }}>
+                        <Image 
+                            source={require('../../assets/images/icon_pattern.png')}
+                            style={{width: '100%',height: '100%'}}
+                            resizeMode='cover'
+                        />
+                    </View>
+                    {/* <View style={{
+                        position: 'absolute',
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
                         alignItems: 'flex-end'
                     }}>
                         <Image 
@@ -42,7 +54,7 @@ const MapelComponent = props => {
                             style={{width: '100%',height: '100%'}}
                             resizeMode='contain'
                         />
-                    </View>
+                    </View> */}
                     <View style={{
                         flex: 4,
                     }}>

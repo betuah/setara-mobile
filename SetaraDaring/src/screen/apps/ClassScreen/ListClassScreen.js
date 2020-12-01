@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {  View, Image, TouchableOpacity } from 'react-native';
 import { Text } from '../../../components/common/UtilsComponent';
 import { Card, useTheme, } from 'react-native-paper';
@@ -6,7 +6,24 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const ListClassScreen = props => {
     const { colors, fonts } = useTheme()
-    const bgCard = ['#F88585','#E0BE99','#FF976B','#97BBEA','#FFBBAB']
+    const [roleColor, setRoleColor] = useState('#F88585')
+
+    useEffect(() => {
+        switch (props.data.role) {
+            case '1':
+                setRoleColor('#FF976B')
+                break;
+            case '2':
+                setRoleColor('#E0BE99')
+                break;
+            case '3':
+                setRoleColor('#97BBEA')
+                break;
+            default:
+                setRoleColor('#F88585')
+                break;
+        }
+    }, [roleColor])
 
     return (
         <TouchableOpacity
@@ -14,7 +31,7 @@ const ListClassScreen = props => {
             onLongPress={() => props.onLongPress(props.data)}
         >
             <Card style={{
-                backgroundColor: bgCard[Math.floor(Math.random() * 5)],
+                backgroundColor: roleColor,
                 borderRadius: 20,
                 marginVertical: 9,
                 marginHorizontal: 18,

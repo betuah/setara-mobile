@@ -11,13 +11,14 @@ const anggotaKelasSchema = new Schema({
     id_kelas : {
         type: String,
         trim: true,
+        index: true,
         required: true,
     },
     status : {
         type: String,
         trim: true,
         required: true,
-    },
+    }
 }, {
     timestamps: true,
     collection : 'anggota_kelas'

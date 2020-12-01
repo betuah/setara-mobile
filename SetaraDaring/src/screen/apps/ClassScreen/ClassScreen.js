@@ -1,14 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {  View, Image, ImageBackground, FlatList, RefreshControl } from 'react-native';
 import { Btn, Text } from '../../../components/common/UtilsComponent';
-import LottieView from 'lottie-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
+import Toast from 'react-native-toast-message';
+import LottieView from 'lottie-react-native';
 
 import ListClass from './ListClassScreen';
 import JoinClass_Modal from '../../../components/modal_component/JoinClass_Modal';
 import * as classAct from '../../../store/actions/classAction';
+import * as authAct from '../../../store/actions/authAction';
 import { useFocusEffect } from '@react-navigation/native';
 
 const ClassScreen = ({ navigation }) => {
@@ -26,7 +28,14 @@ const ClassScreen = ({ navigation }) => {
             await dispatch(classAct.initData())
             setRefresh(false)
         } catch (error) {
-            alert(error)
+            if (error === 'ERR_GENERATE_TOKEN') {
+                dispatch(authAct.signOut(true))
+                Toast.show({
+                    type: 'error',
+                    text1: 'Maaf, Sesi kamu telah Habis!',
+                    text2: 'Silahkan masuk kembali.'
+                });
+            }
             setRefresh(false)
         }
     }
@@ -56,12 +65,7 @@ const ClassScreen = ({ navigation }) => {
     }, [dispatch])
 
     const onClassPress = async data => {
-        try {
-            await dispatch(classAct.detailKelas('testing', data))
-            navigation.navigate('DetailKelas')
-        } catch (error) {
-            alert(error)
-        }
+        navigation.navigate('DetailKelas', { id_kelas: data.id_kelas })
     }
 
     const onClassLongPress = data => {

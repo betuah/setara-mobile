@@ -13,7 +13,7 @@ module.exports = (app) => {
         .post(Auth.signUp) // Bypass Auth Middleware
     
     app.route('/api/v1/token') // Generate New Token
-        .get(Auth.generateNewToken) // Bypass Auth Middleware
+        .post(Auth.generateNewToken) // Bypass Auth Middleware
 
     app.route('/api/v1/signout') // SignOut End Point
         .post(authMiddleware, Auth.signOut) // Set middleware

@@ -27,6 +27,7 @@ const authMiddleware = async (req, res, next) => {
         } else { // If any error
             console.log(new Error(error))
             res.status(500).json({ status: error.name, code: error.name, message: error.message})
+            // res.status(406).json({ status: 'Not Acceptable', code: 'ERR_AUTH_TOKEN', message: "Invalid Authentication."})
         }
     }
 }

@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     LogoBrand: {
-        paddingTop: Dimensions.get('window').height > 600 ? 40 : 20,
+        paddingTop: Dimensions.get('window').height > 600 ? 90 : 40,
         paddingBottom: Dimensions.get('window').height > 600 ? 20 : 10
     },
     button: {

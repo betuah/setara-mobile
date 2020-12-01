@@ -1,4 +1,5 @@
 const bcrypt  = require('bcryptjs') // Import bcrypt
+const env     = require('../env') // Import Environment config
 const User    = require('../models/usersData.model') // Import User Model
 const Kelas   = require('../models/kelasData.model') // Import Kelas Model
 const AnggotaKel = require('../models/anggotaKelas.model') // Import Anggota Kelas Model
@@ -54,7 +55,7 @@ const signIn = async (req, res) => {
                     name: user.nama,
                     email: user.email,
                     status: user.status,
-                    picture: `http://setara.kemdikbud.go.id/media/Assets/foto/${user.foto}`
+                    picture: `${env.picture_path}${user.foto}`
                 },
                 accessToken : jwtToken,
                 refreshToken: refreshToken.token
@@ -203,8 +204,6 @@ const signOut = async (req, res) => {
 const generateNewToken = async (req, res) => {
     const token = req.cookies.refToken ? req.cookies.refToken : (req.body.refreshToken ? req.body.refreshToken : '') // Get refresh token from cookie
 
-    console.log(token, 'asdasd')
-
     refreshToken({ token }) // Create new token and refresh token
         .then((tokenData) => {
             // If creating token success
@@ -219,7 +218,7 @@ const generateNewToken = async (req, res) => {
         })
         .catch(err => { // If create new token and refresh token error
             console.log(new Error(err))
-            res.status(500).json({ status: 'Invalid', code: 'ERR_GENERATE_TOKEN', message: err })
+            res.status(406).json({ status: 'Invalid', code: 'ERR_GENERATE_TOKEN', message: err })
         })
 }
 
