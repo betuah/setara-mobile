@@ -156,22 +156,30 @@ exports.getDetailClass = (req, res) => {
 }
 
 exports.joinClass = async (req, res) => {
-    const userId = req.userId;
+    try {
+        const userId = req.userId;
 
-    const kode_kelas    = req.body.kode_kelas ? req.body.kode_kelas : ''
-    const kelas         = await Kelas.findOne({kode: kode_kelas})
+        const kode_kelas    = req.body.kode_kelas ? req.body.kode_kelas : ''
+        const kelas         = await Kelas.findOne({kode: kode_kelas})
 
-    if (!kelas)  {
-        res.status(500).json({ status: 'error', 'message' : 'Kelas tidak ditemukan!' })
-    }else{
-        await AnggotaKelas.create({id_user: userId, id_kelas: kelas._id, status: 4})
+        if (!kelas)  {
+            res.status(404).json({ 
+                code: 'ERR_CLASS_NOT_FOUND',
+                status: 'error', 
+                message : 'Kelas tidak ditemukan!' 
+            })
+        }else{
+            await AnggotaKelas.create({id_user: userId, id_kelas: kelas._id, status: 4})
 
-        const resData = {
-            status: 'Success',
-            code: 'OK',
-            message: 'Berhasil Gabung Kelas!',
+            const resData = {
+                status: 'Success',
+                code: 'OK',
+                message: 'Berhasil Gabung Kelas!',
+            }
+
+            res.status(200).json(resData)
         }
-
-        res.status(200).json(resData)
+    } catch (error) {
+        res.status(500).json(err)
     }
 }
