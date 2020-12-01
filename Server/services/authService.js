@@ -20,15 +20,15 @@ const generateJwtToken = (user) => {
     // create a jwt token containing the user id that expires in 30 minutes
     return jwt.sign(
         // Start Data PayLoad
-        { 
+        {
             id : user._id,
             username: user.username,
-            status: user.status 
-        }, 
+            status: user.status
+        },
         // End Data PayLoad
         env.token_secret, // Set jwt secret
         {
-            expiresIn: '1m' // Set token expire
+            expiresIn: '120m' // Set token expire
             // expiresIn: '30'
         }
     )
@@ -82,7 +82,7 @@ const refreshToken = async ({ token }) => {
         const jwtToken = generateJwtToken(user)
 
         // return basic details and tokens
-        return { 
+        return {
             message: 'Your old token is expired. Set New Token!',
             accessToken: jwtToken,
             refreshToken: newRefreshToken.token

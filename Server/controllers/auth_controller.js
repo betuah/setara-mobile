@@ -3,12 +3,12 @@ const User    = require('../models/usersData.model') // Import User Model
 const Kelas   = require('../models/kelasData.model') // Import Kelas Model
 const AnggotaKel = require('../models/anggotaKelas.model') // Import Anggota Kelas Model
 
-/*  
+/*
 * Start Import Auth Service
 * Any auth function in Auth service
 * Path : ../Server/services/authService
 */
-const { 
+const {
     generateJwtToken,
     generateRefreshToken,
     revokeToken,
@@ -30,12 +30,12 @@ const signIn = async (req, res) => {
 
         // Find and get User data from user model, reference from mongoose docs
         const user = await User.findOne({ username: username })
-
+        console.log(req.body)
         // Check if user exist and password is valid
         if (!user || !bcrypt.compareSync(password, user.password)) {
             // console.log(new Error('Username or password is incorrect!')) // Show error to log status
 
-            res.status(400).json({code: 'ERR_INCORRECT_USER_PASS', message: 'Username dan Password salah!'}) // Response error to front end 
+            res.status(400).json({code: 'ERR_INCORRECT_USER_PASS', message: 'Username dan Password salah!'}) // Response error to front end
         } else {
             // authentication successful so generate jwt and refresh tokens
             const jwtToken      = generateJwtToken(user) // Generate Access Token From Auth Service
@@ -68,7 +68,7 @@ const signIn = async (req, res) => {
 
     res.status(400).json({code: 'ERR_INTERNAL_SERVER_ERROR', message: 'Ops... Ada yang salah dengan server!'}) // Give error status response to front end
 }
-    
+
 }
 /* Akhir Fungsi signIn */
 
@@ -107,7 +107,7 @@ const signUp = async (req, res) => {
         .then(async data => {
             const jwtToken      = generateJwtToken(data) // Generate Access Token From Auth Service
             const refreshToken  = generateRefreshToken(data) // Generate Refresh Token From Auth Service
-            
+
             // save refresh token to database from Auth Service
             await refreshToken.save()
 
@@ -116,22 +116,22 @@ const signUp = async (req, res) => {
             }
 
             // Response data
-            const resData = { 
-                status: 'Success', 
-                code: 'OK', 
-                message: 'Berhasil Mendaftar!', 
+            const resData = {
+                status: 'Success',
+                code: 'OK',
+                message: 'Berhasil Mendaftar!',
                 data: data,
                 accessToken : jwtToken,
                 refreshToken: refreshToken.token
             }
 
             // If user successfully created
-            res.status(201).json(resData) 
+            res.status(201).json(resData)
         })
         .catch(err => {
             // If creating user error
             console.log(new Error(err)) // Show error log in log
-            if (err.code === 11000) { 
+            if (err.code === 11000) {
                 // If user already exist
                 res.status(500).json({ status: 'error', code: 'ERR_USER_EXIST', 'message' : 'Username already exist!' })
             } else {
@@ -153,7 +153,7 @@ const signUp = async (req, res) => {
         if (error.code) { // If error code exist
             res.status(404).json({ status: 'error', code: error.code, 'message' : 'Kelas tidak ditemukan!' })
         } else {
-            res.status(400).json(err) 
+            res.status(400).json(err)
         }
     }
 }
@@ -162,7 +162,7 @@ const signUp = async (req, res) => {
 // Start user detail function
 const account = async (req, res) => {
     const id    = req.userId // Get UserId from middleware
-    
+
     try {
         // Find user by id in User Model
         User.findById({ _id: id }).then((user) => {
@@ -171,7 +171,7 @@ const account = async (req, res) => {
                 res.status(200).json(user)
             } else { // If user data is null
                 res.status(404).json({ status: 'Error', code: 'ERR_USER_NOT_FOUND', message: 'User Not Found!'})
-            }            
+            }
         }).catch((err) => { // Catch Error
             res.status(400).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
             console.log(new Error(err))

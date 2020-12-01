@@ -5,8 +5,8 @@ const express       = require('express'),
     helmet          = require('helmet'),
     cookieParser    = require('cookie-parser'),
     cors            = require('cors'),
-    env             = require('./env'), 
-    fs              = require("fs"), 
+    env             = require('./env'),
+    fs              = require("fs"),
     https           = require('https'),
     port            = env.port || 8000 // Set custom Port
 // End Import library
@@ -28,9 +28,12 @@ app.use(cors({ origin: (origin, callback) => callback(null, true), credentials: 
 /* Start of Routing Import */
 const authRoute   = require('./routes/auth_route')
 const classRoute  = require('./routes/class_route')
+const kelasRoute  = require('./routes/kelas_route')
 
 authRoute(app)
 classRoute(app)
+kelasRoute(app)
+
 /* End of Routing Import */
 
 /* MongoDB Connection Check and running Apps */
@@ -38,22 +41,24 @@ const { mongoConn } = require('./config/db_mongoDB') // Import mongo connection 
 
 mongoConn.then(() => // If mongodb Connected to the host server
     {
-        if (env.node_env === 'production') { // If Node Env set to production
-            try {
-                // If production set https
-                const privateKey  = fs.readFileSync(`${env.httpsPrivateKey}`, 'utf8')
-                const certificate = fs.readFileSync(`${env.httpsCertificate}`, 'utf8')
-                const credentials = {key: privateKey, cert: certificate}
-                const httpsApps   = https.createServer(credentials, app)
-        
-                httpsApps.listen(port, () => console.log(`Production Server API listen on ${env.host}:${env.port}`)) // listen port https
-            } catch (error) {
-                console.log(new Error(error))
-            }
-        } else {
-            // If env set to development
-            app.listen(port, () => console.log(`Development Server API listen on ${env.host}:${env.port}`)) // Listen port http
-        }
+        // if (env.node_env === 'production') { // If Node Env set to production
+        //     try {
+        //         // If production set https
+        //         const privateKey  = fs.readFileSync(`${env.httpsPrivateKey}`, 'utf8')
+        //         const certificate = fs.readFileSync(`${env.httpsCertificate}`, 'utf8')
+        //         const credentials = {key: privateKey, cert: certificate}
+        //         const httpsApps   = https.createServer(credentials, app)
+        //
+        //         httpsApps.listen(port, () => console.log(`Production Server API listen on ${env.host}:${env.port}`)) // listen port https
+        //     } catch (error) {
+        //         console.log(new Error(error))
+        //     }
+        // } else {
+        //     // If env set to development
+        //     app.listen(port, () => console.log(`Development Server API listen on ${env.host}:${env.port}`)) // Listen port http
+        // }
+
+        app.listen(port, () => console.log(`Development Server API listen on ${env.host}:${env.port}`)) // Listen port http
     }
 ).catch(err => {
     console.log(`${env.host}:${env.port} cannot connect to MongoDB! : ` + err)
