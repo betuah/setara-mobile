@@ -171,8 +171,8 @@ const Mapel_Modal = props => {
                     backgroundColor: colors.bgLight,
                 }}>
                     { props.data.filter(item => {
-                        return item.title.toLowerCase().includes(search.toLowerCase())
-                    }).map((item, index) => <ListMapel key={index} title={item.title} id={item.id} onPress={props.itemPress} colors={colors} fonts={fonts} /> )}
+                        return item.nama.toLowerCase().includes(search.toLowerCase())
+                    }).map((item, index) => <ListMapel key={index} title={item.nama} id={item.id} onPress={props.itemPress} colors={colors} fonts={fonts} /> )}
                 </ScrollView>
             </Card>
         </Modal>

@@ -8,7 +8,6 @@ const authMiddleware = async (req, res, next) => {
         res.setHeader( 'X-Powered-By', 'Setara Daring' ) // Set X Power Header
 
         const token     = req.header('Authorization').replace('Bearer ','') // Get token from Authorization header
-        console.log(token)
         const decoded   = jwt.verify(token, secret) // Verifying and Decoding jwt payload
 
         if (!decoded) {

@@ -1,34 +1,32 @@
-import Axios from 'axios';
-import config from '../../constants/config';
-
-const header  = {
-    headers: {'Content-Type': 'application/json'},
-    timeout: 15000
-}
+import config from '../../config/baseUrl';
+import AxiosAPI from '../../config/AxiosAPI';
+import ErrorHandler from '../../constants/ErrorHandler';
 
 export const LOAD_CLASS = 'LOAD_CLASS'
 export const DETAIL_CLASS = 'DETAIL_CLASS'
 
 export const initData = (token = 'testing token') => {
     return async dispatch => {
-        const res = await Axios.get(`${config.base_url}/api/v1/class`, {}, {...header, headers: {...header.headers, 'Authorization': `Bearer ${token}`}})
-
-        if (!res) throw('Erorr')
-
-        dispatch({type: LOAD_CLASS, listClass: res.data})
+        try {
+            const res = await AxiosAPI.get(`${config.base_url}/api/v1/class`)
+            const resData = res.data
+            dispatch({type: LOAD_CLASS, listClass: resData.data})
+        } catch (err) {
+            ErrorHandler(err)
+        }
+        
     }
 }
 
-export const detailKelas = (token = 'testing', data) => {
+export const detailKelas = (id) => {
     return async dispatch => {
-        const res = await Axios.get(`${config.base_url}/api/v1/class/${data.id_kelas}`, {}, {...header, headers: {...header.headers, 'Authorization': `Bearer ${token}`}})
-        const resData = {
-            details: {...data},
-            ...res.data[0]
+        try {
+            const res = await AxiosAPI.get(`${config.base_url}/api/v1/class/${id}`)
+            const resData = res.data.data
+
+            dispatch({type: DETAIL_CLASS, detailClass: resData})
+        } catch (err) {
+            ErrorHandler(err)
         }
-
-        if (!res) throw('Erorr')
-
-        dispatch({type: DETAIL_CLASS, detailClass: resData})
     }
 }

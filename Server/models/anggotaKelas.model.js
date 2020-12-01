@@ -9,7 +9,10 @@ const anggotaKelasSchema = new Schema({
         required: true
     },
     id_kelas : { 
-        type: Schema.Types.ObjectId, ref: 'kelas' 
+        type: String, 
+        trim: true,
+        index: true,
+        required: true,
     },
     status : { 
         type: String, 

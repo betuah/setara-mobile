@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { useTheme, Card, List, Divider, Avatar } from 'react-native-paper';
-import { Text, Btn, Input } from '../common/UtilsComponent';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Text } from '../common/UtilsComponent';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons'; 
 
@@ -59,8 +59,6 @@ const Members_Modal = props => {
             <Modal 
                 isVisible={props.visible}
                 onBackdropPress={() => onDismiss()}
-                onSwipeComplete={() => onDismiss()}
-                swipeDirection={['down']}
                 style={{
                     justifyContent: 'flex-end',
                     margin: 0
@@ -76,41 +74,31 @@ const Members_Modal = props => {
                     <View style={{
                         justifyContent: 'center',
                         alignItems: 'center',
-                        paddingVertical: 10,
+                        paddingVertical: 14,
                         borderTopRightRadius: 20,
                         borderTopLeftRadius: 20,
                     }}>
-                        <Divider 
-                            style={{
-                                borderRadius: 10,
-                                marginTop: 5,
-                                marginBottom: 5,
-                                height: 5,
-                                width: 50,
-                                backgroundColor: colors.textLightAccent,
-                            }}
-                        />
                         <View 
                             style={{
                                 position: 'absolute',
                                 right: 0,
-                                top: 10,
+                                top: 0,
                                 bottom: 0,
                                 justifyContent: 'center',
                                 alignItems: 'flex-end',
                                 padding: 15,
                             }}
                         >
-                            <Icon name='close' size={20} color={colors.textLight} />
+                            <TouchableOpacity onPress={() => onDismiss()}>
+                                <Icon name='close' size={20} color={colors.textLight} />
+                            </TouchableOpacity>
                         </View>
                         <Text size={18} fontWeight={fonts.bold} color={colors.textWhite}>ANGGOTA KELAS</Text>
                     </View>
                     <ScrollView contentContainerStyle={{
-                        backgroundColor: colors.bgLight,
+                        backgroundColor: colors.bgWhite,
                         paddingRight: 15,
                         paddingLeft: 5,
-                        borderTopLeftRadius: 15,
-                        borderTopRightRadius: 15,
                     }}>
                         { props.data.map(item => <ListMembers key={item.id} {...item} colors={colors} fonts={fonts} />) }
                     </ScrollView>

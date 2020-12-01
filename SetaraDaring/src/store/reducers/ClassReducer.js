@@ -3,9 +3,12 @@ import { LOAD_CLASS, DETAIL_CLASS } from '../actions/classAction'
 const initState = {
     listClass: [],
     detailClass: {
-        details: {},
+        id: null,
+        name: null,
+        code: null,
+        about: null,
         listMapel: [],
-        listMember: []
+        listMembers: []
     },
 }
 
@@ -22,9 +25,7 @@ const ClassReducer = (state = initState, actions) => {
                 ...state,
                 detailClass: {
                     ...state.detailClass,
-                    details: {...actions.detailClass.details},
-                    listMapel: [...actions.detailClass.listMapel],
-                    listMember: [...actions.detailClass.listMember],
+                    ...actions.detailClass,
                 }
             }
 

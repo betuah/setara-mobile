@@ -3,7 +3,7 @@ import { Text as NativeText, View } from 'react-native';
 import { TextInput, HelperText, Button, Text as PaperText } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconIonic from 'react-native-vector-icons/Ionicons';
-import colors from '../../constants/colors'
+import colors from '../../constants/colors';
 
 const Text = props => {
     return (

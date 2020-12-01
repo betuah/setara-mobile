@@ -7,6 +7,8 @@ import { Card, useTheme } from 'react-native-paper';
 const AnggotaComponent = props => {
     const { colors, fonts } = useTheme()
 
+    // console.log(props)
+
     return (
         <TouchableWithoutFeedback>
             <Card style={{
@@ -45,8 +47,8 @@ const AnggotaComponent = props => {
                         alignItems: 'flex-start',
                         justifyContent: 'center',
                     }}>
-                        <Text style={{textAlign: 'center'}} fontWeight={fonts.semiBold} size={14} color={colors.textWhite}>{`${props.data.name}`}</Text>
-                        <Text style={{textAlign: 'center'}} fontWeight={fonts.regular} size={11} color={colors.textWhite}>{`${props.data.school}`}</Text>
+                        <Text style={{textAlign: 'justify'}} fontWeight={fonts.semiBold} size={14} color={colors.textWhite}>{`${props.data.name.length > 18 ? `${props.data.name.slice(0, 15)}...` : props.data.name}`}</Text>
+                        <Text style={{textAlign: 'justify'}} fontWeight={fonts.regular} size={11} color={colors.textWhite}>{`${props.data.school.length > 18 ? `${props.data.school.slice(0, 23)}...` : props.data.school}`}</Text>
                     </View>
                 </View>
             </Card>
