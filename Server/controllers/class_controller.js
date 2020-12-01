@@ -162,22 +162,34 @@ exports.joinClass = async (req, res) => {
         const kode_kelas    = req.body.kode_kelas ? req.body.kode_kelas : ''
         const kelas         = await Kelas.findOne({kode: kode_kelas})
 
+        console.log(kelas)
+
         if (!kelas)  {
             res.status(404).json({ 
                 code: 'ERR_CLASS_NOT_FOUND',
                 status: 'error', 
                 message : 'Kelas tidak ditemukan!' 
             })
-        }else{
-            await AnggotaKelas.create({id_user: userId, id_kelas: kelas._id, status: 4})
+        } else {
+            const checkClass = await AnggotaKelas.find({id_user: userId, id_kelas: kelas._id})
 
-            const resData = {
-                status: 'Success',
-                code: 'OK',
-                message: 'Berhasil Gabung Kelas!',
+            if (checkClass.length === 0) {
+                await AnggotaKelas.create({id_user: userId, id_kelas: kelas._id, status: 4})
+
+                const resData = {
+                    status: 'Success',
+                    code: 'OK',
+                    message: 'Berhasil Gabung Kelas!',
+                }
+
+                res.status(200).json(resData)
+            } else {
+                const resData = {
+                    status: 'Error. Already Join Class',
+                    code: 'ERR_ALREADY_JOIN_CLASS',
+                    message: 'Anda sudah pernah bergabung dengan kelas tersebut.',
+                }
             }
-
-            res.status(200).json(resData)
         }
     } catch (error) {
         res.status(500).json(err)
