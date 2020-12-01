@@ -6,7 +6,7 @@ const AnggotaKelas  = require("../models/anggotaKelas.model");
 
 exports.getAllClass = async (req, res) => {
     const id = req.userId;
-    
+
     const getDetails = new Promise(async (resolve, reject) => {
         try {
             let detailKelas = []
@@ -47,7 +47,7 @@ exports.getAllClass = async (req, res) => {
                 })
             } else {
                 resolve([])
-            }            
+            }
         } catch (error) {
             reject(err);
         }
@@ -67,7 +67,7 @@ exports.getAllClass = async (req, res) => {
         } else {
             res.status(500).json(err)
         }
-        
+
     })
 }
 
@@ -124,7 +124,7 @@ exports.getDetailClass = (req, res) => {
                             role_name: role,
                             role: item.status,
                         }
-                        
+
                         listMembers.push(resData)
 
                         if (listMembers.length === array.length) resolve({...detailsData, listMembers});
@@ -153,4 +153,25 @@ exports.getDetailClass = (req, res) => {
             res.status(500).json(err)
         }
     })
+}
+
+exports.joinClass = async (req, res) => {
+    const userId = req.userId;
+
+    const kode_kelas    = req.body.kode_kelas ? req.body.kode_kelas : ''
+    const kelas         = await Kelas.findOne({kode: kode_kelas})
+
+    if (!kelas)  {
+        res.status(500).json({ status: 'error', 'message' : 'Kelas tidak ditemukan!' })
+    }else{
+        await AnggotaKelas.create({id_user: userId, id_kelas: kelas._id, status: 4})
+
+        const resData = {
+            status: 'Success',
+            code: 'OK',
+            message: 'Berhasil Gabung Kelas!',
+        }
+
+        res.status(200).json(resData)
+    }
 }
