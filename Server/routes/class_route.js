@@ -1,5 +1,5 @@
 const authMiddleware = require('../middlewares/auth_middleware') // Import Middlewares
-const classController = require('../controllers/class_controller') // Import Auth Controller
+const classController = require('../controllers/class_controller') // Import Mapel Controller
 
 module.exports = (app) => {
 

@@ -49,7 +49,7 @@ exports.getAllClass = async (req, res) => {
                 resolve([])
             }
         } catch (error) {
-            reject(err);
+            reject(error);
         }
     })
 
@@ -160,15 +160,14 @@ exports.joinClass = async (req, res) => {
         const userId = req.userId;
 
         const kode_kelas    = req.body.kode_kelas ? req.body.kode_kelas : ''
-        const kelas         = await Kelas.findOne({kode: kode_kelas})
-
-        console.log(kelas)
+        console.log(req.body)
+        const kelas         = await Kelas.findOne({kode: kode_kelas.trim()})
 
         if (!kelas)  {
             res.status(404).json({ 
                 code: 'ERR_CLASS_NOT_FOUND',
                 status: 'error', 
-                message : 'Kelas tidak ditemukan!' 
+                message : 'Kelas tidak ditemukan!'
             })
         } else {
             const checkClass = await AnggotaKelas.find({id_user: userId, id_kelas: kelas._id})
@@ -189,6 +188,8 @@ exports.joinClass = async (req, res) => {
                     code: 'ERR_ALREADY_JOIN_CLASS',
                     message: 'Anda sudah pernah bergabung dengan kelas tersebut.',
                 }
+
+                res.status(409).json(resData)
             }
         }
     } catch (error) {

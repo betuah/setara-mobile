@@ -28,9 +28,11 @@ app.use(cors({ origin: (origin, callback) => callback(null, true), credentials: 
 /* Start of Routing Import */
 const authRoute   = require('./routes/auth_route')
 const classRoute  = require('./routes/class_route')
+const materiRoute = require('./routes/materi_route')
 
 authRoute(app)
 classRoute(app)
+materiRoute(app)
 
 /* End of Routing Import */
 
