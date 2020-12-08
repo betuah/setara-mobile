@@ -1,7 +1,7 @@
 const Modul     = require('../models/modulData.model')
 const Materi    = require('../models/materiData.model')
 
-exports.getMateri = async (req, res) => {
+exports.getListMateri = async (req, res) => {
     
     const getAllMateri = new Promise(async (resolve, reject) => {
         try {
@@ -47,4 +47,20 @@ exports.getMateri = async (req, res) => {
             res.status(500).json(err)
         }
     })
+}
+
+exports.getMateriDetail = async (req, res) => {
+    try {
+        const id = req.params.materiId
+
+        const materiData = await Materi.findOne({ _id: id})
+
+        res.status(200).json(materiData)
+    } catch (error) {
+        if (error.code) {
+            res.status(error.code).json(error)
+        } else {
+            res.status(404).json({status: 'Error. Not Found!', code: 'ERR_MATERI_NOT_FOUND', message: `Materi dengan ID tersebut tidak ditemukan.`})
+        }
+    }
 }

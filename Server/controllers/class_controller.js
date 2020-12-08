@@ -160,7 +160,6 @@ exports.joinClass = async (req, res) => {
         const userId = req.userId;
 
         const kode_kelas    = req.body.kode_kelas ? req.body.kode_kelas : ''
-        console.log(req.body)
         const kelas         = await Kelas.findOne({kode: kode_kelas.trim()})
 
         if (!kelas)  {
@@ -193,6 +192,7 @@ exports.joinClass = async (req, res) => {
             }
         }
     } catch (error) {
+        console.log(error)
         res.status(500).json(err)
     }
 }

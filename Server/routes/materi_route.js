@@ -4,6 +4,7 @@ const materiController = require('../controllers/materi_controller') // Import M
 module.exports = (app) => {
 
     app.route('/api/v1/materi/:mapelId')
-        .get(authMiddleware, materiController.getMateri)
-
+        .get(authMiddleware, materiController.getListMateri)
+    app.route('/api/v1/materi/detail/:materiId')
+        .get(authMiddleware, materiController.getMateriDetail)
 }
