@@ -164,9 +164,9 @@ exports.joinClass = async (req, res) => {
         const kelas         = await Kelas.findOne({kode: kode_kelas.trim()})
 
         if (!kelas)  {
-            res.status(404).json({ 
+            res.status(404).json({
                 code: 'ERR_CLASS_NOT_FOUND',
-                status: 'error', 
+                status: 'error',
                 message : 'Kelas tidak ditemukan!'
             })
         } else {
