@@ -47,17 +47,20 @@ exports.getListMateri = async (req, res) => {
                                     try {
                                         const tugasKumpulData = await TugasKumpul.findOne({ id_user: userId, id_tugas: tugas._id})
 
-                                        nilai_kumpul_tugas += parseFloat(tugasKumpulData.nilai)
+                                        if(tugasKumpulData) {
+                                            nilai_kumpul_tugas += parseFloat(tugasKumpulData.nilai)
+                                        }
 
                                     } catch (e) {
 
                                     }
 
                                     if(index === tugasData.length-1) {
-                                        console.log('Nilai Tugas: ', nilai_kumpul_tugas)
                                         resolve(nilai_kumpul_tugas/tugasData.length)
                                     }
                                 })
+                            }else{
+                                resolve(nilai_kumpul_tugas)
                             }
                         })
 
@@ -70,7 +73,9 @@ exports.getListMateri = async (req, res) => {
                                         const quizKumpulData    = await QuizKumpul.findOne({ id_user: userId, id_quiz: quiz._id})
                                         const soalData          = await Soal.find({ id_paket: quiz.id_paket})
 
-                                        nilai_kumpul_quiz   += (parseFloat(quizKumpulData.nilai)/soalData.length)*100
+                                        if(quizKumpulData) {
+                                            nilai_kumpul_quiz   += (parseFloat(quizKumpulData.nilai)/soalData.length)*100
+                                        }
                                     } catch (e) {
 
                                     }
@@ -79,6 +84,8 @@ exports.getListMateri = async (req, res) => {
                                         resolve(nilai_kumpul_quiz/quizData.length)
                                     }
                                 })
+                            }else{
+                                resolve(nilai_kumpul_quiz)
                             }
                         })
 
@@ -91,6 +98,7 @@ exports.getListMateri = async (req, res) => {
                     })
 
                     nilai_akhir_modul = await getNilaiModul(item._id)
+                    console.log('Nilai akhir modul: ', nilai_akhir_modul)
 
                     if (item.prasyarat!="0"){
                         nilai_akhir_modul_prev = await getNilaiModul(item.prasyarat)

@@ -2,6 +2,7 @@ const env           = require("../env");
 const Mapel         = require("../models/mapelData.model");
 const Kelas         = require("../models/kelasData.model");
 const User          = require("../models/usersData.model");
+const Posting       = require("../models/postingData.model");
 const AnggotaKelas  = require("../models/anggotaKelas.model");
 
 exports.getAllClass = async (req, res) => {
@@ -195,4 +196,38 @@ exports.joinClass = async (req, res) => {
         console.log(error)
         res.status(500).json(err)
     }
+}
+
+exports.getAllPost = async (req, res) => {
+    const userId = req.userId;
+
+    const getListPost = new Promise(async (resolve, reject) => {
+        try {
+            let detailKelas = []
+            const dataKelas = await AnggotaKelas.find({ id_user: userId})
+
+            if (dataKelas.length > 0) {
+                dataKelas.map(async (item, index, array) => {
+
+                    Kelas.findOne({ _id: item.id_kelas}).then(resKelas => {
+                        const resData = {
+                            id_kelas: resKelas.id,
+                            status: role,
+                            nama: resKelas.nama,
+                            role: item.status
+                        }
+                        detailKelas.push(resData)
+
+                        if (detailKelas.length === array.length) resolve(detailKelas);
+                    }).catch(err => {
+                        reject(err);
+                    })
+                })
+            } else {
+                resolve([])
+            }
+        } catch (error) {
+            reject(error);
+        }
+    })
 }
