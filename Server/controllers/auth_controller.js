@@ -31,7 +31,7 @@ const signIn = async (req, res) => {
 
         // Find and get User data from user model, reference from mongoose docs
         const user = await User.findOne({ username: username })
-        console.log(req.body)
+        
         // Check if user exist and password is valid
         if (!user || !bcrypt.compareSync(password, user.password)) {
             // console.log(new Error('Username or password is incorrect!')) // Show error to log status
@@ -96,6 +96,12 @@ const signUp = async (req, res) => {
 
         const kelas = await Kelas.findOne({kode: kode_kelas}) // Find kelas with kode_kelas
 
+        if (!status) {
+            const error = new Error('Harap memasukan status pendaftaran Anda!')
+            error.code = 'ERR_STATUS_REQUIRED'
+            throw error
+        }
+
         if (status === 'siswa' && !kelas)  {
             const error = new Error('Kelas tidak ditemukan!')
             error.code = 'ERR_KELAS_NOT_EXIST'
@@ -121,7 +127,13 @@ const signUp = async (req, res) => {
                 status: 'Success',
                 code: 'OK',
                 message: 'Berhasil Mendaftar!',
-                data: data,
+                data: { 
+                    id: data.id,
+                    username: dataBody.username, 
+                    name: dataBody.nama,
+                    email: dataBody.email,
+                    status: dataBody.status
+                },
                 accessToken : jwtToken,
                 refreshToken: refreshToken.token
             }
@@ -152,7 +164,7 @@ const signUp = async (req, res) => {
 
         // Send error data to front end
         if (error.code) { // If error code exist
-            res.status(404).json({ status: 'error', code: error.code, 'message' : 'Kelas tidak ditemukan!' })
+            res.status(404).json({ status: 'error', code: error.code, 'message' : error.code === 'ERR_STATUS_REQUIRED' ? 'Harap memasukan status pendaftaran Anda!' : 'Kelas tidak ditemukan!' })
         } else {
             res.status(400).json(err)
         }
@@ -221,17 +233,6 @@ const generateNewToken = async (req, res) => {
             res.status(406).json({ status: 'Invalid', code: 'ERR_GENERATE_TOKEN', message: err })
         })
 }
-
-// const getTokens = async (req, res) => {
-//     getRefreshTokens(req.userId)
-//         .then(tokens => {
-//             res.json(tokens)
-//         })
-//         .catch(err => {
-//             console.log(new Error(err))
-//             res.send('error')
-//         })
-// }
 
 // Export All function
 module.exports = {
