@@ -8,11 +8,9 @@ const Soal          = require('../models/soalData.model')
 const Materi        = require('../models/materiData.model')
 
 exports.getListMateri = async (req, res) => {
-
     const getAllMateri = new Promise(async (resolve, reject) => {
         try {
             const userId = req.userId;
-
             const mapelId = req.params.mapelId
             let materiData = []
 
@@ -47,15 +45,14 @@ exports.getListMateri = async (req, res) => {
                                     try {
                                         const tugasKumpulData = await TugasKumpul.findOne({ id_user: userId, id_tugas: tugas._id})
 
-                                        nilai_kumpul_tugas += parseFloat(tugasKumpulData.nilai)
+                                        if (tugasKumpulData) nilai_kumpul_tugas += parseFloat(tugasKumpulData.nilai)
 
                                     } catch (e) {
-
+                                        reject(e)
                                     }
 
                                     if(index === tugasData.length-1) {
-                                        console.log('Nilai Tugas: ', nilai_kumpul_tugas)
-                                        resolve(nilai_kumpul_tugas/tugasData.length)
+                                        resolve(nilai_kumpul_tugas / tugasData.length)
                                     }
                                 })
                             }
@@ -70,9 +67,9 @@ exports.getListMateri = async (req, res) => {
                                         const quizKumpulData    = await QuizKumpul.findOne({ id_user: userId, id_quiz: quiz._id})
                                         const soalData          = await Soal.find({ id_paket: quiz.id_paket})
 
-                                        nilai_kumpul_quiz   += (parseFloat(quizKumpulData.nilai)/soalData.length)*100
+                                        if (quizKumpulData) nilai_kumpul_quiz += (parseFloat(quizKumpulData.nilai)/soalData.length)*100
                                     } catch (e) {
-
+                                        reject(e)
                                     }
 
                                     if(index === quizData.length-1) {
@@ -100,11 +97,16 @@ exports.getListMateri = async (req, res) => {
                     }
 
                     Materi.find({ id_modul: item._id}).then(subMateri => {
+                        console.log(subMateri)
                         const tempData = {
                             ...item._doc,
                             nilai_akhir_modul: nilai_akhir_modul,
                             status_modul: status_modul,
-                            materi: subMateri
+                            materi: subMateri.map(item => { return {
+                                id: item._id,
+                                judul: item.judul,
+                                status: item.status
+                            }})
                         }
                         materiData.push(tempData)
 
