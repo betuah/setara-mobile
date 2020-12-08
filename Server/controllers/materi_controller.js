@@ -77,7 +77,7 @@ exports.getListMateri = async (req, res) => {
                                             nilai_kumpul_quiz   += (parseFloat(quizKumpulData.nilai)/soalData.length)*100
                                         }
                                     } catch (e) {
-
+                                        // console.log(new Error(e))
                                     }
 
                                     if(index === quizData.length-1) {
