@@ -203,10 +203,34 @@ exports.getPosting = async (req, res) => {
 
     const getDetails = new Promise(async (resolve, reject) => {
         try {
-
+            let daftarPosting = []
             const dataPosting = await Posting.find({ id_kelas: id_kelas })
 
-            resolve(dataPosting)
+            if(dataPosting.length > 0){
+
+                dataPosting.map(async (item, index, array) => {
+                    try {
+                        const creator = await User.findOne({_id: item.creator})
+                        const kelas   = await Kelas.findOne({_id: item.id_kelas})
+
+                        const tempData = {
+                            ...item._doc,
+                            nama_creator: creator.nama,
+                            nama_kelas: kelas.nama
+                        }
+
+                        daftarPosting.push(tempData)
+
+                        if(daftarPosting.length === array.length) {
+                            resolve(daftarPosting)
+                        }
+                    } catch (e) {
+                        console.log(new Error(e))
+                    }
+                })
+            }else{
+                reject([])
+            }
 
         } catch (error) {
             reject(error);
@@ -236,16 +260,56 @@ exports.getAllPosting = async (req, res) => {
     const getDetails = new Promise(async (resolve, reject) => {
         try {
             let daftarPosting   = []
+
             const dataKelas = await AnggotaKelas.find({ id_user: id})
 
             if (dataKelas.length > 0) {
-                dataKelas.map(async (item, index, array) => {
-                    const dataPosting = await Posting.find({ id_kelas: item.id_kelas })
 
-                    daftarPosting = ([...daftarPosting,...dataPosting])
+                const getDataPosting = new Promise((resolve, reject) => {
 
-                    if (index === array.length-1) resolve(daftarPosting)
+                    let listPosting = []
+                    let indexDataKelas = 0
+                    dataKelas.map(async (item, index, array) => {
+
+                        const dataPosting       = await Posting.find({ id_kelas: item.id_kelas })
+                        indexDataKelas++
+
+                        listPosting = ([...listPosting,...dataPosting])
+
+                        if (indexDataKelas === array.length) {
+                            resolve(listPosting)
+                        }
+                    })
                 })
+
+                daftarPosting = await getDataPosting
+
+                if(daftarPosting.length > 0){
+                    let newDaftarPosting = []
+                    daftarPosting.map(async (item, index, array) => {
+                        try {
+                            const creator = await User.findOne({_id: item.creator})
+                            const kelas   = await Kelas.findOne({_id: item.id_kelas})
+
+                            const tempData = {
+                                ...item._doc,
+                                nama_creator: creator.nama,
+                                nama_kelas: kelas.nama
+                            }
+
+                            newDaftarPosting.push(tempData)
+
+                            if(newDaftarPosting.length === array.length) {
+                                resolve(newDaftarPosting)
+                            }
+                        } catch (e) {
+                            console.log(new Error(e))
+                        }
+                    })
+                }else{
+                    reject([])
+                }
+
             } else {
                 resolve([])
             }
