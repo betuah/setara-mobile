@@ -45,7 +45,9 @@ exports.getListMateri = async (req, res) => {
                                     try {
                                         const tugasKumpulData = await TugasKumpul.findOne({ id_user: userId, id_tugas: tugas._id})
 
-                                        if (tugasKumpulData) nilai_kumpul_tugas += parseFloat(tugasKumpulData.nilai)
+                                        if(tugasKumpulData) {
+                                            nilai_kumpul_tugas += parseFloat(tugasKumpulData.nilai)
+                                        }
 
                                     } catch (e) {
                                         reject(e)
@@ -55,6 +57,8 @@ exports.getListMateri = async (req, res) => {
                                         resolve(nilai_kumpul_tugas / tugasData.length)
                                     }
                                 })
+                            }else{
+                                resolve(nilai_kumpul_tugas)
                             }
                         })
 
@@ -67,7 +71,9 @@ exports.getListMateri = async (req, res) => {
                                         const quizKumpulData    = await QuizKumpul.findOne({ id_user: userId, id_quiz: quiz._id})
                                         const soalData          = await Soal.find({ id_paket: quiz.id_paket})
 
-                                        if (quizKumpulData) nilai_kumpul_quiz += (parseFloat(quizKumpulData.nilai)/soalData.length)*100
+                                        if(quizKumpulData) {
+                                            nilai_kumpul_quiz   += (parseFloat(quizKumpulData.nilai)/soalData.length)*100
+                                        }
                                     } catch (e) {
                                         reject(e)
                                     }
@@ -76,6 +82,8 @@ exports.getListMateri = async (req, res) => {
                                         resolve(nilai_kumpul_quiz/quizData.length)
                                     }
                                 })
+                            }else{
+                                resolve(nilai_kumpul_quiz)
                             }
                         })
 
@@ -97,7 +105,6 @@ exports.getListMateri = async (req, res) => {
                     }
 
                     Materi.find({ id_modul: item._id}).then(subMateri => {
-                        console.log(subMateri)
                         const tempData = {
                             ...item._doc,
                             nilai_akhir_modul: nilai_akhir_modul,
@@ -105,7 +112,8 @@ exports.getListMateri = async (req, res) => {
                             materi: subMateri.map(item => { return {
                                 id: item._id,
                                 judul: item.judul,
-                                status: item.status
+                                status: item.status,
+                                date_created: item.date_created
                             }})
                         }
                         materiData.push(tempData)
