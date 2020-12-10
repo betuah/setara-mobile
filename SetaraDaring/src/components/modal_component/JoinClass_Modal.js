@@ -11,7 +11,7 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
     const InputDefaultStyle = {
         selectionColor: colors.bgPrimary,
         underlineColor: colors.bgPrimary,
-        fontSize: 16,
+        fontSize: 12,
         theme: {
             colors: { 
                 text: colors.bgPrimary,
@@ -47,7 +47,8 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                 <View style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    paddingVertical: 10,
+                    paddingBottom: 5,
+                    paddingTop: 10,
                     borderTopRightRadius: 20,
                     borderTopLeftRadius: 20,
                 }}>
@@ -55,7 +56,7 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                         style={{
                             borderRadius: 10,
                             marginBottom: 5,
-                            height: 5,
+                            height: 3,
                             width: 50,
                             backgroundColor: colors.textLightAccent,
                         }}
@@ -71,9 +72,9 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                             padding: 15,
                         }}
                     >
-                        <Icon name='close' size={20} color={colors.textLight} />
+                        <Icon name='close' size={16} color={colors.bgWhite} />
                     </View>
-                    <Text size={18} fontWeight={fonts.bold} color={colors.textWhite}>GABUNG KELAS</Text>
+                    <Text size={16} fontWeight={fonts.bold} color={colors.textWhite}>GABUNG KELAS</Text>
                 </View>
                 <View style={{
                     paddingLeft: 18,
@@ -90,7 +91,7 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                         marginBottom: 10
                     }}>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                            <Icon name='qr-code-outline' size={25} color={colors.bgPrimary} />
+                            <Icon name='qr-code-outline' size={20} color={colors.bgPrimary} />
                         </View>
                         <View style={{flex: 10, justifyContent: 'center'}}>
                             <Input
@@ -100,6 +101,7 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                                 color={colors.accent}
                                 defaultStyle={InputDefaultStyle}
                                 onChangeText={e => onChange(e)}
+                                autoCapitalize='characters'
                             />
                         </View>
                     </View>
@@ -111,8 +113,8 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                             onPress={() => onSubmit()}
                             title='Gabung Kelas'
                             color={colors.bgPrimary}
-                            fontColor={colors.white}
-                            fontSize={14}
+                            fontColor={colors.textWhite}
+                            fontSize={12}
                             fontWeight={fonts.semiBold}
                             style={{
                                 borderRadius: 10,

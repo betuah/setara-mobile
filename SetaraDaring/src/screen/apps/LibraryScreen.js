@@ -25,6 +25,21 @@ const LibraryScreen = ({ navigation }) => {
             source={{ uri: 'https://emodul.kemdikbud.go.id/' }} 
             startInLoadingState={true}
             allowsBackForwardNavigationGestures
+            renderError={() => 
+                <View style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Text
+                        color={colors.darkOrange}
+                        size={18}
+                        weight='bold'
+                        style={{marginTop: 20}}
+                    >Error...</Text>
+                </View>
+            }
+                
             renderLoading={() => {
                 return (
                     <View style={{

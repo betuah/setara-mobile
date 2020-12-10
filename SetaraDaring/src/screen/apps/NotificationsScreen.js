@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import NotifComponent from '../../components/NotifComponent';
 import EmptyComponent from '../../components/EmptyComponent';
 import { Modal, Portal, Title, Paragraph, Card, Divider, Caption } from 'react-native-paper';
-import moment from 'moment';
+import moment from 'moment/min/moment-with-locales';
 import * as notifActions from '../../store/actions/notifActions'
 
 const NotificationsScreen = ({ navigation }) => {
+    moment.locale('id')
     const { notif } = useSelector(state =>  state.notif)
     const [modal, setModal] = useState(false)
     const [modalData, setModalData] = useState({})

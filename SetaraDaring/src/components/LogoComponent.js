@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
     },
     font_logo: {
         fontFamily: 'FrefokaOne-Regular',
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: 'bold',
         color: '#F2F2FF'
     },
     logo_box: {
-        width: 70 * 2,
-        height: 50,
+        width: 60 * 2,
+        height: 43,
         backgroundColor: '#3AC9D6',
         borderRadius: 10,
         alignItems: 'center',

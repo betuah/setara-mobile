@@ -20,15 +20,18 @@ export const isUserSignIn = data => {
         const data = await AsyncStorage.getItem('userData')
         const userData = JSON.parse(data)
 
-        console.log('action', data)
+        console.log('AuthAct', userData)
 
         dispatch({
             type: AUTHENTICATE,
             token: userData.token,
+            refToken: userData.refToken,
             userId: userData.userId,
             username: userData.username,
             fullName: userData.fullName,
-            picture: userData.picture
+            foto: userData.foto,
+            role: userData.role,
+            status: userData.status
         })
     }
 }
@@ -40,8 +43,33 @@ export const signIn = data => {
         try {
             const res = await Axios.post(`${config.base_url}/api/v1/signin`, bodyRaw, header)
             const resData = res.data
+            let status = null
+
+            switch (resData.data.status) {
+                case 'superadmin':
+                    status = 'Super Administrator'
+                    break;
+                case 'pengelola':
+                    status = 'Administrator'
+                    break;
+                case 'pengelola':
+                    status = 'Pengelola'
+                    break;
+                case 'kepsek':
+                    status = 'Kepala Sekolah'
+                    break;
+                case 'pengawas':
+                    status = 'Pengawas'
+                    break;
+                case 'guru':
+                    status = 'Pengajar (Tutor)'
+                    break;
+                default:
+                    status = 'Warga Belajar'
+                    break;
+            }
             
-            await saveData(resData.accessToken, resData.refreshToken, resData.data.id, resData.data.username, resData.data.name, resData.data.picture)
+            await saveData(resData.accessToken, resData.refreshToken, resData.data.id, resData.data.username, resData.data.name, resData.data.picture, resData.data.status, status)
             dispatch({
                 type: AUTHENTICATE,
                 token: resData.accessToken,
@@ -49,7 +77,9 @@ export const signIn = data => {
                 userId: resData.data.id,
                 username: resData.data.username,
                 fullName: resData.data.name,
-                picture: resData.data.picture
+                foto: resData.data.picture,
+                role: resData.data.status,
+                status
             })
         } catch (err) {
             ErrorHandler(err)
@@ -119,9 +149,9 @@ export const signOut = (forceSignOut = false) => {
     }
 }
 
-const saveData = async (token, refToken, userId, username, fullName, picture) => {
+const saveData = async (token, refToken, userId, username, fullName, picture, role, status) => {
     try {
-        return await AsyncStorage.setItem('userData', JSON.stringify({token, refToken, userId, username, fullName, picture}))
+        return await AsyncStorage.setItem('userData', JSON.stringify({token, refToken, userId, username, fullName, foto: picture, role: role, status: status}))
     } catch (error) {
         console.log(error)
         throw (error)

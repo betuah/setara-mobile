@@ -8,6 +8,7 @@ import { useTheme } from 'react-native-paper';
 import * as libraryActions from '../store/actions/libraryActions';
 
 import LibraryScreen from '../screen/apps/LibraryScreen';
+import Header from '../components/common/Header';
 
 const Stack = createStackNavigator();
 
@@ -21,33 +22,52 @@ const LibaryNav = (props) => {
 
     const ScreenOptionStyle = {
         headerShown: true,
-        headerTitle: () => (
-            <View style={{
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <Icon name='library' size={20} color={colors.white} />
-                <Text color={colors.white} size={20} weight='bold'> PUSTAKA</Text>
-            </View>
-        ),
-        headerTintColor: colors.white,
-        headerTitleStyle: {
-            fontWeight: 'bold',
-            alignSelf: 'center'
-        },
-        headerStyle: {
-            backgroundColor: colors.header,
-        },
-        headerLeft: () => (
-            <Btn 
-                mode="text"
-                Icon={{name:"chevron-left", size: 35, color: colors.white}}
-                onPress={() => doRefresh(!refresh)}
+        header: ({ scene, previous, navigation }) => (
+            <Header 
+                data={{
+                    title: 'PUSTAKA', 
+                }} 
+                scene={scene} 
+                previous={previous} 
+                navigation={navigation} 
+                titleStyle={{
+                    fontSize: 20,
+                }}
+                Action={{Icon: 'refresh', Size: 25}}
+                ActionOnPress={() => doRefresh(!refresh)}
             />
-        )
+        ),
     }
+
+    // const ScreenOptionStyle = {
+    //     headerShown: true,
+    //     headerTitle: () => (
+    //         <View style={{
+    //             flex: 1,
+    //             flexDirection: 'row',
+    //             justifyContent: 'center',
+    //             alignItems: 'center'
+    //         }}>
+    //             <Icon name='library' size={20} color={colors.white} />
+    //             <Text color={colors.white} size={20} weight='bold'> PUSTAKA</Text>
+    //         </View>
+    //     ),
+    //     headerTintColor: colors.white,
+    //     headerTitleStyle: {
+    //         fontWeight: 'bold',
+    //         alignSelf: 'center'
+    //     },
+    //     headerStyle: {
+    //         backgroundColor: colors.header,
+    //     },
+    //     headerLeft: () => (
+    //         <Btn 
+    //             mode="text"
+    //             Icon={{name:"chevron-left", size: 35, color: colors.white}}
+    //             onPress={() => doRefresh(!refresh)}
+    //         />
+    //     )
+    // }
 
     return (
         <Stack.Navigator 

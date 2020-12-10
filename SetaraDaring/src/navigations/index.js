@@ -51,7 +51,7 @@ const Navigations = () => {
         StatusBar.setBarStyle('light-content');
         if (Platform.OS === 'android') {
             StatusBar.setBackgroundColor(colors.darkBlue2);
-            StatusBar.setTranslucent;
+            // StatusBar.setTranslucent;
             StatusBar.setBarStyle("light-content");
             changeNavigationBarColor(colors.darkBlue2, true);
         }

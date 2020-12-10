@@ -3,7 +3,7 @@ import { Dimensions, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { List, Caption } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import moment from 'moment';
+import moment from 'moment/min/moment-with-locales';
 
 const NotifComponent = props => {
     const { colors } = useTheme();
@@ -29,8 +29,8 @@ const NotifComponent = props => {
                             flex: 1,
                             alignItems: 'flex-end'
                         }}>
-                            <Caption>{moment(props.data.createdTime).format('h:mm a D/mm/yy')}</Caption>
-                            <Caption>{`${moment(props.data.createdTime).startOf('day').fromNow()}`}</Caption>
+                            <Caption>{moment(props.data.createdTime).format('D MMM Y')}</Caption>
+                            <Caption>{`${moment(props.data.createdTime).startOf('minutes').fromNow()}`}</Caption>
                         </View>
                     )
                 }}

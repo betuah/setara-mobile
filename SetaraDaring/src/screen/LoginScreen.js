@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Text, Input, Btn } from '../components/common/UtilsComponent';
 import LogoBrand from '../components/LogoComponent';
@@ -128,14 +128,15 @@ const LoginScreen = ({ navigation }) => {
 
                         <View style={styles.button}>
                             <Btn 
-                                Icon={{name:"send", size: 15, color: colors.primary}}
+                                Icon={{name:"send", size: 12, color: colors.primary}}
                                 IconType='ionic'
                                 title="Masuk" 
+                                fontSize={12}
                                 onPress={submitHandler}
                                 style={{ width: '80%' }}
                                 disabled={loading}
                                 loading={{
-                                    size: '15',
+                                    size: '12',
                                     color: colors.primary
                                 }}
                                 isLoading={loading}
@@ -143,12 +144,12 @@ const LoginScreen = ({ navigation }) => {
                         </View>
                         <View style={styles.signup}>
                             <View>
-                                <Text color={colors.white} >Belum punya akun ? </Text>                                
+                                <Text color={colors.white} size={12}>Belum punya akun ? </Text>                                
                             </View>
                             <View>
                                 <Text 
                                     onPress={() => navigation.navigate('SignUp')}
-                                    size={18}
+                                    size={14}
                                     weight='bold'
                                     color={colors.white}
                                 >Daftar</Text>
@@ -157,7 +158,7 @@ const LoginScreen = ({ navigation }) => {
                     </ScrollView>
                 </View>
                 <View style={{...styles.footer, backgroundColor: colors.darkBlue,}}>
-                    <Text color={colors.white}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
+                    <Text color={colors.white} size={10}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     LogoBrand: {
-        paddingTop: Dimensions.get('window').height > 600 ? 90 : 40,
+        paddingTop: Dimensions.get('window').height > 600 ? 40 : 40,
         paddingBottom: Dimensions.get('window').height > 600 ? 20 : 10
     },
     button: {

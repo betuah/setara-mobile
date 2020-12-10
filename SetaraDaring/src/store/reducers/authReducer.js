@@ -6,8 +6,9 @@ const initState = {
     userId: null,
     username: null,
     fullName: null,
-    foto: 'http://setara.kemdikbud.go.id/media/Assets/foto/aa61ff1b9_0110202020015.jpg',
-    status: 'Warga Belajar'
+    foto: null,
+    role: null,
+    status: null
 }
 
 const auth = (state = initState, actions) => {
@@ -20,6 +21,9 @@ const auth = (state = initState, actions) => {
                 userId: actions.userId,
                 username: actions.username,
                 fullName: actions.fullName,
+                foto: actions.foto,
+                role: actions.role,
+                status: actions.status,
                 isLoading: false
             }
         

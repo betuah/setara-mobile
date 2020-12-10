@@ -1,3 +1,4 @@
 export default {
-    base_url: 'http://10.0.2.2:8000'
+    base_url: 'http://192.168.1.6:8000',
+    file_domain: 'http://setara.kemdikbud.go.id'
 }

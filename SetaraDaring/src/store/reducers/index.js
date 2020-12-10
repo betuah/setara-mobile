@@ -7,6 +7,7 @@ import LibraryReducer from './LibraryReducer';
 import NotifReducer from './NotifReducer';
 import ProfileReducer from './ProfileReducer';
 import ClassReducer from './ClassReducer';
+import MateriReducer from './MateriReducer';
 
 const rootReducer = combineReducers({
     theme: ThemeReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     library: LibraryReducer,
     notif: NotifReducer,
     profile: ProfileReducer,
-    class: ClassReducer
+    class: ClassReducer,
+    materi: MateriReducer
 });
 
 export default rootReducer

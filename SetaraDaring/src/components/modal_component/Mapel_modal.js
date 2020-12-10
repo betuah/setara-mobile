@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Dimensions, TouchableOpacity, View } from 'react-native';
-import { useTheme, Card, List, Divider, Button } from 'react-native-paper';
-import { Text, Btn, Input } from '../common/UtilsComponent';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Dimensions, TouchableOpacity, View, FlatList } from 'react-native';
+import { useTheme, Card, List, Divider, Portal } from 'react-native-paper';
+import { Text, Input } from '../common/UtilsComponent';
 import Modal from 'react-native-modal';
-import Icon from 'react-native-vector-icons/Ionicons'; 
+import Icon from 'react-native-vector-icons/Ionicons';
+import LottieView from 'lottie-react-native';
 
 const ListMapel = ({colors, fonts, id, title, onPress}) => (
     <>
@@ -19,7 +19,7 @@ const ListMapel = ({colors, fonts, id, title, onPress}) => (
                 ...fonts.semiBold, 
                 justifyContent: 'center',
                 color: colors.textPrimary,
-                fontSize: 14,
+                fontSize: 12,
                 marginLeft: 0,
             }}
             left={props => 
@@ -52,7 +52,7 @@ const ListMapel = ({colors, fonts, id, title, onPress}) => (
         <Divider 
             inset={true} 
             style={{
-                height: 1.5,
+                height: 1,
                 backgroundColor: colors.bgPrimary,
                 marginLeft: 55
             }}
@@ -63,6 +63,10 @@ const ListMapel = ({colors, fonts, id, title, onPress}) => (
 const Mapel_Modal = props => {
     const { colors, fonts } = useTheme()
     const [ search, setSearch ] = useState('')
+
+    const data = props.data.filter(item => {
+        return item.nama.toLowerCase().includes(search.toLowerCase())
+    })
 
     const onSearch = value => {
         setSearch(value)
@@ -76,9 +80,9 @@ const Mapel_Modal = props => {
     const InputDefaultStyle = {
         selectionColor: colors.bgPrimary,
         underlineColor: colors.bgPrimary,
-        fontSize: 14,
+        fontSize: 12,
         IconColor: colors.bgPrimary,
-        IconSize: 23,
+        IconSize: 18,
         theme: {
             colors: { 
                 text: colors.bgPrimary,
@@ -90,6 +94,7 @@ const Mapel_Modal = props => {
     }
 
     return (
+        <Portal>
         <Modal 
             isVisible={props.visible}
             onBackdropPress={() => onDismiss()}
@@ -104,12 +109,12 @@ const Mapel_Modal = props => {
                 backgroundColor: colors.bgPrimary,
                 borderTopRightRadius: 20,
                 borderTopLeftRadius: 20,
-                maxHeight: Dimensions.get('window').height * 0.5,
+                maxHeight: Dimensions.get('window').height * 0.6,
             }}>
                 <View style={{
                     justifyContent: 'center',
                     alignItems: 'center',                    
-                    paddingVertical: 10,
+                    paddingVertical: 5,
                     borderTopRightRadius: 20,
                     borderTopLeftRadius: 20,
                 }}>
@@ -118,7 +123,7 @@ const Mapel_Modal = props => {
                             borderRadius: 10,
                             marginTop: 5,
                             marginBottom: 5,
-                            height: 5,
+                            height: 3,
                             width: 50,
                             backgroundColor: colors.textLightAccent,
                         }}
@@ -139,7 +144,7 @@ const Mapel_Modal = props => {
                         <Icon name='close' size={20} color={colors.textLight} />
                         </TouchableOpacity>
                     </View>
-                    <Text size={18} fontWeight={fonts.bold} color={colors.textWhite}>MATA PELAJARAN</Text>
+                    <Text size={16} fontWeight={fonts.bold} color={colors.textWhite}>MATA PELAJARAN</Text>
                 </View>
                 <View style={{
                     paddingLeft: 18,
@@ -148,11 +153,14 @@ const Mapel_Modal = props => {
                     backgroundColor: colors.bgLight,
                     flexDirection: 'row',
                     elevation: 1,
+                    shadowOffset: { width: 0, height: 1 },
+                    shadowOpacity: 0.5,
+                    shadowRadius: 1,
                     borderTopLeftRadius: 15,
                     borderTopRightRadius: 15,
                 }}>
                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                        <Icon name='search' size={23} color={colors.bgPrimary} />
+                        <Icon name='search' size={18} color={colors.bgPrimary} />
                     </View>
                     <View style={{flex: 10, justifyContent: 'center'}}>
                         <Input
@@ -165,17 +173,38 @@ const Mapel_Modal = props => {
                         />
                     </View>
                 </View>
-                {/* <Divider style={{height: 2}} /> */}
-                <ScrollView contentContainerStyle={{
-                    paddingBottom: 20,
-                    backgroundColor: colors.bgLight,
-                }}>
-                    { props.data.filter(item => {
-                        return item.nama.toLowerCase().includes(search.toLowerCase())
-                    }).map((item, index) => <ListMapel key={index} title={item.nama} id={item.id} onPress={props.itemPress} colors={colors} fonts={fonts} /> )}
-                </ScrollView>
+                <FlatList 
+                    style={{
+                        paddingBottom: 20,
+                        backgroundColor: colors.bgLight,
+                    }}
+                    keyExtractor={(item) => item.id.toString()}
+                    data={data}
+                    extraData={data}
+                    renderItem={itemData => <ListMapel key={itemData.item.id} title={itemData.item.nama} id={itemData.item.id} onPress={props.itemPress} colors={colors} fonts={fonts} />}
+                    ListEmptyComponent={() => 
+                        <View style={{
+                            flex: 1,
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginVertical: 20,
+                        }}>
+                            <LottieView 
+                                source={require('../../assets/lottie/33279-stack-of-books.json')} 
+                                autoPlay
+                                style={{
+                                    width: '30%',
+                                    alignItems: 'center',
+                                }}
+                            />
+                            <Text style={{textAlign: 'center'}} fontWeight={fonts.medium} color={colors.textPrimary}>Mata Pelajaran tidak tersedia.</Text>
+                        </View>
+                    }
+                />
             </Card>
         </Modal>
+        </Portal>
     )
 }
 

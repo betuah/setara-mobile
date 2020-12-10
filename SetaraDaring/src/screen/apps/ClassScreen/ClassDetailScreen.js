@@ -1,39 +1,53 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Dimensions, Image, ImageBackground, ScrollView, StatusBar, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { Divider, useTheme } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Text } from '../../../components/common/UtilsComponent';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import LottieView from 'lottie-react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import * as authAct from '../../../store/actions/authAction';
-import * as classAct from '../../../store/actions/classAction';
-
 import AnggotaComponent from '../../../components/class_component/AnggotaComponent';
 import MapelComponent from '../../../components/class_component/MapelComponent';
+import SilabusModal from '../../../components/modal_component/Silabus_Modal';
+import MateriMapelModal from '../../../components/modal_component/MateriMapel_Modal';
 
+import LoadingModal from '../../../components/modal_component/Loading_Modal';
+import Devel from '../../../components/modal_component/Development_Modal';
 import MapelModal from '../../../components/modal_component/Mapel_modal';
 import MembersModal from '../../../components/modal_component/Members_modal';
-import { useFocusEffect } from '@react-navigation/native';
 
-const ClassDetailsScreen = ({route, navigation}) => {
+const ClassDetailsScreen = ({navigation}) => {
     const { colors, fonts } = useTheme();
-    const dispatch = useDispatch()
+
     const AuthState = useSelector(state => state.auth)
     const classState = useSelector(state => state.class)
-    const [isLoading, setLoading] = useState(false)
+    const materiState = useSelector(state => state.materi)
+    
     const detailClass = classState.detailClass
     const mapel = detailClass.listMapel
     const members = detailClass.listMembers
-    const [activeMapel, setActiveMapel] = useState(mapel[1])
-    const [activeMapelIndex, setMapelIndex] = useState(1)
+
+    const carouselRef = useRef(null);
+    const scrollPageRef = useRef(null);
+
+    const [activeMapel, setActiveMapel] = useState(mapel[mapel.length > 1 ? 1 : 0])
+    const [activeMapelIndex, setMapelIndex] = useState(mapel.length > 1 ? 1 : 0)
+    const [isLoading, setLoading] = useState(false)
+    const [devel, setDevel] = useState(false)
+
     const [modal, setModal] = useState({
         mapel: false,
-        members: false
-    });
+        members: false,
+        silabus: false,
+        materi: false
+    })
+
+    const onMapelSliders = (index) => {
+        setActiveMapel(mapel[index])
+        setMapelIndex(index)
+    }
 
     useEffect(() => {
         navigation.setOptions({
@@ -54,42 +68,15 @@ const ClassDetailsScreen = ({route, navigation}) => {
                 right: 0
             },
         })
+        
+    }, [detailClass, classState.detailClass, materiState])
 
-        console.log(activeMapel, activeMapelIndex)
-    }, [detailClass, classState.detailClass])
-
-    const loadData = async (id) => {
-        try {
-            setLoading(true)
-            await dispatch(classAct.detailKelas(id))
-            setActiveMapel(mapel[1])
-            setMapelIndex(1)
-            setLoading(false)
-        } catch (error) {
-            if (error === 'ERR_GENERATE_TOKEN') {
-                dispatch(authAct.signOut(true))
-                Toast.show({
-                    type: 'error',
-                    text1: 'Maaf, Sesi kamu telah Habis!',
-                    text2: 'Silahkan masuk kembali.'
-                });
-            }
-            setLoading(false)
-        }
+    const setModals = req_modal => {
+        setModal({
+            ...modal,
+            [req_modal] : true
+        })
     }
-
-    useFocusEffect(
-        useCallback(() => {
-            let isActive = true
-            const id = route.params.id_kelas
-            setLoading(true)
-            
-            if (isActive) loadData(id)
-            return () => {
-                isActive = false
-            }
-        }, [dispatch])
-    )
 
     const hideModal = req_modal => {
         setModal({
@@ -98,45 +85,51 @@ const ClassDetailsScreen = ({route, navigation}) => {
         })
     }
 
-    const onMapelSliders = (index) => {
-        setActiveMapel(mapel[index])
-        setMapelIndex(index)
-    }
-
     const moreMapel = () => setModal({...mapel, mapel: true})
-
     const moreAnggota = () => setModal({...mapel, members: true})
-
+    
     const MapelItemPress = id => {
-        console.log(id)
+        const index = mapel.findIndex(item => item.id === id)
+        carouselRef.current.snapToItem(index)
+        hideModal('mapel')
     }
 
-    const MembersItemPress = id => {
-        console.log(id)
+    const navIconHandller = async (request) => {
+        switch (request) {
+            case 'silabus':
+                setModals('silabus')
+                break;
+            
+            case 'materi':
+                setModals('materi')
+                break;
+
+            case 'raport':
+                setDevel(true)
+                break;
+
+            case 'tugas':
+                setDevel(true)
+                break;
+
+            case 'diskusi':
+                setDevel(true)
+                break;
+
+            case 'nilai':
+                console.log('nilai')
+                break;
+        
+            default:
+                console.log(request)
+                break;
+        }
     }
 
-    if (isLoading) return (
-        <View style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: colors.bgAccent
-        }}>
-            <LottieView 
-                source={require('../../../assets/lottie/28893-book-loading.json')} 
-                autoPlay 
-                style={{width: '50%'}}
-            />
-            <Text 
-                style={{paddingTop: 20,}} 
-                size={20} 
-                fontWeight={fonts.medium}
-                color={colors.textPrimary}
-            >
-                Loading...
-            </Text>
-        </View>
-    )
+    const onMateriPress = (id, title, date_created) => {
+        hideModal('materi')
+        navigation.push('Materi', { id, title, date_created })
+    }
 
     return (
         <ScrollView 
@@ -145,9 +138,18 @@ const ClassDetailsScreen = ({route, navigation}) => {
                 flex: 1,
             }}
         >
-            <StatusBar backgroundColor={colors.bgPrimary} barStyle='light-content' />
+            <StatusBar 
+                backgroundColor={colors.bgDarkBlue} 
+                barStyle='light-content' 
+            />
+            
+            <LoadingModal visible={isLoading} />
+            <Devel visible={devel} onDismiss={setDevel} />
+
             <MapelModal visible={modal.mapel} onDismiss={hideModal} itemPress={MapelItemPress} data={mapel} />
-            <MembersModal visible={modal.members} onDismiss={hideModal} itemPress={MembersItemPress} data={members} />
+            <MembersModal visible={modal.members} onDismiss={hideModal} data={members} />
+            <SilabusModal visible={modal.silabus} onDismiss={hideModal} silabus={activeMapel ? activeMapel.silabus : false} />
+            <MateriMapelModal visible={modal.materi} onDismiss={hideModal} id={activeMapel ? activeMapel.id : ''} onItemPress={onMateriPress} />
 
             <View style={{
                 flex: 3,
@@ -177,26 +179,26 @@ const ClassDetailsScreen = ({route, navigation}) => {
                                     alignItems: 'flex-start',
                                 }}>
                                     <Text fontWeight={fonts.italic} size={12} color={colors.textWhite}>Selamat Belajar</Text>
-                                    <Text fontWeight={fonts.semiBold} size={18} color={colors.textWhite}>{AuthState.fullName}</Text>
-                                    <Text fontWeight={fonts.medium} size={14} color={colors.textWhite}>{detailClass.name}</Text>
+                                    <Text fontWeight={fonts.semiBold} size={16} color={colors.textWhite}>{AuthState.fullName}</Text>
+                                    <Text fontWeight={fonts.medium} size={13} color={colors.textWhite}>{detailClass.name}</Text>
                                 </View>
                                 <View style={{
                                     flex: 1,
                                     flexDirection: 'column',
                                     alignItems: 'flex-end',
-                                    justifyContent: 'center'
+                                    justifyContent: 'flex-start'
                                 }}>
                                     <View style={{
-                                        borderWidth: 3,
+                                        borderWidth: 2,
                                         borderRadius: 15,
                                         borderColor: colors.bgWhite,
                                         paddingHorizontal: 10,
                                         paddingVertical: 5,
                                         backgroundColor: detailClass.status === 'LOCKED' ? colors.bgLock : colors.bgPrimary,
                                         elevation: 5,
-                                        shadowOffset: { width: 0, height: 5 },
+                                        shadowOffset: { width: 0, height: 2 },
                                         shadowOpacity: 0.5,
-                                        shadowRadius: 5,
+                                        shadowRadius: 2,
                                         flexDirection: "row",
                                     }}>
                                         { 
@@ -204,10 +206,10 @@ const ClassDetailsScreen = ({route, navigation}) => {
                                                 <>
                                                     <View style={{justifyContent: 'center', paddingRight: 5,}}><Icon name="lock-closed" size={16} color={colors.bgWhite} /></View>
                                                     
-                                                    <Text weight='bold' size={18} color={colors.textWhite}>TERKUNCI</Text>
+                                                    <Text weight='bold' size={16} color={colors.textWhite}>TERKUNCI</Text>
                                                 </>
                                             :   
-                                                <Text weight='bold' size={22} color={colors.textWhite}>{detailClass.code}</Text>
+                                                <Text weight='bold' size={18} color={colors.textWhite}>{detailClass.code}</Text>
                                         }
                                         
                                     </View>
@@ -218,12 +220,12 @@ const ClassDetailsScreen = ({route, navigation}) => {
                                     flexDirection: 'row',
                                     marginVertical: 20,
                                     padding: 10,
-                                    elevation: 4,
-                                    shadowOffset: { width: 0, height: 4 },
+                                    elevation: 3,
+                                    shadowOffset: { width: 0, height: 3 },
                                     shadowOpacity: 0.5,
-                                    shadowRadius: 4,
+                                    shadowRadius: 3,
                                     backgroundColor: colors.bgPrimary,
-                                    borderWidth: 5,
+                                    borderWidth: 3,
                                     borderColor: colors.bgWhite,
                                     borderRadius: 20,
                                     marginBottom: -50,
@@ -247,8 +249,8 @@ const ClassDetailsScreen = ({route, navigation}) => {
                                     flex: 2,
                                     paddingRight: 5,
                                 }}>
-                                    <Text fontWeight={fonts.semiBold} size={18} color={colors.textWhite}>Tentang Kelas</Text>
-                                    <Text fontWeight={fonts.regular} size={12} color={colors.textWhite}>{detailClass.about}</Text>
+                                    <Text fontWeight={fonts.semiBold} size={16} color={colors.textWhite}>Tentang Kelas</Text>
+                                    <Text fontWeight={fonts.regular} size={11} color={colors.textWhite}>{detailClass.about ? detailClass.about : 'Tidak ada keterangan kelas.'}</Text>
                                 </View>
                                 <View style={{
                                     flex: 1,
@@ -268,6 +270,7 @@ const ClassDetailsScreen = ({route, navigation}) => {
             <View style={{
                 flex: 6,
             }}>
+            { mapel.length === 0 ? 
                 <View style={{
                     marginTop: 60,
                     flexDirection: 'column',
@@ -288,7 +291,42 @@ const ClassDetailsScreen = ({route, navigation}) => {
                                 paddingHorizontal: 5,
                                 borderRadius: 8,
                             }}>
-                                <Text fontWeight={fonts.semiBold} size={14} color={colors.textWhite}>{`Mata Pelajaran (${mapel.length})`}</Text>
+                                <Text fontWeight={fonts.semiBold} size={12} color={colors.textWhite}>{`Mata Pelajaran (${mapel.length})`}</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={{
+                        backgroundColor: colors.bgLight,
+                        paddingVertical: 50,
+                        paddingHorizontal: 18,
+                        alignItems: 'center'
+                    }}>
+                        <Text fontWeight={fonts.regular} color={colors.textPrimary}>Maaf, Mata Pelajaran Belum Tersedia.</Text>
+                    </View>
+                </View>
+            :
+                <>
+                <View style={{
+                    marginTop: 60,
+                    flexDirection: 'column',
+                }}>
+                    <View style={{
+                        flexDirection: 'row',
+                        paddingVertical: 5,
+                        paddingHorizontal: 18,
+                    }}>
+                        <View style={{
+                            flex: 2,
+                            justifyContent: 'center',
+                            alignItems: 'flex-start'
+                        }}>
+                            <View style={{
+                                backgroundColor: colors.bgPrimary,
+                                paddingTop: 3,
+                                paddingHorizontal: 5,
+                                borderRadius: 8,
+                            }}>
+                                <Text fontWeight={fonts.semiBold} size={12} color={colors.textWhite}>{`Mata Pelajaran (${mapel.length})`}</Text>
                             </View>
                         </View>
                         <View style={{
@@ -298,48 +336,68 @@ const ClassDetailsScreen = ({route, navigation}) => {
                             paddingTop: 10,
                         }}>
                             <TouchableOpacity onPress={moreMapel}>
-                                <Text fontWeight={fonts.medium} size={14} color={colors.textSecondary}>{`Lihat Semua >`}</Text>
+                                <Text fontWeight={fonts.medium} size={12} color={colors.textSecondary}>{`lihat Semua >`}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                     <View style={{
-                        backgroundColor: colors.bgLight,
+                        backgroundColor: colors.bgWhite,
+                        elevation: 2,
+                        shadowOffset: { width: 1, height: 2 },
+                        shadowOpacity: 0.6,
+                        shadowRadius: 2,
                     }}>
-                        <Carousel 
-                            firstItem={1}
+                        <Carousel
+                            ref={carouselRef}
+                            keyExtractor={(item) => item.id.toString()}
+                            firstItem={activeMapelIndex}
                             containerCustomStyle = {{
                                 paddingTop: 10,
                                 paddingBottom: 5,
-                                paddingHorizontal: 10,
                             }}
                             layout={'default'}
                             data={mapel}
-                            renderItem={(data, index) => <MapelComponent key={data.item.id} title={data.item.nama} />}
+                            extraData={mapel}
+                            renderItem={(data) => <MapelComponent onPress={MapelItemPress} id={data.item.id} title={data.item.nama} />}
                             sliderWidth={Dimensions.get('window').width}
-                            itemWidth={Dimensions.get('window').width * 0.65}
+                            itemWidth={Dimensions.get('window').width * 0.8}
                             onSnapToItem={index => onMapelSliders(index) }
+                            removeClippedSubviews={true}
+                            initialNumToRender={3}
+                            maxToRenderPerBatch={6}
+                            updateCellsBatchingPeriod={12}
                         />
 
-                        <Pagination
-                            dotsLength={mapel.length}
-                            activeDotIndex={activeMapelIndex}
-                            containerStyle={{
-                                paddingVertical: 0,
-                                marginTop: 5,
-                                marginBottom: 15,
+                        <ScrollView 
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            ref={scrollPageRef}
+                            style={{
+                                alignSelf: 'center',
+                                width: Dimensions.get('window').width * 0.4,
                             }}
-                            dotStyle={{
-                                width: 8,
-                                height: 8,
-                                borderRadius: 5,
-                                backgroundColor: colors.accent,
-                            }}
-                            inactiveDotStyle={{
-                                backgroundColor: colors.bgPrimary,
-                            }}
-                            inactiveDotOpacity={0.4}
-                            inactiveDotScale={0.6}
-                        />
+                        >
+                            <Pagination
+                                dotsLength={mapel.length}
+                                activeDotIndex={activeMapelIndex}
+                                containerStyle={{
+                                    paddingVertical: 0,
+                                    marginTop: 5,
+                                    marginBottom: 15,
+                                }}
+                                dotStyle={{
+                                    width: 8,
+                                    height: 8,
+                                    borderRadius: 5,
+                                    backgroundColor: colors.bgCardPrimary,
+                                }}
+                                inactiveDotStyle={{
+                                    backgroundColor: colors.bgPrimary,
+                                }}
+                                inactiveDotOpacity={0.4}
+                                inactiveDotScale={0.6}
+                            />
+                        </ScrollView>
                     </View>
                 </View>
                 <View style={{
@@ -348,102 +406,168 @@ const ClassDetailsScreen = ({route, navigation}) => {
                     marginBottom: 10,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: colors.bgLight,
-                    paddingVertical: 20,
+                    backgroundColor: colors.bgWhite,
+                    elevation: 2,
+                    shadowOffset: { width: 1, height: 2 },
+                    shadowOpacity: 0.6,
+                    shadowRadius: 2,
                 }}>
+                    <View style={{
+                        paddingHorizontal: 10,
+                        paddingVertical: 8,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        
+                    }}>
+                        <Text 
+                            style={{textAlign: 'center'}}
+                            fontWeight={fonts.semiBold} 
+                            color={colors.orange}
+                            size={18}
+                        >
+                            {activeMapel.nama.toUpperCase()}
+                        </Text>
+                    </View>
+                    <Divider style={{width: '100%', height: 1}} />
                     <View style={{
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        marginBottom: 5
+                        marginBottom: 5,
+                        marginTop: 18,
                     }}>
-                        <View style={{
-                            width: 90,
-                            height: 90,
-                            padding: 10,
-                            marginHorizontal: 5,
-                            backgroundColor: '#cfeefa',
-                            borderRadius: 20,
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <Icon name='reader' size={40} color={'#32a852'} />
-                            <Text fontWeight={fonts.medium} color={'#32a852'}>Silabus</Text>
-                        </View>
-                        <View style={{
-                            width: 90,
-                            height: 90,
-                            padding: 5,
-                            marginHorizontal: 5,
-                            backgroundColor: '#cfeefa',
-                            borderRadius: 20,
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <Icon name='book' size={40} color={'#32a852'} />
-                            <Text fontWeight={fonts.medium} color={'#32a852'}>Materi</Text>
-                        </View>
-                        <View style={{
-                            width: 90,
-                            height: 90,
-                            padding: 5,
-                            marginHorizontal: 5,
-                            backgroundColor: '#cfeefa',
-                            borderRadius: 20,
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <Icon name='pulse' size={40} color={'#32a852'} />
-                            <Text fontWeight={fonts.medium} color={'#32a852'}>Raport</Text>
-                        </View>
+                        <TouchableOpacity
+                            onPress={() => navIconHandller('silabus')} 
+                            activeOpacity={0.65}
+                            style={{
+                                width: 90,
+                                height: 90,
+                                padding: 8,
+                                marginHorizontal: 5,
+                                backgroundColor: colors.navMapelBg,
+                                borderRadius: 10,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderWidth: 1,
+                                borderColor: colors.navMapelBorder,
+                                borderStyle: 'dotted',
+                            }}
+                        >
+                            <Icon name='clipboard' size={28} color={colors.navMapelPrimary} />
+                            <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Silabus</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={() => navIconHandller('materi')}
+                            activeOpacity={0.65}
+                            style={{
+                                width: 90,
+                                height: 90,
+                                padding: 8,
+                                marginHorizontal: 5,
+                                backgroundColor: colors.navMapelBg,
+                                borderRadius: 10,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderWidth: 1,
+                                borderColor: colors.navMapelBorder,
+                                borderStyle: 'dotted',
+                            }}
+                        >
+                            <Icon name='book' size={28} color={colors.navMapelPrimary} />
+                            <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Materi</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={() => navIconHandller('raport')}
+                            activeOpacity={0.65}
+                            style={{
+                                width: 90,
+                                height: 90,
+                                padding: 8,
+                                marginHorizontal: 5,
+                                backgroundColor: colors.navMapelBg,
+                                borderRadius: 10,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderWidth: 1,
+                                borderColor: colors.navMapelBorder,
+                                borderStyle: 'dotted',
+                            }}
+                        >
+                            <Icon name='pulse' size={25} color={colors.navMapelPrimary} />
+                            <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Raport</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center',
                         marginTop: 5,
+                        marginBottom: 20,
                     }}>
-                        <View style={{
-                            width: 90,
-                            height: 90,
-                            padding: 10,
-                            marginHorizontal: 5,
-                            backgroundColor: '#cfeefa',
-                            borderRadius: 20,
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <Icon name='document-text' size={40} color={'#32a852'} />
-                            <Text fontWeight={fonts.medium} color={'#32a852'}>Tugas</Text>
-                        </View>
-                        <View style={{
-                            width: 90,
-                            height: 90,
-                            padding: 5,
-                            marginHorizontal: 5,
-                            backgroundColor: '#cfeefa',
-                            borderRadius: 20,
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <Icon name='chatbubbles' size={40} color={'#32a852'} />
-                            <Text fontWeight={fonts.medium} color={'#32a852'}>Diskusi</Text>
-                        </View>
-                        <View style={{
-                            width: 90,
-                            height: 90,
-                            padding: 5,
-                            marginHorizontal: 5,
-                            backgroundColor: '#cfeefa',
-                            borderRadius: 20,
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <Icon name='medal' size={40} color={'#32a852'} />
-                            <Text fontWeight={fonts.medium} color={'#32a852'}>Nilai</Text>
-                        </View>
+                        <TouchableOpacity 
+                            onPress={() => navIconHandller('tugas')}
+                            activeOpacity={0.65}
+                            style={{
+                                width: 90,
+                                height: 90,
+                                padding: 8,
+                                marginHorizontal: 5,
+                                backgroundColor: colors.navMapelBg,
+                                borderRadius: 10,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderWidth: 1,
+                                borderColor: colors.navMapelBorder,
+                                borderStyle: 'dotted',
+                            }}
+                        >
+                            <Icon name='document-text' size={25} color={colors.navMapelPrimary} />
+                            <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Tugas</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => navIconHandller('diskusi')}
+                            activeOpacity={0.65}
+                            style={{
+                                width: 90,
+                                height: 90,
+                                padding: 8,
+                                marginHorizontal: 5,
+                                backgroundColor: colors.navMapelBg,
+                                borderRadius: 10,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderWidth: 1,
+                                borderColor: colors.navMapelBorder,
+                                borderStyle: 'dotted',
+                            }}
+                        >
+                            <Icon name='chatbubbles' size={25} color={colors.navMapelPrimary} />
+                            <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Diskusi</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => navIconHandller('nilai')}
+                            activeOpacity={0.65}
+                            style={{
+                                width: 90,
+                                height: 90,
+                                padding: 8,
+                                marginHorizontal: 5,
+                                backgroundColor: colors.navMapelBg,
+                                borderRadius: 10,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderWidth: 1,
+                                borderColor: colors.navMapelBorder,
+                                borderStyle: 'dotted',
+                            }}
+                        >
+                            <Icon name='ribbon' size={25} color={colors.navMapelPrimary} />
+                            <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Evaluasi</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
+                </>
+            }
                 <View style={{
                     marginTop: 10,
                     flexDirection: 'column',
@@ -465,7 +589,7 @@ const ClassDetailsScreen = ({route, navigation}) => {
                                 paddingHorizontal: 5,
                                 borderRadius: 8,
                             }}>
-                                <Text fontWeight={fonts.semiBold} size={14} color={colors.textWhite}>{`Anggota Kelas (${members.length})`}</Text>
+                                <Text fontWeight={fonts.semiBold} size={12} color={colors.textWhite}>{`Anggota Kelas (${members.length})`}</Text>
                             </View>
                         </View>
                         <View style={{
@@ -475,7 +599,7 @@ const ClassDetailsScreen = ({route, navigation}) => {
                             paddingTop: 10,
                         }}>
                             <TouchableOpacity onPress={moreAnggota}>
-                                <Text fontWeight={fonts.medium} size={14} color={colors.textSecondary}>{`Lihat Semua >`}</Text>
+                                <Text fontWeight={fonts.medium} size={12} color={colors.textSecondary}>{`Lihat Semua >`}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

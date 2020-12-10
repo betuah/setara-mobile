@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {  View, Image, ImageBackground, FlatList, RefreshControl } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import {  View, Image, ImageBackground, FlatList, RefreshControl, StatusBar } from 'react-native';
 import { Btn, Text } from '../../../components/common/UtilsComponent';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'react-native-paper';
@@ -9,15 +10,17 @@ import LottieView from 'lottie-react-native';
 
 import ListClass from './ListClassScreen';
 import JoinClass_Modal from '../../../components/modal_component/JoinClass_Modal';
+import LoadingModal from '../../../components/modal_component/Loading_Modal';
+
 import * as classAct from '../../../store/actions/classAction';
 import * as authAct from '../../../store/actions/authAction';
-import { useFocusEffect } from '@react-navigation/native';
 
 const ClassScreen = ({ navigation }) => {
     const { colors, fonts } = useTheme()
     const AuthState = useSelector(state => state.auth)
     const classState = useSelector(state => state.class)
-    const [ isRefresh, setRefresh] = useState(false)
+    const [ isRefresh, setRefresh ] = useState(false)
+    const [ isLoading, setLoading ] = useState(false)
     const [ joinClassModal, setJoinClassModal ] = useState(false)
     const [ joinClassValue, setJoinClassInput] = useState('')
     const dispatch = useDispatch()
@@ -65,7 +68,27 @@ const ClassScreen = ({ navigation }) => {
     }, [dispatch])
 
     const onClassPress = async data => {
-        navigation.navigate('DetailKelas', { id_kelas: data.id_kelas })
+        try {
+            setLoading(true)
+            await dispatch(classAct.detailKelas(data.id_kelas))
+            navigation.navigate('DetailKelas')
+            setLoading(false)
+        } catch (error) {
+            if (error === 'ERR_GENERATE_TOKEN') {
+                dispatch(authAct.signOut(true))
+                Toast.show({
+                    type: 'error',
+                    text1: 'Maaf, Sesi kamu telah Habis!',
+                    text2: 'Silahkan masuk kembali.'
+                });
+            }
+            Toast.show({
+                type: 'error',
+                text1: 'Maaf, Terjadi Kesalahan!',
+                text2: error
+            });
+            setLoading(false)
+        }
     }
 
     const onClassLongPress = data => {
@@ -78,9 +101,28 @@ const ClassScreen = ({ navigation }) => {
 
     const onInputChange = value => setJoinClassInput(value)
 
-    const joinClass = () => {
-        setJoinClassModal(false)
-        console.log(joinClassValue)
+    const joinClass = async () => {
+        try {
+            setLoading(true)
+            setJoinClassModal(false)
+            await dispatch(classAct.joinClass(joinClassValue))
+            setLoading(false)
+            setJoinClassInput('')
+            Toast.show({
+                type: 'success',
+                text1: 'Sukses!',
+                text2: 'Berhasil gabung kelas.'
+            })
+        } catch (error) {
+            Toast.show({
+                type: 'error',
+                text1: 'Maaf, Gagal Bergabung kelas!',
+                text2: error
+            })
+            setJoinClassInput('')
+            setJoinClassModal(false)
+            setLoading(false)
+        }
     }
 
     return (
@@ -88,6 +130,7 @@ const ClassScreen = ({ navigation }) => {
             flex: 1,
             justifyContent: 'center',
         }}>
+            <StatusBar barStyle='light-content' />
             <JoinClass_Modal 
                 visible={joinClassModal} 
                 onDismiss={hideModal} 
@@ -96,13 +139,15 @@ const ClassScreen = ({ navigation }) => {
                 value={joinClassValue} 
             />
 
+            <LoadingModal visible={isLoading} />
+
             <View style={{
                 flex: 3,
                 backgroundColor: colors.bgPrimary,
-                elevation: 8,
-                shadowOffset: { width: 0, height: 6 },
+                elevation: 4,
+                shadowOffset: { width: 0, height: 3 },
                 shadowOpacity: 0.5,
-                shadowRadius: 6,
+                shadowRadius: 3,
             }}>
                 <ImageBackground 
                     source={require('../../../assets/images/header/bg-header.png')}
@@ -120,7 +165,7 @@ const ClassScreen = ({ navigation }) => {
                                 flex: 1,
                                 flexDirection: 'column',
                                 justifyContent: 'center',
-                                paddingHorizontal: 10,
+                                paddingHorizontal: 15,
                                 paddingVertical: 30,
                             }}>
                                 <View style={{
@@ -132,8 +177,8 @@ const ClassScreen = ({ navigation }) => {
                                     }}>
                                         <Image 
                                             style={{
-                                                width: 60,
-                                                height: 60,
+                                                width: 50,
+                                                height: 50,
                                                 borderWidth: 2,
                                                 borderRadius: 50,
                                                 borderColor: colors.bgWhite
@@ -146,11 +191,10 @@ const ClassScreen = ({ navigation }) => {
                                         alignItems: 'flex-start',
                                         justifyContent: 'center'
                                     }}>
-                                        <Text fontWeight={fonts.semiBold} size={16} color={colors.textWhite}>{`Hi, ${AuthState.fullName}`}</Text>
-                                        <Text fontWeight={fonts.italic} size={14} color={colors.textWhite}>{AuthState.status}</Text>
+                                        <Text fontWeight={fonts.semiBold} size={14} color={colors.textWhite}>{`Hi, ${AuthState.fullName}`}</Text>
+                                        <Text fontWeight={fonts.italic} size={12} color={colors.textWhite}>{AuthState.status}</Text>
                                     </View>
                                 </View>
-
                                 <View style={{
                                     marginTop: 20,
                                     justifyContent: 'flex-end',
@@ -159,22 +203,22 @@ const ClassScreen = ({ navigation }) => {
                                         onPress={() => showModal()}
                                         Icon={{
                                             name: 'school',
-                                            color: colors.white,
+                                            color: colors.bgWhite,
                                             size: 15
                                         }}
                                         IconType='ionic'
                                         title='Gabung Kelas'
                                         color={colors.bgPrimary}
-                                        fontColor={colors.white}
-                                        fontSize={14}
+                                        fontColor={colors.bgWhite}
+                                        fontSize={12}
                                         fontWeight={fonts.semiBold}
                                         style={{
-                                            elevation: 4,
-                                            shadowOffset: { width: 0, height: 4 },
+                                            elevation: 3,
+                                            shadowOffset: { width: 0, height: 3 },
                                             shadowOpacity: 0.5,
-                                            shadowRadius: 4,
+                                            shadowRadius: 3,
                                             borderRadius: 80,
-                                            borderWidth: 3,
+                                            borderWidth: 2,
                                             borderColor: colors.textWhite
                                         }}
                                     />
@@ -207,7 +251,7 @@ const ClassScreen = ({ navigation }) => {
                     borderColor: colors.textWhite,
                     borderBottomWidth: 2
                 }}>
-                    <Text color={colors.textWhite} fontWeight={fonts.semiBold} size={20}>DAFTAR KELAS</Text>
+                    <Text color={colors.textWhite} fontWeight={fonts.semiBold} size={16}>DAFTAR KELAS</Text>
                 </View>
                 <View
                     style={{
@@ -216,12 +260,32 @@ const ClassScreen = ({ navigation }) => {
                     }}
                 >
                     <FlatList 
-                        style={{paddingVertical: 10}}
+                        contentContainerStyle={{paddingVertical: 10,}}
                         refreshControl={<RefreshControl colors={[`${colors.bgPrimary}`]} refreshing={isRefresh} onRefresh={fetchKelas} />}
                         keyExtractor={(item, index) => item.id_kelas}
                         data={classState.listClass}
                         extraData={classState}
                         renderItem={itemData => <ListClass onPress={onClassPress} onLongPress={onClassLongPress} data={itemData.item} />}
+                        ListEmptyComponent={() => 
+                            <View style={{
+                                flex: 1,
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginVertical: 20,
+                                marginTop: '30%'
+                            }}>
+                                <Image 
+                                    source={require('../../../assets/images/coach_monochromatic.png')}
+                                    style={{
+                                        width: 150,
+                                        height: 150
+                                    }}
+                                    resizeMode='contain'
+                                />
+                                <Text style={{textAlign: 'center', marginTop: 10,}} fontWeight={fonts.regular} color={colors.textPrimary}>Kamu belum bergabung di kelas.</Text>
+                            </View>
+                        }
                     />
                 </View>
             </View>

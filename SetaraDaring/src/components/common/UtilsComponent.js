@@ -31,7 +31,7 @@ const Input = props => {
                 {...props}
                 value={props.value}
                 onChange={props.onChange}
-                mode="flat"
+                mode={props.mode ? props.mode : 'flat'}
                 keyboardType={props.keyboardType}
                 selectionColor={props.defaultStyle ? props.defaultStyle.selectionColor : colors.light}
                 underlineColor={props.defaultStyle ? props.defaultStyle.underlineColor : colors.light}
@@ -46,7 +46,7 @@ const Input = props => {
                 }
                 style={{
                     backgroundColor: 'transparent',
-                    fontSize: props.defaultStyle ? props.defaultStyle.fontSize : 15,
+                    fontSize: props.defaultStyle ? props.defaultStyle.fontSize : (props.fontSize ? props.fontSize : 12),
                     ...props.style
                 }}
                 theme={{
@@ -89,6 +89,7 @@ const Btn = props => {
                         <View style={{ width: 8, height: 1 }} />
                         <Text 
                             weight='bold'
+                            size={props.fontSize}
                             color={props.loadingColor ? props.loadingColor : colors.primary}
                             style={{
                                 ...props.style

@@ -26,13 +26,19 @@ const AppsNav = () => {
     return (
         <Tab.Navigator
             initialRouteName="Beranda"
-            shifting={true}
-            activeColor={colors.secondary}
-            inactiveColor={colors.secondary}
+            shifting={false}
+            labeled={true}
+            activeColor={colors.bgPrimary}
+            inactiveColor={colors.bgBackdrop}
+            labelStyle={{fontSize: 18}}
             barStyle={{ 
-                backgroundColor: colors.background,
-                borderTopColor: colors.secondary, 
-                borderTopWidth: 2 
+                backgroundColor: colors.bgWhite,
+                borderTopColor: colors.bgPrimary, 
+                borderTopWidth: 1,
+                shadowOffset: { width: 0, height: -10 },
+                shadowOpacity:  0.4,
+                shadowRadius: 3,
+                elevation: 3,
             }}
         >
             <Tab.Screen 
@@ -41,7 +47,7 @@ const AppsNav = () => {
                 options={{
                     tabBarLabel: 'Pustaka',
                     tabBarIcon: ({ color, focused }) => (
-                        <Icon name={focused ? "library" : "library-outline" } color={color} size={26} />
+                        <Icon name={focused ? "library" : "library-outline" } color={color} size={23} />
                     )
                 }}
             />
@@ -51,7 +57,7 @@ const AppsNav = () => {
                 options={{
                     tabBarLabel: 'Kelas',
                     tabBarIcon: ({ color, focused }) => (
-                        <Icon name={focused ? "school" : "school-outline" } color={color} size={26} />
+                        <Icon name={focused ? "school" : "school-outline" } color={color} size={23} />
                     ),
                 }}
             />
@@ -61,7 +67,7 @@ const AppsNav = () => {
                 options={{
                     tabBarLabel: 'Beranda',
                     tabBarIcon: ({ color, focused }) => (
-                        <Icon name={focused ? "book" : "book-outline" } color={color} size={26} />
+                        <Icon name={focused ? "home" : "home-outline" } color={color} size={23} />
                     ),
                 }}
             />
@@ -73,7 +79,7 @@ const AppsNav = () => {
                     tabBarLabel: 'Notifikasi',
                     tabBarIcon: ({ color, focused }) => (
                         <View>
-                            <Icon name={focused ? "notifications" : "notifications-outline" } color={color} size={26} />
+                            <Icon name={focused ? "notifications" : "notifications-outline" } color={color} size={23} />
                         </View>
                     ),
                 }}
@@ -84,7 +90,7 @@ const AppsNav = () => {
                 options={{
                     tabBarLabel: 'Profil',
                     tabBarIcon: ({ color, focused }) => (
-                        <Icon name={focused ? "person" : "person-outline" } color={color} size={26} />
+                        <Icon name={focused ? "person" : "person-outline" } color={color} size={23} />
                     ),
                 }}    
             />

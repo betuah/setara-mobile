@@ -214,21 +214,21 @@ const SignUpScreen = ({ navigation }) => {
                         
                         <View style={styles.signup}>
                             <View>
-                                <Text color={colors.white}>Sudah punya akun ? </Text>                                
+                                <Text color={colors.white} size={12}>Sudah punya akun ? </Text>                                
                             </View>
                             <View>
                                 <Text
                                     onPress={() => navigation.navigate('Login')}
                                     weight='bold'
                                     color={colors.white}
-                                    size={18}
+                                    size={14}
                                 >Masuk</Text>
                             </View>
                         </View>
                     </ScrollView>
                 </View>
                 <View style={styles.footer}>
-                <Text color={colors.white}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
+                <Text color={colors.white} size={10}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>

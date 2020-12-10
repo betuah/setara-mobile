@@ -17,7 +17,6 @@ AxiosAPI.interceptors.request.use(
         config.headers = { 
             'Authorization': `Bearer ${data.token}`,
             'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
         }
         config.timeout = 10000
         return config;

@@ -17,13 +17,18 @@ const Error = err => {
                 throw('Mohon maaf sepertinya terjadi kesalahan pada applikasi. Kamu bisa menghubungi Admin untuk mendapatkan bantuan.')
             case 'ERR_GENERATE_TOKEN':
                 throw(errRes.code)
+            case 'ERR_CLASS_NOT_FOUND':
+                throw('Kelas dengan kode tersebut tidak ditemukan.')
+            case 'ERR_ALREADY_JOIN_CLASS':
+                throw('Sepertinya kamu sudah pernah bergabung dengan kelas tersebut.')
+            case 'ERR_MATERI_NOT_FOUND':
+                throw('Materi tersebut tidak ditemukan.')
             default:
                 throw(errRes.message)
         }
     } else if (errRes.message) {
         throw(errRes.message)
     }
-    
     throw('Sepertinya kamu tidak terhubung ke Server. Periksa kembali jaringan internet kamu ya.')
 }
 

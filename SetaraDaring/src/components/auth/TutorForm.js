@@ -71,8 +71,9 @@ const TutorForm = props => {
             </View>
             <View style={styles.button}>
                 <Btn 
-                    Icon={{name:"clipboard-text", size: 15, color: "#2A9FC4"}}
+                    Icon={{name:"clipboard-text", size: 12, color: "#2A9FC4"}}
                     title="Daftar Tutor" 
+                    fontSize={12}
                     onPress={props.signUp}
                     style={{ width: '100%' }}
                     disabled={props.btnDisable}
