@@ -7,12 +7,14 @@ const QuizKumpul    = require('../models/quizKumpul.model')
 const Soal          = require('../models/soalData.model')
 const Materi        = require('../models/materiData.model')
 
-exports.getListMateri = async (req, res) => {
-    const getAllMateri = new Promise(async (resolve, reject) => {
+exports.getListTugas = async (req, res) => {
+
+    const getAllTugas = new Promise(async (resolve, reject) => {
         try {
             const userId = req.userId;
+
             const mapelId = req.params.mapelId
-            let materiData = []
+            let tugasData = []
 
             const modulData = await Modul.find({ id_mapel: mapelId}).sort({ date_created: 'asc'}) //Sort ascending by date_created
 
@@ -50,11 +52,11 @@ exports.getListMateri = async (req, res) => {
                                         }
 
                                     } catch (e) {
-                                        reject(e)
+
                                     }
 
                                     if(index === tugasData.length-1) {
-                                        resolve(nilai_kumpul_tugas / tugasData.length)
+                                        resolve(nilai_kumpul_tugas/tugasData.length)
                                     }
                                 })
                             }else{
@@ -75,7 +77,7 @@ exports.getListMateri = async (req, res) => {
                                             nilai_kumpul_quiz   += (parseFloat(quizKumpulData.nilai)/soalData.length)*100
                                         }
                                     } catch (e) {
-                                        reject(e)
+                                        // console.log(new Error(e))
                                     }
 
                                     if(index === quizData.length-1) {
@@ -96,6 +98,7 @@ exports.getListMateri = async (req, res) => {
                     })
 
                     nilai_akhir_modul = await getNilaiModul(item._id)
+                    console.log('Nilai akhir modul: ', nilai_akhir_modul)
 
                     if (item.prasyarat!="0"){
                         nilai_akhir_modul_prev = await getNilaiModul(item.prasyarat)
@@ -104,21 +107,16 @@ exports.getListMateri = async (req, res) => {
                         }
                     }
 
-                    Materi.find({ id_modul: item._id}).sort({ date_created: 'asc'}).then(subMateri => {
+                    Tugas.find({ id_modul: item._id}).sort({ date_created: 'asc'}).then(tugas => {
                         const tempData = {
                             ...item._doc,
                             nilai_akhir_modul: nilai_akhir_modul,
                             status_modul: status_modul,
-                            materi: subMateri.map(item => { return {
-                                id: item._id,
-                                judul: item.judul,
-                                status: item.status,
-                                date_created: item.date_created
-                            }})
+                            tugas: tugas
                         }
-                        materiData.push(tempData)
+                        tugasData.push(tempData)
 
-                        if (materiData.length === array.length) resolve(materiData);
+                        if (tugasData.length === array.length) resolve(tugasData);
                     }).catch(err => {
                         reject(err)
                     })
@@ -131,7 +129,7 @@ exports.getListMateri = async (req, res) => {
         }
     })
 
-    getAllMateri.then(resData => {
+    getAllTugas.then(resData => {
         const resJson = {
             code: 'OK',
             status: 'Success',
@@ -148,18 +146,18 @@ exports.getListMateri = async (req, res) => {
     })
 }
 
-exports.getMateriDetail = async (req, res) => {
+exports.getTugasDetail = async (req, res) => {
     try {
-        const id = req.params.materiId
+        const id = req.params.tugasId
 
-        const materiData = await Materi.findOne({ _id: id})
+        const tugasData = await Tugas.findOne({ _id: id})
 
-        res.status(200).json(materiData)
+        res.status(200).json(tugasData)
     } catch (error) {
         if (error.code) {
             res.status(error.code).json(error)
         } else {
-            res.status(404).json({status: 'Error. Not Found!', code: 'ERR_MATERI_NOT_FOUND', message: `Materi dengan ID tersebut tidak ditemukan.`})
+            res.status(404).json({status: 'Error. Not Found!', code: 'ERR_MATERI_NOT_FOUND', message: `Tugas dengan ID tersebut tidak ditemukan.`})
         }
     }
 }
