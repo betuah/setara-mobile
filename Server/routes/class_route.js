@@ -12,9 +12,9 @@ module.exports = (app) => {
     app.route('/api/v1/class/join')
         .post(authMiddleware, classController.joinClass)
 
-    app.route('/api/v1/all/posting')
+    app.route('/api/v1/post/')
         .get(authMiddleware, classController.getAllPosting)
 
-    app.route('/api/v1/class/posting/:classId')
+    app.route('/api/v1//post/class/:classId')
         .get(authMiddleware, classController.getPosting)
 }
