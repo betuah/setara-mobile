@@ -204,7 +204,7 @@ exports.getPosting = async (req, res) => {
     const getDetails = new Promise(async (resolve, reject) => {
         try {
             let daftarPosting = []
-            const dataPosting = await Posting.find({ id_kelas: id_kelas })
+            const dataPosting = await Posting.find({ id_kelas: id_kelas }).sort({ date_created: -1})
 
             if(dataPosting.length > 0){
 
@@ -271,7 +271,7 @@ exports.getAllPosting = async (req, res) => {
                     let indexDataKelas = 0
                     dataKelas.map(async (item, index, array) => {
 
-                        const dataPosting       = await Posting.find({ id_kelas: item.id_kelas })
+                        const dataPosting       = await Posting.find({ id_kelas: item.id_kelas }).sort({ date_created: -1})
                         indexDataKelas++
 
                         listPosting = ([...listPosting,...dataPosting])
