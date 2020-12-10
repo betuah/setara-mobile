@@ -227,7 +227,7 @@ exports.getPosting = async (req, res) => {
 
                         const tempData = {
                             ...item._doc,
-                            foto: creator.foto,
+                            foto_creator: `${env.picture_path}${creator.foto}`,
                             nama_creator: creator.nama,
                             nama_kelas: kelas.nama
                         }
@@ -306,7 +306,7 @@ exports.getAllPosting = async (req, res) => {
 
                             const tempData = {
                                 ...item._doc,
-                                foto_creator: creator.foto,
+                                foto_creator: `${env.picture_path}${creator.foto}`,
                                 nama_creator: creator.nama,
                                 nama_kelas: kelas.nama
                             }
