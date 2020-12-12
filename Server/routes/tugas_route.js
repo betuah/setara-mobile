@@ -5,7 +5,10 @@ module.exports = (app) => {
 
     app.route('/api/v1/tugas/:mapelId')
         .get(authMiddleware, tugasController.getListTugas)
-        
+
     app.route('/api/v1/tugas/detail/:tugasId')
         .get(authMiddleware, tugasController.getTugasDetail)
+
+    app.route('/api/v1/tugas/kumpul/:tugasId')
+        .post(authMiddleware, tugasController.kumpulkanTugas)
 }
