@@ -52,6 +52,11 @@ const ClassScreen = ({ navigation }) => {
     useFocusEffect(
         useCallback(() => {
             let isActive = true
+
+            StatusBar.setBackgroundColor('transparent');
+            StatusBar.setTranslucent;
+            StatusBar.setBarStyle("light-content");
+
             if (isActive) loadData()
             return () => {
                 isActive = false
@@ -130,7 +135,7 @@ const ClassScreen = ({ navigation }) => {
             flex: 1,
             justifyContent: 'center',
         }}>
-            <StatusBar barStyle='light-content' />
+            <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
             <JoinClass_Modal 
                 visible={joinClassModal} 
                 onDismiss={hideModal} 

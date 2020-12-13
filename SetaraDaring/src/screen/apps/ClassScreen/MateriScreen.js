@@ -5,7 +5,6 @@ import { Card, Divider, useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text } from '../../../components/common/UtilsComponent';
 import Toast from 'react-native-toast-message';
-import LottieView from 'lottie-react-native';
 import HTML from 'react-native-render-html';
 import env from '../../../config/baseUrl';
 import moment from 'moment/min/moment-with-locales';
@@ -81,34 +80,6 @@ const MateriScreen = ({route, navigation}) => {
             </View>
         )
 
-    // if (refresh) 
-    //     return (
-    //         <View 
-    //             style={{
-    //                 flex: 1,
-    //                 flexDirection: 'column',
-    //                 alignItems: 'center',
-    //                 justifyContent: 'center',
-    //             }}
-    //         >
-    //             <LottieView 
-    //                 source={require('../../../assets/lottie/28893-book-loading.json')} 
-    //                 autoPlay
-    //                 style={{width: '50%'}}
-    //             />
-    //             <View style={{width: useWindowDimensions().width * 0.7, marginTop: 10,}}>
-    //                 <Text 
-    //                     fontWeight={{...fonts.medium}} 
-    //                     color={colors.textSecondary} 
-    //                     style={{textAlign: 'center'}} 
-    //                     size={12}
-    //                 >
-    //                     Mohon tunggu sebentar ya. Bahan Belajar kamu sedang dipersiapkan.
-    //                 </Text>
-    //             </View>
-    //         </View>
-    //     )
-
     return (
         <View>
             <ImageBackground
@@ -120,7 +91,6 @@ const MateriScreen = ({route, navigation}) => {
                 contentContainerStyle={{
                     paddingVertical: 13,
                     paddingHorizontal: 8,
-                    // backgroundColor: colors.bgLight,
                 }}
                 refreshControl={
                     <RefreshControl colors={[`${colors.bgPrimary}`]} refreshing={refresh} onRefresh={onRefresh} />
