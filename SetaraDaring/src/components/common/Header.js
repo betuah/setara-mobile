@@ -6,7 +6,7 @@ import { StatusBar } from 'react-native';
 import moment from 'moment/min/moment-with-locales';
 moment.locale('id')
 
-const Header = ({ data, scene, previous, navigation, style, contentStyle, titleStyle, subtitleStyle, Action, ActionOnPress }) => {
+const Header = ({ data, scene, previous, navigation, style, contentStyle, titleStyle, subtitleStyle, action, actionOnPress, leftIcon, leftIconOnPress }) => {
     const { fonts, colors } = useTheme()
 
     return (
@@ -28,6 +28,15 @@ const Header = ({ data, scene, previous, navigation, style, contentStyle, titleS
                         color={colors.bgWhite}
                     />
                 ) : null}
+                { leftIcon &&
+                    <Appbar.Action 
+                        size={leftIcon && leftIcon.size ? leftIcon.size : 20}
+                        color={leftIcon && leftIcon.color ? leftIcon.color : colors.textWhite}
+                        icon={leftIcon && leftIcon.icon ? leftIcon.icon : "dots-vertical"} 
+                        onPress={leftIconOnPress} 
+                        style={{...leftIcon.style && leftIcon.style}}
+                    />
+                }
                 <Appbar.Content
                     title={data.title.toUpperCase()}
                     color={colors.textWhite}
@@ -46,13 +55,13 @@ const Header = ({ data, scene, previous, navigation, style, contentStyle, titleS
                         ...contentStyle
                     }}
                 />
-                { Action &&
+                { action &&
                     <Appbar.Action 
-                        size={Action && Action.Size ? Action.Size : 20}
-                        color={Action && Action.Color ? Action.Color : colors.textWhite}
-                        icon={Action && Action.Icon ? Action.Icon : "dots-vertical"} 
-                        onPress={ActionOnPress} 
-                        style={{...Action.Style && Action.style}}
+                        size={action && action.size ? action.size : 20}
+                        color={action && action.color ? action.color : colors.textWhite}
+                        icon={action && action.icon ? action.icon : "dots-vertical"} 
+                        onPress={() => actionOnPress()} 
+                        style={{...action.style && action.style}}
                     />
                 }
             </Appbar.Header>
