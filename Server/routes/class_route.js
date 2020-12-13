@@ -15,6 +15,6 @@ module.exports = (app) => {
     app.route('/api/v1/post/')
         .get(authMiddleware, classController.getAllPosting)
 
-    app.route('/api/v1//post/class/:classId')
+    app.route('/api/v1/post/class/:classId')
         .get(authMiddleware, classController.getPosting)
 }

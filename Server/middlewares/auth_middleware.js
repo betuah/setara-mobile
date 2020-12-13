@@ -7,19 +7,23 @@ const authMiddleware = async (req, res, next) => {
     try {
         res.setHeader( 'X-Powered-By', 'Setara Daring' ) // Set X Power Header
 
-        const token     = req.header('Authorization').replace('Bearer ','') // Get token from Authorization header
-        const decoded   = jwt.verify(token, secret) // Verifying and Decoding jwt payload
+        if (req.header('Authorization')) {
+            const token     = req.header('Authorization').replace('Bearer ','') // Get token from Authorization header
+            const decoded   = jwt.verify(token, secret) // Verifying and Decoding jwt payload
 
-        if (!decoded) {
-            res.status(406).json({ status: 'Not Acceptable', code: 'ERR_INVALID_TOKEN', message: "Invalid Access Token Request."}) // If token not verified
+            if (!decoded) {
+                res.status(406).json({ status: 'Not Acceptable', code: 'ERR_INVALID_TOKEN', message: "Invalid Access Token Request."}) // If token not verified
+            } else {
+                // If verified create new request header
+                req.token    = token
+                req.userId   = decoded.id
+                req.username = decoded.username
+                req.status   = decoded.status
+
+                next() // Send to routing
+            }
         } else {
-            // If verified create new request header
-            req.token    = token
-            req.userId   = decoded.id
-            req.username = decoded.username
-            req.status   = decoded.status
-
-            next() // Send to routing
+            res.status(406).json({ status: 'Not Acceptable', code: 'ERR_TOKEN_REQUIRED', message: "Invalid Authentication."})
         }
     } catch (error) {
         if (error.name === 'TokenExpiredError') { // If token is expires

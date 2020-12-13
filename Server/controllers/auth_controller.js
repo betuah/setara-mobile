@@ -55,7 +55,8 @@ const signIn = async (req, res) => {
                     name: user.nama,
                     email: user.email,
                     status: user.status,
-                    picture: `${env.picture_path}${user.foto}`
+                    picture: `${env.picture_path}${user.foto}`,
+                    sekolah: user.sekolah
                 },
                 accessToken : jwtToken,
                 refreshToken: refreshToken.token
