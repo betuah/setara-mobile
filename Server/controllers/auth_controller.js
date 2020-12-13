@@ -173,74 +173,6 @@ const signUp = async (req, res) => {
 }
 // End singup function
 
-// Start user detail function
-const account = async (req, res) => {
-    const id    = req.userId // Get UserId from middleware
-
-    try {
-        // Find user by id in User Model
-        User.findById({ _id: id }).then((user) => {
-            // If not Error
-            if(user) { // If User exist
-                res.status(200).json(user)
-            } else { // If user data is null
-                res.status(404).json({ status: 'Error', code: 'ERR_USER_NOT_FOUND', message: 'User Not Found!'})
-            }
-        }).catch((err) => { // Catch Error
-            res.status(400).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
-            console.log(new Error(err))
-        })
-    } catch (error) { // Catch any Error
-        res.status(400).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
-        console.log(new Error(err))
-    }
-}
-
-// set Profile function
-const setProfile = async (req, res) => {
-    const id    = req.userId // Get UserId from middleware
-
-    try {
-        // Get user data from API body Raw or form from front end request
-        const nama              = req.body.nama
-        const email             = req.body.email
-        const jenis_kelamin     = req.body.jenis_kelamin
-        const sekolah           = req.body.sekolah
-        const provinsi          = req.body.provinsi
-        const kabupaten         = req.body.kabupaten
-        const website           = req.body.website ? req.body.website : ''
-        const facebook          = req.body.facebook ? req.body.facebook : ''
-        const linkedin          = req.body.linkedin ? req.body.linkedin : ''
-        const twitter           = req.body.twitter ? req.body.twitter : ''
-
-        // Find user by id in User Model
-        User.findOneAndUpdate({ _id: id },{
-            nama: nama,
-            email: email,
-            jk: jk,
-            sekolah:sekolah,
-            provinsi: provinsi,
-            kabupaten: kabupaten,
-            sosmed:{
-                website: website,
-                facbook: facebook,
-                linkedin: linkedin,
-                twitter: twitter
-            }
-        },{
-            new: true
-        }).then((updatedAccount) =>{
-            res.status(200).json(updatedAccount)
-        }).catch((err) => { // Catch Error
-            res.status(400).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
-            console.log(new Error(err))
-        })
-    } catch (error) { // Catch any Error
-        res.status(400).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
-        console.log(new Error(err))
-    }
-}
-
 // Start Singout Function
 const signOut = async (req, res) => {
     const token = req.body.token || req.cookies.refToken // Get refresh token from cookie
@@ -286,7 +218,5 @@ module.exports = {
     signIn,
     signUp,
     signOut,
-    account,
     generateNewToken,
-    setProfile
 }

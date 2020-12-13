@@ -30,11 +30,15 @@ const authRoute   = require('./routes/auth_route')
 const classRoute  = require('./routes/class_route')
 const materiRoute = require('./routes/materi_route')
 const tugasRoute  = require('./routes/tugas_route')
+const postRoute   = require('./routes/post_route')
+const userRoute   = require('./routes/user_route')
 
 authRoute(app)
 classRoute(app)
 materiRoute(app)
 tugasRoute(app)
+postRoute(app)
+userRoute(app)
 
 /* End of Routing Import */
 
