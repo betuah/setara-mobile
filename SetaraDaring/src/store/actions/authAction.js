@@ -31,7 +31,8 @@ export const isUserSignIn = data => {
             fullName: userData.fullName,
             foto: userData.foto,
             role: userData.role,
-            status: userData.status
+            status: userData.status,
+            sekolah: userData.sekolah
         })
     }
 }
@@ -69,7 +70,7 @@ export const signIn = data => {
                     break;
             }
             
-            await saveData(resData.accessToken, resData.refreshToken, resData.data.id, resData.data.username, resData.data.name, resData.data.picture, resData.data.status, status)
+            await saveData(resData.accessToken, resData.refreshToken, resData.data.id, resData.data.username, resData.data.name, resData.data.picture, resData.data.status, resData.data.sekolah, status)
             dispatch({
                 type: AUTHENTICATE,
                 token: resData.accessToken,
@@ -79,6 +80,7 @@ export const signIn = data => {
                 fullName: resData.data.name,
                 foto: resData.data.picture,
                 role: resData.data.status,
+                sekolah: resData.data.sekolah,
                 status
             })
         } catch (err) {
@@ -149,9 +151,9 @@ export const signOut = (forceSignOut = false) => {
     }
 }
 
-const saveData = async (token, refToken, userId, username, fullName, picture, role, status) => {
+const saveData = async (token, refToken, userId, username, fullName, picture, role, sekolah, status) => {
     try {
-        return await AsyncStorage.setItem('userData', JSON.stringify({token, refToken, userId, username, fullName, foto: picture, role: role, status: status}))
+        return await AsyncStorage.setItem('userData', JSON.stringify({token, refToken, userId, username, fullName, foto: picture, role: role, sekolah: sekolah, status: status}))
     } catch (error) {
         console.log(error)
         throw (error)

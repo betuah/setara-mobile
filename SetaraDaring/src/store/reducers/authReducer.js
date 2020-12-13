@@ -8,6 +8,7 @@ const initState = {
     fullName: null,
     foto: null,
     role: null,
+    sekolah: null,
     status: null
 }
 
@@ -24,6 +25,7 @@ const auth = (state = initState, actions) => {
                 foto: actions.foto,
                 role: actions.role,
                 status: actions.status,
+                sekolah: actions.sekolah,
                 isLoading: false
             }
         
