@@ -161,3 +161,31 @@ exports.getTugasDetail = async (req, res) => {
         }
     }
 }
+
+exports.kumpulkanTugas = async (req, res) => {
+    try {
+        const userId    = req.userId
+        const tugasId   = req.params.tugasId
+        const isi_tugas = req.body.isi_tugas ? req.body.isi_tugas : ''
+
+        await TugasKumpul.create({
+            id_user: userId,
+            id_tugas: tugasId,
+            deskripsi: isi_tugas,
+            file: '',
+            nilai: '',
+            catatan:'',
+        })
+
+        const resData = {
+            status: 'Success',
+            code: 'OK',
+            message: 'Berhasil Kumpul Tugas!',
+        }
+
+        res.status(200).json(resData)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json(err)
+    }
+}

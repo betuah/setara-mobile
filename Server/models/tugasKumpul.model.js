@@ -12,16 +12,19 @@ const tugasKumpulSchema = new Schema({
         trim: true,
         required: true,
     },
-    nilai: {
-        type: String,
-        trim: true,
-        required: true,
-    },
-    catatan: {
+    deskripsi: {
         type: String,
         trim: true,
     },
     file: {
+        type: String,
+        trim: true,
+    },
+    nilai: {
+        type: String,
+        trim: true,
+    },
+    catatan: {
         type: String,
         trim: true,
     },

@@ -17,4 +17,7 @@ module.exports = (app) => {
 
     app.route('/api/v1/post/class/:classId')
         .get(authMiddleware, classController.getPosting)
+
+    app.route('/api/v1/post/detail/:postingId')
+        .get(authMiddleware, classController.getDetailPosting)
 }
