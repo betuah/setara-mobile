@@ -2,158 +2,183 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from 'react-native-paper';
 import { Text } from '../../components/common/UtilsComponent';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import LottieView from 'lottie-react-native';
-import { useSafeAreaInsets  } from 'react-native-safe-area-context';
 import { 
     View, 
-    StyleSheet, 
-    TouchableWithoutFeedback, 
-    Keyboard,
-    Dimensions, 
     StatusBar, 
     FlatList,
     ImageBackground,
-    RefreshControl
+    RefreshControl,
+    Image
 } from 'react-native';
+import Toast from 'react-native-toast-message';
+import Moment from 'moment/min/moment-with-locales';
+Moment.locale('id')
+
 import FeedComponent from '../../components/FeedComponent';
 import * as homeAct from '../../store/actions/homeActions';
-import { Chase } from 'react-native-animated-spinkit';
+import { useFocusEffect } from '@react-navigation/native';
+
 
 const LoginScreen = ({ navigation }) => {
-    const { colors } = useTheme()
-    const authData = useSelector(state => state.auth)
+    const { colors, fonts } = useTheme()
+    const { fullName, foto, sekolah } = useSelector(state => state.auth)
     const homeState = useSelector(state => state.home)
     const [ refreshing, setRefreshing ] = useState(false)
     const [ error, setError ] = useState(true);
     const [ screenLoading, setScreenLoading ] = useState(true);
     const dispatch = useDispatch()
     const feed = homeState.feed
-    const insets = useSafeAreaInsets();
-    const name = authData.fullName
 
-    useEffect(() => {
-        navigation.setOptions({
-            tabBarVisible:false
-        })
-
-        setScreenLoading(false)
-
-        navigation.addListener('focus', async () => {
-            try {
-                await dispatch(homeAct.initData())
-                setError(false)
-                setRefreshing(false)
-            } catch (error) {
-                setError(true)
-                setRefreshing(false)
-            }
-        });
-    }, [homeState, error, screenLoading])
-
-    const onRefresh = async () => {
+    const loadData = async () => {
         try {
+            setRefreshing(true)
             await dispatch(homeAct.initData())
-            setError(false)
             setRefreshing(false)
         } catch (error) {
-            setError(true)
+            if (error === 'ERR_GENERATE_TOKEN') {
+                dispatch(authAct.signOut(true))
+                Toast.show({
+                    type: 'error',
+                    text1: 'Maaf, Sesi kamu telah Habis!',
+                    text2: 'Silahkan masuk kembali.'
+                });
+            }
+            Toast.show({
+                type: 'error',
+                text1: 'Maaf, Terjadi Kesalahan!',
+                text2: error
+            });
             setRefreshing(false)
         }
     }
 
+    useFocusEffect(
+        useCallback(() => {
+            let isActive = true
+
+            StatusBar.setBackgroundColor('transparent');
+            StatusBar.setTranslucent;
+            StatusBar.setBarStyle("light-content");
+
+            if (isActive) loadData()
+            return () => {
+                isActive = false
+            }
+        }, [dispatch])
+    )
+
+    useEffect(() => {
+        navigation.setOptions({
+            tabBarVisible: false
+        })
+
+        setScreenLoading(false)
+    }, [homeState, screenLoading])
+
+    const onRefresh = async () => {
+        loadData()
+    }
+
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-            <ImageBackground 
-                source={require('../../assets/images/cat.png')}
-                style={{width:"100%",height:"100%"}}
-            >
-            <View style={styles.screen}>
-                <StatusBar 
-                    translucent 
-                    backgroundColor="transparent" 
-                    barStyle='light-content'
-                />
-                    <View style={styles.header}>
-                        <View style={{...styles.headerContent, paddingTop: insets.top + 10,}}>
-                            <Text color={colors.light} size={16}>{`Selamat Belajar`}</Text>
-                            <Text color={colors.light} size={18} weight='bold'>{`${name}`}</Text>
-                        </View>
+        <View style={{
+            flex: 1,
+        }}>
+            <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
+            <View style={{
+                backgroundColor: colors.bgPrimary,
+                elevation: 4,
+                shadowOffset: { width: 2, height: 4 },
+                shadowOpacity: 0.5,
+                shadowRadius: 4,
+            }}>
+                <ImageBackground 
+                    source={require('../../assets/images/header/bg-header-1.png')}
+                    style={{width:"100%"}}
+                    resizeMode="cover"
+                >
+                    <SafeAreaView>
                         <View style={{
-                            flex: 1,
-                            justifyContent: 'flex-end',
-                            paddingTop: insets.top + 10,
-                            paddingRight: 20,
+                            flexDirection: 'row',
+                            paddingVertical: 20,
+                            paddingHorizontal: 13,
                         }}>
-                            <LottieView 
-                                source={require('../../assets/lottie/30305-back-to-school.json')} 
-                                autoPlay
-                                style={{width: '90%'}}
-                            />
-                        </View>
-                    </View>
-                    <View style={{...styles.content, backgroundColor: colors.light}}>
-                        <FlatList
-                            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-                            style={{
-                                marginTop: 10
-                            }}
-                            keyExtractor={(item) => item.id.toString()}
-                            data={feed}
-                            renderItem={itemData => <FeedComponent {...itemData.item} />}
-                            ListEmptyComponent={() => 
+                            <View style={{
+                                flexDirection: 'row',
+                                flex: 1,
+                            }}>
                                 <View style={{
                                     flex: 1,
-                                    flexDirection: 'column',
                                     justifyContent: 'center',
-                                    alignItems: 'center',
-                                    marginTop: '30%'
+                                    alignItems: 'flex-start'
                                 }}>
-                                    <LottieView 
-                                        source={require('../../assets/lottie/33173-smartphone-addicition.json')} 
-                                        autoPlay
-                                        style={{
-                                            width: '40%',
-                                            alignItems: 'center',
-                                        }}
-                                    />
-                                    <Text style={{textAlign: 'center'}} color={colors.primary}>Tidak Ada Postingan</Text>
+                                    <Text fontWeight={{...fonts.italic}} color={colors.textWhite} size={12}>{`Selamat Belajar`}</Text>
+                                    <Text fontWeight={{...fonts.semiBold}} color={colors.textWhite} size={16} weight='bold'>{`${fullName}`}</Text>
+                                    <Text fontWeight={{...fonts.medium}} color={colors.textWhite} size={13} weight='bold'>{`${sekolah.split(':')[1].trim()}`}</Text>
                                 </View>
-                            }
-                        />
-                    </View>
+                                <View style={{
+                                    flex: 1,
+                                    justifyContent: 'center',
+                                    alignItems: 'flex-end',
+                                }}>
+                                    <Image 
+                                        style={{
+                                            width: 65,
+                                            height: 65,
+                                            borderWidth: 2,
+                                            borderRadius: 50,
+                                            borderColor: colors.bgWhite
+                                        }}
+                                        source={{ uri: foto }}   
+                                    />
+                                </View>
+                            </View>
+                        </View>
+                    </SafeAreaView>
+                </ImageBackground>
             </View>
-            </ImageBackground>
-        </TouchableWithoutFeedback>
+            <View style={{
+                flex: 1,
+            }}>
+                <ImageBackground 
+                    source={require('../../assets/images/bgScreen01.png')}
+                    style={{width:"100%",height:"100%"}}
+                    resizeMode="cover"
+                >
+                    <FlatList
+                        contentContainerStyle={{
+                            paddingVertical: 15,
+                        }}
+                        refreshControl={<RefreshControl colors={[`${colors.bgPrimary}`]} refreshing={refreshing} onRefresh={onRefresh} />}
+                        keyExtractor={(item) => item._id}
+                        data={feed.sort((a, b) => Moment(b.date_created) - Moment(a.date_created))}
+                        extraData={feed}
+                        renderItem={itemData => <FeedComponent {...itemData.item} />}
+                        ListEmptyComponent={() => 
+                            <View style={{
+                                flex: 1,
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginTop: '50%'
+                            }}>
+                                <LottieView 
+                                    source={require('../../assets/lottie/33173-smartphone-addicition.json')} 
+                                    autoPlay
+                                    style={{
+                                        width: '40%',
+                                        alignItems: 'center',
+                                    }}
+                                />
+                                <Text style={{textAlign: 'center'}} color={colors.primary}>Tidak Ada Postingan</Text>
+                            </View>
+                        }
+                    />
+                </ImageBackground>
+            </View>
+        </View>
     )
 }
-
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-    },
-    LogoBrand: {
-        flex: 1
-    },
-    header: {
-        flex: 3,
-        flexDirection: 'row'
-    },
-    headerContent: {
-        flex: 1,
-        flexDirection: 'column',
-        paddingLeft: 25,
-        paddingBottom: 15,
-        justifyContent: 'flex-end' 
-    },
-    content: {
-        flex: 7,
-        marginTop: 10,
-        height: '100%'
-    },
-    LogoBrand: {
-        paddingTop: Dimensions.get('window').height > 600 ? 40 : 20,
-        paddingBottom: Dimensions.get('window').height > 600 ? 20 : 10
-    }
-});
 
 export default LoginScreen;
