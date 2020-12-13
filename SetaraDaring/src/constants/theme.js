@@ -1,6 +1,6 @@
 import { DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme } from '@react-navigation/native';
 import { configureFonts, DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme } from 'react-native-paper';
-import colors from './colors'
+import colorName from './colors'
 
 const fontConfig = {
     default: {
@@ -104,9 +104,9 @@ export const CombinedDefaultTheme = {
         // bgAccent: '#FFBBAB',
         
         // Warna 3
-        bgPrimary: '#00CFFF',
-        bgSecondary: '#A3E3FF',
-        bgAccent: '#DEEAEF',
+        // bgPrimary: '#00CFFF',
+        // bgSecondary: '#A3E3FF',
+        // bgAccent: '#E7F8FF',
 
         primary: '#40C3FD',
         accent: '#FF7676',
@@ -131,11 +131,12 @@ export const CombinedDefaultTheme = {
         deepOrange: '#E6794B',
         skinny: '#F5DFD4',
         skinny2: '#FFF2E7',
+        pink: colorName.darkPink,
 
         // Warna 3
-        // bgPrimary: '#00CFFF',
-        // bgSecondary: '#84C2FD',
-        // bgAccent: '#ABDBFF',
+        bgPrimary: '#00CFFF',
+        bgSecondary: '#84C2FD',
+        bgAccent: '#ABDBFF',
 
         bgWhite: '#FFFFFF',
         bgLight: '#f2feff',
@@ -144,7 +145,7 @@ export const CombinedDefaultTheme = {
         bgLock: '#F88585',
         bgCardPrimary: '#F88585',
         bgCardSecondary: '#FFBBAB',
-        bgDarkBlue: colors.tosca,
+        bgDarkBlue: colorName.tosca,
 
         navMapelPrimary: '#FF8962',
         navMapelBg: '#FEFAF7',
@@ -161,32 +162,9 @@ export const CombinedDefaultTheme = {
         textBgPrimary: '',
         textLink: '#F88585',
         textBlue: '#00CFFF',
-        textBlueDark: colors.blue,
-
-        // primary: colors.tosca,
-        // secondary: colors.blue,
-        // accent: colors.darkPink,
-        // background: colors.white,
-        // card: colors.white,
-        // text: colors.darkBlue2,
-        // textLight: colors.white,
-        // textDark: PaperDefaultTheme.colors.backdrop,
-        // border: NavigationDefaultTheme.colors.darkBlue2,
-        // notification: NavigationDefaultTheme.colors.notification,
-        // surface: PaperDefaultTheme.colors.surface,
-        // disabled: PaperDefaultTheme.colors.disabled,
-        // placeholder: PaperDefaultTheme.colors.placeholder,
-        // backdrop : PaperDefaultTheme.colors.backdrop,
-        // loadingBackground: '#d5f1f7',
-        // dark: colors.dark,
-        // light: colors.light,
-        // darkBlue: colors.darkBlue,
-        // white: colors.white,
-        // lightBlue: colors.lightBlue,
-        // purple: colors.purple,
-        // cyan: colors.cyan,
-        // darkOrange: colors.darkOrange,
-        // header: colors.blue
+        textBlueDark: colorName.blue,
+        textGrey: '#7A8590',
+        textGreyLight: '#B5C1D6',
     },
     fonts: configureFonts(fontConfig)
 };
