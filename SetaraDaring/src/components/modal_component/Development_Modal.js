@@ -46,6 +46,7 @@ const Development_Modal = ({visible, onDismiss}) => {
                         onPress={() => onDismiss(false)}
                         color={colors.bgPrimary} 
                         fontColor={colors.textWhite}
+                        fontSize={12}
                         title='Tutup' 
                         mode="contained" 
                     />

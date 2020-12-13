@@ -89,7 +89,7 @@ const Silabus_Modal = ({visible, onDismiss, silabus}) => {
                 <Card.Actions style={{
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: colors.bgAccent
+                    backgroundColor: colors.bgSecondary
                 }}>
                     <Btn 
                         title='TUTUP' 
@@ -97,7 +97,7 @@ const Silabus_Modal = ({visible, onDismiss, silabus}) => {
                         style={{
                             width: '100%'
                         }} 
-                        fontColor={colors.primary} 
+                        fontColor={colors.textWhite} 
                         fontSize={14} 
                         onPress={() => onDismiss('silabus')} 
                     />

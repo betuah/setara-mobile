@@ -284,7 +284,7 @@ const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
                         }}
                     >
                         <TouchableOpacity onPress={() => onDismiss('materi')}>
-                            <Icon name='close' size={16} color={colors.textLight} />
+                            <Icon name='close' size={16} color={colors.textWhite} />
                         </TouchableOpacity>
                         
                     </View>
@@ -353,7 +353,7 @@ const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
                 <Card.Actions style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: colors.bgAccent
+                    backgroundColor: colors.bgSecondary
                 }}>
                     <Btn 
                         title='TUTUP' 
@@ -361,7 +361,7 @@ const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
                         style={{
                             width: '100%'
                         }} 
-                        fontColor={colors.primary} 
+                        fontColor={colors.textWhite} 
                         fontSize={14} 
                         onPress={() => onDismiss('materi')}
                     />
