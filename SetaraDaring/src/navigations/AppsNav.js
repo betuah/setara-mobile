@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from '../screen/apps/HomeScreen';
 
+import HomeNav from './HomeNav';
 import LibraryNav from './LibraryNav';
 import NotifNav from './NotifNav';
 import ProfileNav from './ProfileNav';
@@ -47,7 +48,7 @@ const AppsNav = () => {
                 options={{
                     tabBarLabel: 'Pustaka',
                     tabBarIcon: ({ color, focused }) => (
-                        <Icon name={focused ? "library" : "library-outline" } color={color} size={23} />
+                        <Icon name={focused ? "library" : "library-outline" } color={color} size={20} />
                     )
                 }}
             />
@@ -57,17 +58,17 @@ const AppsNav = () => {
                 options={{
                     tabBarLabel: 'Kelas',
                     tabBarIcon: ({ color, focused }) => (
-                        <Icon name={focused ? "school" : "school-outline" } color={color} size={23} />
+                        <Icon name={focused ? "school" : "school-outline" } color={color} size={20} />
                     ),
                 }}
             />
             <Tab.Screen 
                 name="Beranda" 
-                component={HomeScreen} 
+                component={HomeNav} 
                 options={{
                     tabBarLabel: 'Beranda',
                     tabBarIcon: ({ color, focused }) => (
-                        <Icon name={focused ? "home" : "home-outline" } color={color} size={23} />
+                        <Icon name={focused ? "home" : "home-outline" } color={color} size={20} />
                     ),
                 }}
             />
@@ -79,7 +80,7 @@ const AppsNav = () => {
                     tabBarLabel: 'Notifikasi',
                     tabBarIcon: ({ color, focused }) => (
                         <View>
-                            <Icon name={focused ? "notifications" : "notifications-outline" } color={color} size={23} />
+                            <Icon name={focused ? "notifications" : "notifications-outline" } color={color} size={20} />
                         </View>
                     ),
                 }}
@@ -90,7 +91,7 @@ const AppsNav = () => {
                 options={{
                     tabBarLabel: 'Profil',
                     tabBarIcon: ({ color, focused }) => (
-                        <Icon name={focused ? "person" : "person-outline" } color={color} size={23} />
+                        <Icon name={focused ? "person" : "person-outline" } color={color} size={20} />
                     ),
                 }}    
             />

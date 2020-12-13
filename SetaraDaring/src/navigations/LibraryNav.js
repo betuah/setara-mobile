@@ -13,7 +13,7 @@ import Header from '../components/common/Header';
 const Stack = createStackNavigator();
 
 const LibaryNav = (props) => {
-    const {colors} = useTheme()
+    const {colors, fonts} = useTheme()
     const { refresh } = useSelector(state => state.library)
     const dispatch = useDispatch()
     const doRefresh = () => {
@@ -25,16 +25,23 @@ const LibaryNav = (props) => {
         header: ({ scene, previous, navigation }) => (
             <Header 
                 data={{
-                    title: 'PUSTAKA', 
+                    title: 'P U S T A K A', 
                 }} 
                 scene={scene} 
                 previous={previous} 
-                navigation={navigation} 
+                navigation={navigation}
+                contentStyle={{alignItems: 'center', justifyContent: 'center'}}
                 titleStyle={{
-                    fontSize: 20,
+                    paddingTop: 5,
+                    fontSize: 18,
+                    ...fonts.bold
                 }}
-                Action={{Icon: 'refresh', Size: 25}}
-                ActionOnPress={() => doRefresh(!refresh)}
+                leftIcon={{
+                    icon: 'library',
+                    size: 22,
+                }}
+                action={{icon: 'refresh', size: 25}}
+                actionOnPress={() => doRefresh(!refresh)}
             />
         ),
     }
