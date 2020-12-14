@@ -39,7 +39,7 @@ const Header = ({ data, scene, previous, navigation, style, contentStyle, titleS
                 <Appbar.Content
                     title={data.title.toUpperCase()}
                     color={colors.textWhite}
-                    subtitle={data.createdDate ? `${moment(data.createdDate).format('D MMM Y')} - ${moment(data.createdDate).startOf('day').fromNow()}` : (data.subtitle ? data.subtitle : null)}
+                    subtitle={data.createdDate ? `${moment(data.createdDate).startOf('day').fromNow()}` : (data.subtitle ? data.subtitle : null)}
                     titleStyle={{
                         ...fonts.semiBold,
                         fontSize: 14,

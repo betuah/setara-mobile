@@ -126,7 +126,7 @@ const MateriScreen = ({route, navigation}) => {
                             fontWeight={{...fonts.regular}}
                             size={10}
                         >
-                            {`${moment(detailMateri.date_created).format('D MMM Y')} - ${moment(detailMateri.date_created).startOf('day').fromNow()}`}
+                            {`${moment(detailMateri.date_created).format('D MMM Y')}`}
                         </Text>
                     </View>
                     <Divider />

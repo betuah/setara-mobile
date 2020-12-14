@@ -38,7 +38,7 @@ const ProfileScreen = (props) => {
     useFocusEffect(
         useCallback(() => {
             let isActive = true;
-            console.log('ea')
+            
             StatusBar.setBarStyle('light-content')
             StatusBar.setBackgroundColor(colors.primary)
 
