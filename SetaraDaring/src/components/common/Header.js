@@ -11,7 +11,6 @@ const Header = ({ data, scene, previous, navigation, style, contentStyle, titleS
 
     return (
         <SafeAreaView>
-            <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
             <Appbar.Header
                 style={{
                     backgroundColor: colors.primary,

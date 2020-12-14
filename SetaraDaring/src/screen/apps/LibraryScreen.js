@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
+import { StatusBar } from 'react-native';
 import { useSelector } from 'react-redux';
+import { useTheme } from 'react-native-paper';
 import { Text } from '../../components/common/UtilsComponent';
 import { Fold } from 'react-native-animated-spinkit';
-import colors from '../../constants/colors';
 import { WebView } from 'react-native-webview';
 import { 
     View,
@@ -10,6 +11,7 @@ import {
 
 const LibraryScreen = ({ navigation }) => {
     let WebViewRef;
+    const {colors} = useTheme()
     const {refresh} = useSelector(state => state.library)
 
     useEffect(() => {
@@ -20,6 +22,8 @@ const LibraryScreen = ({ navigation }) => {
     }, [refresh])
 
     return (
+        <>
+        <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
         <WebView
             ref={WEBVIEW_REF => (WebViewRef = WEBVIEW_REF)}
             source={{ uri: 'https://emodul.kemdikbud.go.id/' }} 
@@ -32,7 +36,7 @@ const LibraryScreen = ({ navigation }) => {
                     alignItems: 'center'
                 }}>
                     <Text
-                        color={colors.darkOrange}
+                        color={colors.grey}
                         size={18}
                         weight='bold'
                         style={{marginTop: 20}}
@@ -47,17 +51,12 @@ const LibraryScreen = ({ navigation }) => {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                        <Fold  size={48} color={colors.darkOrange}></Fold>
-                        <Text
-                            color={colors.darkOrange}
-                            size={18}
-                            weight='bold'
-                            style={{marginTop: 20}}
-                        >Loading...</Text>
+                        <Fold  size={48} color={colors.primary}></Fold>
                     </View>
                 )
             }}
         />
+        </>
     )
 }
 

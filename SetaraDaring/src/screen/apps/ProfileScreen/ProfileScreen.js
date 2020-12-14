@@ -6,7 +6,7 @@ import { Text } from '../../../components/common/UtilsComponent';
 import { Chase } from 'react-native-animated-spinkit';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
-import { View, ScrollView, Image, RefreshControl, Dimensions } from 'react-native';
+import { View, ScrollView, Image, RefreshControl, StatusBar } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 import Devel from '../../../components/modal_component/Development_Modal';
@@ -30,12 +30,17 @@ const ProfileScreen = (props) => {
     const [ passModal, setPassModal ] = useState(false)
 
     useEffect(() => {
+        StatusBar.setBarStyle('light-content')
+        StatusBar.setBackgroundColor(colors.primary)
         if (profileState.profile) setProfile(profileState.profile)
     }, [profileState])
 
     useFocusEffect(
         useCallback(() => {
             let isActive = true;
+            console.log('ea')
+            StatusBar.setBarStyle('light-content')
+            StatusBar.setBackgroundColor(colors.primary)
 
             const fetch = async () => {
                 try {
@@ -120,6 +125,7 @@ const ProfileScreen = (props) => {
                     <RefreshControl refreshing={refreshing} colors={[`${colors.bgPrimary}`]} onRefresh={onRefresh} />
                 }
             >
+                <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
                 <View style={{
                     flex: 1,
                     justifyContent: 'center',
@@ -138,6 +144,7 @@ const ProfileScreen = (props) => {
             <View style={{
                 flex: 1,
             }}>
+                <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
                 <ImageBackground 
                     source={require('../../../assets/images/bgScreen01.png')}
                     style={{flex: 1,}}
@@ -163,6 +170,7 @@ const ProfileScreen = (props) => {
 
     return (
         <View style={{flex: 1,}}>
+            <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
             <ImageBackground 
                 source={require('../../../assets/images/bgScreen01.png')}
                 style={{flex: 1,}}

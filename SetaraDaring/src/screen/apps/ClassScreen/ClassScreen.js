@@ -44,6 +44,10 @@ const ClassScreen = ({ navigation }) => {
     }
 
     useEffect(() => {
+        StatusBar.setBackgroundColor('transparent');
+        StatusBar.setTranslucent;
+        StatusBar.setBarStyle("light-content");
+        
         navigation.setOptions({
             tabBarVisible:false
         })
