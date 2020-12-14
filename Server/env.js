@@ -7,6 +7,7 @@ const env = {
     httpsPrivateKey: process.env.HTTPS_PRIVATE_KEY_PATH,
     httpsCertificate: process.env.HTTPS_CERTIFICATE_PATH,
     host: process.env.HOST,
+    path_protocol: process.env.PATH_PROTOCOL,
     picture_path: process.env.PICTURE_PATH,
     db_mongoDB: {
         database: process.env.MONGO_DB,

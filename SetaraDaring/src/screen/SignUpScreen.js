@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { StatusBar } from 'react-native';
 import { TabView, SceneMap, TabBar  } from 'react-native-tab-view';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text, Texts } from '../components/common/UtilsComponent';
@@ -192,41 +193,42 @@ const SignUpScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <SafeAreaView style={styles.screen}>
-                <View style={styles.body}>
-                    <ScrollView style={{height: '50%', maxHeight: '100%'}}>
-                        <View style={styles.LogoBrand}>
-                            <LogoBrand />
-                        </View>
+                <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
+                <ScrollView 
+                    contentContainerStyle={styles.body}
+                >
+                    <View style={styles.LogoBrand}>
+                        <LogoBrand />
+                    </View>
 
-                        <View style={{
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                        }}>
-                            <TabView
-                                navigationState={{ index, routes }}
-                                renderTabBar={renderTabBar}
-                                renderScene={renderScene}
-                                onIndexChange={setIndex}
-                                initialLayout={initialLayout}
-                                style={{width: '80%'}}
-                            />
+                    <View style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        <TabView
+                            navigationState={{ index, routes }}
+                            renderTabBar={renderTabBar}
+                            renderScene={renderScene}
+                            onIndexChange={setIndex}
+                            initialLayout={initialLayout}
+                            style={{width: '80%'}}
+                        />
+                    </View>
+                    
+                    <View style={styles.signup}>
+                        <View>
+                            <Text color={colors.white} size={12}>Sudah punya akun ? </Text>                                
                         </View>
-                        
-                        <View style={styles.signup}>
-                            <View>
-                                <Text color={colors.white} size={12}>Sudah punya akun ? </Text>                                
-                            </View>
-                            <View>
-                                <Text
-                                    onPress={() => navigation.navigate('Login')}
-                                    weight='bold'
-                                    color={colors.white}
-                                    size={14}
-                                >Masuk</Text>
-                            </View>
+                        <View>
+                            <Text
+                                onPress={() => navigation.navigate('Login')}
+                                weight='bold'
+                                color={colors.white}
+                                size={14}
+                            >Masuk</Text>
                         </View>
-                    </ScrollView>
-                </View>
+                    </View>
+                </ScrollView>
                 <View style={styles.footer}>
                 <Text color={colors.white} size={10}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
                 </View>
@@ -242,21 +244,20 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary
     },
     LogoBrand: {
-        paddingTop: Dimensions.get('window').height > 600 ? 40 : 20,
+        paddingTop: Dimensions.get('window').height > 600 ? 60 : 40,
         paddingBottom: Dimensions.get('window').height > 600 ? 20 : 10
     },
     signup: {
-        flex: 1, 
         flexDirection: 'row', 
         alignItems: 'center', 
         justifyContent: 'center',
-        paddingVertical: Dimensions.get('window').height > 600 ? 10 : 10
+        paddingVertical: 10
     },
     body: {
-        flex: 13
+        flexGrow: 1
     },
     footer: {
-        flex: 1,
+        padding: 15,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: colors.darkBlue

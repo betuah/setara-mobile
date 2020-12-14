@@ -8,5 +8,7 @@ module.exports = (app) => {
 
     app.route('/api/v1/profile') // Edit Profile End Point
         .put(authMiddleware, userController.setProfile) // Set Middleware
-        
+    
+    app.route('/api/v1/profile/avatar') // Get Profile End Point
+        .post(authMiddleware, userController.avatarUpload) // Set Middleware
 }

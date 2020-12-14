@@ -6,7 +6,7 @@ import LottieView from 'lottie-react-native';
 const LoadingModal = ({visible}) => {
     return(
         <Portal>
-            <Modal visible={visible}>
+            <Modal dismissable={false} visible={visible}>
                 <View style={{
                     flex: 1,
                     justifyContent: 'center',

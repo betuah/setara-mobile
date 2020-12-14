@@ -1,3 +1,4 @@
+const multer  = require('multer')
 const env     = require('../env') // Import Environment config
 const User    = require('../models/usersData.model') // Import User Model
 
@@ -10,7 +11,8 @@ exports.profile = async (req, res) => {
         User.findById({ _id: id }).then((user) => {
             // If not Error
             if(user) { // If User exist
-                user.foto = user.foto ? `${env.picture_path}${user.foto}` : ''
+                const photoWithPath = `${env.path_protocol}://${user.path}`
+                user.foto = user.foto ? `${user.path ? photoWithPath : env.picture_path}${user.foto}` : ''
 
                 res.status(200).json({status: 'Success', code: 'OK', data: user})
             } else { // If user data is null
@@ -42,17 +44,6 @@ exports.setProfile = async (req, res) => {
         const facebook          = req.body.facebook ? req.body.facebook : ''
         const linkedin          = req.body.linkedin ? req.body.linkedin : ''
         const twitter           = req.body.twitter ? req.body.twitter : ''
-        
-        let dataSosmed = {}
-
-        if (website.trim() || facebook.trim() || linkedin.trim() || twitter.trim()) {
-            dataSosmed = {
-                ...website.trim() && {website},
-                ...facebook.trim() && {facebook},
-                ...linkedin.trim() && {linkedin},
-                ...twitter.trim() && {twitter}
-            }
-        }
 
         const dataProfile = {
             ...nama != undefined && (nama.trim() && {nama}),
@@ -61,7 +52,12 @@ exports.setProfile = async (req, res) => {
             ...jk != undefined && (jk.trim() && {jk}),
             ...provinsi != undefined && (provinsi.trim() && {provinsi}),
             ...kabupaten != undefined && (kabupaten.trim() && {kabupaten}),
-            ...dataSosmed && {sosmed : {...dataSosmed}}
+            sosmed: {
+                website,
+                facebook,
+                linkedin,
+                twitter
+            }
         }
 
         // Find user by id in User Model
@@ -70,6 +66,9 @@ exports.setProfile = async (req, res) => {
         },{
             new: true
         }).then((updatedAccount) =>{
+            const photoWithPath = `${env.path_protocol}://${updatedAccount.path}`
+            updatedAccount.foto = updatedAccount.foto ? `${updatedAccount.path ? photoWithPath : env.picture_path}${updatedAccount.foto}` : ''
+            
             res.status(200).json({status: 'Success', code: 'OK', data: updatedAccount})
         }).catch((err) => { // Catch Error
             res.status(400).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
@@ -83,60 +82,69 @@ exports.setProfile = async (req, res) => {
 
 // Upload Foto
 exports.avatarUpload = (req, res) => {
-    const path = 'public/avatars'
+    try {
+        const path = 'public/photo'
 
-    const storage = multer.diskStorage({
-        destination: (req, file, callback) => {
-            callback(null, (path))
-        },
-        filename: (req, file, callback) => {
-            let filetype = file.mimetype === 'image/png' ? 'png' : (file.mimetype === 'image/jpg' ? 'jpg' : (file.mimetype === 'image/jpeg' && 'jpeg'))
-
-            callback(null, `${req.id_user}_${Date.now()}.${filetype}`)
-        }
-    })
-
-    const upload = multer({
-        storage: storage,
-        fileFilter: (req, file, cb) => {
-            if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-                cb(null, true);
-            } else {
-                cb(null, false);
-                return cb(new Error('Only .png, .jpg and .jpeg format allowed!'))
+        const storage = multer.diskStorage({
+            destination: (req, file, callback) => {
+                callback(null, (path))
+            },
+            filename: (req, file, callback) => {
+                let filetype = file.mimetype === 'image/png' ? 'png' : (file.mimetype === 'image/jpg' ? 'jpg' : (file.mimetype === 'image/jpeg' && 'jpeg'))
+                callback(null, `${req.userId}.${filetype}`)
             }
-        }
-    }).any('file')
+        })
 
-    upload(req, res, async (err) => {
-        if (err) {
-            return res.status(400).send({
-                code: 500,
-                status: 'INTERNAL_SERVER_ERROR',
-                message: err
-            })
-        } else {
-            const fileData = req.files[0]
-
-            usersData.findOneAndUpdate({ userId: req.id_user },
-            { 
-                $set: { 
-                    "personalData.photoUrl" : {
-                        sourceId: 'api',
-                        url: fileData.filename
-                    }
+        const upload = multer({
+            storage: storage,
+            fileFilter: (req, file, cb) => {
+                if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+                    cb(null, true);
+                } else {
+                    cb(null, false);
+                    return cb(new Error('Only .png, .jpg and .jpeg format allowed!'))
                 }
-            }, { upsert: true })
-            .then(data => {})
-            .catch(err => {
+            }
+        }).any('photo')
+
+        upload(req, res, async (err) => {
+            if (err) {
                 console.log(new Error(err))
-                fs.unlink(`public/avatars/${fileData.filename}s`, err => {
-                    console.log('Catch Error update firebase database. ', err)
+                return res.status(400).send({
+                    code: 500,
+                    status: 'INTERNAL_SERVER_ERROR',
+                    message: err
                 })
-            })
-            
-            res.status(sendToFirebase.code).json(sendToFirebase)
-        }
-    })
+            } else {
+                
+                const fileData = req.files[0]
+
+                User.findOneAndUpdate(
+                    { _id: req.userId }, 
+                    { 
+                        foto: fileData.filename, 
+                        // path: 'api.setara.kemdikbud.go.id/public/photo/' 
+                        path: '192.168.1.6:8000/public/photo/'
+                    }
+                ).then(resData => {
+                    const photoWithPath = `${env.path_protocol}://${resData.path}`
+                    resData.foto = resData.foto ? `${resData.path ? photoWithPath : env.picture_path}${resData.foto}` : ''
+
+                    res.status(200).json({status: 'Success', code: 'OK', data: resData})
+                }).catch(err => {
+                    console.log(new Error(err))
+                    fs.unlink(`public/photo/${fileData.filename}`, err => {
+                        console.log(new Error('Catch Error update firebase database. ', err))
+                        res.status(500).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
+                    })
+                })
+            }
+        })
+    } catch (error) {
+        console.log(new Error(error))
+        res.status(500).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
+    }
+
+    
     
 }

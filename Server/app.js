@@ -15,6 +15,7 @@ app.use(helmet()) // User helmet for basic security
 app.disable("x-powered-by") // Disable X Powered header
 app.use(bodyParser.urlencoded({ extended: true })) // Url Encoded
 app.use(bodyParser.json()) // Body Json
+app.use(bodyParser.raw()) // Body Raw
 
 app.use('/public', express.static(__dirname + '/public')) // Set public directory
 

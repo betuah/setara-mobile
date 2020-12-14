@@ -39,6 +39,10 @@ const userDataSchema = new Schema({
         type: String, 
         trim: true,
     },
+    path: {
+        type: String, 
+        trim: true,
+    },
     provinsi : { 
         type: String, 
         trim: true

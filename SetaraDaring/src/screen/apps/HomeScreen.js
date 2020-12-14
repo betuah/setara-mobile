@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from 'react-native-paper';
 import { Text } from '../../components/common/UtilsComponent';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import { 
     View, 
@@ -17,8 +18,10 @@ import Moment from 'moment/min/moment-with-locales';
 Moment.locale('id')
 
 import FeedComponent from '../../components/FeedComponent';
+
+import * as authAct from '../../store/actions/authAction';
 import * as homeAct from '../../store/actions/homeActions';
-import { useFocusEffect } from '@react-navigation/native';
+
 
 
 const LoginScreen = ({ navigation }) => {
@@ -115,7 +118,7 @@ const LoginScreen = ({ navigation }) => {
                                 }}>
                                     <Text fontWeight={{...fonts.italic}} color={colors.textWhite} size={12}>{`Selamat Belajar`}</Text>
                                     <Text fontWeight={{...fonts.semiBold}} color={colors.textWhite} size={16} weight='bold'>{`${fullName}`}</Text>
-                                    <Text fontWeight={{...fonts.medium}} color={colors.textWhite} size={13} weight='bold'>{`${sekolah.split(':')[1].trim()}`}</Text>
+                                    <Text fontWeight={{...fonts.medium}} color={colors.textWhite} size={13} weight='bold'>{`${sekolah.split(':').length > 1 ? sekolah.split(':')[1].trim() : sekolah}`}</Text>
                                 </View>
                                 <View style={{
                                     flex: 1,

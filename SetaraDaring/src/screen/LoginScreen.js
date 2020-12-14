@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { StatusBar } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { Text, Input, Btn } from '../components/common/UtilsComponent';
 import LogoBrand from '../components/LogoComponent';
@@ -21,6 +23,7 @@ import {
 import * as authActions from '../store/actions/authAction';
 
 const LoginScreen = ({ navigation }) => {
+    // const { colors } = useTheme
     const date = new Date()
     const authData = useSelector(state => state.auth)
     const [loading, setLoading] = useState(false)
@@ -83,8 +86,14 @@ const LoginScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
             <SafeAreaView style={{...styles.screen, backgroundColor: colors.primary}}>
-                <View style={styles.body}>
-                    <ScrollView style={{height: '50%', maxHeight: '100%'}}>
+                <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
+                {/* <View style={styles.body}> */}
+                    <ScrollView 
+                        // style={{height: '50%', maxHeight: '100%'}}
+                        contentContainerStyle={{
+                            flexGrow: 1,
+                        }}
+                    >
                         <View style={styles.LogoBrand}>
                             <LogoBrand />
                         </View>
@@ -156,8 +165,8 @@ const LoginScreen = ({ navigation }) => {
                             </View>
                         </View>
                     </ScrollView>
-                </View>
-                <View style={{...styles.footer, backgroundColor: colors.darkBlue,}}>
+                {/* </View> */}
+                <View style={{...styles.footer}}>
                     <Text color={colors.white} size={10}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
                 </View>
             </SafeAreaView>
@@ -194,10 +203,10 @@ const styles = StyleSheet.create({
         flex: 13
     },
     footer: {
-        flex: 1,
+        padding: 15,
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'relative'
+        backgroundColor: colors.darkBlue
     }
 });
 
