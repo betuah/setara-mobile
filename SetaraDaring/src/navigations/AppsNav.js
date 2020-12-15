@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import HomeScreen from '../screen/apps/HomeScreen';
+import HomeScreen from '../screen/apps/HomeScreen/HomeScreen';
 
 import HomeNav from './HomeNav';
 import LibraryNav from './LibraryNav';

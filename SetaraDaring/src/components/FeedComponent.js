@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Divider, useTheme } from 'react-native-paper';
-import { useWindowDimensions, View } from 'react-native';
+import { useWindowDimensions, View, TouchableOpacity } from 'react-native';
 import { Text } from './common/UtilsComponent';
 import { Avatar, Card, Menu } from 'react-native-paper';
 import HTML from 'react-native-render-html';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment/min/moment-with-locales';
-import { TouchableNativeFeedback, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 moment.locale('id')
 
 const FeedComponent = props => {
@@ -41,39 +40,51 @@ const FeedComponent = props => {
                     </View>
                     
                     <View style={{
-                        flex: 1,
+                        flex: 10,
                         paddingLeft: 10,
                         flexDirection: 'column'
                     }}>
-                        <Text weight='bold' color={colors.textGrey} size={14}>
+                        <Text weight='bold' color={colors.primary} size={14}>
                             {props.nama_creator}
                         </Text>
-                        <Text weight='bold' color={colors.textPrimary} size={12}>
-                            {props.nama_kelas} 
-                        </Text>
+                        {
+                            !props.postScreen ?
+                            <TouchableOpacity onPress={() => props.onClassPress(props.id_kelas)} activeOpacity={0.6}>
+                                <Text weight='bold' color={colors.orange} size={12}>
+                                    {props.nama_kelas} 
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                                <Text weight='bold' color={colors.orange} size={12}>
+                                    {props.nama_kelas} 
+                                </Text>
+                        }
                         <Text color={colors.textGrey} size={10}>
                             {`${moment(props.date_created).startOf('day').fromNow()}`}
                         </Text>
                     </View>
                     <View
                         style={{
+                            flex: 1,
                             justifyContent: 'center',
+                            alignItems: 'flex-end',
                         }}>
                         <Menu
                             visible={visible}
                             onDismiss={closeMenu}
                             anchor={
-                                <TouchableWithoutFeedback 
+                                <TouchableOpacity 
                                     onPress={openMenu}
-                                    containerStyle={{
-                                        justifyContent: 'center',
-                                    }}
+                                    activeOpacity={0.6}
                                 >
                                     <Icon name='ellipsis-horizontal' size={20} color={colors.textGrey} />
-                                </TouchableWithoutFeedback>
+                                </TouchableOpacity>
                             }
                         >
-                            <Menu.Item onPress={() => { closeMenu(); alert(props._id)}} title="Posting Detail" titleStyle={{fontSize: 12,}} />
+                            <Menu.Item onPress={() => { closeMenu(); props.onDetailPress(props._id, props.date_created)}} title="Detail Posting" titleStyle={{fontSize: 12,}} />
+                            {
+                                !props.postScreen && <Menu.Item onPress={() => { closeMenu(); props.onClassPress(props.id_kelas)}} title="Posting Kelas" titleStyle={{fontSize: 12,}} />
+                            }
                         </Menu>
                     </View>
                 </View>
@@ -83,7 +94,7 @@ const FeedComponent = props => {
                 }}>
                     <HTML 
                         html={props.isi_postingan} 
-                        baseFontStyle={{color: colors.textDark, ...fonts.regular}} 
+                        baseFontStyle={{color: colors.textDark, ...fonts.regular, fontSize: 11}} 
                         contentWidth={useWindowDimensions().width * 0.90}
                         imagesMaxWidth={useWindowDimensions().width * 0.93}
                         enableExperimentalPercentWidt={true}

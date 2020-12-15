@@ -38,9 +38,6 @@ const ProfileScreen = (props) => {
     useFocusEffect(
         useCallback(() => {
             let isActive = true;
-            
-            StatusBar.setBarStyle('light-content')
-            StatusBar.setBackgroundColor(colors.primary)
 
             const fetch = async () => {
                 try {
@@ -53,18 +50,19 @@ const ProfileScreen = (props) => {
                         }
                     }
                 } catch (error) {
-                    console.log('eaea')
-                    if (error) {
-                        if (error === 'ERR_GENERATE_TOKEN') {
-                            dispatch(authAct.signOut(true))
-                            Toast.show({
-                                type: 'error',
-                                text1: 'Maaf, Sesi kamu telah Habis!',
-                                text2: 'Silahkan masuk kembali.'
-                            });
+                    if (isActive) {
+                        if (error) {
+                            if (error === 'ERR_GENERATE_TOKEN') {
+                                dispatch(authAct.signOut(true))
+                                Toast.show({
+                                    type: 'error',
+                                    text1: 'Maaf, Sesi kamu telah Habis!',
+                                    text2: 'Silahkan masuk kembali.'
+                                });
+                            }
+                            setError(true)
+                            setRefreshing(false)
                         }
-                        setError(true)
-                        setRefreshing(false)
                     }
                 }
             }

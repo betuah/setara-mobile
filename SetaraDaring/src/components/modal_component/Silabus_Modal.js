@@ -55,11 +55,12 @@ const Silabus_Modal = ({visible, onDismiss, silabus}) => {
                         }}
                     >
                         <TouchableOpacity onPress={() => onDismiss('silabus')}>
-                            <Icon name='close' size={16} color={colors.textLight} />
+                            <Icon name='close' size={16} color={colors.textWhite} />
                         </TouchableOpacity>
                         
                     </View>
                     <Text size={16} fontWeight={fonts.bold} color={colors.textWhite}>SILABUS</Text>
+                    <Text size={11} fontWeight={fonts.regular} color={colors.textWhite}>Informasi mengenai mata pelajaran yang kamu pilih.</Text>
                 </View>
                 <ScrollView contentContainerStyle={{
                     paddingHorizontal: 13,

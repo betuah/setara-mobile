@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'react-native';
-import { useTheme } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { Text, Input, Btn } from '../components/common/UtilsComponent';
 import LogoBrand from '../components/LogoComponent';
@@ -23,7 +22,6 @@ import {
 import * as authActions from '../store/actions/authAction';
 
 const LoginScreen = ({ navigation }) => {
-    // const { colors } = useTheme
     const date = new Date()
     const authData = useSelector(state => state.auth)
     const [loading, setLoading] = useState(false)
@@ -87,85 +85,82 @@ const LoginScreen = ({ navigation }) => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
             <SafeAreaView style={{...styles.screen, backgroundColor: colors.primary}}>
                 <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
-                {/* <View style={styles.body}> */}
-                    <ScrollView 
-                        // style={{height: '50%', maxHeight: '100%'}}
-                        contentContainerStyle={{
-                            flexGrow: 1,
-                        }}
-                    >
-                        <View style={styles.LogoBrand}>
-                            <LogoBrand />
-                        </View>
+                <ScrollView 
+                    contentContainerStyle={{
+                        flexGrow: 1,
+                    }}
+                >
+                    <View style={styles.LogoBrand}>
+                        <LogoBrand />
+                    </View>
 
-                        <View style={{alignItems: 'center'}}>
-                            <LottieView 
-                                source={require('../assets/lottie/33172-01-finishig-studies.json')} 
-                                autoPlay 
-                                // loop 
-                                style={{width: '50%'}}
+                    <View style={{alignItems: 'center'}}>
+                        <LottieView 
+                            source={require('../assets/lottie/33172-01-finishig-studies.json')} 
+                            autoPlay 
+                            // loop 
+                            style={{width: '50%'}}
+                        />
+                    </View>
+
+                    <View style={styles.form}>
+                        <View style={{ width: '80%' }}>
+                            <Input
+                                label="Username"
+                                placeholder="Username"
+                                value={loginData.uname}
+                                IconName='account-circle'                                    
+                                onChangeText={e => onInputChange(e, 'uname')}
+                                errorVisible={loginData.error.uname ? true : false}
+                                errorMassage={loginData.error.uname}
                             />
                         </View>
-
-                        <View style={styles.form}>
-                            <View style={{ width: '80%' }}>
-                                <Input
-                                    label="Username"
-                                    placeholder="Username"
-                                    value={loginData.uname}
-                                    IconName='account-circle'                                    
-                                    onChangeText={e => onInputChange(e, 'uname')}
-                                    errorVisible={loginData.error.uname ? true : false}
-                                    errorMassage={loginData.error.uname}
-                                />
-                            </View>
-                            <View style={{ width: '80%' }}>
-                                <Input
-                                    label="Password"
-                                    name={'password'}
-                                    placeholder="Password"
-                                    value={loginData.password}
-                                    secureTextEntry={true}
-                                    IconName='lock'
-                                    IconType='material'
-                                    errorVisible={loginData.error.password ? true : false}
-                                    errorMassage={loginData.error.password}
-                                    onChangeText={e => onInputChange(e, 'password')}
-                                />
-                            </View>
-                        </View>
-
-                        <View style={styles.button}>
-                            <Btn 
-                                Icon={{name:"send", size: 12, color: colors.primary}}
-                                IconType='ionic'
-                                title="Masuk" 
-                                fontSize={12}
-                                onPress={submitHandler}
-                                style={{ width: '80%' }}
-                                disabled={loading}
-                                loading={{
-                                    size: '12',
-                                    color: colors.primary
-                                }}
-                                isLoading={loading}
+                        <View style={{ width: '80%' }}>
+                            <Input
+                                label="Password"
+                                name={'password'}
+                                placeholder="Password"
+                                value={loginData.password}
+                                secureTextEntry={true}
+                                IconName='lock'
+                                IconType='material'
+                                errorVisible={loginData.error.password ? true : false}
+                                errorMassage={loginData.error.password}
+                                onChangeText={e => onInputChange(e, 'password')}
                             />
                         </View>
-                        <View style={styles.signup}>
-                            <View>
-                                <Text color={colors.white} size={12}>Belum punya akun ? </Text>                                
-                            </View>
-                            <View>
-                                <Text 
-                                    onPress={() => navigation.navigate('SignUp')}
-                                    size={14}
-                                    weight='bold'
-                                    color={colors.white}
-                                >Daftar</Text>
-                            </View>
+                    </View>
+
+                    <View style={styles.button}>
+                        <Btn 
+                            Icon={{name:"send", size: 12, color: colors.primary}}
+                            IconType='ionic'
+                            title="Masuk" 
+                            fontSize={12}
+                            onPress={submitHandler}
+                            style={{ width: '80%' }}
+                            disabled={loading}
+                            loading={{
+                                size: '12',
+                                color: colors.primary
+                            }}
+                            isLoading={loading}
+                        />
+                    </View>
+                    <View style={styles.signup}>
+                        <View>
+                            <Text color={colors.white} size={12}>Belum punya akun ? </Text>                                
                         </View>
-                    </ScrollView>
-                {/* </View> */}
+                        <View>
+                            <Text 
+                                onPress={() => navigation.navigate('SignUp')}
+                                size={14}
+                                weight='bold'
+                                color={colors.white}
+                            >Daftar</Text>
+                        </View>
+                    </View>
+                </ScrollView>
                 <View style={{...styles.footer}}>
                     <Text color={colors.white} size={10}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
                 </View>

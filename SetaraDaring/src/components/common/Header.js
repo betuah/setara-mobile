@@ -47,7 +47,7 @@ const Header = ({ data, scene, previous, navigation, style, contentStyle, titleS
                     }}
                     subtitleStyle={{
                         ...fonts.regular,
-                        fontSize: 10,
+                        fontSize: 11,
                         ...subtitleStyle
                     }}
                     style={{

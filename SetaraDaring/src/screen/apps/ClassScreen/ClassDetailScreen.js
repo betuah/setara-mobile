@@ -117,7 +117,7 @@ const ClassDetailsScreen = ({navigation}) => {
                 break;
 
             case 'nilai':
-                console.log('nilai')
+                setDevel(true)
                 break;
         
             default:
@@ -147,7 +147,7 @@ const ClassDetailsScreen = ({navigation}) => {
             <Devel visible={devel} onDismiss={setDevel} />
 
             <MapelModal visible={modal.mapel} onDismiss={hideModal} itemPress={MapelItemPress} data={mapel} />
-            <MembersModal visible={modal.members} onDismiss={hideModal} data={members} />
+            <MembersModal visible={modal.members} onDismiss={() => hideModal('members')} data={members} />
             <SilabusModal visible={modal.silabus} onDismiss={hideModal} silabus={activeMapel ? activeMapel.silabus : false} />
             <MateriMapelModal visible={modal.materi} onDismiss={hideModal} id={activeMapel ? activeMapel.id : ''} onItemPress={onMateriPress} />
 

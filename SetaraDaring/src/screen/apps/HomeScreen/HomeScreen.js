@@ -1,37 +1,43 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from 'react-native-paper';
-import { Text } from '../../components/common/UtilsComponent';
+import { Text } from '../../../components/common/UtilsComponent';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
+import Icon from 'react-native-vector-icons/Ionicons'
 import { 
     View, 
     StatusBar, 
     FlatList,
     ImageBackground,
     RefreshControl,
-    Image
+    Image,
+    TouchableOpacity,
+    useWindowDimensions
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import Moment from 'moment/min/moment-with-locales';
 Moment.locale('id')
 
-import FeedComponent from '../../components/FeedComponent';
+import FilterModal from '../../../components/modal_component/FilterClass_Modal';
+import FeedComponent from '../../../components/FeedComponent';
 
-import * as authAct from '../../store/actions/authAction';
-import * as homeAct from '../../store/actions/homeActions';
-
-
+import * as authAct from '../../../store/actions/authAction';
+import * as homeAct from '../../../store/actions/homeActions';
 
 const LoginScreen = ({ navigation }) => {
     const { colors, fonts } = useTheme()
+    const dispatch = useDispatch()
+
     const { fullName, foto, sekolah } = useSelector(state => state.auth)
     const homeState = useSelector(state => state.home)
+
     const [ refreshing, setRefreshing ] = useState(false)
     const [ error, setError ] = useState(true);
     const [ screenLoading, setScreenLoading ] = useState(true);
-    const dispatch = useDispatch()
+    const [ filterModal, setFilterModal ] = useState(false)
+
     const feed = homeState.feed
 
     const loadData = async () => {
@@ -50,7 +56,7 @@ const LoginScreen = ({ navigation }) => {
             }
             Toast.show({
                 type: 'error',
-                text1: 'Maaf, Terjadi Kesalahan!',
+                text1: 'Ops...!',
                 text2: error
             });
             setRefreshing(false)
@@ -84,11 +90,29 @@ const LoginScreen = ({ navigation }) => {
         loadData()
     }
 
+    const classPostPress = (classId, className) => {
+        setFilterModal(false)
+        navigation.navigate('PostClass', {
+            classId,
+            className
+        })
+    }
+
+    const detailPress = (postId, date_created) => {
+        navigation.navigate('DetailPost', { postId, date_created })
+    }
+
     return (
         <View style={{
             flex: 1,
         }}>
             <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
+            <FilterModal 
+                visible={filterModal} 
+                onDismiss={() => setFilterModal(false)} 
+                onPress={classPostPress}
+            />
+            
             <View style={{
                 backgroundColor: colors.bgPrimary,
                 elevation: 4,
@@ -97,14 +121,65 @@ const LoginScreen = ({ navigation }) => {
                 shadowRadius: 4,
             }}>
                 <ImageBackground 
-                    source={require('../../assets/images/header/bg-header-1.png')}
+                    source={require('../../../assets/images/header/bg-header-1.png')}
                     style={{width:"100%"}}
                     resizeMode="cover"
                 >
                     <SafeAreaView>
                         <View style={{
                             flexDirection: 'row',
-                            paddingVertical: 20,
+                            justifyContent: 'center',
+                            paddingVertical: 10,
+                            paddingHorizontal: 13,
+                        }}>
+                            <View
+                                style={{
+                                    flexGrow: 1,
+                                    alignItems: 'flex-start'
+                                }}
+                            >
+                                <TouchableOpacity
+                                    onPress={() => onRefresh()}
+                                    activeOpacity={0.6}
+                                >
+                                    <Icon 
+                                        name='home' 
+                                        color={colors.textWhite} 
+                                        size={22}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <Text
+                                fontWeight={{
+                                    ...fonts.bold
+                                }}
+                                size={18}
+                                color={colors.textWhite}
+                            >
+                                B E R A N D A
+                            </Text>
+                            <View
+                                style={{
+                                    flexGrow: 1,
+                                    alignItems: 'flex-end'
+                                }}
+                            >
+                                <TouchableOpacity
+                                    onPress={() => setFilterModal(true)}
+                                    activeOpacity={0.6}
+                                >
+                                    <Icon 
+                                        name='filter' 
+                                        color={colors.textWhite} 
+                                        size={22}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row',
+                            paddingTop: 10,
+                            paddingBottom: 20,
                             paddingHorizontal: 13,
                         }}>
                             <View style={{
@@ -145,7 +220,7 @@ const LoginScreen = ({ navigation }) => {
                 flex: 1,
             }}>
                 <ImageBackground 
-                    source={require('../../assets/images/bgScreen01.png')}
+                    source={require('../../../assets/images/bgScreen01.png')}
                     style={{width:"100%",height:"100%"}}
                     resizeMode="cover"
                 >
@@ -157,17 +232,17 @@ const LoginScreen = ({ navigation }) => {
                         keyExtractor={(item) => item._id}
                         data={feed.sort((a, b) => Moment(b.date_created) - Moment(a.date_created))}
                         extraData={feed}
-                        renderItem={itemData => <FeedComponent {...itemData.item} />}
+                        renderItem={itemData => <FeedComponent onClassPress={classPostPress} onDetailPress={detailPress} {...itemData.item} />}
                         ListEmptyComponent={() => 
                             <View style={{
                                 flex: 1,
                                 flexDirection: 'column',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                marginTop: '50%'
+                                marginTop: useWindowDimensions().height * 0.2
                             }}>
                                 <LottieView 
-                                    source={require('../../assets/lottie/33173-smartphone-addicition.json')} 
+                                    source={require('../../../assets/lottie/33173-smartphone-addicition.json')} 
                                     autoPlay
                                     style={{
                                         width: '40%',

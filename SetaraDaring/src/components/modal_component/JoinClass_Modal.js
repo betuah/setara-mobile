@@ -74,7 +74,8 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                     >
                         <Icon name='close' size={16} color={colors.bgWhite} />
                     </View>
-                    <Text size={16} fontWeight={fonts.bold} color={colors.textWhite}>GABUNG KELAS</Text>
+                    <Text size={15} fontWeight={fonts.bold} color={colors.textWhite}>GABUNG KELAS</Text>
+                    <Text size={11} fontWeight={fonts.regular} color={colors.textWhite}>Bergabung dengan kelas yang ingin kamu ikuti.</Text>
                 </View>
                 <View style={{
                     paddingLeft: 18,

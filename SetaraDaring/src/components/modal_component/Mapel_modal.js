@@ -100,6 +100,7 @@ const Mapel_Modal = props => {
             onBackdropPress={() => onDismiss()}
             onSwipeComplete={() => onDismiss()}
             swipeDirection={['down']}
+            propagateSwipe={true}
             style={{
                 justifyContent: 'flex-end',
                 margin: 0
@@ -141,16 +142,17 @@ const Mapel_Modal = props => {
                         }}
                     >
                         <TouchableOpacity onPress={() => onDismiss()}>
-                        <Icon name='close' size={20} color={colors.textLight} />
+                        <Icon name='close' size={20} color={colors.textWhite} />
                         </TouchableOpacity>
                     </View>
                     <Text size={16} fontWeight={fonts.bold} color={colors.textWhite}>MATA PELAJARAN</Text>
+                    <Text size={11} fontWeight={fonts.regular} color={colors.textWhite}>Daftar mata pelajaran dalam kelas yang kamu pilih.</Text>
                 </View>
                 <View style={{
                     paddingLeft: 18,
                     paddingRight: 23,
                     paddingBottom: 15,
-                    backgroundColor: colors.bgLight,
+                    backgroundColor: colors.bgWhite,
                     flexDirection: 'row',
                     elevation: 1,
                     shadowOffset: { width: 0, height: 1 },
@@ -176,7 +178,7 @@ const Mapel_Modal = props => {
                 <FlatList 
                     style={{
                         paddingBottom: 20,
-                        backgroundColor: colors.bgLight,
+                        backgroundColor: colors.bgWhite,
                     }}
                     keyExtractor={(item) => item.id.toString()}
                     data={data}

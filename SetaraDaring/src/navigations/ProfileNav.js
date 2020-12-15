@@ -25,7 +25,7 @@ const ProfileNav = ({ route, navigation}) => {
                 scene={scene} 
                 previous={previous} 
                 navigation={navigation} 
-                titleStyle={{fontSize: 18, ...fonts.bold, paddingTop: 5,}}
+                titleStyle={{fontSize: 16, ...fonts.bold, paddingTop: 3,}}
                 contentStyle={{alignItems: 'center', justifyContent: 'center'}}
                 style={{
                     backgroundColor: colors.primary,
@@ -57,7 +57,7 @@ const ProfileNav = ({ route, navigation}) => {
                 scene={scene} 
                 previous={previous} 
                 navigation={navigation} 
-                titleStyle={{fontSize: 18, ...fonts.semoBold, paddingTop: 5,}}
+                titleStyle={{fontSize: 16, ...fonts.semoBold, paddingTop: 3,}}
                 contentStyle={{alignItems: 'center', justifyContent: 'center'}}
             />
         ),

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { View, ScrollView, useWindowDimensions, RefreshControl, Linking, ImageBackground, StatusBar } from 'react-native';
+import { View, ScrollView, RefreshControl, Linking, ImageBackground, StatusBar, Dimensions } from 'react-native';
 import { Card, Divider, useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text } from '../../../components/common/UtilsComponent';
@@ -117,7 +117,7 @@ const MateriScreen = ({route, navigation}) => {
                         <Text
                             color={colors.textPrimary}
                             fontWeight={{...fonts.semiBold}}
-                            size={20}
+                            size={14}
                         >
                             {detailMateri.judul}
                         </Text>
@@ -132,11 +132,11 @@ const MateriScreen = ({route, navigation}) => {
                     <Divider />
                     <HTML 
                         html={detailMateri ? (detailMateri.isi ? detailMateri.isi : EmptySilabus) : EmptySilabus} 
-                        baseFontStyle={{color: colors.textDark, ...fonts.regular}} 
-                        contentWidth={useWindowDimensions().width * 0.90}
-                        imagesMaxWidth={useWindowDimensions().width * 0.93}
+                        baseFontStyle={{color: colors.textDark, ...fonts.regular, fontSize: 11}} 
+                        contentWidth={Dimensions.get('window').width * 0.90}
+                        imagesMaxWidth={Dimensions.get('window').width * 0.93}
                         enableExperimentalPercentWidt={true}
-                        staticContentMaxWidth={useWindowDimensions().width * 0.93}
+                        staticContentMaxWidth={Dimensions.get('window').width * 0.93}
                         onLinkPress={(event, url) => Linking.openURL(`${env.file_domain}/${url}`)}
                         alterChildren = {node => {
                             if (node.attribs.src) {

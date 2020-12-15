@@ -288,7 +288,8 @@ const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
                         </TouchableOpacity>
                         
                     </View>
-                    <Text size={16} fontWeight={fonts.bold} color={colors.textWhite}>MATERI</Text>
+                    <Text size={15} fontWeight={fonts.bold} color={colors.textWhite}>MATERI</Text>
+                    <Text size={11} fontWeight={fonts.regular} color={colors.textWhite}>Daftar materi pelajaran dalam mapel yang kamu pilih.</Text>
                 </View>
                     { 
                         isLoading ? 
