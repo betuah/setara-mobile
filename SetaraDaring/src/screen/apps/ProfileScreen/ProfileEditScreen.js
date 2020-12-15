@@ -316,7 +316,7 @@ const ProfileEditScreen = ({ navigation }) => {
                     >
                         <TouchableOpacity 
                             onPress={() => UploadImage()}
-                            activeOpacity={0.8}
+                            activeOpacity={0.7}
                         >
                             <View style={{
                                 backgroundColor: colors.textPrimary,
@@ -332,35 +332,45 @@ const ProfileEditScreen = ({ navigation }) => {
                         alignItems: 'center',
                     }}>
                         { data.profile.foto ? 
-                            <Image 
-                                style={{
+                            <TouchableOpacity 
+                                onPress={() => UploadImage()}
+                                activeOpacity={0.7}
+                            >
+                                <Image 
+                                    style={{
+                                        width: 80,
+                                        height: 80,
+                                        borderWidth: 3,
+                                        borderRadius: 50,
+                                        borderColor: colors.bgWhite,
+                                    }}
+                                    source={{ uri: data.profile.foto }}   
+                                />
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity 
+                                onPress={() => UploadImage()}
+                                activeOpacity={0.7}
+                            >
+                                <View style={{
                                     width: 80,
                                     height: 80,
                                     borderWidth: 3,
                                     borderRadius: 50,
                                     borderColor: colors.bgWhite,
-                                }}
-                                source={{ uri: data.profile.foto }}   
-                            />
-                            :
-                            <View style={{
-                                width: 80,
-                                height: 80,
-                                borderWidth: 3,
-                                borderRadius: 50,
-                                borderColor: colors.bgWhite,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: colors.purple2
-                            }}>
-                                <Text
-                                    color={colors.textWhite}
-                                    style={{fontWeight: 'bold'}}
-                                    size={20}
-                                >
-                                    { data.profile.nama.split(" ").length === 1 ? data.profile.nama.substring(0, 1).toUpperCase() : `${data.profile.nama.split(" ")[0].substring(0, 1).toUpperCase()}${data.profile.nama.split(" ")[1].substring(0, 1).toUpperCase()}` }
-                                </Text>
-                            </View>
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    backgroundColor: colors.purple2
+                                }}>
+                                    <Text
+                                        color={colors.textWhite}
+                                        style={{fontWeight: 'bold'}}
+                                        size={20}
+                                    >
+                                        { data.profile.nama.split(" ").length === 1 ? data.profile.nama.substring(0, 1).toUpperCase() : `${data.profile.nama.split(" ")[0].substring(0, 1).toUpperCase()}${data.profile.nama.split(" ")[1].substring(0, 1).toUpperCase()}` }
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                         }
                     </View>
                     <View style={{
