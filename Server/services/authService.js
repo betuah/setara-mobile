@@ -87,6 +87,7 @@ const refreshToken = async ({ token }) => {
             refreshToken: newRefreshToken.token
         }
     } catch (error) {
+        console.log(new Error(error))
         throw error // Return any error
     }
 }

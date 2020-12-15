@@ -127,9 +127,8 @@ exports.getPosting = async (req, res) => {
                     }
                 })
             }else{
-                reject([])
+                resolve([])
             }
-
         } catch (error) {
             reject(error);
         }
@@ -144,9 +143,11 @@ exports.getPosting = async (req, res) => {
 
         res.status(200).json(resJson)
     }).catch(err => {
+        console.log(new Error(err))
         if (err.code) {
             res.status(err.code).json(err)
         } else {
+            
             res.status(500).json(err)
         }
     })
