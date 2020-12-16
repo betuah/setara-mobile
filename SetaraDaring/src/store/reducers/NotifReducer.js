@@ -9,7 +9,8 @@ const initState = {
             read: false,
             createdTime: Date.now(),
             image: 'https://seamolec.org/images/banner/96900.jpg',
-            category: 1
+            category: 1,
+            label: 'Pengumuman'
         },
         {
             id: '2',
@@ -18,6 +19,7 @@ const initState = {
             read: true,
             createdTime: Date.now(),
             category: 1,
+            label: 'Pengumuman'
         },
         {
             id: '3',
@@ -25,7 +27,8 @@ const initState = {
             notifContent: 'This is the notification details',
             read: true,
             createdTime: Date.now(),
-            category: 1
+            category: 1,
+            label: 'Pengumuman'
         },
         {
             id: '4',
@@ -33,7 +36,8 @@ const initState = {
             notifContent: 'This is the notification details',
             read: false,
             createdTime: Date.now(),
-            category: 2
+            category: 2,
+            label: 'Diskusi'
         },
         {
             id: '5',
@@ -43,6 +47,7 @@ const initState = {
             createdTime: Date.now(),
             image: 'https://seamolec.org/images/banner/96900.jpg',
             category: 3,
+            label: 'Tugas'
         },
         {
             id: '6',
@@ -51,6 +56,7 @@ const initState = {
             read: true,
             createdTime: Date.now(),
             category: 3,
+            label: 'Tugas'
         },
         {
             id: '7',
@@ -59,6 +65,7 @@ const initState = {
             read: false,
             createdTime: Date.now(),
             category: 4,
+            label: 'Quiz'
         },
         {
             id: '8',
@@ -68,6 +75,7 @@ const initState = {
             createdTime: Date.now(),
             image: 'https://seamolec.org/images/banner/96900.jpg',
             category: 2,
+            label: 'Diskusi Umum'
         },
         {
             id: '9',
@@ -76,6 +84,7 @@ const initState = {
             read: true,
             createdTime: Date.now(),
             category: 3,
+            label: 'Tugas Di Tutup'
         },
         {
             id: '10',
@@ -84,6 +93,7 @@ const initState = {
             read: false,
             createdTime: Date.now(),
             category: 4,
+            label: 'Ujian Akhir Semester'
         }
     ]
 }
