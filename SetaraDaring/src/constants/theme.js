@@ -113,6 +113,7 @@ export const CombinedDefaultTheme = {
         background: '#E7F8FF',
         text: '#7A8590',
         loadingBackground: '#d5f1f7',
+        softBlue: '#E7F8FF',
 
         red: '#FF7676', //'rgb(255,118,118)'
         softRed: 'F88585',
@@ -145,7 +146,7 @@ export const CombinedDefaultTheme = {
         bgLock: '#F88585',
         bgCardPrimary: '#F88585',
         bgCardSecondary: '#FFBBAB',
-        bgDarkBlue: colorName.tosca,
+        // bgDarkBlue: colorName.tosca,
 
         navMapelPrimary: '#FF8962',
         navMapelBg: '#FEFAF7',

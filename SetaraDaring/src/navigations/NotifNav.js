@@ -1,36 +1,121 @@
 import React from 'react';
 import { useTheme } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 import {createStackNavigator} from '@react-navigation/stack';
-import { View } from 'react-native';
-import { Text } from '../components/common/UtilsComponent';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
-import NotifScreen from '../screen/apps/NotificationsScreen';
+
+import NotifUmum from '../screen/apps/NotifScreen/NotifUmumScreen';
+import NotifDiscussion from '../screen/apps/NotifScreen/NotifDiscussionSreen';
+import NotifClass from '../screen/apps/NotifScreen/NotifClassScreen';
+
+import Header from '../components/common/Header';
 
 const Stack = createStackNavigator();
+const Tab = createMaterialTopTabNavigator();
+
+const NotifTab = (props) => {
+    const {colors,fonts} = useTheme()
+
+    const notifState    = useSelector(state => state.notif.notif)
+    const notifClass    = notifState.map(item => item).filter(item => { return (item.category === 3 || item.category === 4 ) && item.read})
+    const notifDiscuss  = notifState.map(item => item).filter(item => item.category === 2 && item.read)
+    const notifUmum     = notifState.map(item => item).filter(item => item.category === 1 && item.read)
+
+    return (
+        <Tab.Navigator 
+            initialRouteName='Umum'
+            removeClippedSubviews={true}
+            tabBarOptions={{
+                activeTintColor: colors.textWhite,
+                inactiveTintColor: colors.textLightAccent,
+                showIcon: true,
+                style : {
+                    backgroundColor: colors.primary
+                },
+                tabStyle : {
+                    flexDirection: 'row'
+                },
+                labelStyle : {
+                    ...fonts.medium,
+                    fontSize: 12,
+                },
+                indicatorStyle: {
+                    height: 2,
+                    borderRadius: 50,
+                    backgroundColor: colors.bgWhite
+                },
+            }}
+        >
+            <Tab.Screen 
+                name="Umum" 
+                component={NotifUmum}
+                options={{
+                    title: `UMUM ( ${notifUmum.length} )`,
+                    tabBarIcon: ({focused, color}) => (
+                        <Icon 
+                            name={focused ? 'notifications' : 'notifications-outline'} 
+                            size={18} 
+                            color={focused ? colors.textWhite : colors.textLightAccent} 
+                        />
+                    )
+                }}
+            />
+            <Tab.Screen 
+                name="Diskusi" 
+                component={NotifDiscussion}
+                options={{
+                    title: `DISKUSI ( ${notifDiscuss.length} )`,
+                    tabBarIcon: ({focused, color}) => (
+                        <Icon 
+                            name={focused ? 'chatbubbles' : 'chatbubbles-outline'} 
+                            size={18} 
+                            color={focused ? colors.textWhite : colors.textLightAccent} 
+                        />
+                    )
+                }}
+            />
+            <Tab.Screen 
+                name="TugasEvaluasi" 
+                component={NotifClass}
+                options={{
+                    title: `KELAS ( ${notifClass.length} )`,
+                    tabBarIcon: ({focused, color}) => (
+                        <Icon 
+                            name={focused ? 'school' : 'school-outline'} 
+                            size={18} 
+                            color={focused ? colors.textWhite : colors.textLightAccent} 
+                        />
+                    )
+                }}
+            />
+        </Tab.Navigator>
+    )
+}
 
 const NotifNav = (props) => {
-    const {colors} = useTheme()
+    const {colors,fonts} = useTheme()
     const ScreenOptionStyle = {
-        headerTitle: () => (
-            <View style={{
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <Icon name='notifications' size={20} color={colors.white} />
-                <Text color={colors.white} size={20} weight='bold'> NOTIFIKASI</Text>
-            </View>
-        ),
         headerShown: true,
-        headerTintColor: colors.white,
-        headerTitleStyle: {
-            fontWeight: 'bold',
-            alignSelf: 'center'
-        },
-        headerStyle: {
-            backgroundColor: colors.header,
-        },
+        header: ({ scene, previous, navigation }) => (
+            <Header 
+                data={{
+                    title: 'N O T I F I K A S I', 
+                }} 
+                scene={scene} 
+                previous={previous} 
+                navigation={navigation} 
+                titleStyle={{fontSize: 16, ...fonts.bold, paddingTop: 3,}}
+                contentStyle={{alignItems: 'center', justifyContent: 'center'}}
+                style={{
+                    backgroundColor: colors.primary,
+                    elevation: 0,
+                    shadowOffset: { width: 0, height: 0 },
+                    shadowOpacity: 0,
+                    shadowRadius: 0,
+                }}
+            />
+        ),
     }
 
     return (
@@ -38,7 +123,7 @@ const NotifNav = (props) => {
             initialRouteName="Notif"
             screenOptions={ScreenOptionStyle}
         >
-            <Stack.Screen name="Notif" component={NotifScreen} />
+            <Stack.Screen name="Notif" component={NotifTab} />
         </Stack.Navigator>
     )
 };

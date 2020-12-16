@@ -2,7 +2,6 @@ import React from 'react';
 import { useWindowDimensions, View } from 'react-native';
 import { useTheme, Card, Portal, Modal } from 'react-native-paper';
 import { Text, Btn } from '../common/UtilsComponent';
-// import Modal from 'react-native-modal';
 import LottieView from 'lottie-react-native';
 
 const Development_Modal = ({visible, onDismiss}) => {
@@ -16,10 +15,6 @@ const Development_Modal = ({visible, onDismiss}) => {
             contentContainerStyle={{
                 alignItems: 'center'
             }}
-            // isVisible={visible}
-            // onBackdropPress={() => onDismiss(false)}
-            // onSwipeComplete={() => onDismiss(false)}
-            // swipeDirection={['down']}
         >
             <Card style={{
                 borderRadius: 20,

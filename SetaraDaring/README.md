@@ -2,7 +2,7 @@
 ```sh
 npm i --save react-native-paper
 npm i --save react-native-navigation-bar-color
-npm i --save react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npm i --save react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view @react-navigation/material-top-tabs react-native-tab-view
 npm i --save @react-navigation/native
 npm i --save @react-navigation/stack
 npm i --save react-native-animated-spinkit
