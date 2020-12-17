@@ -23,6 +23,8 @@ const Error = err => {
                 throw('Sepertinya kamu sudah pernah bergabung dengan kelas tersebut.')
             case 'ERR_MATERI_NOT_FOUND':
                 throw('Materi tersebut tidak ditemukan.')
+            case 'ERR_UPLOAD_FILE':
+                throw('Sepertinya ada yang salah dengan file kamu. Coba unggah beberapa saat lagi ya.')
             default:
                 throw(errRes.message)
         }
