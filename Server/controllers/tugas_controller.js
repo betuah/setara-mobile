@@ -1,3 +1,5 @@
+const multer        = require('multer')
+const fs            = require('fs')
 const Modul         = require('../models/modulData.model')
 const ModulKumpul   = require('../models/modulKumpul.model')
 const Tugas         = require('../models/tugasData.model')
@@ -98,7 +100,6 @@ exports.getListTugas = async (req, res) => {
                     })
 
                     nilai_akhir_modul = await getNilaiModul(item._id)
-                    console.log('Nilai akhir modul: ', nilai_akhir_modul)
 
                     if (item.prasyarat!="0"){
                         nilai_akhir_modul_prev = await getNilaiModul(item.prasyarat)
@@ -172,7 +173,7 @@ exports.kumpulkanTugas = async (req, res) => {
             id_user: userId,
             id_tugas: tugasId,
             deskripsi: isi_tugas,
-            file: '',
+            file: [...fileData],
             nilai: '',
             catatan:'',
         })

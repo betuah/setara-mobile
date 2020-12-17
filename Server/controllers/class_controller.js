@@ -75,9 +75,6 @@ exports.getAllClass = async (req, res) => {
 exports.getDetailClass = (req, res) => {
     const id_class = req.params.classId
 
-    const maleAvatar = 'https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortFlat&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light'
-    const femaleAvatar = 'https://avataaars.io/?avatarStyle=Transparent&topType=LongHairCurvy&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light'
-
     const getDetails = new Promise(async (resolve, reject) => {
         try {
             const dataKelas = await Kelas.findOne({ _id: id_class})
@@ -124,7 +121,7 @@ exports.getDetailClass = (req, res) => {
                                 name: resUser.nama,
                                 school: resUser.sekolah ? resUser.sekolah : '-',
                                 jk: resUser.jk,
-                                picture: resUser.foto ? `${env.picture_path}${resUser.foto}` : (resUser.jk === 'Perempuan' ? femaleAvatar : maleAvatar),
+                                picture: `${env.picture_path}${resUser.foto}`,
                                 role_name: role,
                                 role: item.status,
                             }
@@ -136,10 +133,6 @@ exports.getDetailClass = (req, res) => {
                     } else {
                         listMembersError.push('1')
                     }
-
-
-
-                    // if (listMembers.length === array.length) resolve({...detailsData, listMembers});
                 })
             } else {
                 resolve([])

@@ -1,4 +1,5 @@
-const authMiddleware = require('../middlewares/auth_middleware') // Import Middlewares
+const authMiddleware = require('../middlewares/auth_middleware') // Import Auth Middlewares
+const uploadPhotoMiddleware = require('../middlewares/uploadPhoto_Middleware') // Import Upload Photo Middleware
 const userController = require('../controllers/user_controller') // Import User Controller
 
 module.exports = (app) => {
@@ -10,5 +11,5 @@ module.exports = (app) => {
         .put(authMiddleware, userController.setProfile) // Set Middleware
     
     app.route('/api/v1/profile/avatar') // Get Profile End Point
-        .post(authMiddleware, userController.avatarUpload) // Set Middleware
+        .post(authMiddleware, uploadPhotoMiddleware, userController.avatarUpload) // Set Middleware
 }

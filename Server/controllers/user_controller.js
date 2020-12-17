@@ -1,4 +1,5 @@
 const multer  = require('multer')
+const fs      = require('fs')
 const env     = require('../env') // Import Environment config
 const User    = require('../models/usersData.model') // Import User Model
 
@@ -83,68 +84,26 @@ exports.setProfile = async (req, res) => {
 // Upload Foto
 exports.avatarUpload = (req, res) => {
     try {
-        const path = 'public/photo'
-
-        const storage = multer.diskStorage({
-            destination: (req, file, callback) => {
-                callback(null, (path))
-            },
-            filename: (req, file, callback) => {
-                let filetype = file.mimetype === 'image/png' ? 'png' : (file.mimetype === 'image/jpg' ? 'jpg' : (file.mimetype === 'image/jpeg' && 'jpeg'))
-                callback(null, `${req.userId}.${filetype}`)
+        User.findOneAndUpdate(
+            { _id: req.userId }, 
+            { 
+                foto: fileData.filename, 
+                path: 'api.setara.kemdikbud.go.id/public/photo/'
             }
-        })
+        ).then(resData => {
+            const photoWithPath = `${env.path_protocol}://${resData.path}`
+            resData.foto = resData.foto ? `${resData.path ? photoWithPath : env.picture_path}${resData.foto}` : ''
 
-        const upload = multer({
-            storage: storage,
-            fileFilter: (req, file, cb) => {
-                if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-                    cb(null, true);
-                } else {
-                    cb(null, false);
-                    return cb(new Error('Only .png, .jpg and .jpeg format allowed!'))
-                }
-            }
-        }).any('photo')
-
-        upload(req, res, async (err) => {
-            if (err) {
-                console.log(new Error(err))
-                return res.status(400).send({
-                    code: 500,
-                    status: 'INTERNAL_SERVER_ERROR',
-                    message: err
-                })
-            } else {
-                
-                const fileData = req.files[0]
-
-                User.findOneAndUpdate(
-                    { _id: req.userId }, 
-                    { 
-                        foto: fileData.filename, 
-                        // path: 'api.setara.kemdikbud.go.id/public/photo/' 
-                        path: '192.168.1.6:8000/public/photo/'
-                    }
-                ).then(resData => {
-                    const photoWithPath = `${env.path_protocol}://${resData.path}`
-                    resData.foto = resData.foto ? `${resData.path ? photoWithPath : env.picture_path}${resData.foto}` : ''
-
-                    res.status(200).json({status: 'Success', code: 'OK', data: resData})
-                }).catch(err => {
-                    console.log(new Error(err))
-                    fs.unlink(`public/photo/${fileData.filename}`, err => {
-                        console.log(new Error('Catch Error update firebase database. ', err))
-                        res.status(500).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
-                    })
-                })
-            }
+            res.status(200).json({status: 'Success', code: 'OK', data: resData})
+        }).catch(err => {
+            console.log(new Error(err))
+            fs.unlink(`public/photo/${fileData.filename}`, err => {
+                console.log(new Error('Catch Error update firebase database. ', err))
+                res.status(500).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
+            })
         })
     } catch (error) {
         console.log(new Error(error))
         res.status(500).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
     }
-
-    
-    
 }
