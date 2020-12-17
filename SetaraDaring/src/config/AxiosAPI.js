@@ -4,7 +4,7 @@ import config from './baseUrl';
 
 const header  = {
     headers: {'Content-Type': 'application/json'},
-    timeout: 10000
+    timeout: 5000
 }
 
 const AxiosAPI = Axios.create();
@@ -18,7 +18,7 @@ AxiosAPI.interceptors.request.use(
             'Authorization': `Bearer ${data.token}`,
             'Accept': 'application/json',
         }
-        config.timeout = 10000
+        config.timeout = 5000
         return config;
     },
     error => {
