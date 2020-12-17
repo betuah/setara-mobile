@@ -3,7 +3,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import { View, ScrollView, RefreshControl, Linking, ImageBackground, StatusBar, Dimensions, TouchableOpacity } from 'react-native';
 import { Card, Divider, useTheme, TextInput, Button } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { Text, Input, Btn } from '../../../components/common/UtilsComponent';
+import { Text, Btn } from '../../../components/common/UtilsComponent';
+import DocumentPicker from 'react-native-document-picker';
 import Toast from 'react-native-toast-message';
 import LottieView from 'lottie-react-native';
 import HTML from 'react-native-render-html';
@@ -66,6 +67,29 @@ const TugasScreen = ({route, navigation}) => {
             }
         }, [dispatch])
     )
+
+    const onAttachFile = async () => {
+        console.log('attach')
+        try {
+            const results = await DocumentPicker.pickMultiple({
+                type: [DocumentPicker.types.allFiles],
+            });
+            for (const res of results) {
+                console.log(
+                    res.uri,
+                    res.type, // mime type
+                    res.name,
+                    res.size
+                );
+            }
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+                throw err;
+            }
+        }
+    }
 
     if (isLoading || (stateTugas.detailTugas === null)) return (
         <View style={{
@@ -305,7 +329,7 @@ const TugasScreen = ({route, navigation}) => {
                             alignItems: 'flex-start'
                         }}>
                             <TouchableOpacity 
-                                onPress={() => console.log('pressed')}
+                                onPress={() => onAttachFile()}
                                 activeOpacity={0.7}
                             >
                                 <View style={{
