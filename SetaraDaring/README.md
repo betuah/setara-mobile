@@ -23,11 +23,12 @@ npm i --save react-native-image-picker
 npm i --save react-native-render-html
 npm i --save react-native-timeline-flatlist
 npm i --save react-native-reanimated
+npm i --save react-native-snap-carousel
 ```
 
 ##### All In One Install
 ```sh
-npm i --save react-native-paper react-native-navigation-bar-color react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view @react-navigation/native @react-navigation/stack react-native-animated-spinkit lottie-react-native lottie-ios@3.1.8 react-native-vector-icons react-native-tab-view validate.js redux react-redux redux-thunk react-native-safe-area-context react-native-toast-message @react-native-async-storage/async-storage @react-navigation/material-bottom-tabs moment react-native-render-html react-native-timeline-flatlist save react-native-reanimated
+npm i --save react-native-paper react-native-navigation-bar-color react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view @react-navigation/native @react-navigation/stack react-native-animated-spinkit lottie-react-native lottie-ios@3.1.8 react-native-vector-icons react-native-tab-view validate.js redux react-redux redux-thunk react-native-safe-area-context react-native-toast-message @react-native-async-storage/async-storage @react-navigation/material-bottom-tabs moment react-native-render-html react-native-timeline-flatlist save react-native-reanimated react-native-snap-carousel
 ```
 
 <hr>

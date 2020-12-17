@@ -86,12 +86,12 @@ export const CombinedDefaultTheme = {
     colors: {
         ...NavigationDefaultTheme.colors,
         ...PaperDefaultTheme.colors,
-        utama: '#0090FF',
-        kedua: '#68E1FD',
-        acc: '#F88585',
+        // utama: '#0090FF',
+        // kedua: '#68E1FD',
+        // acc: '#F88585',
         
-        bgLight: '#9FD5FF',
-        bg: '#00CFFF',
+        // bgLight: '#9FD5FF',
+        // bg: '#00CFFF',
 
         // Warna 1
         // bgPrimary: '#F88585',
@@ -142,11 +142,10 @@ export const CombinedDefaultTheme = {
         bgWhite: '#FFFFFF',
         bgLight: '#f2feff',
         bgDark: '#473F47',
-        bgDarkBlue: '#5588F5',
+        bgDarkBlue: '#2A9FC4',
         bgLock: '#F88585',
         bgCardPrimary: '#F88585',
         bgCardSecondary: '#FFBBAB',
-        // bgDarkBlue: colorName.tosca,
 
         navMapelPrimary: '#FF8962',
         navMapelBg: '#FEFAF7',

@@ -17,6 +17,7 @@ import LoadingModal from '../../../components/modal_component/Loading_Modal';
 import Devel from '../../../components/modal_component/Development_Modal';
 import MapelModal from '../../../components/modal_component/Mapel_modal';
 import MembersModal from '../../../components/modal_component/Members_modal';
+import TugasModal from '../../../components/modal_component/Tugas_Modal';
 
 const ClassDetailsScreen = ({navigation}) => {
     const { colors, fonts } = useTheme();
@@ -41,7 +42,8 @@ const ClassDetailsScreen = ({navigation}) => {
         mapel: false,
         members: false,
         silabus: false,
-        materi: false
+        materi: false,
+        tugas: false,
     })
 
     const onMapelSliders = (index) => {
@@ -109,7 +111,7 @@ const ClassDetailsScreen = ({navigation}) => {
                 break;
 
             case 'tugas':
-                setDevel(true)
+                setModals('tugas')
                 break;
 
             case 'diskusi':
@@ -131,6 +133,11 @@ const ClassDetailsScreen = ({navigation}) => {
         navigation.push('Materi', { id, title, date_created })
     }
 
+    const onTugasPress = (id, title, date_created) => {
+        hideModal('tugas')
+        navigation.push('Tugas', { id, title, date_created })
+    }
+
     return (
         <ScrollView 
             style={{
@@ -150,6 +157,7 @@ const ClassDetailsScreen = ({navigation}) => {
             <MembersModal visible={modal.members} onDismiss={() => hideModal('members')} data={members} />
             <SilabusModal visible={modal.silabus} onDismiss={hideModal} silabus={activeMapel ? activeMapel.silabus : false} />
             <MateriMapelModal visible={modal.materi} onDismiss={hideModal} id={activeMapel ? activeMapel.id : ''} onItemPress={onMateriPress} />
+            <TugasModal visible={modal.tugas} onDismiss={hideModal} id={activeMapel ? activeMapel.id : ''} onItemPress={onTugasPress} />
 
             <View style={{
                 flex: 3,
@@ -611,9 +619,9 @@ const ClassDetailsScreen = ({navigation}) => {
                         }}
                     >
                         {
-                            members.length > 20 
+                            members.length > 10 
                                 ? 
-                                members.slice(0, 20).map((item) => <AnggotaComponent key={item.id} data={item} />)
+                                members.slice(0, 10).map((item) => <AnggotaComponent key={item.id} data={item} />)
                                 :
                                 members.map((item) => <AnggotaComponent key={item.id} data={item} />)
                         }

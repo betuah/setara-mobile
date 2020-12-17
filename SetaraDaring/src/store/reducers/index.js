@@ -8,6 +8,7 @@ import NotifReducer from './NotifReducer';
 import ProfileReducer from './ProfileReducer';
 import ClassReducer from './ClassReducer';
 import MateriReducer from './MateriReducer';
+import TugasReducer from './TugasReducer';
 
 const rootReducer = combineReducers({
     theme: ThemeReducer,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
     notif: NotifReducer,
     profile: ProfileReducer,
     class: ClassReducer,
-    materi: MateriReducer
+    materi: MateriReducer,
+    tugas: TugasReducer
 });
 
 export default rootReducer

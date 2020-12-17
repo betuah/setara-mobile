@@ -10,7 +10,6 @@ const initState = {
         date_modified: null,
         date_created: null
     },
-    test: false
 }
 
 const MateriReducer = (state = initState, actions) => {
@@ -24,7 +23,6 @@ const MateriReducer = (state = initState, actions) => {
         case DETAIL_MATERI:
             return {
                 ...state,
-                test: true,
                 detailMateri: {
                     ...state.detailMateri,
                     ...actions.detailMateri

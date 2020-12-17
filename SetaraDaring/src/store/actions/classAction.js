@@ -22,7 +22,7 @@ export const initData = () => {
 export const detailKelas = (id) => {
     return async dispatch => {
         try {
-            const res = await AxiosAPI.get(`${config.base_url}/api/v1/class/detail/${id}`)
+            const res = await AxiosAPI.get(`${config.base_url}/api/v1/class/${id}`)
             const resData = res.data.data
 
             dispatch({type: DETAIL_CLASS, detailClass: resData})
