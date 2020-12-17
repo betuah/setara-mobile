@@ -16,9 +16,10 @@ const tugasKumpulSchema = new Schema({
         type: String,
         trim: true,
     },
-    file: {
+    file: [],
+    path: {
         type: String,
-        trim: true,
+        trim: true
     },
     nilai: {
         type: String,
