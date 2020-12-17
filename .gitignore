@@ -10,7 +10,8 @@ lerna-debug.log*
 Server/node_modules/
 Server/*.env
 Server/db/init_mongo.js
-Server/public/*
+Server/public/photo/*
+Server/public/files/*
 Server/package-lock.json
 Server/ssl/*
 
