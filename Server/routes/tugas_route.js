@@ -9,6 +9,6 @@ module.exports = (app) => {
     app.route('/api/v1/tugas/detail/:tugasId')
         .get(authMiddleware, tugasController.getTugasDetail)
 
-    app.route('/api/v1/tugas/kumpul/:tugasId')
+    app.route('/api/v1/tugas/:tugasId')
         .post(authMiddleware, tugasController.kumpulkanTugas)
 }
