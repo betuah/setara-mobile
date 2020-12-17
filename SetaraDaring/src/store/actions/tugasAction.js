@@ -34,16 +34,32 @@ export const getDetailTugas = (tugasId) => {
     }
 }
 
-export const addTugas = (tugasId) => {
+export const addTugas = (tugasId, files) => {
     return async dispatch => {
         try {
-            const res = await AxiosAPI.post(`${config.base_url}/api/v1/tugas/${tugasId}`)
+            const res = await AxiosAPI.post(`${config.base_url}/api/v1/tugas/${tugasId}`, createFormData(files))
             const resData = res.data
 
-            dispatch({type: ADD_TUGAS, data: resData})
+            console.log(createFormData(files))
+
+            // dispatch({type: ADD_TUGAS, data: resData})
         } catch (error) {
             console.log(error, 'error tugas')
             ErrorHandler(error)
         }
     }
 }
+
+const createFormData = (files) => {
+    const data = new FormData();
+
+    files.forEach((item, i) => {
+        data.append('files', {
+            name: item.name ,
+            type: item.type,
+            uri: Platform.OS === 'android' ? item.uri : item.uri.replace('file://', ''),
+        });
+    })
+
+    return data;
+};

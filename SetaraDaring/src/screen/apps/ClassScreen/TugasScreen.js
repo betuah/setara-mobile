@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { View, ScrollView, RefreshControl, Linking, ImageBackground, StatusBar, Dimensions, TouchableOpacity } from 'react-native';
-import { Card, Divider, useTheme, TextInput, Button } from 'react-native-paper';
+import { View, ScrollView, RefreshControl, Linking, ImageBackground, StatusBar, Dimensions, TouchableOpacity, FlatList } from 'react-native';
+import { Card, Divider, useTheme, TextInput, FAB } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text, Btn } from '../../../components/common/UtilsComponent';
 import DocumentPicker from 'react-native-document-picker';
@@ -13,15 +13,57 @@ import env from '../../../config/baseUrl';
 import moment from 'moment/min/moment-with-locales';
 moment.locale('id')
 
+import LoadingModal from '../../../components/modal_component/Loading_Modal';
+
 import * as authAct from '../../../store/actions/authAction';
 import * as tugasAct from '../../../store/actions/tugasAction';
+
+const FilesListComponent = ({item, colors, fonts, onDeletePress}) => (
+    <View
+        style={{
+            flexDirection: 'row',
+            paddingVertical: 3
+        }}
+    >
+        <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => onDeletePress(item.name)}
+            style={{
+                marginHorizontal: 5,
+            }}
+        >
+            <Icon name='trash-outline' color={colors.red} size={16} />
+        </TouchableOpacity>
+        <View style={{
+            flex: 1,
+            marginHorizontal: 3,
+        }}>
+            <Icon name='document-attach-outline' color={colors.primary} size={16} />
+        </View>
+        <View style={{
+            flex: 15,
+        }}>
+            <Text
+                fontWeight={{...fonts.regular}}
+                size={12}
+                color={colors.text}
+            >
+                {item.name}
+            </Text>
+        </View>
+    </View>
+)
 
 const TugasScreen = ({route, navigation}) => {
     const { fonts, colors } = useTheme()
     const dispatch = useDispatch()
     const stateTugas = useSelector(state => state.tugas)
+
+    const [ attacthment, setAttacthment ] = useState([])
+    const [ tugasPost, setTugasPost ] = useState('')
     const [ refresh, setRefresh ] = useState(false)
     const [ isLoading, setLoading ] = useState(false)
+    const [ modalLoading, setModalLoading ] = useState(false)
     const [ error, setError ] = useState(false)
 
     const EmptySilabus = `<div style="display: flex; justify-content: center; align-items: center;"><h3 style="color: ${colors.textPrimary};">Tugas Tidak Tersedia. Silahkan hubungi pengajar.</h3></div>`
@@ -69,25 +111,44 @@ const TugasScreen = ({route, navigation}) => {
     )
 
     const onAttachFile = async () => {
-        console.log('attach')
         try {
-            const results = await DocumentPicker.pickMultiple({
+            const files = await DocumentPicker.pickMultiple({
                 type: [DocumentPicker.types.allFiles],
             });
-            for (const res of results) {
-                console.log(
-                    res.uri,
-                    res.type, // mime type
-                    res.name,
-                    res.size
-                );
-            }
+
+            setAttacthment(files)
+
         } catch (err) {
-            if (DocumentPicker.isCancel(err)) {
-                // User cancelled the picker, exit any dialogs or menus and move on
-            } else {
-                throw err;
+            console.log(err)
+        }
+    }
+
+    const deleteAttachFile = dataItem => {
+        const files = attacthment.filter(item => item.name !== dataItem).map(item => item)
+
+        setAttacthment(files)
+    }
+
+    const onSavePress = async () => {
+        try {
+            setModalLoading(true)
+            await dispatch(tugasAct.addTugas(route.params.id, attacthment))
+            setModalLoading(false)
+        } catch (error) {
+            if (error === 'ERR_GENERATE_TOKEN') {
+                dispatch(authAct.signOut(true))
+                Toast.show({
+                    type: 'error',
+                    text1: 'Maaf, Sesi kamu telah Habis!',
+                    text2: 'Silahkan masuk kembali.'
+                });
             }
+            Toast.show({
+                type: 'error',
+                text1: 'Maaf, Terjadi Kesalah!',
+                text2: error
+            });
+            setModalLoading(false)
         }
     }
 
@@ -149,6 +210,22 @@ const TugasScreen = ({route, navigation}) => {
         )
 
     return (
+        <>
+        <LoadingModal visible={modalLoading} />
+        <FAB
+            style={{
+                backgroundColor: colors.primary,
+                position: 'absolute',
+                margin: 16,
+                right: 0,
+                bottom: 0,
+                zIndex: 10,
+            }}
+            icon="content-save"
+            color={colors.textWhite}
+            visible={tugasPost.trim() || attacthment.length > 0 ? true : false}
+            onPress={() => onSavePress()}
+        />
         <View>
             <StatusBar barStyle='light-content' backgroundColor={colors.primary} />
             <ImageBackground
@@ -317,21 +394,28 @@ const TugasScreen = ({route, navigation}) => {
                             style={{
                                 fontSize: 12,
                             }}
+                            value={tugasPost}
+                            onChangeText={text => setTugasPost(text)}
                         />
                     </View>
                     <View style={{
                         paddingBottom: 10,
-                        flexDirection: 'row'
+                        flexDirection: 'column'
                     }}>
-                        <View style={{
-                            flex: 1,
-                            justifyContent: 'center',
-                            alignItems: 'flex-start'
-                        }}>
-                            <TouchableOpacity 
+                        <TouchableOpacity 
                                 onPress={() => onAttachFile()}
                                 activeOpacity={0.7}
                             >
+                            <View style={{
+                                height: 50,
+                                borderWidth: 1,
+                                borderStyle: 'dashed',
+                                borderRadius: 10,
+                                borderColor: colors.greyLight,
+                                backgroundColor: colors.bgLightBlye,
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}>
                                 <View style={{
                                     flexDirection: 'row'
                                 }}>
@@ -339,31 +423,41 @@ const TugasScreen = ({route, navigation}) => {
                                     <Text
                                         fontWeight={{...fonts.regular}}
                                         size={12}
-                                        color={colors.text}
+                                        color={colors.primary}
                                     >
                                         Lampirkan File
                                     </Text>
                                 </View>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{
-                            flex: 1,
-                            alignItems: 'flex-end'
-                        }}>
-                            <Btn 
-                                onPress={() => console.log('test')}
-                                mode="text"
-                                title='Simpan'
-                                fontColor={colors.primary}
-                                fontSize={14}
-                                fontWeight={fonts.semiBold}
-                            />
-                        </View>
+                            </View>
+                        </TouchableOpacity>
+                        <ScrollView
+                            showsVerticalScrollIndicator={false}
+                            contentContainerStyle={{
+                                flex: 1,
+                                paddingTop: 10,
+                                paddingLeft: 5,
+                            }}
+                        >
+                            {
+                                attacthment.map((item, index) => {
+                                    return (
+                                        <FilesListComponent 
+                                            key={index.toString()} 
+                                            item={item} 
+                                            colors={colors} 
+                                            fonts={fonts} 
+                                            onDeletePress={deleteAttachFile}
+                                        />
+                                    )
+                                })
+                            }
+                        </ScrollView>
                     </View>
                 </Card>
             </ScrollView>
             </ImageBackground>
         </View>
+        </>
     )
 }
 
