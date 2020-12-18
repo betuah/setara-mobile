@@ -33,6 +33,7 @@ const materiRoute = require('./routes/materi_route')
 const tugasRoute  = require('./routes/tugas_route')
 const postRoute   = require('./routes/post_route')
 const userRoute   = require('./routes/user_route')
+const notifRoute   = require('./routes/notif_route')
 
 authRoute(app)
 classRoute(app)
@@ -40,6 +41,7 @@ materiRoute(app)
 tugasRoute(app)
 postRoute(app)
 userRoute(app)
+notifRoute(app)
 
 /* End of Routing Import */
 

@@ -18,7 +18,6 @@ const NotifUmum = ({ navigation }) => {
     const { colors, fonts } = useTheme()
     const dispatch = useDispatch()
 
-    const [devel, setDevel ] = useState(false)
     const [refreshing, setRefresh] = useState(false)
 
     const { notif } = useSelector(state =>  state.notif)
@@ -62,31 +61,6 @@ const NotifUmum = ({ navigation }) => {
         }
 
     }, [dispatch])
-
-    if (devel) return (
-        <>
-        <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
-        <View>
-            <View style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-                marginTop: Dimensions.get('window').height * 0.3,
-            }}>
-                <LottieView 
-                        source={require('../../../assets/lottie/26383-teamwork.json')} 
-                        autoPlay
-                        style={{
-                            width: '40%',
-                            alignItems: 'center',
-                        }}
-                    />
-                <Text style={{textAlign: 'center', marginVertical: 15,}} size={12} fontWeight={fonts.regular} color={colors.textPrimary}>Mohon Maaf Fitur Ini Sedang Dalam Pengembangan.</Text>
-            </View>
-        </View>
-        </>
-    )
 
     return (
         <>
