@@ -1,9 +1,7 @@
 import React from 'react';
 import { useTheme } from 'react-native-paper';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { StatusBar } from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { Btn } from '../components/common/UtilsComponent';
 
 import Header from '../components/common/Header';
 
@@ -18,6 +16,8 @@ const ProfileNav = ({ route, navigation}) => {
     const MainProfileOption = {
         headerShown: true,
         header: ({ scene, previous, navigation }) => (
+            <>
+            <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
             <Header 
                 data={{
                     title: 'P R O F I L   S A Y A', 
@@ -44,6 +44,7 @@ const ProfileNav = ({ route, navigation}) => {
                     size: 22,
                 }}
             />
+            </>
         ),
     }
 
