@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 import { View, ScrollView, Image, RefreshControl, StatusBar } from 'react-native';
 import LottieView from 'lottie-react-native';
+import Toast from 'react-native-toast-message';
 
 import Devel from '../../../components/modal_component/Development_Modal';
 

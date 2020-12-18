@@ -11,13 +11,13 @@ const EmptyComponent = props => {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: '50%'
+            marginTop: props.top ? props.top : '50%'
         }}>
             <LottieView 
                 source={require('../assets/lottie/33173-smartphone-addicition.json')} 
                 autoPlay
                 style={{
-                    width: '60%',
+                    width: props.width ? props.width : '60%',
                     alignItems: 'center',
                 }}
             />

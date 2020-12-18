@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {createStackNavigator} from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -11,16 +12,54 @@ import NotifClass from '../screen/apps/NotifScreen/NotifClassScreen';
 
 import Header from '../components/common/Header';
 
+import * as authAct from '../store/actions/authAction';
+import * as notifAct from '../store/actions/notifActions';
+
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
 const NotifTab = (props) => {
     const {colors,fonts} = useTheme()
+    const dispatch = useDispatch()
 
     const notifState    = useSelector(state => state.notif.notif)
     const notifClass    = notifState.map(item => item).filter(item => { return (item.category === 3 || item.category === 4 ) && item.read})
     const notifDiscuss  = notifState.map(item => item).filter(item => item.category === 2 && item.read)
     const notifUmum     = notifState.map(item => item).filter(item => item.category === 1 && item.read)
+
+    useFocusEffect(
+        useCallback(() => {
+            let isActive = true;
+    
+            const fetch = async () => {
+                try {
+                    if (isActive) {
+                        await dispatch(notifAct.initData())
+                    }
+                } catch (error) {
+                    if (isActive) {
+                        if (error) {
+                            if (error === 'ERR_GENERATE_TOKEN') {
+                                dispatch(authAct.signOut(true))
+                                Toast.show({
+                                    type: 'error',
+                                    text1: 'Maaf, Sesi kamu telah Habis!',
+                                    text2: 'Silahkan masuk kembali.'
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+    
+            fetch();
+    
+            return () => {
+                isActive = false
+            }
+    
+        }, [dispatch])
+    );
 
     return (
         <Tab.Navigator 
@@ -51,7 +90,7 @@ const NotifTab = (props) => {
                 name="Umum" 
                 component={NotifUmum}
                 options={{
-                    title: `UMUM ( ${notifUmum.length} )`,
+                    title: notifUmum.length > 0 ? `UMUM ( ${notifUmum.length} )` : 'UMUM',
                     tabBarIcon: ({focused, color}) => (
                         <Icon 
                             name={focused ? 'notifications' : 'notifications-outline'} 
@@ -65,7 +104,7 @@ const NotifTab = (props) => {
                 name="Diskusi" 
                 component={NotifDiscussion}
                 options={{
-                    title: `DISKUSI ( ${notifDiscuss.length} )`,
+                    title: notifDiscuss.length > 0 ? `DISKUSI ( ${notifDiscuss.length} )` : 'DISKUSI',
                     tabBarIcon: ({focused, color}) => (
                         <Icon 
                             name={focused ? 'chatbubbles' : 'chatbubbles-outline'} 
@@ -79,7 +118,7 @@ const NotifTab = (props) => {
                 name="TugasEvaluasi" 
                 component={NotifClass}
                 options={{
-                    title: `KELAS ( ${notifClass.length} )`,
+                    title: notifClass.length > 0 ? `KELAS ( ${notifClass.length} )` : 'KELAS',
                     tabBarIcon: ({focused, color}) => (
                         <Icon 
                             name={focused ? 'school' : 'school-outline'} 
