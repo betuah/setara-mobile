@@ -117,6 +117,7 @@ const ProfileScreen = (props) => {
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
+                    flex: 1,
                     paddingBottom: 10,
                     paddingHorizontal: 10,
                 }}
@@ -129,9 +130,8 @@ const ProfileScreen = (props) => {
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: colors.loadingBackground
                 }}>
-                    <Text style={{textAlign: 'center'}} fontWeight={{...fonts.regular}} size={12}>Maaf Terjadi Kesalahan, Geser layar ke bawah untuk mencoba lagi.</Text>
+                    <Text style={{textAlign: 'center'}} fontWeight={{...fonts.regular}} size={12} color={colors.red}>Maaf Terjadi Kesalahan, Geser layar ke bawah untuk mencoba lagi.</Text>
                 </View>
             </ScrollView>
             
