@@ -114,6 +114,8 @@ const ProfileEditScreen = ({ navigation }) => {
                 }
 
                 setModal(false)
+            }).catch(err => {
+                console.log(err)
             })
         } 
         
@@ -206,7 +208,9 @@ const ProfileEditScreen = ({ navigation }) => {
         )
 
     return (
-        <Fragment>
+        <View style={{
+            backgroundColor: colors.bgLight
+        }}>
         <StatusBar barStyle='light-content' backgroundColor={colors.primary} />
         <LoadingModal visible={isLoading} />
         <FAB.Group
@@ -250,9 +254,9 @@ const ProfileEditScreen = ({ navigation }) => {
                     width: '70%',
                     borderRadius: 10,
                     elevation: 3,
-                    shadowOffset: { width: 0, height: 3 },
-                    shadowOpacity: 0.5,
-                    shadowRadius: 3,
+                    shadowOffset: { width: 0, height: 1 },
+                    shadowOpacity: 0.3,
+                    shadowRadius: 1,
                 }}>
                     <View style={{
                         paddingVertical: 10,
@@ -287,10 +291,11 @@ const ProfileEditScreen = ({ navigation }) => {
         >
             <View style={{
                 backgroundColor: colors.bgPrimary,
+                overflow: 'hidden',
                 elevation: 3,
-                shadowOffset: { width: 2, height: 3 },
+                shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.5,
-                shadowRadius: 3,
+                shadowRadius: 2,
             }}>
                 <ImageBackground 
                     source={require('../../../assets/images/icon_pattern.png')}
@@ -417,7 +422,7 @@ const ProfileEditScreen = ({ navigation }) => {
                         borderRadius: 10,
                         elevation: 2,
                         shadowOffset: { width: 1, height: 2 },
-                        shadowOpacity: 0.5,
+                        shadowOpacity: 0.3,
                         shadowRadius: 2,
                     }}>
                         <View style={{
@@ -546,7 +551,7 @@ const ProfileEditScreen = ({ navigation }) => {
                         borderRadius: 10,
                         elevation: 2,
                         shadowOffset: { width: 1, height: 2 },
-                        shadowOpacity: 0.5,
+                        shadowOpacity: 0.3,
                         shadowRadius: 2,
                     }}>
                         <View style={{
@@ -623,7 +628,7 @@ const ProfileEditScreen = ({ navigation }) => {
                 </ImageBackground>
             </View>
         </ScrollView>
-        </Fragment>
+        </View>
     )
 }
 

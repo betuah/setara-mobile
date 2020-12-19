@@ -4,6 +4,7 @@ import { Dimensions, View, TouchableOpacity, Image, FlatList } from 'react-nativ
 import { useTheme, Divider, TouchableRipple, Card } from 'react-native-paper';
 import { Text, Btn } from '../common/UtilsComponent';
 import { Transition, Transitioning } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
@@ -177,12 +178,16 @@ const ListAcordition = ({
 
 const Tugas_Modal = ({visible, onDismiss, id, onItemPress}) => {
     const { colors, fonts } = useTheme()
+    const dispatch = useDispatch()
+    const insets = useSafeAreaInsets();
+
+    const AcordionRef = useRef()
+
     const tugasState = useSelector(state => state.tugas)
     const authState = useSelector(state => state.auth)
-    const dispatch = useDispatch()
+    
     const [isLoading, setLoading] = useState(false)
-    const [cAccIndex, setcAccIndex] = useState(null)
-    const AcordionRef = useRef()
+    const [cAccIndex, setcAccIndex] = useState(null)    
     
     useEffect(
         useCallback(() => {
@@ -336,7 +341,8 @@ const Tugas_Modal = ({visible, onDismiss, id, onItemPress}) => {
                 <Card.Actions style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: colors.bgSecondary
+                    backgroundColor: colors.bgSecondary,
+                    paddingBottom: insets.bottom
                 }}>
                     <Btn 
                         title='TUTUP' 

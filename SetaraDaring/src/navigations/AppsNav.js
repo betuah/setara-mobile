@@ -36,10 +36,10 @@ const AppsNav = () => {
                 backgroundColor: colors.bgWhite,
                 borderTopColor: colors.bgPrimary, 
                 borderTopWidth: 1,
-                shadowOffset: { width: 0, height: -10 },
-                shadowOpacity:  0.4,
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity:  0.5,
                 shadowRadius: 3,
-                elevation: 3,
+                elevation: 0,
             }}
         >
             <Tab.Screen 

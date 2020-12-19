@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar } from 'react-native';
-import { TabView, SceneMap, TabBar  } from 'react-native-tab-view';
+import { TabView, TabBar  } from 'react-native-tab-view';
 import { useDispatch, useSelector } from 'react-redux';
-import { Text, Texts } from '../components/common/UtilsComponent';
+import { Text } from '../components/common/UtilsComponent';
 import { validate } from 'validate.js';
 import { signupWbConstrains } from '../constants/constrains';
 import { signupTutorConstrains } from '../constants/constrains';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { 
     View, 
-    StyleSheet, 
-    SafeAreaView, 
+    StatusBar,
+    StyleSheet,  
     TouchableWithoutFeedback, 
     Keyboard,
     Dimensions, 
     ScrollView,
+    KeyboardAvoidingView
 } from 'react-native';
 
 // Auth Actions
@@ -32,6 +33,7 @@ const initialLayout = { width: Dimensions.get('window').width };
 const SignUpScreen = ({ navigation }) => {
     const authData = useSelector(state => state.auth)
     const dispatch = useDispatch()
+    const insets = useSafeAreaInsets();
     const [loading, setLoading] = useState(false)
 
     const [wbData, setWbData] = useState({
@@ -192,6 +194,14 @@ const SignUpScreen = ({ navigation }) => {
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={{flex: 1,}}>
+            <KeyboardAvoidingView
+                behavior={Platform.OS == "ios" ? "padding" : "height"}
+                style={{
+                    backgroundColor: colors.primary,
+                    flex: 1,
+                }}
+            >
             <SafeAreaView style={styles.screen}>
                 <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
                 <ScrollView 
@@ -228,11 +238,13 @@ const SignUpScreen = ({ navigation }) => {
                             >Masuk</Text>
                         </View>
                     </View>
-                </ScrollView>
-                <View style={styles.footer}>
-                <Text color={colors.white} size={10}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
-                </View>
+                </ScrollView>                
             </SafeAreaView>
+            </KeyboardAvoidingView>
+            <View style={{...styles.footer, paddingBottom: insets.bottom}}>
+                <Text color={colors.white} size={10}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
+            </View>
+            </View>
         </TouchableWithoutFeedback>
     )
 }
@@ -257,7 +269,7 @@ const styles = StyleSheet.create({
         flexGrow: 1
     },
     footer: {
-        padding: 15,
+        paddingVertical: 15,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: colors.darkBlue

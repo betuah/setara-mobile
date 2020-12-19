@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, View, KeyboardAvoidingView } from 'react-native';
 import { useTheme, Card, Divider } from 'react-native-paper';
 import { Text, Btn, Input } from '../common/UtilsComponent';
 import Modal from 'react-native-modal';
@@ -33,17 +33,16 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                 margin: 0
             }}
         >
+            <KeyboardAvoidingView
+                behavior={Platform.OS == "ios" ? "padding" : "height"}
+            >
             <Card style={{
                 backgroundColor: colors.bgPrimary,
                 borderTopRightRadius: 20,
                 borderTopLeftRadius: 20,
                 maxHeight: Dimensions.get('window').height * 0.5,
+                minHeight: Dimensions.get('window').height * 0.3
             }}>
-                <View style={{
-                    alignItems: 'center'
-                }}>
-                    
-                </View>
                 <View style={{
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -86,6 +85,7 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                     borderTopRightRadius: 15,
                     backgroundColor: colors.bgLight,
                     flexDirection: 'column',
+                    flex: 1,
                 }}>
                     <View style={{
                         flexDirection: 'row',
@@ -124,6 +124,7 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                     </View>
                 </View>
             </Card>
+            </KeyboardAvoidingView>
         </Modal>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { View, ScrollView, RefreshControl, Linking, ImageBackground, StatusBar, Dimensions, TouchableOpacity, FlatList } from 'react-native';
+import { View, ScrollView, RefreshControl, Linking, ImageBackground, StatusBar, Dimensions, TouchableOpacity, FlatList, Platform } from 'react-native';
 import { Card, Divider, useTheme, TextInput, FAB } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text, Btn } from '../../../components/common/UtilsComponent';
@@ -100,7 +100,7 @@ const TugasScreen = ({route, navigation}) => {
     useFocusEffect(
         useCallback(() => {
             StatusBar.setBarStyle('light-content')
-            StatusBar.setBackgroundColor(colors.primary)
+            Platform.OS === 'android' && StatusBar.setBackgroundColor(colors.primary)
 
             let isActive = true
             if (isActive) loadDetailData()
