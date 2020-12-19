@@ -119,7 +119,19 @@ const TugasScreen = ({route, navigation}) => {
             setAttacthment(files)
 
         } catch (err) {
-            console.log(err)
+            if (error === 'ERR_GENERATE_TOKEN') {
+                dispatch(authAct.signOut(true))
+                Toast.show({
+                    type: 'error',
+                    text1: 'Maaf, Sesi kamu telah Habis!',
+                    text2: 'Silahkan masuk kembali.'
+                });
+            }
+            Toast.show({
+                type: 'error',
+                text1: 'Opss..!',
+                text2: error
+            });
         }
     }
 

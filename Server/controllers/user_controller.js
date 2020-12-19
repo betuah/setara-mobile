@@ -84,10 +84,12 @@ exports.setProfile = async (req, res) => {
 // Upload Foto
 exports.avatarUpload = (req, res) => {
     try {
+        const fileData = req.files
+
         User.findOneAndUpdate(
             { _id: req.userId }, 
             { 
-                foto: fileData.filename, 
+                foto: fileData[0].filename, 
                 path: 'api.setara.kemdikbud.go.id/public/photo/'
             }
         ).then(resData => {

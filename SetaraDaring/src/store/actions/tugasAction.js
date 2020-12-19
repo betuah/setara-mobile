@@ -26,7 +26,7 @@ export const getDetailTugas = (tugasId) => {
             const res = await AxiosAPI.get(`${config.base_url}/api/v1/tugas/detail/${tugasId}`)
             const resData = res.data
 
-            dispatch({type: DETAIL_TUGAS, detailTugas: resData})
+            dispatch({type: DETAIL_TUGAS, detailTugas: resData.data})
         } catch (error) {
             console.log(error, 'error tugas')
             ErrorHandler(error)

@@ -43,22 +43,46 @@ exports.getListTugas = async (req, res) => {
 
                         const getNilaiTugas = new Promise ((resolve, reject) => {
                             if (tugasData.length > 0){
-                                nilai_kumpul_tugas = 0
+                                nilai_kumpul_tugas  = 0
+                                let listTugas       = []
+                                let tempTugas
+                                let status_kumpul
+                                let nilai_tugas
 
                                 tugasData.map( async (tugas, index, array)  => {
                                     try {
                                         const tugasKumpulData = await TugasKumpul.findOne({ id_user: userId, id_tugas: tugas._id})
 
+                                        nilai_tugas         = tugasKumpulData.nilai
+
                                         if(tugasKumpulData) {
                                             nilai_kumpul_tugas += parseFloat(tugasKumpulData.nilai)
+                                            status_kumpul = 'Sudah Mengerjakan'
                                         }
 
                                     } catch (e) {
+                                        let today       = new Date()
+                                        let deadline    = new Date(tugas.deadline)
 
+                                        nilai_tugas = null
+                                        status_kumpul = ((deadline-today) > 0) ? 'Belum Mengerjakan':'Tidak Mengerjakan'
+
+                                    } finally{
+                                        tempTugas = {
+                                            ...tugas._doc,
+                                            nilai_tugas: nilai_tugas,
+                                            status_kumpul: status_kumpul
+                                        }
+
+                                        listTugas.push(tempTugas)
                                     }
 
                                     if(index === tugasData.length-1) {
-                                        resolve(nilai_kumpul_tugas/tugasData.length)
+                                        resolve({
+                                            list_tugas: listTugas,
+                                            rata_nilai: nilai_kumpul_tugas/tugasData.length
+                                        })
+                                        // resolve(nilai_kumpul_tugas/tugasData.length)
                                     }
                                 })
                             }else{
@@ -94,33 +118,47 @@ exports.getListTugas = async (req, res) => {
                         nilai_kumpul_tugas = await getNilaiTugas
                         nilai_kumpul_quiz  = await getNilaiQuiz
 
-                        nilai_modul = (nilai_baca_materi*item.nilai.materi/100)+(nilai_kumpul_tugas*item.nilai.tugas/100)+(nilai_kumpul_quiz*item.nilai.ujian/100)
+                        nilai_modul = (nilai_baca_materi*item.nilai.materi/100)+(nilai_kumpul_tugas.rata_nilai*item.nilai.tugas/100)+(nilai_kumpul_quiz*item.nilai.ujian/100)
 
-                        resolve(nilai_modul)
+                        // resolve(nilai_modul)
+                        resolve({
+                            list_tugas: nilai_kumpul_tugas.list_tugas,
+                            nilai: nilai_modul
+                        })
                     })
 
                     nilai_akhir_modul = await getNilaiModul(item._id)
 
                     if (item.prasyarat!="0"){
                         nilai_akhir_modul_prev = await getNilaiModul(item.prasyarat)
-                        if (nilai_akhir_modul_prev < item.nilai.minimal){
+                        if (nilai_akhir_modul_prev.nilai < item.nilai.minimal){
                             status_modul = 'locked'
                         }
                     }
 
-                    Tugas.find({ id_modul: item._id}).sort({ date_created: 'asc'}).then(tugas => {
-                        const tempData = {
-                            ...item._doc,
-                            nilai_akhir_modul: nilai_akhir_modul,
-                            status_modul: status_modul,
-                            tugas: tugas
-                        }
-                        tugasData.push(tempData)
+                    const tempData = {
+                        ...item._doc,
+                        nilai_akhir_modul: nilai_akhir_modul.nilai,
+                        status_modul: status_modul,
+                        tugas: nilai_akhir_modul.list_tugas
+                    }
+                    tugasData.push(tempData)
 
-                        if (tugasData.length === array.length) resolve(tugasData);
-                    }).catch(err => {
-                        reject(err)
-                    })
+                    if (tugasData.length === array.length) resolve(tugasData)
+
+                    // Tugas.find({ id_modul: item._id}).sort({ date_created: 'asc'}).then(tugas => {
+                    //     const tempData = {
+                    //         ...item._doc,
+                    //         nilai_akhir_modul: nilai_akhir_modul,
+                    //         status_modul: status_modul,
+                    //         tugas: tugas
+                    //     }
+                    //     tugasData.push(tempData)
+                    //
+                    //     if (tugasData.length === array.length) resolve(tugasData);
+                    // }).catch(err => {
+                    //     reject(err)
+                    // })
                 })
             } else {
                 resolve([])
@@ -149,11 +187,56 @@ exports.getListTugas = async (req, res) => {
 
 exports.getTugasDetail = async (req, res) => {
     try {
-        const id = req.params.tugasId
+        const userId    = req.userId
+        const id        = req.params.tugasId
+
+        let isi_tugas
+        let lampiran_tugas
+        let catatan_tugas
+        let nilai_tugas
+        let status_kumpul
 
         const tugasData = await Tugas.findOne({ _id: id})
 
-        res.status(200).json(tugasData)
+        TugasKumpul.findOne({ id_user: userId, id_tugas: id}).then(tugasKumpulData => {
+            nilai_tugas     = tugasKumpulData.nilai
+            isi_tugas       = tugasKumpulData.deskripsi
+            lampiran_tugas  = tugasKumpulData.file
+            catatan_tugas   = tugasKumpulData.catatan
+            status_kumpul   = 'Sudah Mengerjakan'
+        }).catch( e => {
+            let today       = new Date()
+            let deadline    = new Date(tugasData && tugasData.deadline)
+
+            nilai_tugas     = null
+            isi_tugas       = null
+            lampiran_tugas  = null
+            catatan_tugas   = null
+            status_kumpul = ((deadline-today) > 0) ? 'Belum Mengerjakan':'Tidak Mengerjakan'
+        }).finally(() => {
+            tempTugas = {
+                ...tugasData ? tugasData._doc : {},
+                isi_tugas: isi_tugas,
+                lampiran_tugas: lampiran_tugas,
+                catatan_tugas: catatan_tugas,
+                nilai_tugas: nilai_tugas,
+                status_kumpul: status_kumpul
+            }
+
+            if (tugasData) {
+                res.status(200).json({
+                    code: 'OK',
+                    status: 'success',
+                    data: tempTugas
+                })
+            } else {
+                res.status(404).json({
+                    code: 'ERR_TUGAS_NOT_FOUND',
+                    status: 'Tugas not found!',
+                    message: 'Tugas tidak ditemukan'
+                })
+            }
+        })
     } catch (error) {
         if (error.code) {
             res.status(error.code).json(error)
@@ -165,6 +248,7 @@ exports.getTugasDetail = async (req, res) => {
 
 exports.kumpulkanTugas = async (req, res) => {
     try {
+        const fileData  = req.files.map(item => item.filename)
         const userId    = req.userId
         const tugasId   = req.params.tugasId
         const isi_tugas = req.body.isi_tugas ? req.body.isi_tugas : ''

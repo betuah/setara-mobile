@@ -190,6 +190,60 @@ const signOut = async (req, res) => {
         })
 }
 
+// Reset Password
+const resetPassword = async (req, res) => {
+    try {
+        const oldPass = req.body.pass ? req.body.pass : ''
+        const newPass = req.body.pass ? req.body.pass : ''
+
+        const passwordHashed = await bcrypt.hash(newPass, 12)
+
+        if (oldPass && newPass) {
+            // Find and get User data from user model, reference from mongoose docs
+            const user = await User.findOne({ _id: req.userId })
+
+            // Check if user exist and password is valid
+            if (!user || !bcrypt.compareSync(password, user.password)) {
+                res.status(400).json({code: 'ERR_INCORRECT_OLDPASS', message: 'Password lama Anda salah!'})
+            } else {
+                User.findByIdAndUpdate(
+                    { _id: userId },
+                    {
+                        password: passwordHashed.replace(/^\$2y(.+)$/i, '\$2a$1')
+                    }
+                    ).then((reData) => {
+                    res.status(200).json({
+                        code: 'OK',
+                        status: 'Password Updated.',
+                        data: {
+                            id: req.userId,
+                            username: reData.username,
+                            name: reData.nama,
+                            email: reData.email,
+                            status: reData.status
+                        }
+                    })
+                }).catch(err => {
+                    console.log(new Error(err))
+                    res.status(400).json({
+                        code: 'ERR_UPDATE_PASS',
+                        status: 'Error update password.',
+                        message: err
+                    })
+                })
+            }
+        } else {
+            res.status(404).json({
+                code: 'ERR_PASS_REQUIRED',
+                status: 'Password body required',
+                error: 'Membutuhkan field password lama dan password baru.'
+            })
+        }
+    } catch (error) {
+        
+    }
+}
+
 // Get New Token
 const generateNewToken = async (req, res) => {
     const token = req.cookies.refToken ? req.cookies.refToken : (req.body.refreshToken ? req.body.refreshToken : '') // Get refresh token from cookie
@@ -219,4 +273,5 @@ module.exports = {
     signUp,
     signOut,
     generateNewToken,
+    resetPassword
 }

@@ -50,24 +50,22 @@ const { mongoConn } = require('./config/db_mongoDB') // Import mongo connection 
 
 mongoConn.then(() => // If mongodb Connected to the host server
     {
-        // if (env.node_env === 'production') { // If Node Env set to production
-        //     try {
-        //         // If production set https
-        //         const privateKey  = fs.readFileSync(`${env.httpsPrivateKey}`, 'utf8')
-        //         const certificate = fs.readFileSync(`${env.httpsCertificate}`, 'utf8')
-        //         const credentials = {key: privateKey, cert: certificate}
-        //         const httpsApps   = https.createServer(credentials, app)
-        //
-        //         httpsApps.listen(port, () => console.log(`Production Server API listen on ${env.host}:${env.port}`)) // listen port https
-        //     } catch (error) {
-        //         console.log(new Error(error))
-        //     }
-        // } else {
-        //     // If env set to development
-        //     app.listen(port, () => console.log(`Development Server API listen on ${env.host}:${env.port}`)) // Listen port http
-        // }
+        if (env.node_env === 'production') { // If Node Env set to production
+            try {
+                // If production set https
+                const privateKey  = fs.readFileSync(`${env.httpsPrivateKey}`, 'utf8')
+                const certificate = fs.readFileSync(`${env.httpsCertificate}`, 'utf8')
+                const credentials = {key: privateKey, cert: certificate}
+                const httpsApps   = https.createServer(credentials, app)
 
-        app.listen(port, () => console.log(`Development Server API listen on ${env.host}:${env.port}`)) // Listen port http
+                httpsApps.listen(port, () => console.log(`Production Server API listen on ${env.host}:${env.port}`)) // listen port https
+            } catch (error) {
+                console.log(new Error(error))
+            }
+        } else {
+            // If env set to development
+            app.listen(port, () => console.log(`Development Server API listen on ${env.host}:${env.port}`)) // Listen port http
+        }
     }
 ).catch(err => {
     console.log(`${env.host}:${env.port} cannot connect to MongoDB! : ` + err)

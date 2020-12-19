@@ -141,7 +141,7 @@ export const CombinedDefaultTheme = {
 
         bgWhite: '#FFFFFF',
         bgLight: '#f2feff',
-        bgLightBlye: '#E7F8FF',
+        bgLightBlue: '#E7F8FF',
         bgDark: '#473F47',
         bgDarkBlue: '#2A9FC4',
         bgLock: '#F88585',
