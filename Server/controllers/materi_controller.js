@@ -96,7 +96,6 @@ exports.getListMateri = async (req, res) => {
                     })
 
                     nilai_akhir_modul = await getNilaiModul(item._id)
-                    console.log('Nilai akhir modul: ', nilai_akhir_modul)
 
                     if (item.prasyarat!="0"){
                         nilai_akhir_modul_prev = await getNilaiModul(item.prasyarat)

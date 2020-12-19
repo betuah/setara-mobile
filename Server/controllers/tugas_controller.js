@@ -206,7 +206,7 @@ exports.getTugasDetail = async (req, res) => {
             status_kumpul   = 'Sudah Mengerjakan'
         }).catch( e => {
             let today       = new Date()
-            let deadline    = new Date(tugasData.deadline)
+            let deadline    = new Date(tugasData && tugasData.deadline)
 
             nilai_tugas     = null
             isi_tugas       = null
@@ -215,7 +215,7 @@ exports.getTugasDetail = async (req, res) => {
             status_kumpul = ((deadline-today) > 0) ? 'Belum Mengerjakan':'Tidak Mengerjakan'
         }).finally(() => {
             tempTugas = {
-                ...tugasData._doc,
+                ...tugasData ? tugasData._doc : {},
                 isi_tugas: isi_tugas,
                 lampiran_tugas: lampiran_tugas,
                 catatan_tugas: catatan_tugas,
@@ -223,7 +223,19 @@ exports.getTugasDetail = async (req, res) => {
                 status_kumpul: status_kumpul
             }
 
-            res.status(200).json(tempTugas)
+            if (tugasData) {
+                res.status(200).json({
+                    code: 'OK',
+                    status: 'success',
+                    data: tempTugas
+                })
+            } else {
+                res.status(404).json({
+                    code: 'ERR_TUGAS_NOT_FOUND',
+                    status: 'Tugas not found!',
+                    message: 'Tugas tidak ditemukan'
+                })
+            }
         })
     } catch (error) {
         if (error.code) {
@@ -236,6 +248,7 @@ exports.getTugasDetail = async (req, res) => {
 
 exports.kumpulkanTugas = async (req, res) => {
     try {
+        const fileData  = req.files.map(item => item.filename)
         const userId    = req.userId
         const tugasId   = req.params.tugasId
         const isi_tugas = req.body.isi_tugas ? req.body.isi_tugas : ''

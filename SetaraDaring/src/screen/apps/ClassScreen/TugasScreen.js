@@ -120,6 +120,19 @@ const TugasScreen = ({route, navigation}) => {
 
         } catch (err) {
             console.log(err)
+            if (error === 'ERR_GENERATE_TOKEN') {
+                dispatch(authAct.signOut(true))
+                Toast.show({
+                    type: 'error',
+                    text1: 'Maaf, Sesi kamu telah Habis!',
+                    text2: 'Silahkan masuk kembali.'
+                });
+            }
+            Toast.show({
+                type: 'error',
+                text1: 'Opss..!',
+                text2: error
+            });
         }
     }
 
@@ -310,7 +323,7 @@ const TugasScreen = ({route, navigation}) => {
                                     fontWeight={{...fonts.medium}}
                                     size={12}
                                 >
-                                    {`${moment(stateTugas.detailTugas.deadline).format('HH:MM - D MMM Y')}`}
+                                    {`${moment(stateTugas.detailTugas.deadline).format('D MMM Y (HH:MM)')}`}
                                 </Text>
                             </View>
                             <Text

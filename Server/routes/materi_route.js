@@ -5,6 +5,8 @@ module.exports = (app) => {
 
     app.route('/api/v1/materi/:mapelId')
         .get(authMiddleware, materiController.getListMateri)
+
     app.route('/api/v1/materi/detail/:materiId')
         .get(authMiddleware, materiController.getMateriDetail)
+        
 }

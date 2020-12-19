@@ -116,6 +116,7 @@ const ListAcordition = ({
             {
                 currentIndex === index && 
                 <FlatList 
+                    keyExtractor={item => item._id}
                     data={tugas}
                     contentContainerStyle={{
                         flexDirection: 'column',
@@ -123,7 +124,7 @@ const ListAcordition = ({
                     renderItem={(data) => (
                         <>
                         <TouchableRipple
-                            onPress={() => onItemPress(data.item.id, data.item.nama, data.item.date_created)}
+                            onPress={() => onItemPress(data.item._id, data.item.nama, data.item.date_created)}
                             rippleColor="rgba(0, 208, 255, .20)"
                         >
                             <View style={{
