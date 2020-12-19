@@ -7,14 +7,14 @@ services:
             dockerfile: Dockerfile
         image: setara/api_server:release
         container_name: api_server
-        env_file: dev.env
+        env_file: prod.env
         networks: 
             - setaralms_network
         volumes: 
             - ./public:/usr/src/app/public
-            - ./ssl:/usr/src/app/ssl
+            - /etc/letsencrypt/archive/api.setara.kemdikbud.go.id/:/usr/src/app/ssl
         ports:
-            - 8000:8000
+            - 8443:8443
         command: npm run start
 
 networks: 

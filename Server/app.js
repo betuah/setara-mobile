@@ -57,7 +57,7 @@ mongoConn.then(() => // If mongodb Connected to the host server
                 const certificate = fs.readFileSync(`${env.httpsCertificate}`, 'utf8')
                 const credentials = {key: privateKey, cert: certificate}
                 const httpsApps   = https.createServer(credentials, app)
-        
+
                 httpsApps.listen(port, () => console.log(`Production Server API listen on ${env.host}:${env.port}`)) // listen port https
             } catch (error) {
                 console.log(new Error(error))
