@@ -24,6 +24,10 @@ npm i --save react-native-render-html
 npm i --save react-native-reanimated
 npm i --save react-native-snap-carousel
 npm i --save react-native-document-picker
+npm i --save axios
+npm i --save @react-navigation/material-top-tabs
+npm i --save react-native-modal
+npm i --save react-native-webview
 ```
 
 ##### All In One Install
