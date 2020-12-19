@@ -6,11 +6,10 @@ import { Text } from '../../../components/common/UtilsComponent';
 import { Chase } from 'react-native-animated-spinkit';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
-import { View, ScrollView, Image, RefreshControl, StatusBar, Platform } from 'react-native';
+import { View, ScrollView, Image, RefreshControl, StatusBar } from 'react-native';
 import LottieView from 'lottie-react-native';
 import Toast from 'react-native-toast-message';
 
-import StatusBariOS from '../../../components/common/StatusBar.js';
 import Devel from '../../../components/modal_component/Development_Modal';
 
 import * as authAct from '../../../store/actions/authAction';
@@ -32,10 +31,8 @@ const ProfileScreen = (props) => {
     const [ passModal, setPassModal ] = useState(false)
 
     useEffect(() => {
-        if (Platform.OS === 'android') {
-            StatusBar.setBarStyle('light-content')
-            StatusBar.setBackgroundColor(colors.primary)
-        }
+        StatusBar.setBarStyle('light-content')
+        StatusBar.setBackgroundColor(colors.primary)
         if (profileState.profile) setProfile(profileState.profile)
     }, [profileState])
 
@@ -115,6 +112,7 @@ const ProfileScreen = (props) => {
     }
 
     if (error)  {
+        console.log('eaea error')
         return (
             <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -127,7 +125,7 @@ const ProfileScreen = (props) => {
                     <RefreshControl refreshing={refreshing} colors={[`${colors.bgPrimary}`]} onRefresh={onRefresh} />
                 }
             >
-                <StatusBariOS/>
+                <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
                 <View style={{
                     flex: 1,
                     justifyContent: 'center',
@@ -145,7 +143,7 @@ const ProfileScreen = (props) => {
             <View style={{
                 flex: 1,
             }}>
-                <StatusBariOS/>
+                <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
                 <ImageBackground 
                     source={require('../../../assets/images/bgScreen01.png')}
                     style={{flex: 1,}}
@@ -194,9 +192,9 @@ const ProfileScreen = (props) => {
                         padding: 10,
                         borderRadius: 10,
                         elevation: 3,
-                        shadowOffset: { width: 1, height: 2 },
-                        shadowOpacity: 0.3,
-                        shadowRadius: 2,
+                        shadowOffset: { width: 2, height: 3 },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 3,
                     }}>
                         <View style={{flexDirection: 'row'}}>
                             <View style={{
@@ -269,9 +267,9 @@ const ProfileScreen = (props) => {
                         padding: 10,
                         borderRadius: 10,
                         elevation: 3,
-                        shadowOffset: { width: 1, height: 2 },
-                        shadowOpacity: 0.3,
-                        shadowRadius: 2,
+                        shadowOffset: { width: 2, height: 3 },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 3,
                     }}>
                         <View style={{
                             flexDirection: 'column',
@@ -383,9 +381,9 @@ const ProfileScreen = (props) => {
                         marginTop: 10,
                         borderRadius: 10,
                         elevation: 3,
-                        shadowOffset: { width: 1, height: 1 },
-                        shadowOpacity: 0.3,
-                        shadowRadius: 2,
+                        shadowOffset: { width: 2, height: 3 },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 3,
                     }}>
                         <View style={{
                             flexDirection: 'column',
@@ -487,9 +485,9 @@ const ProfileScreen = (props) => {
                         marginTop: 10,
                         borderRadius: 10,
                         elevation: 3,
-                        shadowOffset: { width: 1, height: 2 },
-                        shadowOpacity: 0.3,
-                        shadowRadius: 2,
+                        shadowOffset: { width: 2, height: 3 },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 3,
                     }}>
                         <View style={{
                             flexDirection: 'column',
@@ -579,9 +577,9 @@ const ProfileScreen = (props) => {
                         marginTop: 10,
                         borderRadius: 10,
                         elevation: 3,
-                        shadowOffset: { width: 1, height: 2 },
-                        shadowOpacity: 0.3,
-                        shadowRadius: 2,
+                        shadowOffset: { width: 2, height: 3 },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 3,
                     }}>
                         <View style={{
                             flexDirection: 'column',

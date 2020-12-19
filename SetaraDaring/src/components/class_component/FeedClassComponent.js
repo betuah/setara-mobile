@@ -18,7 +18,7 @@ const FeedClassComponent = props => {
             marginLeft: 18,
             elevation: 3,
             shadowOffset: { width: 0, height: 3 },
-            shadowOpacity: 0.3,
+            shadowOpacity: 0.5,
             shadowRadius: 3,
             width: 350,
             paddingHorizontal: 15,

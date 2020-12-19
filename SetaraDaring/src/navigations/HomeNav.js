@@ -44,9 +44,6 @@ const HomeNav = (props) => {
                                 fontSize: 16,
                                 ...fonts.bold
                             }}
-                            style={{
-                                overflow: 'hidden'
-                            }}
                             action={{icon: 'google-classroom', size: 22}}
                             actionOnPress={() => console.log('')}
                         />
@@ -71,9 +68,6 @@ const HomeNav = (props) => {
                             titleStyle={{
                                 fontSize: 16,
                                 ...fonts.bold
-                            }}
-                            style={{
-                                overflow: 'hidden'
                             }}
                             action={{icon: 'tooltip-text', size: 22}}
                             actionOnPress={() => console.log('')}

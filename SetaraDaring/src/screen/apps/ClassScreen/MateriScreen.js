@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { View, ScrollView, RefreshControl, Linking, ImageBackground, StatusBar, Dimensions, Platform } from 'react-native';
+import { View, ScrollView, RefreshControl, Linking, ImageBackground, StatusBar, Dimensions } from 'react-native';
 import { Card, Divider, useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text } from '../../../components/common/UtilsComponent';
@@ -54,7 +54,7 @@ const MateriScreen = ({route, navigation}) => {
     useFocusEffect(
         useCallback(() => {
             StatusBar.setBarStyle('light-content')
-            Platform.OS === 'android' && StatusBar.setBackgroundColor(colors.primary)
+            StatusBar.setBackgroundColor(colors.primary)
 
             let isActive = true
             if (isActive) loadDetailData()
@@ -106,7 +106,7 @@ const MateriScreen = ({route, navigation}) => {
                     borderRadius: 10,
                     elevation: 2,
                     shadowOffset: { width: 1, height: 2 },
-                    shadowOpacity: 0.3,
+                    shadowOpacity: 0.5,
                     shadowRadius: 2,
                 }}>
                     <View style={{

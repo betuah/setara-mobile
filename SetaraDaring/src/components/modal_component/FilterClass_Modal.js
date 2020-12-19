@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FlatList, TouchableOpacity, useWindowDimensions, View, KeyboardAvoidingView } from 'react-native';
+import { FlatList, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { Divider, Portal, TouchableRipple, useTheme } from 'react-native-paper';
 import { Text, Input } from '../common/UtilsComponent';
@@ -121,9 +121,6 @@ const FilterClass = props => {
                     width: '100%'
                 }}
             >
-                <KeyboardAvoidingView
-                    behavior={Platform.OS == "ios" ? "padding" : "height"}
-                >
                 <View style={{
                     backgroundColor: colors.bgPrimary,
                     borderTopRightRadius: 20,
@@ -228,7 +225,6 @@ const FilterClass = props => {
                         }
                     />
                 </View>
-                </KeyboardAvoidingView>
             </Modal>
         </Portal>
     )

@@ -23,7 +23,7 @@ const FeedComponent = props => {
             borderRadius: 10,
             elevation: 2,
             shadowOffset: { width: 1, height: 2 },
-            shadowOpacity: 0.3,
+            shadowOpacity: 0.5,
             shadowRadius: 2,
         }}>
             <Card.Content>

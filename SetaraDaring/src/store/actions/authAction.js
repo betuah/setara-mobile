@@ -84,7 +84,6 @@ export const signIn = data => {
                 status
             })
         } catch (err) {
-            console.log(err, config.base_url)
             ErrorHandler(err)
         }
     }

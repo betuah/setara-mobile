@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import {  View, Image, ImageBackground, FlatList, RefreshControl, StatusBar, Platform } from 'react-native';
+import {  View, Image, ImageBackground, FlatList, RefreshControl, StatusBar } from 'react-native';
 import { Btn, Text } from '../../../components/common/UtilsComponent';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'react-native-paper';
@@ -44,7 +44,7 @@ const ClassScreen = ({ navigation }) => {
     }
 
     useEffect(() => {
-        Platform.OS === 'android' && StatusBar.setBackgroundColor('transparent');
+        StatusBar.setBackgroundColor('transparent');
         StatusBar.setTranslucent;
         StatusBar.setBarStyle("light-content");
         
@@ -57,7 +57,7 @@ const ClassScreen = ({ navigation }) => {
         useCallback(() => {
             let isActive = true
 
-            Platform.OS === 'android' && StatusBar.setBackgroundColor('transparent');
+            StatusBar.setBackgroundColor('transparent');
             StatusBar.setTranslucent;
             StatusBar.setBarStyle("light-content");
 
@@ -155,7 +155,7 @@ const ClassScreen = ({ navigation }) => {
                 backgroundColor: colors.bgPrimary,
                 elevation: 4,
                 shadowOffset: { width: 0, height: 3 },
-                shadowOpacity: 0.3,
+                shadowOpacity: 0.5,
                 shadowRadius: 3,
             }}>
                 <ImageBackground 
@@ -223,9 +223,9 @@ const ClassScreen = ({ navigation }) => {
                                         fontWeight={fonts.semiBold}
                                         style={{
                                             elevation: 3,
-                                            shadowOffset: { width: 0, height: 2 },
-                                            shadowOpacity: 0.3,
-                                            shadowRadius: 2,
+                                            shadowOffset: { width: 0, height: 3 },
+                                            shadowOpacity: 0.5,
+                                            shadowRadius: 3,
                                             borderRadius: 80,
                                             borderWidth: 2,
                                             borderColor: colors.textWhite
@@ -255,19 +255,12 @@ const ClassScreen = ({ navigation }) => {
             }}>
                 <View style={{
                     paddingTop: 10,
-                    paddingBottom: 5,
                     alignItems: 'center',
                     backgroundColor: colors.bgPrimary,
                     borderColor: colors.textWhite,
                     borderBottomWidth: 2
                 }}>
-                    <Text 
-                        color={colors.textWhite} 
-                        fontWeight={fonts.semiBold} 
-                        size={16}
-                    >
-                        DAFTAR KELAS
-                    </Text>
+                    <Text color={colors.textWhite} fontWeight={fonts.semiBold} size={16}>DAFTAR KELAS</Text>
                 </View>
                 <View
                     style={{

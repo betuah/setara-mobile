@@ -1,23 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
 
 const LogoBrand = props => {
-    const { colors, fonts } = useTheme()
-
-    return !props.miniLogo ? (        
+    return !props.miniLogo ? (
         <View style={{...styles.logo, ...props.style}}>
             <View style={styles.logo_box}>
-                <Text style={{...styles.font_logo, ...fonts.bold}}>seTARA</Text>
+                <Text style={styles.font_logo}>seTARA</Text>
             </View>
-            <Text style={{...styles.font_logo, ...fonts.bold}}> daring</Text>
+            <Text style={styles.font_logo}> daring</Text>
         </View>
         ) : (
             <View style={{...styles.logo, ...props.style}}>
                 <View style={styles.logo_box_mini}>
-                    <Text style={{...styles.font_logo_mini, ...fonts.bold}}>seTARA</Text>
+                    <Text style={styles.font_logo_mini}>seTARA</Text>
                 </View>
-                <Text style={{...styles.font_logo_mini, ...fonts.bold}}> daring</Text>
+                <Text style={styles.font_logo_mini}> daring</Text>
             </View>
         )
 };
@@ -28,7 +25,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     font_logo: {
+        fontFamily: 'FrefokaOne-Regular',
         fontSize: 30,
+        fontWeight: 'bold',
         color: '#F2F2FF'
     },
     logo_box: {
@@ -40,7 +39,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     font_logo_mini: {
+        fontFamily: 'FrefokaOne-Regular',
         fontSize: 23,
+        fontWeight: 'bold',
         color: '#F2F2FF'
     },
     logo_box_mini: {

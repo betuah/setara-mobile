@@ -14,8 +14,7 @@ import {
     RefreshControl,
     Image,
     TouchableOpacity,
-    useWindowDimensions,
-    Platform
+    useWindowDimensions
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import Moment from 'moment/min/moment-with-locales';
@@ -35,6 +34,7 @@ const LoginScreen = ({ navigation }) => {
     const homeState = useSelector(state => state.home)
 
     const [ refreshing, setRefreshing ] = useState(false)
+    const [ error, setError ] = useState(true);
     const [ screenLoading, setScreenLoading ] = useState(true);
     const [ filterModal, setFilterModal ] = useState(false)
 
@@ -67,7 +67,7 @@ const LoginScreen = ({ navigation }) => {
         useCallback(() => {
             let isActive = true
 
-            Platform.OS === 'android' && StatusBar.setBackgroundColor('transparent');
+            StatusBar.setBackgroundColor('transparent');
             StatusBar.setTranslucent;
             StatusBar.setBarStyle("light-content");
 
@@ -106,11 +106,7 @@ const LoginScreen = ({ navigation }) => {
         <View style={{
             flex: 1,
         }}>
-            { Platform.OS === 'ios' ? 
-                <StatusBar barStyle='light-content' translucent />
-                :
-                <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
-            }
+            <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
             <FilterModal 
                 visible={filterModal} 
                 onDismiss={() => setFilterModal(false)} 
@@ -120,10 +116,9 @@ const LoginScreen = ({ navigation }) => {
             <View style={{
                 backgroundColor: colors.bgPrimary,
                 elevation: 4,
-                shadowOffset: { width: 1, height: 3 },
-                shadowOpacity: 0.3,
-                shadowRadius: 3,
-                shadowColor: 'black',
+                shadowOffset: { width: 2, height: 4 },
+                shadowOpacity: 0.5,
+                shadowRadius: 4,
             }}>
                 <ImageBackground 
                     source={require('../../../assets/images/header/bg-header-1.png')}

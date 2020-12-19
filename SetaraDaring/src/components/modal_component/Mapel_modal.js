@@ -111,7 +111,6 @@ const Mapel_Modal = props => {
                 borderTopRightRadius: 20,
                 borderTopLeftRadius: 20,
                 maxHeight: Dimensions.get('window').height * 0.6,
-                minHeight: Dimensions.get('window').height * 0.3
             }}>
                 <View style={{
                     justifyContent: 'center',
@@ -157,7 +156,7 @@ const Mapel_Modal = props => {
                     flexDirection: 'row',
                     elevation: 1,
                     shadowOffset: { width: 0, height: 1 },
-                    shadowOpacity: 0.3,
+                    shadowOpacity: 0.5,
                     shadowRadius: 1,
                     borderTopLeftRadius: 15,
                     borderTopRightRadius: 15,
@@ -178,11 +177,8 @@ const Mapel_Modal = props => {
                 </View>
                 <FlatList 
                     style={{
-                        paddingBottom: 25,
-                    }}
-                    contentContainerStyle={{
-                        paddingBottom: 15,
-                        backgroundColor: colors.bgWhite,                    
+                        paddingBottom: 20,
+                        backgroundColor: colors.bgWhite,
                     }}
                     keyExtractor={(item) => item.id.toString()}
                     data={data}
