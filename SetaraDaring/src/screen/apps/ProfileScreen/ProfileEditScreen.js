@@ -281,6 +281,9 @@ const ProfileEditScreen = ({ navigation }) => {
                 </View>
             </Modal>
         </Portal>
+        <KeyboardAvoidingView
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+        >
         <ScrollView
             showsVerticalScrollIndicator={false}
             refreshControl={
@@ -411,10 +414,7 @@ const ProfileEditScreen = ({ navigation }) => {
                     source={require('../../../assets/images/bgScreenSoftBlue.png')}
                     style={{flex: 1, padding: 10,}}
                     resizeMode="cover"
-                >
-                    <KeyboardAvoidingView
-                        behavior={Platform.OS == "ios" ? "padding" : "height"}
-                    >
+                >                    
                     <View style={{
                         backgroundColor: colors.bgWhite,
                         marginTop: 10,
@@ -625,10 +625,10 @@ const ProfileEditScreen = ({ navigation }) => {
                             </View>
                         </View>
                     </View>
-                    </KeyboardAvoidingView>
                 </ImageBackground>
             </View>
         </ScrollView>
+        </KeyboardAvoidingView>
         </View>
     )
 }

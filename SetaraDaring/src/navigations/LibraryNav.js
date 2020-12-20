@@ -40,41 +40,14 @@ const LibaryNav = (props) => {
                     icon: 'library',
                     size: 22,
                 }}
+                style={{
+                    overflow: 'hidden',
+                }}
                 action={{icon: 'refresh', size: 25}}
                 actionOnPress={() => doRefresh(!refresh)}
             />
         ),
     }
-
-    // const ScreenOptionStyle = {
-    //     headerShown: true,
-    //     headerTitle: () => (
-    //         <View style={{
-    //             flex: 1,
-    //             flexDirection: 'row',
-    //             justifyContent: 'center',
-    //             alignItems: 'center'
-    //         }}>
-    //             <Icon name='library' size={20} color={colors.white} />
-    //             <Text color={colors.white} size={20} weight='bold'> PUSTAKA</Text>
-    //         </View>
-    //     ),
-    //     headerTintColor: colors.white,
-    //     headerTitleStyle: {
-    //         fontWeight: 'bold',
-    //         alignSelf: 'center'
-    //     },
-    //     headerStyle: {
-    //         backgroundColor: colors.header,
-    //     },
-    //     headerLeft: () => (
-    //         <Btn 
-    //             mode="text"
-    //             Icon={{name:"chevron-left", size: 35, color: colors.white}}
-    //             onPress={() => doRefresh(!refresh)}
-    //         />
-    //     )
-    // }
 
     return (
         <Stack.Navigator 
