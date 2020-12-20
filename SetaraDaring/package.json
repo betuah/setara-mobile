@@ -32,12 +32,8 @@
     "react-native-reanimated": "^1.13.2",
     "react-native-render-html": "^5.0.1",
     "react-native-safe-area-context": "^3.1.9",
-<<<<<<< HEAD
-    "react-native-screens": "^2.16.1",
-=======
     "react-native-safe-area-view": "^1.1.1",
     "react-native-screens": "^2.15.0",
->>>>>>> 0354477fce130c1626a03ab61b99c8794034ae33
     "react-native-snap-carousel": "^3.9.1",
     "react-native-tab-view": "^2.15.2",
     "react-native-toast-message": "^1.4.2",
