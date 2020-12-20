@@ -2,10 +2,6 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { Image, StatusBar, View, RefreshControl, ScrollView } from 'react-native';
 import { useTheme, RadioButton, Divider, Portal, Modal, List, FAB } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-<<<<<<< HEAD
-// import ImagePicker from 'react-native-image-picker';
-=======
->>>>>>> 0354477fce130c1626a03ab61b99c8794034ae33
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Toast from 'react-native-toast-message';
 import { Text, Input, Btn } from '../../../components/common/UtilsComponent'
