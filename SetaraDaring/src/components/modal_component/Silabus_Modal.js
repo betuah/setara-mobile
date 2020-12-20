@@ -2,6 +2,7 @@ import React from 'react';
 import { useWindowDimensions, View, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { Card, Divider, useTheme } from 'react-native-paper';
 import { Text, Btn } from '../common/UtilsComponent';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HTML from 'react-native-render-html';
@@ -9,6 +10,8 @@ import env from '../../config/baseUrl';
 
 const Silabus_Modal = ({visible, onDismiss, silabus}) => {
     const { colors, fonts } = useTheme()
+    const insets = useSafeAreaInsets();
+
     const EmptySilabus = `<div style="display: flex; justify-content: center; align-items: center;"><h3 style="color: ${colors.textPrimary};">Silabus Tidak Tersedia.</h3></div>`
 
     return (
@@ -90,7 +93,8 @@ const Silabus_Modal = ({visible, onDismiss, silabus}) => {
                 <Card.Actions style={{
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: colors.bgSecondary
+                    backgroundColor: colors.bgSecondary,
+                    paddingBottom: insets.bottom
                 }}>
                     <Btn 
                         title='TUTUP' 

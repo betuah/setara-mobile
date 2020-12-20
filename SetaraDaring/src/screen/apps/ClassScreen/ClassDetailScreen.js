@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Dimensions, Image, ImageBackground, ScrollView, StatusBar, View } from 'react-native';
+import { Dimensions, Image, ImageBackground, Platform, ScrollView, View } from 'react-native';
 import { Divider, useTheme } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { Text } from '../../../components/common/UtilsComponent';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import StatusBar from '../../../components/common/StatusBar';
 
 import AnggotaComponent from '../../../components/class_component/AnggotaComponent';
 import MapelComponent from '../../../components/class_component/MapelComponent';
@@ -21,6 +23,7 @@ import TugasModal from '../../../components/modal_component/Tugas_Modal';
 
 const ClassDetailsScreen = ({navigation}) => {
     const { colors, fonts } = useTheme();
+    const insets = useSafeAreaInsets();
 
     const AuthState = useSelector(state => state.auth)
     const classState = useSelector(state => state.class)
@@ -54,6 +57,7 @@ const ClassDetailsScreen = ({navigation}) => {
     useEffect(() => {
         navigation.setOptions({
             headerShown: true,
+            headerBackTitle: false,
             headerTitle: '',
             headerTintColor: colors.textWhite,
             headerTransparent: {
@@ -139,17 +143,17 @@ const ClassDetailsScreen = ({navigation}) => {
     }
 
     return (
+        <>
+        <StatusBar 
+            bgColor={colors.bgDarkBlue} 
+            barHeight={insets.top} 
+        />
         <ScrollView 
             style={{
                 backgroundColor: colors.bgAccent,
                 flex: 1,
             }}
         >
-            <StatusBar 
-                backgroundColor={colors.bgDarkBlue} 
-                barStyle='light-content' 
-            />
-            
             <LoadingModal visible={isLoading} />
             <Devel visible={devel} onDismiss={setDevel} />
 
@@ -163,9 +167,9 @@ const ClassDetailsScreen = ({navigation}) => {
                 flex: 3,
                 backgroundColor: colors.bgPrimary,
                 elevation: 5,
-                shadowOffset: { width: 0, height: 5 },
-                shadowOpacity: 0.5,
-                shadowRadius: 5,
+                shadowOffset: { width: 0, height: 3 },
+                shadowOpacity: 0.3,
+                shadowRadius: 3,
             }}>
                 <ImageBackground
                     source={require('../../../assets/images/header/bg-header-classDetails.png')}
@@ -174,7 +178,7 @@ const ClassDetailsScreen = ({navigation}) => {
                 >
                     <SafeAreaView>
                         <View style={{
-                            marginTop: 50,
+                            marginTop: Platform.OS === 'ios' ? 10 : 50,
                             paddingHorizontal: 18,
                             flexDirection: 'column'
                         }}>
@@ -205,7 +209,7 @@ const ClassDetailsScreen = ({navigation}) => {
                                         backgroundColor: detailClass.status === 'LOCKED' ? colors.bgLock : colors.bgPrimary,
                                         elevation: 5,
                                         shadowOffset: { width: 0, height: 2 },
-                                        shadowOpacity: 0.5,
+                                        shadowOpacity: 0.3,
                                         shadowRadius: 2,
                                         flexDirection: "row",
                                     }}>
@@ -230,13 +234,13 @@ const ClassDetailsScreen = ({navigation}) => {
                                     padding: 10,
                                     elevation: 3,
                                     shadowOffset: { width: 0, height: 3 },
-                                    shadowOpacity: 0.5,
+                                    shadowOpacity: 0.3,
                                     shadowRadius: 3,
                                     backgroundColor: colors.bgPrimary,
                                     borderWidth: 3,
                                     borderColor: colors.bgWhite,
                                     borderRadius: 20,
-                                    marginBottom: -50,
+                                    marginBottom: Platform.OS === 'android' ? -50 : -80,
                                 }}
                             >
                                 <View style={{
@@ -351,8 +355,8 @@ const ClassDetailsScreen = ({navigation}) => {
                     <View style={{
                         backgroundColor: colors.bgWhite,
                         elevation: 2,
-                        shadowOffset: { width: 1, height: 2 },
-                        shadowOpacity: 0.6,
+                        shadowOffset: { width: 0, height: 2 },
+                        shadowOpacity: 0.3,
                         shadowRadius: 2,
                     }}>
                         <Carousel
@@ -416,8 +420,8 @@ const ClassDetailsScreen = ({navigation}) => {
                     alignItems: 'center',
                     backgroundColor: colors.bgWhite,
                     elevation: 2,
-                    shadowOffset: { width: 1, height: 2 },
-                    shadowOpacity: 0.6,
+                    shadowOffset: { width: 0, height: 2 },
+                    shadowOpacity: 0.3,
                     shadowRadius: 2,
                 }}>
                     <View style={{
@@ -629,6 +633,7 @@ const ClassDetailsScreen = ({navigation}) => {
                 </View>
             </View>
         </ScrollView>
+        </>
     )
 }
 

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Text, Input, Btn } from '../components/common/UtilsComponent';
 import LogoBrand from '../components/LogoComponent';
@@ -8,14 +7,16 @@ import LottieView from 'lottie-react-native';
 import Toast from 'react-native-toast-message';
 import { validate } from 'validate.js';
 import { signinConstrains } from '../constants/constrains'
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { 
     View, 
+    StatusBar,
     StyleSheet, 
     TouchableWithoutFeedback, 
     Keyboard,
     Dimensions, 
-    ScrollView
+    ScrollView,
+    KeyboardAvoidingView
 } from 'react-native';
 
 // Actions
@@ -26,6 +27,7 @@ const LoginScreen = ({ navigation }) => {
     const authData = useSelector(state => state.auth)
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
+    const insets = useSafeAreaInsets();
 
     const [loginData, setLoginForm] = useState({
         uname: '',
@@ -82,90 +84,103 @@ const LoginScreen = ({ navigation }) => {
     }
 
     return (
+        <>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-            <SafeAreaView style={{...styles.screen, backgroundColor: colors.primary}}>
-                <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
-                <ScrollView 
-                    contentContainerStyle={{
-                        flexGrow: 1,
-                    }}
-                >
-                    <View style={styles.LogoBrand}>
-                        <LogoBrand />
-                    </View>
+            <View style={{flex: 1,}}>
+            <KeyboardAvoidingView
+                behavior={Platform.OS == "ios" ? "padding" : "height"}
+                style={{
+                    backgroundColor: colors.primary,
+                    flex: 1,
+                }}
+            >
+                <SafeAreaView style={{...styles.screen, backgroundColor: colors.primary}}>
+                    <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
+                    
+                    <ScrollView 
+                        contentContainerStyle={{
+                            flexGrow: 1,
+                        }}
+                    >
+                        <View style={styles.LogoBrand}>
+                            <LogoBrand />
+                        </View>
 
-                    <View style={{alignItems: 'center'}}>
-                        <LottieView 
-                            source={require('../assets/lottie/33172-01-finishig-studies.json')} 
-                            autoPlay 
-                            // loop 
-                            style={{width: '50%'}}
-                        />
-                    </View>
-
-                    <View style={styles.form}>
-                        <View style={{ width: '80%' }}>
-                            <Input
-                                label="Username"
-                                placeholder="Username"
-                                value={loginData.uname}
-                                IconName='account-circle'                                    
-                                onChangeText={e => onInputChange(e, 'uname')}
-                                errorVisible={loginData.error.uname ? true : false}
-                                errorMassage={loginData.error.uname}
+                        <View style={{alignItems: 'center'}}>
+                            <LottieView 
+                                source={require('../assets/lottie/33172-01-finishig-studies.json')} 
+                                autoPlay 
+                                // loop 
+                                style={{width: '50%'}}
                             />
                         </View>
-                        <View style={{ width: '80%' }}>
-                            <Input
-                                label="Password"
-                                name={'password'}
-                                placeholder="Password"
-                                value={loginData.password}
-                                secureTextEntry={true}
-                                IconName='lock'
-                                IconType='material'
-                                errorVisible={loginData.error.password ? true : false}
-                                errorMassage={loginData.error.password}
-                                onChangeText={e => onInputChange(e, 'password')}
+
+                        <View style={styles.form}>
+                            <View style={{ width: '80%' }}>
+                                <Input
+                                    label="Username"
+                                    placeholder="Username"
+                                    value={loginData.uname}
+                                    IconName='account-circle'                                    
+                                    onChangeText={e => onInputChange(e, 'uname')}
+                                    errorVisible={loginData.error.uname ? true : false}
+                                    errorMassage={loginData.error.uname}
+                                />
+                            </View>
+                            <View style={{ width: '80%' }}>
+                                <Input
+                                    label="Password"
+                                    name={'password'}
+                                    placeholder="Password"
+                                    value={loginData.password}
+                                    secureTextEntry={true}
+                                    IconName='lock'
+                                    IconType='material'
+                                    errorVisible={loginData.error.password ? true : false}
+                                    errorMassage={loginData.error.password}
+                                    onChangeText={e => onInputChange(e, 'password')}
+                                />
+                            </View>
+                        </View>
+
+                        <View style={styles.button}>
+                            <Btn 
+                                Icon={{name:"send", size: 12, color: colors.primary}}
+                                IconType='ionic'
+                                title="Masuk" 
+                                fontSize={12}
+                                onPress={submitHandler}
+                                style={{ width: '80%' }}
+                                disabled={loading}
+                                loading={{
+                                    size: '12',
+                                    color: colors.primary
+                                }}
+                                isLoading={loading}
                             />
                         </View>
-                    </View>
-
-                    <View style={styles.button}>
-                        <Btn 
-                            Icon={{name:"send", size: 12, color: colors.primary}}
-                            IconType='ionic'
-                            title="Masuk" 
-                            fontSize={12}
-                            onPress={submitHandler}
-                            style={{ width: '80%' }}
-                            disabled={loading}
-                            loading={{
-                                size: '12',
-                                color: colors.primary
-                            }}
-                            isLoading={loading}
-                        />
-                    </View>
-                    <View style={styles.signup}>
-                        <View>
-                            <Text color={colors.white} size={12}>Belum punya akun ? </Text>                                
+                        <View style={styles.signup}>
+                            <View>
+                                <Text color={colors.white} size={12}>Belum punya akun ? </Text>                                
+                            </View>
+                            <View>
+                                <Text 
+                                    onPress={() => navigation.navigate('SignUp')}
+                                    size={14}
+                                    weight='bold'
+                                    color={colors.white}
+                                >Daftar</Text>
+                            </View>
                         </View>
-                        <View>
-                            <Text 
-                                onPress={() => navigation.navigate('SignUp')}
-                                size={14}
-                                weight='bold'
-                                color={colors.white}
-                            >Daftar</Text>
-                        </View>
-                    </View>
-                </ScrollView>
-                <View style={{...styles.footer}}>
-                    <Text color={colors.white} size={10}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
-                </View>
-            </SafeAreaView>
+                    </ScrollView>                    
+                </SafeAreaView>                
+            </KeyboardAvoidingView>
+            <View style={{...styles.footer, paddingBottom: insets.bottom}}>
+                <Text color={colors.white} size={10}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
+            </View>
+            </View>
         </TouchableWithoutFeedback>
+        </>
     )
 }
 
@@ -179,13 +194,11 @@ const styles = StyleSheet.create({
         paddingBottom: Dimensions.get('window').height > 600 ? 20 : 10
     },
     button: {
-        flex: 1,
         flexDirection: 'column',
         paddingVertical: 20,
         alignItems: "center"
     },
     signup: {
-        flex: 1, 
         flexDirection: 'row', 
         alignItems: 'center', 
         justifyContent: 'center',
@@ -198,7 +211,7 @@ const styles = StyleSheet.create({
         flex: 13
     },
     footer: {
-        padding: 15,
+        paddingVertical: 15,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: colors.darkBlue

@@ -14,7 +14,6 @@ import Header from '../components/common/Header';
 
 import * as authAct from '../store/actions/authAction';
 import * as notifAct from '../store/actions/notifActions';
-import { StatusBar } from 'react-native';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -135,11 +134,11 @@ const NotifTab = (props) => {
 
 const NotifNav = (props) => {
     const {colors,fonts} = useTheme()
+
     const ScreenOptionStyle = {
         headerShown: true,
         header: ({ scene, previous, navigation }) => (
             <>
-            <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
             <Header 
                 data={{
                     title: 'N O T I F I K A S I', 

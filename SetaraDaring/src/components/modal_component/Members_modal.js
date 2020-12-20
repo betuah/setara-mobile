@@ -6,6 +6,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LottieView from 'lottie-react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ListMembers = ({colors, fonts, name, role_name, school, picture}) => (
     <>
@@ -73,6 +74,7 @@ const Members_Modal = props => {
                     maxHeight: Dimensions.get('window').height * 0.5,
                     elevation: 5,
                 }}>
+                    <SafeAreaView>
                     <View style={{
                         justifyContent: 'center',
                         alignItems: 'center',
@@ -131,6 +133,7 @@ const Members_Modal = props => {
                                 </View>
                             }
                     />
+                    </SafeAreaView>
                 </Card>
             </Modal>
     )

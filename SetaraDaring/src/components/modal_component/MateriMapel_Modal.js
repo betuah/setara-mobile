@@ -1,9 +1,10 @@
 import React, { useEffect, useCallback, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dimensions, View, TouchableOpacity, Image, FlatList, Animated, Easing  } from 'react-native';
-import { useTheme, List, Divider, TouchableRipple, Chip, Card } from 'react-native-paper';
+import { Dimensions, View, TouchableOpacity, Image, FlatList, } from 'react-native';
+import { useTheme, Divider, TouchableRipple, Chip, Card } from 'react-native-paper';
 import { Text, Btn } from '../common/UtilsComponent';
 import { Transition, Transitioning } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
@@ -197,13 +198,17 @@ const ListAcordition = ({
 
 const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
     const { colors, fonts } = useTheme()
+    const dispatch = useDispatch()
+    const insets = useSafeAreaInsets();
+
+    const AcordionRef = useRef()
+
     const materiState = useSelector(state => state.materi)
     const authState = useSelector(state => state.auth)
-    const dispatch = useDispatch()
+    
     const [isLoading, setLoading] = useState(false)
     const [cAccIndex, setcAccIndex] = useState(null)
-    const AcordionRef = useRef()
-    
+        
     useEffect(
         useCallback(() => {
             let isActive = true
@@ -354,7 +359,8 @@ const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
                 <Card.Actions style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: colors.bgSecondary
+                    backgroundColor: colors.bgSecondary,
+                    paddingBottom: insets.bottom
                 }}>
                     <Btn 
                         title='TUTUP' 
