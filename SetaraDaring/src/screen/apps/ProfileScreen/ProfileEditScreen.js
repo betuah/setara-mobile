@@ -192,7 +192,7 @@ const ProfileEditScreen = ({ navigation }) => {
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: colors.loadingBackground
+                backgroundColor: colors.bgLightBlue
             }}>
                 <LottieView 
                     source={require('../../../assets/lottie/28893-book-loading.json')} 

@@ -116,7 +116,7 @@ const MateriScreen = ({route, navigation}) => {
                     }}>
                         <View style={{
                             flex: 5,
-                            alignItems: 'flex-start',
+                            alignItems: 'center',
                             justifyContent: 'center'
                         }}>
                             <Text
@@ -125,18 +125,6 @@ const MateriScreen = ({route, navigation}) => {
                                 size={14}
                             >
                                 {detailMateri.judul}
-                            </Text>
-                        </View>
-                        <View style={{
-                            flex: 1,
-                            alignItems: 'flex-end',
-                        }}>
-                            <Text
-                                color={colors.textGreyLight}
-                                fontWeight={{...fonts.regular}}
-                                size={10}
-                            >
-                                {`${moment(detailMateri.date_created).format('D MMM Y')}`}
                             </Text>
                         </View>
                     </View>

@@ -82,7 +82,7 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                     paddingBottom: 20,
                     borderTopLeftRadius: 15,
                     borderTopRightRadius: 15,
-                    backgroundColor: colors.bgLight,
+                    backgroundColor: colors.bgWhite,
                     flexDirection: 'column',
                     flex: 1,
                 }}>

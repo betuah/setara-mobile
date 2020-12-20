@@ -143,7 +143,7 @@ export const CombinedDefaultTheme = {
         bgWhite: '#FFFFFF',
         bgBlue: '#00CFFF',
         bgLight: '#f2feff',
-        bgLightBlye: '#E7F8FF',
+        bgLightBlue: '#E7F8FF',
         bgDark: '#473F47',
         bgDarkBlue: '#2A9FC4',
         bgLock: '#F88585',
@@ -176,6 +176,7 @@ export const CombinedDarkTheme = {
     ...PaperDarkTheme,
     ...NavigationDarkTheme,
     colors: {
+        ...CombinedDefaultTheme.colors,
         ...PaperDarkTheme.colors,
         ...NavigationDarkTheme.colors,
     },

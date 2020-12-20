@@ -297,7 +297,7 @@ const TugasScreen = ({route, navigation}) => {
                                     fontWeight={{...fonts.medium}}
                                     size={12}
                                 >
-                                    {`${moment(stateTugas.detailTugas.deadline).format('HH:MM - D MMM Y')}`}
+                                    {`${moment(stateTugas.detailTugas.deadline).format('D MMM Y HH:MM')}`}
                                 </Text>
                             </View>
                             <Text

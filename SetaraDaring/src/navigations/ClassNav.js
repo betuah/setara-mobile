@@ -37,7 +37,7 @@ const ClassNav = (props) => {
                             previous={previous} 
                             navigation={navigation}
                             style={{
-                                elevation: 0,
+                                elevation: 3,
                                 shadowOffset: { width: 0, height: 0 },
                                 shadowOpacity: 0,
                                 shadowRadius: 0,
@@ -62,7 +62,7 @@ const ClassNav = (props) => {
                             navigation={navigation}
                             subtittle={'eaea'}
                             style={{
-                                elevation: 0,
+                                elevation: 3,
                                 shadowOffset: { width: 0, height: 0 },
                                 shadowOpacity: 0,
                                 shadowRadius: 0,
