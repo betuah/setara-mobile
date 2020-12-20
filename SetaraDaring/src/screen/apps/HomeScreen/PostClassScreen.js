@@ -6,6 +6,7 @@ import { FlatList, StatusBar, View, RefreshControl, useWindowDimensions, ImageBa
 import { Text } from '../../../components/common/UtilsComponent';
 import Toast from 'react-native-toast-message';
 import LottieView from 'lottie-react-native';
+import Orientation from 'react-native-orientation-locker';
 
 import FeedComponent from '../../../components/FeedComponent';
 
@@ -50,6 +51,8 @@ const PostClass = ({navigation, route}) => {
         useCallback(() => {
             let isActive = true
             isActive && loadClassFeed()
+
+            Orientation.lockToPortrait()
 
             return () => {
                 isActive = false

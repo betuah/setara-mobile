@@ -9,6 +9,7 @@ import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 import { View, ScrollView, Image, RefreshControl, StatusBar, Platform } from 'react-native';
 import LottieView from 'lottie-react-native';
 import Toast from 'react-native-toast-message';
+import Orientation from 'react-native-orientation-locker';
 
 import StatusBariOS from '../../../components/common/StatusBar.js';
 import Devel from '../../../components/modal_component/Development_Modal';
@@ -37,6 +38,7 @@ const ProfileScreen = (props) => {
             StatusBar.setBackgroundColor(colors.primary)
         }
         if (profileState.profile) setProfile(profileState.profile)
+        Orientation.lockToPortrait()
     }, [profileState])
 
     useFocusEffect(

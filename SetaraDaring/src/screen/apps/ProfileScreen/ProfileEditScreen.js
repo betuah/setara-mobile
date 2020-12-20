@@ -9,6 +9,7 @@ import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LottieView from 'lottie-react-native';
+import Orientation from 'react-native-orientation-locker';
 
 import * as profileAct from '../../../store/actions/profileActions';
 import * as authAct from '../../../store/actions/authAction';
@@ -49,6 +50,8 @@ const ProfileEditScreen = ({ navigation }) => {
         if (data.profile === null && profileState.profile) {
             updateData()
         }
+
+        Orientation.lockToPortrait()
     },[profileState, data])
 
     const saveAction = async () => {

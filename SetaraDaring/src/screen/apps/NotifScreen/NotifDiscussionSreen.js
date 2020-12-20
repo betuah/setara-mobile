@@ -3,7 +3,7 @@ import { StatusBar, FlatList, View, Dimensions, Image, RefreshControl } from 're
 import { useDispatch, useSelector } from 'react-redux';
 import { Text } from '../../../components/common/UtilsComponent';
 import { useTheme } from 'react-native-paper';
-import LottieView from 'lottie-react-native';
+import Orientation from 'react-native-orientation-locker';
 import moment from 'moment/min/moment-with-locales';
 moment.locale('id')
 
@@ -24,7 +24,7 @@ const NotifDiscussion = ({ navigation }) => {
     const data = notif.filter(item => item.category === 2).map(item => item)
 
     useEffect(() => {
-        
+        Orientation.lockToPortrait()
     }, [notif])
 
     const onRefresh = useCallback(() => {

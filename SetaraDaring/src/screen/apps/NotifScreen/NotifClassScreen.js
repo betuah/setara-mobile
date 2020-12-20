@@ -4,7 +4,7 @@ import { StatusBar, FlatList, View, Dimensions, Image, RefreshControl } from 're
 import { useDispatch, useSelector } from 'react-redux';
 import { Text } from '../../../components/common/UtilsComponent';
 import { useTheme } from 'react-native-paper';
-import LottieView from 'lottie-react-native';
+import Orientation from 'react-native-orientation-locker';
 import moment from 'moment/min/moment-with-locales';
 import Toast from 'react-native-toast-message';
 moment.locale('id')
@@ -24,7 +24,7 @@ const NotifClass = ({ navigation }) => {
     const data = notif.filter(item => item.category === 3 || item.category === 4).map(item => item)
 
     useEffect(() => {
-        
+        Orientation.lockToPortrait()
     }, [notif])
 
     const onRefresh = useCallback(() => {

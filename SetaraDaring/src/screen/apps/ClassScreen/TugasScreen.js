@@ -11,6 +11,7 @@ import HTML from 'react-native-render-html';
 import Icon from 'react-native-vector-icons/Ionicons';
 import env from '../../../config/baseUrl';
 import moment from 'moment/min/moment-with-locales';
+import Orientation from 'react-native-orientation-locker';
 moment.locale('id')
 
 import LoadingModal from '../../../components/modal_component/Loading_Modal';
@@ -99,6 +100,7 @@ const TugasScreen = ({route, navigation}) => {
 
     useFocusEffect(
         useCallback(() => {
+            Orientation.unlockAllOrientations()
             StatusBar.setBarStyle('light-content')
             Platform.OS === 'android' && StatusBar.setBackgroundColor(colors.primary)
 

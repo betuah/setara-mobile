@@ -7,6 +7,7 @@ import { Text } from '../../../components/common/UtilsComponent';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Orientation from 'react-native-orientation-locker';
 
 import StatusBar from '../../../components/common/StatusBar';
 
@@ -75,6 +76,7 @@ const ClassDetailsScreen = ({navigation}) => {
             },
         })
         
+        Orientation.lockToPortrait()
     }, [detailClass, classState.detailClass, materiState])
 
     const setModals = req_modal => {

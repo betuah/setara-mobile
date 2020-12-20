@@ -5,6 +5,7 @@ import { Text } from '../../../components/common/UtilsComponent';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
+import Orientation from 'react-native-orientation-locker';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { 
     View, 
@@ -71,6 +72,8 @@ const LoginScreen = ({ navigation }) => {
             StatusBar.setTranslucent;
             StatusBar.setBarStyle("light-content");
 
+            Orientation.lockToPortrait()
+
             if (isActive) loadData()
             return () => {
                 isActive = false
@@ -82,6 +85,8 @@ const LoginScreen = ({ navigation }) => {
         navigation.setOptions({
             tabBarVisible: false
         })
+
+
 
         setScreenLoading(false)
     }, [homeState, screenLoading])

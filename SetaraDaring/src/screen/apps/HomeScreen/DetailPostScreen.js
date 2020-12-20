@@ -6,6 +6,7 @@ import { ScrollView, StatusBar, View, RefreshControl, ImageBackground, Image, Di
 import { Text } from '../../../components/common/UtilsComponent';
 import Toast from 'react-native-toast-message';
 import LottieView from 'lottie-react-native';
+import Orientation from 'react-native-orientation-locker';
 import env from '../../../config/baseUrl';
 import HTML from 'react-native-render-html';
 import moment from 'moment/min/moment-with-locales';
@@ -53,6 +54,8 @@ const PostClass = ({navigation, route}) => {
         useCallback(() => {
             let isActive = true
             isActive && loadDetailFeed()
+
+            Orientation.lockToPortrait()
 
             return () => {
                 isActive = false

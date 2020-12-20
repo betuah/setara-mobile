@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { View, ScrollView, RefreshControl, Linking, ImageBackground, StatusBar, Dimensions, Platform } from 'react-native';
 import { Card, Divider, useTheme } from 'react-native-paper';
@@ -8,6 +8,7 @@ import Toast from 'react-native-toast-message';
 import HTML from 'react-native-render-html';
 import env from '../../../config/baseUrl';
 import moment from 'moment/min/moment-with-locales';
+import Orientation from 'react-native-orientation-locker';
 moment.locale('id')
 
 import * as authAct from '../../../store/actions/authAction';
@@ -51,8 +52,13 @@ const MateriScreen = ({route, navigation}) => {
         }
     }
 
+    useEffect(() => {
+        Orientation.unlockAllOrientations()
+    }, [])
+
     useFocusEffect(
         useCallback(() => {
+            Orientation.unlockAllOrientations()
             StatusBar.setBarStyle('light-content')
             Platform.OS === 'android' && StatusBar.setBackgroundColor(colors.primary)
 

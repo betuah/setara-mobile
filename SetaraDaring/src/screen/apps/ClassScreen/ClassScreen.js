@@ -7,6 +7,7 @@ import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import LottieView from 'lottie-react-native';
+import Orientation from 'react-native-orientation-locker';
 
 import ListClass from './ListClassScreen';
 import JoinClass_Modal from '../../../components/modal_component/JoinClass_Modal';
@@ -60,6 +61,7 @@ const ClassScreen = ({ navigation }) => {
             Platform.OS === 'android' && StatusBar.setBackgroundColor('transparent');
             StatusBar.setTranslucent;
             StatusBar.setBarStyle("light-content");
+            Orientation.lockToPortrait()
 
             if (isActive) loadData()
             return () => {
