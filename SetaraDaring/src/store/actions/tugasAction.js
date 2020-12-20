@@ -26,7 +26,7 @@ export const getDetailTugas = (tugasId) => {
             const res = await AxiosAPI.get(`${config.base_url}/api/v1/tugas/detail/${tugasId}`)
             const resData = res.data
 
-            dispatch({type: DETAIL_TUGAS, detailTugas: resData})
+            dispatch({type: LOAD_TUGAS, listTugas: resData.data})
         } catch (error) {
             console.log(error, 'error tugas')
             ErrorHandler(error)
@@ -37,8 +37,8 @@ export const getDetailTugas = (tugasId) => {
 export const addTugas = (tugasId, files) => {
     return async dispatch => {
         try {
-            const res = await AxiosAPI.post(`${config.base_url}/api/v1/tugas/${tugasId}`, createFormData(files))
-            const resData = res.data
+            await AxiosAPI.post(`${config.base_url}/api/v1/tugas/${tugasId}`, createFormData(files))
+            const res = await AxiosAPI.get(`${config.base_url}/api/v1/tugas/detail/${tugasId}`)
 
             console.log(createFormData(files))
 

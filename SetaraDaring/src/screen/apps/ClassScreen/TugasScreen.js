@@ -253,7 +253,7 @@ const TugasScreen = ({route, navigation}) => {
                 }}>
                     <View style={{
                         flex: 1,
-                        flexDirection: 'row',
+                        flexDirection: 'column',
                         marginBottom: 5,
                     }}>
                         <View style={{
@@ -267,19 +267,6 @@ const TugasScreen = ({route, navigation}) => {
                                 size={14}
                             >
                                 {stateTugas.detailTugas.nama}
-                            </Text>
-                        </View>
-                        <View style={{
-                            flex: 1,
-                            alignItems: 'flex-end',
-                            paddingTop: 5,
-                        }}>
-                            <Text
-                                color={colors.textGreyLight}
-                                fontWeight={{...fonts.regular}}
-                                size={10}
-                            >
-                                {`${moment(stateTugas.detailTugas.date_created).format('D MMM Y')}`}
                             </Text>
                         </View>
                     </View>
@@ -344,116 +331,220 @@ const TugasScreen = ({route, navigation}) => {
                         }}
                     />
                 </Card>
-                <Card style={{
-                    marginTop: 10,
-                    paddingVertical: 10,
-                    paddingHorizontal: 10,
-                    borderRadius: 10,
-                    elevation: 2,
-                    shadowOffset: { width: 1, height: 2 },
-                    shadowOpacity: 0.5,
-                    shadowRadius: 2,
-                }}>
-                    <View style={{
-                        flexDirection: 'row',
-                        paddingBottom: 5,
+
+                {   
+                    stateTugas.detailTugas.status_code === 1 ?
+                    <Card style={{
+                        marginTop: 10,
+                        paddingVertical: 10,
+                        paddingHorizontal: 10,
+                        borderRadius: 10,
+                        elevation: 2,
+                        shadowOffset: { width: 1, height: 2 },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 2,
                     }}>
                         <View style={{
-                            flex: 1,
-                            alignItems: 'flex-start'
+                            flexDirection: 'row',
+                            paddingBottom: 5,
                         }}>
-                            <Text
-                                fontWeight={{...fonts.medium}}
-                                size={14}
-                                color={colors.textPrimary}
-                            >
-                                Pengumpulan Tugas
-                            </Text>
-                        </View>
-                        <View style={{
-                            flex: 1,
-                            alignItems: 'flex-end',
-                            justifyContent: 'center'
-                        }}>
-                            <Icon name='create' color={colors.primary} size={18} />
-                        </View>
-                    </View>
-                    <Divider />
-                    <View style={{
-                        paddingVertical: 8,
-                    }}>
-                        <TextInput 
-                            mode='outlined'
-                            label='Jawab Tugas'
-                            placeholder='Tulis jawaban Kamu di sini dan lampirkan file bila perlu.'
-                            multiline={true}
-                            numberOfLines={5}
-                            dense={true}
-                            editable={true}
-                            selectionColor={colors.primary}
-                            style={{
-                                fontSize: 12,
-                            }}
-                            value={tugasPost}
-                            onChangeText={text => setTugasPost(text)}
-                        />
-                    </View>
-                    <View style={{
-                        paddingBottom: 10,
-                        flexDirection: 'column'
-                    }}>
-                        <TouchableOpacity 
-                                onPress={() => onAttachFile()}
-                                activeOpacity={0.7}
-                            >
                             <View style={{
-                                height: 50,
-                                borderWidth: 1,
-                                borderStyle: 'dashed',
-                                borderRadius: 10,
-                                borderColor: colors.greyLight,
-                                backgroundColor: colors.bgLightBlye,
-                                justifyContent: 'center',
-                                alignItems: 'center'
+                                flex: 1,
+                                alignItems: 'flex-start'
+                            }}>
+                                <Text
+                                    fontWeight={{...fonts.medium}}
+                                    size={14}
+                                    color={colors.textPrimary}
+                                >
+                                    Pengumpulan Tugas
+                                </Text>
+                            </View>
+                            <View style={{
+                                flex: 1,
+                                alignItems: 'flex-end',
+                                justifyContent: 'center'
+                            }}>
+                                <Icon name='create' color={colors.primary} size={18} />
+                            </View>
+                        </View>
+                        <Divider />
+                        <View style={{
+                            paddingVertical: 8,
+                        }}>
+                            <TextInput 
+                                mode='outlined'
+                                label='Jawab Tugas'
+                                placeholder='Tulis jawaban Kamu di sini dan lampirkan file bila perlu.'
+                                multiline={true}
+                                numberOfLines={5}
+                                dense={true}
+                                editable={true}
+                                selectionColor={colors.primary}
+                                style={{
+                                    fontSize: 12,
+                                }}
+                                value={tugasPost}
+                                onChangeText={text => setTugasPost(text)}
+                            />
+                        </View>
+                        <View style={{
+                            paddingBottom: 10,
+                            flexDirection: 'column'
+                        }}>
+                            <TouchableOpacity 
+                                    onPress={() => onAttachFile()}
+                                    activeOpacity={0.7}
+                                >
+                                <View style={{
+                                    height: 50,
+                                    borderWidth: 1,
+                                    borderStyle: 'dashed',
+                                    borderRadius: 10,
+                                    borderColor: colors.greyLight,
+                                    backgroundColor: colors.bgLightBlye,
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    <View style={{
+                                        flexDirection: 'row'
+                                    }}>
+                                        <Icon name='attach' color={colors.primary} size={18} />
+                                        <Text
+                                            fontWeight={{...fonts.regular}}
+                                            size={12}
+                                            color={colors.primary}
+                                        >
+                                            Lampirkan File
+                                        </Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                            <ScrollView
+                                showsVerticalScrollIndicator={false}
+                                contentContainerStyle={{
+                                    flex: 1,
+                                    paddingTop: 10,
+                                    paddingLeft: 5,
+                                }}
+                            >
+                                {
+                                    attacthment.map((item, index) => {
+                                        return (
+                                            <FilesListComponent 
+                                                key={index.toString()} 
+                                                item={item} 
+                                                colors={colors} 
+                                                fonts={fonts} 
+                                                onDeletePress={deleteAttachFile}
+                                            />
+                                        )
+                                    })
+                                }
+                            </ScrollView>
+                        </View>
+                    </Card>
+                    :
+                    <Card style={{
+                        marginTop: 10,
+                        paddingVertical: 10,
+                        paddingHorizontal: 10,
+                        borderRadius: 10,
+                        borderLeftWidth: 5,
+                        borderColor: colors.bgPrimary,
+                        elevation: 2,
+                        shadowOffset: { width: 1, height: 2 },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 2,
+                    }}>
+                        <View style={{
+                            padding: 10,
+                            flexDirection: 'row',
+                        }}>
+                            <View style={{
+                                justifyContent: 'center'
                             }}>
                                 <View style={{
-                                    flexDirection: 'row'
+                                    flexDirection: 'row',
                                 }}>
-                                    <Icon name='attach' color={colors.primary} size={18} />
                                     <Text
                                         fontWeight={{...fonts.regular}}
-                                        size={12}
-                                        color={colors.primary}
+                                        color={colors.textPrimary}
+                                        size={14}
                                     >
-                                        Lampirkan File
+                                        {'Nilai Tugas : '}
+                                    </Text>
+                                    <Text
+                                        fontWeight={{...fonts.bold}}
+                                        color={colors.textPrimary}
+                                        size={14}
+                                    >
+                                        {stateTugas.detailTugas.nilai_tugas ? stateTugas.detailTugas.nilai_tugas : 0}
                                     </Text>
                                 </View>
                             </View>
-                        </TouchableOpacity>
-                        <ScrollView
-                            showsVerticalScrollIndicator={false}
-                            contentContainerStyle={{
+                            
+                            <View style={{
                                 flex: 1,
-                                paddingTop: 10,
-                                paddingLeft: 5,
-                            }}
-                        >
-                            {
-                                attacthment.map((item, index) => {
-                                    return (
-                                        <FilesListComponent 
-                                            key={index.toString()} 
-                                            item={item} 
-                                            colors={colors} 
-                                            fonts={fonts} 
-                                            onDeletePress={deleteAttachFile}
-                                        />
-                                    )
-                                })
-                            }
-                        </ScrollView>
-                    </View>
-                </Card>
+                                alignItems: 'flex-end'
+                            }}>
+                                <View style={{
+                                    backgroundColor: stateTugas.detailTugas.status_code === 2 ? colors.blue : (stateTugas.detailTugas.status_code === 1 ? colors.yellow : colors.red),
+                                    paddingHorizontal: 10,
+                                    paddingVertical: 5,
+                                    borderRadius: 10,
+                                }}>
+                                    <Text
+                                        fontWeight={{...fonts.regular}}
+                                        color={colors.textWhite}
+                                        size={12}
+                                    >
+                                        {stateTugas.detailTugas.status_kumpul}
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+                        <Divider />
+                        <View style={{
+                            padding: 10,
+                        }}>
+                            <Text
+                                fontWeight={{...fonts.medium}}
+                                color={colors.textPrimary}
+                                size={12}
+                            >
+                                Catatan Tugas :
+                            </Text>
+                            <View style={{
+                                paddingTop: 5
+                            }}>
+                                { stateTugas.detailTugas.catatan_tugas ? 
+                                    <Text
+                                        fontWeight={{...fonts.medium}}
+                                        color={colors.textPrimary}
+                                        size={10}
+                                    >
+                                        {stateTugas.detailTugas.catatan_tugas}
+                                    </Text>
+                                    :
+                                    <Text
+                                        style={{
+                                            paddingVertical: 10,
+                                            textAlign: 'center'
+                                        }}
+                                        fontWeight={{...fonts.medium}}
+                                        color={colors.textGreyLight}
+                                        size={10}
+                                    >
+                                        {'Tidak Ada Catatan Tugas'}
+                                    </Text>
+                                }
+                                    
+                            </View>
+                        </View>
+                    </Card>
+                }
+                
             </ScrollView>
             </ImageBackground>
         </View>

@@ -60,6 +60,7 @@ const ClassNav = (props) => {
                             scene={scene} 
                             previous={previous} 
                             navigation={navigation}
+                            subtittle={'eaea'}
                             style={{
                                 elevation: 0,
                                 shadowOffset: { width: 0, height: 0 },
