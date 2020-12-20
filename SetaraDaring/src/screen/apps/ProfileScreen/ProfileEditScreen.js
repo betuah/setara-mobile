@@ -2,7 +2,10 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { Image, StatusBar, View, RefreshControl, ScrollView } from 'react-native';
 import { useTheme, RadioButton, Divider, Portal, Modal, List, FAB } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
+<<<<<<< HEAD
 // import ImagePicker from 'react-native-image-picker';
+=======
+>>>>>>> 0354477fce130c1626a03ab61b99c8794034ae33
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Toast from 'react-native-toast-message';
 import { Text, Input, Btn } from '../../../components/common/UtilsComponent'
@@ -479,7 +482,7 @@ const ProfileEditScreen = ({ navigation }) => {
                                             label="Gender"
                                             disabled={true}
                                             placeholder="Jenis Kelamin kamu"
-                                            value={data.profile.jk}
+                                            value={data.profile.jk ? data.profile.js : "Laki - Laki"}
                                             IconName='gender-male-female'
                                             color={colors.accent}
                                             defaultStyle={InputDefaultStyle}
@@ -497,7 +500,7 @@ const ProfileEditScreen = ({ navigation }) => {
                                                     jk: newValue
                                                 }
                                             })} 
-                                            value={data.profile.jk}
+                                            value={data.profile.jk ? data.profile.js : "Laki - Laki"}
                                         >
                                             <View
                                                 style={{

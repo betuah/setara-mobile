@@ -32,7 +32,12 @@
     "react-native-reanimated": "^1.13.2",
     "react-native-render-html": "^5.0.1",
     "react-native-safe-area-context": "^3.1.9",
+<<<<<<< HEAD
     "react-native-screens": "^2.16.1",
+=======
+    "react-native-safe-area-view": "^1.1.1",
+    "react-native-screens": "^2.15.0",
+>>>>>>> 0354477fce130c1626a03ab61b99c8794034ae33
     "react-native-snap-carousel": "^3.9.1",
     "react-native-tab-view": "^2.15.2",
     "react-native-toast-message": "^1.4.2",
@@ -45,6 +50,7 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@babel/core": "7.12.10",
     "@babel/runtime": "7.12.5",
     "@react-native-community/eslint-config": "1.1.0",
@@ -52,6 +58,15 @@
     "eslint": "6.8.0",
     "jest": "25.5.4",
     "metro-react-native-babel-preset": "0.59.0",
+=======
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.16.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.63.0",
+>>>>>>> 0354477fce130c1626a03ab61b99c8794034ae33
     "react-test-renderer": "16.13.1"
   },
   "jest": {
