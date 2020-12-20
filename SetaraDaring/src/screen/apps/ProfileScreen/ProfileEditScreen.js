@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { Image, StatusBar, View, RefreshControl, ScrollView } from 'react-native';
 import { useTheme, RadioButton, Divider, Portal, Modal, List, FAB } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import ImagePicker from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Toast from 'react-native-toast-message';
 import { Text, Input, Btn } from '../../../components/common/UtilsComponent'
 import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
@@ -92,7 +92,7 @@ const ProfileEditScreen = ({ navigation }) => {
         };
 
         if (req === 'camera') {
-            ImagePicker.launchCamera(options, async response => {
+            launchCamera(options, async response => {
                 if (response.error) {
                     console.log(error)
 
@@ -118,7 +118,7 @@ const ProfileEditScreen = ({ navigation }) => {
         } 
         
         if (req === 'library') {
-            ImagePicker.launchImageLibrary(options, async response => {
+            launchImageLibrary(options, async response => {
                 if (response.error) {
                     Toast.show({
                         type: 'error',
@@ -475,7 +475,7 @@ const ProfileEditScreen = ({ navigation }) => {
                                             label="Gender"
                                             disabled={true}
                                             placeholder="Jenis Kelamin kamu"
-                                            value={data.profile.jk}
+                                            value={data.profile.jk ? data.profile.js : "Laki - Laki"}
                                             IconName='gender-male-female'
                                             color={colors.accent}
                                             defaultStyle={InputDefaultStyle}
@@ -493,7 +493,7 @@ const ProfileEditScreen = ({ navigation }) => {
                                                     jk: newValue
                                                 }
                                             })} 
-                                            value={data.profile.jk}
+                                            value={data.profile.jk ? data.profile.js : "Laki - Laki"}
                                         >
                                             <View
                                                 style={{
