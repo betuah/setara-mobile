@@ -121,9 +121,6 @@ const FilterClass = props => {
                     width: '100%'
                 }}
             >
-                <KeyboardAvoidingView
-                    behavior={Platform.OS == "ios" ? "padding" : "height"}
-                >
                 <View style={{
                     backgroundColor: colors.bgPrimary,
                     borderTopRightRadius: 20,
@@ -166,33 +163,37 @@ const FilterClass = props => {
                         <Text size={15} fontWeight={fonts.bold} color={colors.textWhite}>POSTING KELAS</Text>
                         <Text size={11} fontWeight={fonts.regular} color={colors.textWhite}>Filter posting berdasarkan kelas.</Text>
                     </View>
-                    <View style={{
-                        paddingLeft: 18,
-                        paddingRight: 23,
-                        paddingBottom: 15,
-                        backgroundColor: colors.bgWhite,
-                        flexDirection: 'row',
-                        elevation: 2,
-                        shadowOffset: { width: 1, height: 2 },
-                        shadowOpacity: 0.5,
-                        shadowRadius: 2,
-                        borderTopLeftRadius: 15,
-                        borderTopRightRadius: 15,
-                    }}>
-                        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                            <Icon name='filter' size={20} color={colors.bgPrimary} />
+                    <KeyboardAvoidingView
+                        behavior={Platform.OS == "ios" ? "padding" : "height"}
+                    >
+                        <View style={{
+                            paddingLeft: 18,
+                            paddingRight: 23,
+                            paddingBottom: 15,
+                            backgroundColor: colors.bgWhite,
+                            flexDirection: 'row',
+                            elevation: 2,
+                            shadowOffset: { width: 1, height: 2 },
+                            shadowOpacity: 0.5,
+                            shadowRadius: 2,
+                            borderTopLeftRadius: 15,
+                            borderTopRightRadius: 15,
+                        }}>
+                            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                                <Icon name='filter' size={20} color={colors.bgPrimary} />
+                            </View>
+                            <View style={{flex: 10, justifyContent: 'center'}}>
+                                <Input
+                                    label="Filter Kelas"
+                                    placeholder="Masukan nama kelas"
+                                    value={search}
+                                    color={colors.accent}
+                                    defaultStyle={InputDefaultStyle}
+                                    onChangeText={e => onSearch(e)}
+                                />
+                            </View>
                         </View>
-                        <View style={{flex: 10, justifyContent: 'center'}}>
-                            <Input
-                                label="Filter Kelas"
-                                placeholder="Masukan nama kelas"
-                                value={search}
-                                color={colors.accent}
-                                defaultStyle={InputDefaultStyle}
-                                onChangeText={e => onSearch(e)}
-                            />
-                        </View>
-                    </View>
+                    </KeyboardAvoidingView>
                     <FlatList 
                         style={{
                             paddingBottom: 20,
@@ -228,7 +229,6 @@ const FilterClass = props => {
                         }
                     />
                 </View>
-                </KeyboardAvoidingView>
             </Modal>
         </Portal>
     )

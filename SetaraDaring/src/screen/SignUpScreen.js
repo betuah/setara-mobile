@@ -241,7 +241,7 @@ const SignUpScreen = ({ navigation }) => {
                 </ScrollView>                
             </SafeAreaView>
             </KeyboardAvoidingView>
-            <View style={{...styles.footer, paddingBottom: insets.bottom}}>
+            <View style={{...styles.footer, paddingBottom: Platform.OS === 'ios' ? insets.bottom : insets.bottom + 10}}>
                 <Text color={colors.white} size={10}>{`Setara Daring All Right Reserved @ ${date.getFullYear()} `}</Text>
             </View>
             </View>

@@ -40,8 +40,7 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                 backgroundColor: colors.bgPrimary,
                 borderTopRightRadius: 20,
                 borderTopLeftRadius: 20,
-                maxHeight: Dimensions.get('window').height * 0.5,
-                minHeight: Dimensions.get('window').height * 0.3
+                height: Dimensions.get('window').height * 0.35
             }}>
                 <View style={{
                     justifyContent: 'center',

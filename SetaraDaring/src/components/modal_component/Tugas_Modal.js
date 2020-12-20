@@ -117,6 +117,7 @@ const ListAcordition = ({
             {
                 currentIndex === index && 
                 <FlatList 
+                    keyExtractor={item => item._id}
                     data={tugas}
                     contentContainerStyle={{
                         flexDirection: 'column',
@@ -124,7 +125,7 @@ const ListAcordition = ({
                     renderItem={(data) => (
                         <Fragment>
                         <TouchableRipple
-                            onPress={() => onItemPress(data.item.id, data.item.nama, data.item.date_created)}
+                            onPress={() => onItemPress(data.item._id, data.item.nama, data.item.date_created)}
                             rippleColor="rgba(0, 208, 255, .20)"
                         >
                             <View style={{
@@ -166,22 +167,11 @@ const ListAcordition = ({
                                 </View>
                                 <View style={{
                                     flexDirection: 'row',
-                                    paddingVertical: 5,
+                                    paddingVertical: 10,
                                 }}>
                                     <View style={{
-                                        justifyContent: 'center'
-                                    }}>
-                                        <Text
-                                            size={12}
-                                            color={colors.textPrimary}
-                                            fontWeight={{...fonts.medium}}
-                                        >
-                                            {`Nilai Tugas : ${data.item.nilai_tugas ? data.item.nilai_tugas : 0}`}
-                                        </Text>
-                                    </View>
-                                    <View style={{
-                                        flex: 1,
-                                        alignItems: 'flex-end',
+                                        // flex: 1,
+                                        // flexDirection: 'row'
                                     }}>
                                         <Text
                                             style={{
@@ -194,6 +184,23 @@ const ListAcordition = ({
                                             fontWeight={{...fonts.medium}}
                                         >
                                             {data.item.status_kumpul}
+                                        </Text>
+                                    </View>
+                                    <View style={{
+                                        flex: 1,
+                                        alignItems: 'flex-end'
+                                    }}>
+                                        <Text
+                                            style={{
+                                                backgroundColor: colors.blue,
+                                                borderRadius: 5,
+                                                paddingHorizontal: 10,
+                                            }}
+                                            size={12}
+                                            color={colors.textWhite}
+                                            fontWeight={{...fonts.medium}}
+                                        >
+                                            {`Nilai Tugas : ${data.item.nilai_tugas ? data.item.nilai_tugas : 0}`}
                                         </Text>
                                     </View>
                                 </View>

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Image, StatusBar, View, RefreshControl, ScrollView } from 'react-native';
+import { Image, StatusBar, View, RefreshControl, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { useTheme, RadioButton, Divider, Portal, Modal, List, FAB } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
@@ -412,7 +412,9 @@ const ProfileEditScreen = ({ navigation }) => {
                     style={{flex: 1, padding: 10,}}
                     resizeMode="cover"
                 >
-
+                    <KeyboardAvoidingView
+                        behavior={Platform.OS == "ios" ? "padding" : "height"}
+                    >
                     <View style={{
                         backgroundColor: colors.bgWhite,
                         marginTop: 10,
@@ -623,6 +625,7 @@ const ProfileEditScreen = ({ navigation }) => {
                             </View>
                         </View>
                     </View>
+                    </KeyboardAvoidingView>
                 </ImageBackground>
             </View>
         </ScrollView>

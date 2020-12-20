@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions, TouchableOpacity, View, FlatList } from 'react-native';
+import { Dimensions, TouchableOpacity, View, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 import { useTheme, Card, List, Divider, Portal } from 'react-native-paper';
 import { Text, Input } from '../common/UtilsComponent';
 import Modal from 'react-native-modal';
@@ -149,6 +149,9 @@ const Mapel_Modal = props => {
                     <Text size={16} fontWeight={fonts.bold} color={colors.textWhite}>MATA PELAJARAN</Text>
                     <Text size={11} fontWeight={fonts.regular} color={colors.textWhite}>Daftar mata pelajaran dalam kelas yang kamu pilih.</Text>
                 </View>
+                <KeyboardAvoidingView
+                    behavior={Platform.OS == "ios" ? "padding" : "height"}
+                >
                 <View style={{
                     paddingLeft: 18,
                     paddingRight: 23,
@@ -176,6 +179,7 @@ const Mapel_Modal = props => {
                         />
                     </View>
                 </View>
+                </KeyboardAvoidingView>
                 <FlatList 
                     style={{
                         paddingBottom: 25,
