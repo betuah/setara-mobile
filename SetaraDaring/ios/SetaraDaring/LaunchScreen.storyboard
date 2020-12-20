@@ -17,16 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="MQa-W5-W7i">
-                                <rect key="frame" x="71" y="275" width="233" height="70"/>
+                                <rect key="frame" x="71" y="298" width="233" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" red="0.16470588235294117" green="0.62352941176470589" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <keyCommands>
-                        <keyCommand/>
-                    </keyCommands>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
