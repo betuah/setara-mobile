@@ -478,7 +478,7 @@ const ProfileEditScreen = ({ navigation }) => {
                                             label="Gender"
                                             disabled={true}
                                             placeholder="Jenis Kelamin kamu"
-                                            value={data.profile.jk ? data.profile.js : "Laki - Laki"}
+                                            value={data.profile.jk ? data.profile.jk : "Laki - Laki"}
                                             IconName='gender-male-female'
                                             color={colors.accent}
                                             defaultStyle={InputDefaultStyle}
@@ -496,7 +496,7 @@ const ProfileEditScreen = ({ navigation }) => {
                                                     jk: newValue
                                                 }
                                             })} 
-                                            value={data.profile.jk ? data.profile.js : "Laki - Laki"}
+                                            value={data.profile.jk ? data.profile.jk : "Laki - Laki"}
                                         >
                                             <View
                                                 style={{
