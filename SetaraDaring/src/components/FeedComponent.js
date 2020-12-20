@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Divider, useTheme } from 'react-native-paper';
-import { useWindowDimensions, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { Text } from './common/UtilsComponent';
 import { Avatar, Card, Menu } from 'react-native-paper';
-import HTML from 'react-native-render-html';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment/min/moment-with-locales';
 moment.locale('id')
@@ -92,26 +91,28 @@ const FeedComponent = props => {
                 <View style={{
                     marginTop: 10,
                 }}>
-                    <HTML 
-                        html={props.isi_postingan} 
-                        baseFontStyle={{color: colors.textDark, ...fonts.regular, fontSize: 11}} 
-                        contentWidth={useWindowDimensions().width * 0.90}
-                        imagesMaxWidth={useWindowDimensions().width * 0.93}
-                        enableExperimentalPercentWidt={true}
-                        staticContentMaxWidth={useWindowDimensions().width * 0.93}
-                        onLinkPress={(event, url) => Linking.openURL(`${env.file_domain}/${url}`)}
-                        alterChildren = {node => {
-                            if (node.attribs.src) {
-                                const firtsPath = node.attribs.src.split('/')
-                                if (firtsPath[0] === 'assets') node.attribs.src = `${env.file_domain}/${node.attribs.src}`
-                            }
-
-                            if (node.name === 'iframe') {
-                                delete node.attribs.width;
-                            }
-                            return node.children;
-                        }}
-                    />
+                    <Text
+                        fontWeight={{...fonts.regular}}
+                        color={colors.textDark}
+                        size={12}
+                    >
+                        {props.isi_postingan.length > 300 ? `${props.isi_postingan.slice(0, 300)}` : props.isi_postingan}
+                    </Text>
+                    {
+                        props.isi_postingan.length > 300 &&
+                        <TouchableOpacity
+                            onPress={() => props.onDetailPress(props._id, props.date_created)}
+                            activeOpacity={0.7}
+                        >                        
+                            <Text
+                                fontWeight={{...fonts.regular}}
+                                color={colors.textAccent}
+                                size={12}
+                            >
+                                Lihat Semua...
+                            </Text>
+                        </TouchableOpacity>
+                    }
                 </View>
             </Card.Content>
         </Card>

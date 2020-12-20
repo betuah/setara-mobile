@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StatusBar, Platform } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
+const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? 0 : StatusBar.currentHeight;
 
 const StatusBarPlaceHolder = props => {
     const { colors } = useTheme()

@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>SetaraDaring membutuhkan akses ke libary foto kamu.</string>
+	<string>$(PRODUCT_NAME) membutuhkan akses untuk melihat galery kamu.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME) membutuhkan akses untuk menyimpan file.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) membutuhkan akses untuk menggunakan kamera kamu.</string>
 	<key>CFBundleDevelopmentRegion</key>

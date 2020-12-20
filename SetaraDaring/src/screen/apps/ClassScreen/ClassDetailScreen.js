@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Dimensions, Image, ImageBackground, Platform, ScrollView, View } from 'react-native';
+import { Dimensions, Image, ImageBackground, Platform, ScrollView, View, StatusBar } from 'react-native';
 import { Divider, useTheme } from 'react-native-paper';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Orientation from 'react-native-orientation-locker';
 
-import StatusBar from '../../../components/common/StatusBar';
+import StatusBariOS from '../../../components/common/StatusBar';
 
 import AnggotaComponent from '../../../components/class_component/AnggotaComponent';
 import MapelComponent from '../../../components/class_component/MapelComponent';
@@ -146,10 +146,15 @@ const ClassDetailsScreen = ({navigation}) => {
 
     return (
         <>
-        <StatusBar 
-            bgColor={colors.bgDarkBlue} 
-            barHeight={insets.top} 
-        />
+        {
+            Platform.OS === 'ios' ?
+            <StatusBariOS
+                bgColor={colors.bgDarkBlue} 
+                barHeight={insets.top - 5} 
+            />
+            :
+            <StatusBar barStyle='light-content' backgroundColor={colors.bgDarkBlue} />
+        }
         <ScrollView 
             style={{
                 backgroundColor: colors.bgAccent,

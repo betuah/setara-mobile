@@ -71,7 +71,7 @@ const Members_Modal = props => {
                     backgroundColor: colors.bgPrimary,
                     borderTopRightRadius: 20,
                     borderTopLeftRadius: 20,
-                    maxHeight: Dimensions.get('window').height * 0.5,
+                    height: Dimensions.get('window').height * 0.4,
                     elevation: 5,
                 }}>
                     <SafeAreaView>
@@ -103,6 +103,7 @@ const Members_Modal = props => {
                     </View>
                     <FlatList 
                         style={{
+                            height: '100%',
                             backgroundColor: colors.bgWhite,
                             paddingRight: 15,
                             paddingLeft: 5,

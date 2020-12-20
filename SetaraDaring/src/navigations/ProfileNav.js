@@ -61,9 +61,11 @@ const ProfileNav = ({ route, navigation}) => {
                 titleStyle={{fontSize: 16, ...fonts.semoBold, paddingTop: 3,}}
                 contentStyle={{alignItems: 'center', justifyContent: 'center'}}
                 style={{
-                    overflow: 'hidden',
                     backgroundColor: colors.primary,
                     elevation: 3,
+                    shadowOffset: { width: 0, height: 0 },
+                    shadowOpacity: 0,
+                    shadowRadius: 0, 
                 }}
             />
         ),

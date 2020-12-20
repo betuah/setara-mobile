@@ -30,7 +30,7 @@ const Silabus_Modal = ({visible, onDismiss, silabus}) => {
                 borderTopLeftRadius: 15,
                 elevation: 2,
                 shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.5,
+                shadowOpacity: 0.3,
                 shadowRadius: 2,
             }}>
                 <View style={{
@@ -41,9 +41,9 @@ const Silabus_Modal = ({visible, onDismiss, silabus}) => {
                     borderTopRightRadius: 15,
                     borderTopLeftRadius: 15,
                     elevation: 2,
-                    shadowOffset: { width: 0, height: 2 },
-                    shadowOpacity: 0.5,
-                    shadowRadius: 2,
+                    shadowOffset: { width: 0, height: 3 },
+                    shadowOpacity: 0.3,
+                    shadowRadius: 3,
                 }}>
                     <View
                         style={{

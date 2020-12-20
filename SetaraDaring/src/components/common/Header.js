@@ -17,7 +17,7 @@ const Header = ({ data, scene, previous, navigation, style, contentStyle, titleS
                 backgroundColor: colors.primary,
                 elevation: 3,
                 shadowOffset: { width: 0, height: 3 },
-                shadowOpacity: 0.5,
+                shadowOpacity: 0.3,
                 shadowRadius: 3,
                 ...style,
             }}

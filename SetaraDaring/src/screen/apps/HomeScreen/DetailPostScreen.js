@@ -117,6 +117,9 @@ const PostClass = ({navigation, route}) => {
                         padding: 10,
                         borderRadius: 10,
                         elevation: 2,
+                        shadowOffset: { width: 1, height: 2 },
+                        shadowOpacity: 0.3,
+                        shadowRadius: 2,
                     }}>
                         <View style={{
                             flexDirection: 'row'
@@ -148,7 +151,7 @@ const PostClass = ({navigation, route}) => {
                                     {data.nama_kelas} 
                                 </Text>
                                 <Text color={colors.textGrey} size={10}>
-                                    {`${moment(data.date_created).startOf('day').fromNow()}`}
+                                    {`${moment(data.date_created).format('DD MMM YYYY')} - ${moment(data.date_created).startOf('day').fromNow()}`}
                                 </Text>
                             </View>
                         </View>
@@ -156,26 +159,13 @@ const PostClass = ({navigation, route}) => {
                         <View style={{
                             marginTop: 10,
                         }}>
-                            <HTML 
-                                html={state.detailFeed ? (state.detailFeed.isi_postingan ? state.detailFeed.isi_postingan : '<h1>EA</h1>') : '<h1>EA</h1>'} 
-                                baseFontStyle={{color: colors.textDark, ...fonts.regular, fontSize: 11}} 
-                                contentWidth={Dimensions.get('window').width * 0.90}
-                                imagesMaxWidth={Dimensions.get('window').width * 0.93}
-                                enableExperimentalPercentWidt={true}
-                                staticContentMaxWidth={Dimensions.get('window').width * 0.93}
-                                onLinkPress={(event, url) => Linking.openURL(`${env.file_domain}/${url}`)}
-                                alterChildren = {node => {
-                                    if (node.attribs.src) {
-                                        const firtsPath = node.attribs.src.split('/')
-                                        if (firtsPath[0] === 'assets') node.attribs.src = `${env.file_domain}/${node.attribs.src}`
-                                    }
-
-                                    if (node.name === 'iframe') {
-                                        delete node.attribs.width;
-                                    }
-                                    return node.children;
-                                }}
-                            />
+                            <Text
+                                fontWeight={{...fonts.regular}}
+                                color={colors.textDark}
+                                size={12}
+                            >
+                                {state.detailFeed ? (state.detailFeed.isi_postingan ? state.detailFeed.isi_postingan : '') : ''}
+                            </Text>
                         </View>
                     </View>
                 </ScrollView>

@@ -110,6 +110,7 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View style={{
             flex: 1,
+            backgroundColor: colors.primary
         }}>
             { Platform.OS === 'ios' ? 
                 <StatusBar barStyle='light-content' translucent />
@@ -121,110 +122,112 @@ const LoginScreen = ({ navigation }) => {
                 onDismiss={() => setFilterModal(false)} 
                 onPress={classPostPress}
             />
-            
             <View style={{
-                backgroundColor: colors.bgPrimary,
-                elevation: 4,
-                shadowOffset: { width: 1, height: 3 },
-                shadowOpacity: 0.3,
-                shadowRadius: 3,
-                shadowColor: 'black',
+                marginBottom: Platform.OS === 'ios' ? 10 : 0,
             }}>
-                <ImageBackground 
-                    source={require('../../../assets/images/header/bg-header-1.png')}
-                    style={{width:"100%"}}
-                    resizeMode="cover"
-                >
-                    <SafeAreaView>
-                        <View style={{
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            paddingVertical: 10,
-                            paddingHorizontal: 13,
-                        }}>
-                            <View
-                                style={{
-                                    flexGrow: 1,
-                                    alignItems: 'flex-start'
-                                }}
-                            >
-                                <TouchableOpacity
-                                    onPress={() => onRefresh()}
-                                    activeOpacity={0.6}
-                                >
-                                    <Icon 
-                                        name='home' 
-                                        color={colors.textWhite} 
-                                        size={22}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <Text
-                                fontWeight={{
-                                    ...fonts.bold
-                                }}
-                                size={18}
-                                color={colors.textWhite}
-                            >
-                                B E R A N D A
-                            </Text>
-                            <View
-                                style={{
-                                    flexGrow: 1,
-                                    alignItems: 'flex-end'
-                                }}
-                            >
-                                <TouchableOpacity
-                                    onPress={() => setFilterModal(true)}
-                                    activeOpacity={0.6}
-                                >
-                                    <Icon 
-                                        name='filter' 
-                                        color={colors.textWhite} 
-                                        size={22}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <View style={{
-                            flexDirection: 'row',
-                            paddingTop: 10,
-                            paddingBottom: 20,
-                            paddingHorizontal: 13,
-                        }}>
+                <View style={{
+                    backgroundColor: colors.bgPrimary,
+                    elevation: 4,
+                    shadowOffset: { width: 0, height: 3 },
+                    shadowOpacity: 0.3,
+                    shadowRadius: 3,
+                }}>
+                    <ImageBackground 
+                        source={require('../../../assets/images/header/bg-header-1.png')}
+                        style={{width:"100%"}}
+                        resizeMode="cover"
+                    >
+                        <SafeAreaView>
                             <View style={{
                                 flexDirection: 'row',
-                                flex: 1,
+                                justifyContent: 'center',
+                                paddingVertical: 10,
+                                paddingHorizontal: 13,
                             }}>
-                                <View style={{
-                                    flex: 1,
-                                    justifyContent: 'center',
-                                    alignItems: 'flex-start'
-                                }}>
-                                    <Text fontWeight={{...fonts.italic}} color={colors.textWhite} size={12}>{`Selamat Belajar`}</Text>
-                                    <Text fontWeight={{...fonts.semiBold}} color={colors.textWhite} size={16} weight='bold'>{`${fullName}`}</Text>
-                                    <Text fontWeight={{...fonts.medium}} color={colors.textWhite} size={13} weight='bold'>{`${sekolah.split(':').length > 1 ? sekolah.split(':')[1].trim() : sekolah}`}</Text>
+                                <View
+                                    style={{
+                                        flexGrow: 1,
+                                        alignItems: 'flex-start'
+                                    }}
+                                >
+                                    <TouchableOpacity
+                                        onPress={() => onRefresh()}
+                                        activeOpacity={0.6}
+                                    >
+                                        <Icon 
+                                            name='home' 
+                                            color={colors.textWhite} 
+                                            size={22}
+                                        />
+                                    </TouchableOpacity>
                                 </View>
-                                <View style={{
-                                    flex: 1,
-                                    justifyContent: 'center',
-                                    alignItems: 'flex-end',
-                                }}>
-                                    <Image 
-                                        style={{
-                                            width: 65,
-                                            height: 65,
-                                            borderWidth: 2,
-                                            borderRadius: 50,
-                                            borderColor: colors.bgWhite
-                                        }}
-                                        source={{ uri: foto }}   
-                                    />
+                                <Text
+                                    fontWeight={{
+                                        ...fonts.bold
+                                    }}
+                                    size={18}
+                                    color={colors.textWhite}
+                                >
+                                    B E R A N D A
+                                </Text>
+                                <View
+                                    style={{
+                                        flexGrow: 1,
+                                        alignItems: 'flex-end'
+                                    }}
+                                >
+                                    <TouchableOpacity
+                                        onPress={() => setFilterModal(true)}
+                                        activeOpacity={0.6}
+                                    >
+                                        <Icon 
+                                            name='filter' 
+                                            color={colors.textWhite} 
+                                            size={22}
+                                        />
+                                    </TouchableOpacity>
                                 </View>
                             </View>
-                        </View>
-                    </SafeAreaView>
-                </ImageBackground>
+                            <View style={{
+                                flexDirection: 'row',
+                                paddingTop: 10,
+                                paddingBottom: 20,
+                                paddingHorizontal: 13,
+                            }}>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    flex: 1,
+                                }}>
+                                    <View style={{
+                                        flex: 1,
+                                        justifyContent: 'center',
+                                        alignItems: 'flex-start'
+                                    }}>
+                                        <Text fontWeight={{...fonts.italic}} color={colors.textWhite} size={12}>{`Selamat Belajar`}</Text>
+                                        <Text fontWeight={{...fonts.semiBold}} color={colors.textWhite} size={16} weight='bold'>{`${fullName}`}</Text>
+                                        <Text fontWeight={{...fonts.medium}} color={colors.textWhite} size={13} weight='bold'>{`${sekolah.split(':').length > 1 ? sekolah.split(':')[1].trim() : sekolah}`}</Text>
+                                    </View>
+                                    <View style={{
+                                        flex: 1,
+                                        justifyContent: 'center',
+                                        alignItems: 'flex-end',
+                                    }}>
+                                        <Image 
+                                            style={{
+                                                width: 65,
+                                                height: 65,
+                                                borderWidth: 2,
+                                                borderRadius: 50,
+                                                borderColor: colors.bgWhite
+                                            }}
+                                            source={{ uri: foto }}   
+                                        />
+                                    </View>
+                                </View>
+                            </View>
+                        </SafeAreaView>
+                    </ImageBackground>
+                </View>
             </View>
             <View style={{
                 flex: 1,

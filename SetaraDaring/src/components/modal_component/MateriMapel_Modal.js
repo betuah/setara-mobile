@@ -140,7 +140,7 @@ const ListAcordition = ({
                                 >
                                     <View style={{
                                         paddingLeft: 40,
-                                        paddingVertical: 5,
+                                        paddingVertical: 8,
                                         paddingRight: 10,
                                         flexDirection: 'row',
                                     }}>

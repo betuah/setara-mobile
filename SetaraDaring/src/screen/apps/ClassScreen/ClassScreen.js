@@ -140,6 +140,7 @@ const ClassScreen = ({ navigation }) => {
         <View style={{
             flex: 1,
             justifyContent: 'center',
+            backgroundColor: colors.bgPrimary,
         }}>
             <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
             <JoinClass_Modal 
@@ -154,109 +155,113 @@ const ClassScreen = ({ navigation }) => {
 
             <View style={{
                 flex: 3,
-                backgroundColor: colors.bgPrimary,
-                elevation: 4,
-                shadowOffset: { width: 0, height: 3 },
-                shadowOpacity: 0.3,
-                shadowRadius: 3,
+                marginBottom: Platform.OS === 'ios' ? 10 : 0,
             }}>
-                <ImageBackground 
-                    source={require('../../../assets/images/header/bg-header.png')}
-                    style={{width:"100%",height:"100%"}}
-                    resizeMode="cover"
-                >
-                    <SafeAreaView style={{
-                        flex: 1,
-                    }}>
-                        <View style={{
+                <View style={{
+                    backgroundColor: colors.bgPrimary,
+                    elevation: 4,
+                    shadowOffset: { width: 0, height: 3 },
+                    shadowOpacity: 0.3,
+                    shadowRadius: 3,
+                }}>
+                    <ImageBackground 
+                        source={require('../../../assets/images/header/bg-header.png')}
+                        style={{width:"100%",height:"100%"}}
+                        resizeMode="cover"
+                    >
+                        <SafeAreaView style={{
                             flex: 1,
-                            flexDirection: 'row'
                         }}>
                             <View style={{
                                 flex: 1,
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                paddingHorizontal: 15,
-                                paddingVertical: 30,
+                                flexDirection: 'row'
                             }}>
                                 <View style={{
-                                    flexDirection: 'row',
+                                    flex: 1,
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    paddingHorizontal: 15,
+                                    paddingVertical: 30,
                                 }}>
                                     <View style={{
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
+                                        flexDirection: 'row',
                                     }}>
-                                        <Image 
-                                            style={{
-                                                width: 50,
-                                                height: 50,
-                                                borderWidth: 2,
-                                                borderRadius: 50,
-                                                borderColor: colors.bgWhite
-                                            }}
-                                            source={{ uri: AuthState.foto }}   
-                                        />
+                                        <View style={{
+                                            justifyContent: 'center',
+                                            alignItems: 'center'
+                                        }}>
+                                            <Image 
+                                                style={{
+                                                    width: 50,
+                                                    height: 50,
+                                                    borderWidth: 2,
+                                                    borderRadius: 50,
+                                                    borderColor: colors.bgWhite
+                                                }}
+                                                source={{ uri: AuthState.foto }}   
+                                            />
+                                        </View>
+                                        <View style={{
+                                            paddingLeft: 10,
+                                            alignItems: 'flex-start',
+                                            justifyContent: 'center'
+                                        }}>
+                                            <Text fontWeight={fonts.semiBold} size={14} color={colors.textWhite}>{`Hi, ${AuthState.fullName}`}</Text>
+                                            <Text fontWeight={fonts.italic} size={12} color={colors.textWhite}>{AuthState.status}</Text>
+                                        </View>
                                     </View>
                                     <View style={{
-                                        paddingLeft: 10,
-                                        alignItems: 'flex-start',
-                                        justifyContent: 'center'
+                                        marginTop: 20,
+                                        justifyContent: 'flex-end',
                                     }}>
-                                        <Text fontWeight={fonts.semiBold} size={14} color={colors.textWhite}>{`Hi, ${AuthState.fullName}`}</Text>
-                                        <Text fontWeight={fonts.italic} size={12} color={colors.textWhite}>{AuthState.status}</Text>
+                                        <Btn 
+                                            onPress={() => showModal()}
+                                            Icon={{
+                                                name: 'school',
+                                                color: colors.bgWhite,
+                                                size: 15
+                                            }}
+                                            IconType='ionic'
+                                            title='Gabung Kelas'
+                                            color={colors.bgPrimary}
+                                            fontColor={colors.bgWhite}
+                                            fontSize={12}
+                                            fontWeight={fonts.semiBold}
+                                            style={{
+                                                elevation: 3,
+                                                shadowOffset: { width: 0, height: 2 },
+                                                shadowOpacity: 0.3,
+                                                shadowRadius: 2,
+                                                borderRadius: 80,
+                                                borderWidth: 2,
+                                                borderColor: colors.textWhite
+                                            }}
+                                        />
                                     </View>
                                 </View>
                                 <View style={{
-                                    marginTop: 20,
+                                    flex: 1,
                                     justifyContent: 'flex-end',
+                                    alignItems: 'center',
+                                    paddingBottom: 10
                                 }}>
-                                    <Btn 
-                                        onPress={() => showModal()}
-                                        Icon={{
-                                            name: 'school',
-                                            color: colors.bgWhite,
-                                            size: 15
-                                        }}
-                                        IconType='ionic'
-                                        title='Gabung Kelas'
-                                        color={colors.bgPrimary}
-                                        fontColor={colors.bgWhite}
-                                        fontSize={12}
-                                        fontWeight={fonts.semiBold}
-                                        style={{
-                                            elevation: 3,
-                                            shadowOffset: { width: 0, height: 2 },
-                                            shadowOpacity: 0.3,
-                                            shadowRadius: 2,
-                                            borderRadius: 80,
-                                            borderWidth: 2,
-                                            borderColor: colors.textWhite
-                                        }}
+                                    <LottieView 
+                                        source={require('../../../assets/lottie/30884-online-tutorials-online-work.json')} 
+                                        autoPlay
+                                        style={{width: '100%'}}
                                     />
                                 </View>
                             </View>
-                            <View style={{
-                                flex: 1,
-                                justifyContent: 'flex-end',
-                                alignItems: 'center',
-                                paddingBottom: 10
-                            }}>
-                                <LottieView 
-                                    source={require('../../../assets/lottie/30884-online-tutorials-online-work.json')} 
-                                    autoPlay
-                                    style={{width: '100%'}}
-                                />
-                            </View>
-                        </View>
-                    </SafeAreaView>
-                </ImageBackground>
+                        </SafeAreaView>
+                    </ImageBackground>
+                </View>
             </View>
             <View style={{
                 flex: 7,
                 backgroundColor: colors.bgWhite,
             }}>
                 <View style={{
-                    paddingTop: 10,
+                    paddingTop: Platform.OS === 'android' ? 10 : 0,
                     paddingBottom: 5,
                     alignItems: 'center',
                     backgroundColor: colors.bgPrimary,
