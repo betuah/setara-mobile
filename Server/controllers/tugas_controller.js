@@ -195,6 +195,7 @@ exports.getTugasDetail = async (req, res) => {
         let catatan_tugas
         let nilai_tugas
         let status_kumpul
+        let status_code
 
         const tugasData = await Tugas.findOne({ _id: id})
 
@@ -204,6 +205,7 @@ exports.getTugasDetail = async (req, res) => {
             lampiran_tugas  = tugasKumpulData.file
             catatan_tugas   = tugasKumpulData.catatan
             status_kumpul   = 'Sudah Mengerjakan'
+            status_code     = 2
         }).catch( e => {
             let today       = new Date()
             let deadline    = new Date(tugasData && tugasData.deadline)
@@ -212,7 +214,8 @@ exports.getTugasDetail = async (req, res) => {
             isi_tugas       = null
             lampiran_tugas  = null
             catatan_tugas   = null
-            status_kumpul = ((deadline-today) > 0) ? 'Belum Mengerjakan':'Tidak Mengerjakan'
+            status_kumpul   = ((deadline-today) > 0) ? 'Belum Mengerjakan':'Tidak Mengerjakan'
+            status_code     = ((deadline-today) > 0) ? 1 : 0
         }).finally(() => {
             tempTugas = {
                 ...tugasData ? tugasData._doc : {},
@@ -220,7 +223,8 @@ exports.getTugasDetail = async (req, res) => {
                 lampiran_tugas: lampiran_tugas,
                 catatan_tugas: catatan_tugas,
                 nilai_tugas: nilai_tugas,
-                status_kumpul: status_kumpul
+                status_kumpul: status_kumpul,
+                status_code: status_code
             }
 
             if (tugasData) {

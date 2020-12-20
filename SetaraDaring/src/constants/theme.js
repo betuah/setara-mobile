@@ -115,6 +115,7 @@ export const CombinedDefaultTheme = {
         loadingBackground: '#d5f1f7',
         softBlue: '#E7F8FF',
 
+        blue: '#40C3FD',
         red: '#FF7676', //'rgb(255,118,118)'
         softRed: 'F88585',
         green: '#53E69D',
@@ -140,6 +141,7 @@ export const CombinedDefaultTheme = {
         bgAccent: '#ABDBFF',
 
         bgWhite: '#FFFFFF',
+        bgBlue: '#00CFFF',
         bgLight: '#f2feff',
         bgLightBlue: '#E7F8FF',
         bgDark: '#473F47',

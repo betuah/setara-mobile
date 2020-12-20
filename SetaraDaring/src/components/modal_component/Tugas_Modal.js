@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState, useRef } from 'react';
+import React, { useEffect, useCallback, useState, useRef, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dimensions, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import { useTheme, Divider, TouchableRipple, Card } from 'react-native-paper';
@@ -122,51 +122,93 @@ const ListAcordition = ({
                         flexDirection: 'column',
                     }}
                     renderItem={(data) => (
-                        <>
+                        <Fragment>
                         <TouchableRipple
                             onPress={() => onItemPress(data.item._id, data.item.nama, data.item.date_created)}
                             rippleColor="rgba(0, 208, 255, .20)"
                         >
                             <View style={{
-                                paddingLeft: 40,
-                                paddingVertical: 5,
-                                paddingRight: 10,
                                 flexDirection: 'row',
+                                paddingLeft: 40,
+                                paddingRight: 10,
+                            }}>
+                            <View style={{
+                                flex: 13,
+                                flexDirection: 'column',
                             }}>
                                 <View style={{
-                                    alignItems: 'flex-start',
-                                    justifyContent: 'center',
+                                    paddingVertical: 5,
+                                    flexDirection: 'row',
                                 }}>
-                                    <Icon name={'bookmark-check'} size={16} color={colors.bgPrimary} />
+                                    <View style={{
+                                        alignItems: 'flex-start',
+                                        justifyContent: 'center',
+                                    }}>
+                                        <Icon name={'bookmark-check'} size={16} color={colors.bgPrimary} />
+                                    </View>
+                                    <View style={{
+                                        flexDirection: 'column',
+                                        flex: 13,
+                                        marginLeft: 5,
+                                        alignItems: 'flex-start',
+                                        justifyContent: 'center',
+                                    }}>
+                                        <View>
+                                            <Text
+                                                size={12}
+                                                color={colors.textPrimary}
+                                                fontWeight={{...fonts.medium}}
+                                            >
+                                                {data.item.nama}
+                                            </Text>
+                                        </View>
+                                    </View>
                                 </View>
                                 <View style={{
-                                    flexDirection: 'column',
-                                    flex: 13,
-                                    marginLeft: 5,
-                                    alignItems: 'flex-start',
-                                    justifyContent: 'center',
+                                    flexDirection: 'row',
+                                    paddingVertical: 5,
                                 }}>
-                                    <View>
+                                    <View style={{
+                                        justifyContent: 'center'
+                                    }}>
                                         <Text
                                             size={12}
                                             color={colors.textPrimary}
                                             fontWeight={{...fonts.medium}}
                                         >
-                                            {data.item.nama}
+                                            {`Nilai Tugas : ${data.item.nilai_tugas ? data.item.nilai_tugas : 0}`}
+                                        </Text>
+                                    </View>
+                                    <View style={{
+                                        flex: 1,
+                                        alignItems: 'flex-end',
+                                    }}>
+                                        <Text
+                                            style={{
+                                                backgroundColor: data.item.status_code === 2 ? colors.blue : (data.item.status_code === 1 ? colors.yellow : colors.red),
+                                                borderRadius: 5,
+                                                paddingHorizontal: 10,
+                                            }}
+                                            size={12}
+                                            color={colors.textWhite}
+                                            fontWeight={{...fonts.medium}}
+                                        >
+                                            {data.item.status_kumpul}
                                         </Text>
                                     </View>
                                 </View>
-                                <View style={{
-                                    flex: 1,
-                                    alignItems: 'flex-end',
-                                    justifyContent: 'center'
-                                }}>
-                                    <Icon name={'chevron-right'} size={18} color={colors.bgPrimary} />
-                                </View>
+                            </View>
+                            <View style={{
+                                flex: 1,
+                                alignItems: 'flex-end',
+                                justifyContent: 'center'
+                            }}>
+                                <Icon name={'chevron-right'} size={18} color={colors.bgPrimary} />
+                            </View>
                             </View>
                         </TouchableRipple>
                         {data.index === (tugas.length - 1) ? null : <Divider />}
-                    </>
+                    </Fragment>
                     )}
                 />
             }
