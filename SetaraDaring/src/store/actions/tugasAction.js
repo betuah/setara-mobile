@@ -28,7 +28,7 @@ export const getDetailTugas = (tugasId) => {
 
             dispatch({type: DETAIL_TUGAS, detailTugas: resData.data})
         } catch (error) {
-            console.log(error, 'error tugas')
+            console.log(error, 'error tugas detail')
             ErrorHandler(error)
         }
     }
@@ -43,7 +43,7 @@ export const addTugas = (tugasId, files) => {
 
             dispatch({type: DETAIL_TUGAS, detailTugas: resData.data})
         } catch (error) {
-            console.log(error, 'error tugas')
+            console.log(error, 'error tugas upload')
             ErrorHandler(error)
         }
     }

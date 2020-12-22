@@ -277,6 +277,7 @@ const ProfileScreen = (props) => {
                         shadowRadius: 2,
                     }}>
                         <View style={{
+                            flex: 1,
                             flexDirection: 'column',
                             paddingHorizontal: 10,
                         }}>
@@ -295,10 +296,11 @@ const ProfileScreen = (props) => {
                             </View>
                             <Divider style={{height: 0.5}}/>
                             <View style={{
+                                flex: 1,
                                 flexDirection: 'row',
                                 marginTop: 5,
                             }}>
-                                <View style={{flexDirection: 'column'}}>
+                                <View style={{flexDirection: 'column',}}>
                                     <View style={{flexDirection: 'row', marginTop: 5}}>
                                         <View style={{paddingRight: 10,}}><Icon name='mail' color={colors.red} size={15} /></View>
                                         <Text 
@@ -340,7 +342,7 @@ const ProfileScreen = (props) => {
                                         </Text>
                                     </View>
                                 </View>
-                                <View style={{flexDirection: 'column', marginLeft: 15,}}>
+                                <View style={{ flex: 1, marginLeft: 10,}}>
                                     <View style={{flexDirection: 'row', marginTop: 5}}>
                                         <Text 
                                             fontWeight={{...fonts.regular}}
