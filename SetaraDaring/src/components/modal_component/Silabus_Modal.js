@@ -70,7 +70,7 @@ const Silabus_Modal = ({visible, onDismiss, silabus}) => {
                     paddingVertical: 10,
                 }}>
                     <HTML 
-                        html={visible ? (silabus ? silabus : EmptySilabus) : EmptySilabus} 
+                        source={{ html: visible ? (silabus ? silabus : EmptySilabus) : EmptySilabus}}
                         baseFontStyle={{color: colors.textDark, ...fonts.regular}} 
                         contentWidth={useWindowDimensions().width * 0.90}
                         imagesMaxWidth={useWindowDimensions().width * 0.93}

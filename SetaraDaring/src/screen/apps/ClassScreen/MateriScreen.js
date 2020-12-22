@@ -136,7 +136,7 @@ const MateriScreen = ({route, navigation}) => {
                     </View>
                     <Divider />
                     <HTML 
-                        html={detailMateri ? (detailMateri.isi ? detailMateri.isi : EmptySilabus) : EmptySilabus} 
+                        source={{ html: detailMateri ? (detailMateri.isi ? detailMateri.isi : EmptySilabus) : EmptySilabus}}
                         baseFontStyle={{color: colors.textDark, ...fonts.regular, fontSize: 11}} 
                         contentWidth={Dimensions.get('window').width * 0.90}
                         imagesMaxWidth={Dimensions.get('window').width * 0.93}

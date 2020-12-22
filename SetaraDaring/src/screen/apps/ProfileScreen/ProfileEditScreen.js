@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, StatusBar, View, RefreshControl, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { Image, StatusBar, View, RefreshControl, ScrollView, KeyboardAvoidingView, Platform, PermissionsAndroid } from 'react-native';
 import { useTheme, RadioButton, Divider, Portal, Modal, List, FAB } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
@@ -95,52 +95,88 @@ const ProfileEditScreen = ({ navigation }) => {
         };
 
         if (req === 'camera') {
-            launchCamera(options, async response => {
-                console.log(response, 'ea')
-                if (response.error) {
-                    console.log(error)
 
-                    return Toast.show({
-                        type: 'error',
-                        text1: 'Gagal Unggah Foto!',
-                        text2: 'Pastikan Kamu sudah memberikan izin untuk menggunakan camera ya.'
-                    });
-                } else if (response.uri) {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.CAMERA,
+            {
+                title: "Perizinan Camera",
+                message:"SetaraDaring membutuhkan akses kamera kamu. ",
+                buttonNegative: "Tolak",
+                buttonPositive: "Izinkan"
+            }
+            );
+
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                launchCamera(options, async response => {
+                    if (response.error) {
+                        return Toast.show({
+                            type: 'error',
+                            text1: 'Gagal Unggah Foto!',
+                            text2: 'Pastikan Kamu sudah memberikan izin untuk menggunakan camera ya.'
+                        });
+                    } else if (response.uri) {
+                        setModal(false)
+                        setLoading(true)
+                        await dispatch(profileAct.updateAvatar(response, profileState.profile.id))
+                        setLoading(false)
+                        updateData()
+                        Toast.show({
+                            type: 'success',
+                            text1: 'Yey.. Unggah Foto kamu berhasil.',
+                        });
+                    }
+    
                     setModal(false)
-                    setLoading(true)
-                    await dispatch(profileAct.updateAvatar(response, profileState.profile.id))
-                    setLoading(false)
-                    updateData()
-                    Toast.show({
-                        type: 'success',
-                        text1: 'Yey.. Unggah Foto kamu berhasil.',
-                    });
-                }
-
-                setModal(false)
-            })
+                })
+            } else {
+                Toast.show({
+                    type: 'error',
+                    text1: 'Info Unggah Foto dengan Camera!',
+                    text2: 'Kamu tidak dapat upload foto sampai kamu mengubah pengaturan perizinan applikasi.'
+                });
+            }
         } 
         
         if (req === 'library') {
-            launchImageLibrary(options, async response => {
-                if (response.error) {
-                    Toast.show({
-                        type: 'error',
-                        text1: 'Gagal Unggah Foto!',
-                        text2: 'Pastikan Kamu sudah memberikan izin untuk menggunakan camera ya.'
-                    });
-                } else if (response.uri) {
-                    setModal(false)
-                    setLoading(true)
-                    await dispatch(profileAct.updateAvatar(response, profileState.profile.id))
-                    setLoading(false)
-                    updateData()
-                    Toast.show({
-                        type: 'success',
-                        text1: 'Yey.. Unggah Foto kamu berhasil.',
-                    });
-                }
-            })
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.CAMERA,
+            {
+                title: "Perizinan Penyimpanan Data",
+                message:"SetaraDaring membutuhkan akses penyimpanan kamu untuk keperluan unggah foto dan file.",
+                buttonNegative: "Tolak",
+                buttonPositive: "Izinkan"
+            }
+            );
+
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                launchImageLibrary(options, async response => {
+                    if (response.error) {
+                        Toast.show({
+                            type: 'error',
+                            text1: 'Gagal Unggah Foto!',
+                            text2: 'Pastikan Kamu sudah memberikan izin untuk menggunakan camera ya.'
+                        });
+                    } else if (response.uri) {
+                        setModal(false)
+                        setLoading(true)
+                        await dispatch(profileAct.updateAvatar(response, profileState.profile.id))
+                        setLoading(false)
+                        updateData()
+                        Toast.show({
+                            type: 'success',
+                            text1: 'Yey.. Unggah Foto kamu berhasil.',
+                        });
+                    }
+                })
+
+                setModal(false)
+            } else {
+                Toast.show({
+                    type: 'error',
+                    text1: 'Info Unggah Foto dengan Camera!',
+                    text2: 'Kamu tidak dapat upload foto sampai kamu mengubah pengaturan perizinan applikasi.'
+                });
+            }
         }
     };
 
