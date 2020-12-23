@@ -8,61 +8,61 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* SetaraDaringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SetaraDaringTests.m */; };
-		01088B2BD9A94CCDB3BE520E /* Raleway-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89A3BC47E9ED4D41921BB68D /* Raleway-Light.ttf */; };
-		01AA25D577D142CDA2383294 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62D6FF702B9B462CB43BD8FE /* Montserrat-Black.ttf */; };
-		0341C534C2014CD499C196AB /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E4F033F4DD4439A993688E9 /* Poppins-MediumItalic.ttf */; };
-		08EF801BB1F5465CB6D69BC6 /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F36DDD0A4212413A8A4843F3 /* Raleway-Thin.ttf */; };
+		0184139E47C5317444EBB87C /* libPods-SetaraDaring-SetaraDaringTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B43E8751F7D6522532CF6907 /* libPods-SetaraDaring-SetaraDaringTests.a */; };
+		01E9C4F5FE0F4EEA85AEFC3E /* FredokaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4670F46046834EEBA7BC3316 /* FredokaOne-Regular.ttf */; };
+		03DEE419AD4C476EBC72BC95 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B67305FCA14361B51B85B6 /* Quicksand-Medium.ttf */; };
+		11DB887368004A5EA6A9210D /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97E84A170A8947B19A7EAF4C /* Poppins-Regular.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		19DE0B43E85B43E5B66519F7 /* Barlow-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D248A9759434D6F98523981 /* Barlow-Light.ttf */; };
-		1C4D6FB506CB4BE0AB9144AC /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B65706A72C184EA69254E980 /* Poppins-ExtraBold.ttf */; };
-		20683D4F96E9D715B555E905 /* libPods-SetaraDaring-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0DA1D231F692AB49E781A05 /* libPods-SetaraDaring-tvOSTests.a */; };
-		2952B3E2B7084DEDAEF05F3B /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D46D0601F884CF2B825A2DD /* Nunito-SemiBold.ttf */; };
-		2AE2E8AFFDFC47AFA0F20FB6 /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E72999585B65454EADD65C86 /* Raleway-SemiBold.ttf */; };
+		14603BB6B9C414C15974BF79 /* libPods-SetaraDaring-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A60DBC9965FD2979044F72A1 /* libPods-SetaraDaring-tvOSTests.a */; };
+		2C2C9E1EEE24B049862A015F /* libPods-SetaraDaring-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFCCD01C168446947C9F17C0 /* libPods-SetaraDaring-tvOS.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* SetaraDaringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SetaraDaringTests.m */; };
-		327DE0C57A7B4A03BBD8EF22 /* Raleway-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D422AE7F65CF432B918C6B70 /* Raleway-Black.ttf */; };
-		3532A535409541B6A51BD1F6 /* Barlow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC1C4B1F426C494D8D706E86 /* Barlow-Regular.ttf */; };
-		3986076FC3C546208E2F1388 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92392C72A8354315885A955D /* Poppins-Bold.ttf */; };
-		3B864FF8A357FE8519AA74FC /* libPods-SetaraDaring.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ED4604C471D62FC1D51071A /* libPods-SetaraDaring.a */; };
-		3D02ECD046F843EC91E9F16F /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B52168190AB84344AB7A9F9A /* Quicksand-Medium.ttf */; };
-		4012CAE5424849A7ADE7ADD0 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB35BEFD57EF455E93797504 /* Poppins-SemiBoldItalic.ttf */; };
-		4A0E74D3DA184F7F8DE40C6E /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 399D72BE3C7E4A4A9F026FE0 /* Montserrat-Light.ttf */; };
-		5073DA7D3FAE405AA24793DF /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B9DA32FBBBD4E6BB08CF49F /* Poppins-Light.ttf */; };
-		50FCE31C3C1148078E9AD324 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB18134BAD014AC790825A22 /* Poppins-LightItalic.ttf */; };
-		526B2DBAC1274138F9D8E2A6 /* libPods-SetaraDaring-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6BF78523FC266F95F97AC03 /* libPods-SetaraDaring-tvOS.a */; };
-		57AA143C121E4C2BB0C39AD9 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73FBECF458B44766B2AE844D /* Montserrat-Regular.ttf */; };
-		5D6A80FE973240888B38696A /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C2BA2D06C4A8F97B0FA0F /* Quicksand-Regular.ttf */; };
-		610AECD80A5E4D2FA43DBCAB /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1348B63BBDD4462A81A956A5 /* Montserrat-SemiBold.ttf */; };
-		63271A7C2E8641D3879B8A0C /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43D6B62E66B8436EB86CBC6C /* Poppins-Regular.ttf */; };
-		6AAAEBA9BDC74F00988F20BB /* Barlow-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FB2B5E82C074EEA897ED099 /* Barlow-SemiBold.ttf */; };
-		706AA261B8314E2D905A6EE3 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34963019C4294AC2A56BC02D /* Nunito-Bold.ttf */; };
-		7F725BBC656948F787E2FF94 /* Barlow-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3EDCB44A7D2C45268E9EE0CB /* Barlow-Thin.ttf */; };
-		8033DFF41D74477FB05693FA /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 456A8ACCF6B744FF89C4BD72 /* Quicksand-Light.ttf */; };
+		3F64877C13CC7DF73CDBCEB3 /* libPods-SetaraDaring.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC6D20535A9BB5FB9BB3AA3A /* libPods-SetaraDaring.a */; };
+		4465A2DA53BA475B982874F7 /* Barlow-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42EE924CFED14021A02784AE /* Barlow-Black.ttf */; };
+		475E9FAF5D3B40DD9ACB19DA /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7BCDE0E154595BE2783EC /* Quicksand-SemiBold.ttf */; };
+		4B8ED9914B2E4243876D44FB /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD677C9D6BBB4CC19A996E8C /* Nunito-Italic.ttf */; };
+		4E40E91A694D48638362D3B9 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46D94161CD104F82A0FAC60C /* Montserrat-Thin.ttf */; };
+		542F82FF046C473B814C7AE5 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86CF01B6E44A462F9A9D68EB /* Poppins-Thin.ttf */; };
+		54A53D853C56425A9258C7DB /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 475D4E9623EE4093965FB1B8 /* Raleway-Thin.ttf */; };
+		566D17CAAA594720B29BB072 /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FD867B846F94345BC114803 /* Raleway-SemiBold.ttf */; };
+		5B634403C9EF4AE98640F92A /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB1B1167D034359AF8CD71F /* Poppins-Bold.ttf */; };
+		628CA1E386744160B93EECA0 /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2263986930FE4B689AB4A1AF /* Raleway-Medium.ttf */; };
+		67761634AB594DF7B2383EB7 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA935CF45E8B4D4ABC8F7C7E /* Poppins-Medium.ttf */; };
+		6D1303494DF24916908A318D /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DD57944A67F47AB8DEC8235 /* Raleway-Regular.ttf */; };
+		6F7025CAACC04262B18522E9 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 483B9C7EFE60497D8F5C3C39 /* Montserrat-Black.ttf */; };
+		7383A3BBC5E746DB9331671E /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D2CBE3860DB4C7CA4CA6A2D /* Poppins-BoldItalic.ttf */; };
+		79D30E068D0F461F86E357EA /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 178E0AD0EF9947A4BF8EF19E /* Quicksand-Bold.ttf */; };
+		7B4230449A5845D09898BB94 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84E896E4C6744B1AA5A8656C /* Nunito-Regular.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		88168554C8944C9CB2835A56 /* Barlow-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB98033A864810B28EF87C /* Barlow-Black.ttf */; };
-		8E95E2A49B93413C9AD7747B /* FredokaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C517B766E1894C3BAABF9234 /* FredokaOne-Regular.ttf */; };
-		8F365BC364464883A27B4036 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA2D9425C2C4FA2BED5E94C /* Poppins-ThinItalic.ttf */; };
-		A4F379AFCE7947F99C17AA2C /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C27F8B0D3A44228A4BFCE7F /* Montserrat-Medium.ttf */; };
-		AAB87BB8964F45D78F46F706 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0065DD4C161463EA8325CDD /* Quicksand-Bold.ttf */; };
-		AC404C38D7C248D78F193F7C /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D00493B8F7384CC2AEF4FE95 /* Nunito-Light.ttf */; };
-		AEFAF2953B7542C0ADC68B0B /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B7B616EAF644EF6968D029B /* Nunito-Italic.ttf */; };
-		B26D5E16157342B9B74A9AB7 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D52EFDA2931942BFA03CA51D /* Poppins-BoldItalic.ttf */; };
-		BA2127F7A519BE829F5626C4 /* libPods-SetaraDaring-SetaraDaringTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 896C253000E09C50D10D7340 /* libPods-SetaraDaring-SetaraDaringTests.a */; };
-		BA6889D757574CE985857B16 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8D414C7983E47B7B4D095A2 /* Poppins-SemiBold.ttf */; };
-		CC7BCEEA476B49788FAE90FD /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E1D2D20C5046388B76177D /* Nunito-Regular.ttf */; };
-		D2D2864BC5494DC8B01EAB0B /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88DBA1E8190C45DBBE7FE5E7 /* Poppins-Italic.ttf */; };
-		DF160EDCE90F4613AC3079B7 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C4F7F05717E4D63A4B457A2 /* Poppins-Thin.ttf */; };
-		E52E921867F542C9A5D40B76 /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BACA1FE7234240FBB19C8A51 /* Raleway-Regular.ttf */; };
-		E7EBA1BF42C646FA9577E035 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFB5A4C9C1EA4F0DA453E216 /* Montserrat-Thin.ttf */; };
-		E884C05132B0436D91E38661 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 559E4791E47F426F85B608C2 /* Poppins-Medium.ttf */; };
-		EC0880E0C29E4A7196A3EDE6 /* Barlow-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB757437936441DA9D403C93 /* Barlow-Medium.ttf */; };
-		F87DC6C3B51A464A9880B3E8 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8443AB935C64F3F8B04E95D /* Poppins-ExtraBoldItalic.ttf */; };
-		F888DE3383DA4CE594CED5FA /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F644B97A33E641208978A673 /* Raleway-Medium.ttf */; };
-		F9FA16DBA2C74DEEA639BEE7 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB1960D597514D2586B63642 /* Quicksand-SemiBold.ttf */; };
+		8276A867E73E4E45970438FF /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B68909A38B3D4DDCBB526835 /* Poppins-ExtraBold.ttf */; };
+		8A9630842CE74742AF28BDF7 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E4EC837D48941C1ABB03DF1 /* Montserrat-Light.ttf */; };
+		8D798443F6C64DB0A5612DDA /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0C8710DA7B4F6CB51BF6E4 /* Poppins-SemiBoldItalic.ttf */; };
+		8EFD92ACA9394D408A18AFB0 /* Barlow-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE751AECF30B42B1B9F57A3B /* Barlow-Medium.ttf */; };
+		90EDFCC7EB70480DA3ED988F /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68B4867AF04F41EA981BA014 /* Nunito-Light.ttf */; };
+		946DCDFF0EFD4D8588A9FB37 /* Barlow-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C7D4941EDB480497F86230 /* Barlow-Thin.ttf */; };
+		956D23B8FDCF4086BA92FCF4 /* Barlow-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC7113EA1335416084653F50 /* Barlow-Light.ttf */; };
+		9C2231BFD1134716B3D8876B /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92FA2F1582B744C48148B74C /* Nunito-Bold.ttf */; };
+		A057411FCAF34051AA0A5AB4 /* Barlow-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62A93881FD91413E872B58C3 /* Barlow-SemiBold.ttf */; };
+		A2B580C2173E4AB69A888994 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66A27AAD0F3348CAA9D23339 /* Nunito-SemiBold.ttf */; };
+		AED217176DE24DF7B068F329 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBD223EBCECF413C80D0D8AA /* Poppins-Italic.ttf */; };
+		B2AE24B922594D03A363703C /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E4E0E3DC32947B58F51252D /* Montserrat-SemiBold.ttf */; };
+		B8DD4C030B19480AA2E35F57 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D086EDF0DA442FEAEDDAE21 /* Poppins-LightItalic.ttf */; };
+		BA2879C7686F4A55B7CDB11A /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1D6B5183532480D9EC577A7 /* Poppins-SemiBold.ttf */; };
+		C60176079DA54A4FB67EFAE2 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 725ED94CA0E645838593C505 /* Montserrat-Regular.ttf */; };
+		CF1F4FFF736E4A7393EB0581 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3818706464F34638BCF3841A /* Poppins-MediumItalic.ttf */; };
+		D14E88B651084744BF6598B9 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F8BE7FF07F4D6FBFC9DD4C /* Poppins-ExtraBoldItalic.ttf */; };
+		D495241A15714F93B72602B7 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBCB51F2C0394EDC97866E5B /* Poppins-ThinItalic.ttf */; };
+		DB45DF96315F439E815F3688 /* Barlow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94ADF20BB2324057B0DFD08A /* Barlow-Regular.ttf */; };
+		E9195DCF356C468C86EE2372 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B8E0D6033BC4EE4A24F5451 /* Montserrat-Medium.ttf */; };
+		F0D596C54BB5472F9759DE0F /* Raleway-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414E564404084C3BB52934B9 /* Raleway-Light.ttf */; };
+		F7D34A0EFBFD4C23A6DB8AC0 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A717D8862614AE0870C2E18 /* Quicksand-Light.ttf */; };
+		F8D02E92B8A04945931AAC93 /* Raleway-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8F16E94C03E4A1FA8917E11 /* Raleway-Black.ttf */; };
+		FAC34747C47A4C088EF60E43 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECD0652270ED47C5977BF135 /* Poppins-Light.ttf */; };
+		FC53B69144F84F61BD89EF2A /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF89AAFE074B4C38B7EB706D /* Quicksand-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,88 +87,88 @@
 		00E356EE1AD99517003FC87E /* SetaraDaringTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SetaraDaringTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* SetaraDaringTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetaraDaringTests.m; sourceTree = "<group>"; };
-		08A3D94C4BAF46CC9917D776 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		09E1D2D20C5046388B76177D /* Nunito-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Regular.ttf"; path = "../src/assets/fonts/Nunito-Regular.ttf"; sourceTree = "<group>"; };
-		0B5C2BA2D06C4A8F97B0FA0F /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Regular.ttf"; path = "../src/assets/fonts/Quicksand-Regular.ttf"; sourceTree = "<group>"; };
-		0FA2D9425C2C4FA2BED5E94C /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ThinItalic.ttf"; path = "../src/assets/fonts/Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
-		1348B63BBDD4462A81A956A5 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../src/assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		10C9C40F995C406282ECB59A /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		10D8621518BA560989F0A6D9 /* Pods-SetaraDaring-SetaraDaringTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-SetaraDaringTests.debug.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-SetaraDaringTests/Pods-SetaraDaring-SetaraDaringTests.debug.xcconfig"; sourceTree = "<group>"; };
+		11BDDE16849C4D779AC1B49F /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		1219EE6A1CA242FD8C58B12D /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* SetaraDaring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SetaraDaring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SetaraDaring/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SetaraDaring/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SetaraDaring/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SetaraDaring/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SetaraDaring/main.m; sourceTree = "<group>"; };
-		154D697ACB024578B12C7DC2 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
-		1C27F8B0D3A44228A4BFCE7F /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
-		1D248A9759434D6F98523981 /* Barlow-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Light.ttf"; path = "../src/assets/fonts/Barlow-Light.ttf"; sourceTree = "<group>"; };
-		27F4776188E8438CB6A4B912 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		29BA680AEA4575292BBC1000 /* Pods-SetaraDaring-SetaraDaringTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-SetaraDaringTests.release.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-SetaraDaringTests/Pods-SetaraDaring-SetaraDaringTests.release.xcconfig"; sourceTree = "<group>"; };
-		29C0D651E9AA47AAA68E1EF8 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		14B67305FCA14361B51B85B6 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Medium.ttf"; path = "../src/assets/fonts/Quicksand-Medium.ttf"; sourceTree = "<group>"; };
+		14F8BE7FF07F4D6FBFC9DD4C /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		178E0AD0EF9947A4BF8EF19E /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Bold.ttf"; path = "../src/assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; };
+		1A0C8710DA7B4F6CB51BF6E4 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBoldItalic.ttf"; path = "../src/assets/fonts/Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		1D2CBE3860DB4C7CA4CA6A2D /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.ttf"; path = "../src/assets/fonts/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
+		1FD867B846F94345BC114803 /* Raleway-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-SemiBold.ttf"; path = "../src/assets/fonts/Raleway-SemiBold.ttf"; sourceTree = "<group>"; };
+		21F34AA78577CB7194338CD3 /* Pods-SetaraDaring-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-tvOSTests/Pods-SetaraDaring-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2263986930FE4B689AB4A1AF /* Raleway-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-Medium.ttf"; path = "../src/assets/fonts/Raleway-Medium.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* SetaraDaring-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SetaraDaring-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* SetaraDaring-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SetaraDaring-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2EDB0B4C2ECA4A1C91C18447 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
-		30A3F283B63B418F919CB52D /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		34963019C4294AC2A56BC02D /* Nunito-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Bold.ttf"; path = "../src/assets/fonts/Nunito-Bold.ttf"; sourceTree = "<group>"; };
-		399D72BE3C7E4A4A9F026FE0 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Light.ttf"; path = "../src/assets/fonts/Montserrat-Light.ttf"; sourceTree = "<group>"; };
-		3EDCB44A7D2C45268E9EE0CB /* Barlow-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Thin.ttf"; path = "../src/assets/fonts/Barlow-Thin.ttf"; sourceTree = "<group>"; };
-		3FCE2CE6E1416CF39CED465D /* Pods-SetaraDaring-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-tvOSTests/Pods-SetaraDaring-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		43D6B62E66B8436EB86CBC6C /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
-		456A8ACCF6B744FF89C4BD72 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Light.ttf"; path = "../src/assets/fonts/Quicksand-Light.ttf"; sourceTree = "<group>"; };
-		4A138321632C43798DD84EB7 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
-		4EEB98033A864810B28EF87C /* Barlow-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Black.ttf"; path = "../src/assets/fonts/Barlow-Black.ttf"; sourceTree = "<group>"; };
-		4FB2B5E82C074EEA897ED099 /* Barlow-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-SemiBold.ttf"; path = "../src/assets/fonts/Barlow-SemiBold.ttf"; sourceTree = "<group>"; };
-		559E4791E47F426F85B608C2 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
-		57FA4818F7514506BFDE5ABB /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		5B43AEE1CCF40C3DF7DF5C76 /* Pods-SetaraDaring-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-tvOS.release.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-tvOS/Pods-SetaraDaring-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		5C70D5DBFB96EC2E7AB2CAB4 /* Pods-SetaraDaring-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-tvOS/Pods-SetaraDaring-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		5D46D0601F884CF2B825A2DD /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-SemiBold.ttf"; path = "../src/assets/fonts/Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
-		62D6FF702B9B462CB43BD8FE /* Montserrat-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Black.ttf"; path = "../src/assets/fonts/Montserrat-Black.ttf"; sourceTree = "<group>"; };
-		6719D7E816D94335836D6B74 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		67CA45D8974C4AECA082C8FC /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		73FBECF458B44766B2AE844D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
-		7B9DA32FBBBD4E6BB08CF49F /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../src/assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
-		7E4F033F4DD4439A993688E9 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-MediumItalic.ttf"; path = "../src/assets/fonts/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
+		2EA96033BFB8460AA4710D23 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		3633D37AC4734177ABA01CB0 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		365729A745DBF08D8D544234 /* Pods-SetaraDaring-SetaraDaringTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-SetaraDaringTests.release.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-SetaraDaringTests/Pods-SetaraDaring-SetaraDaringTests.release.xcconfig"; sourceTree = "<group>"; };
+		36C7D4941EDB480497F86230 /* Barlow-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Thin.ttf"; path = "../src/assets/fonts/Barlow-Thin.ttf"; sourceTree = "<group>"; };
+		3818706464F34638BCF3841A /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-MediumItalic.ttf"; path = "../src/assets/fonts/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
+		3922074E7719426E86BB7150 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		3BB7BCDE0E154595BE2783EC /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-SemiBold.ttf"; path = "../src/assets/fonts/Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
+		3D37A82757F248938BC654B1 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		3E4EC837D48941C1ABB03DF1 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Light.ttf"; path = "../src/assets/fonts/Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		414E564404084C3BB52934B9 /* Raleway-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-Light.ttf"; path = "../src/assets/fonts/Raleway-Light.ttf"; sourceTree = "<group>"; };
+		42EE924CFED14021A02784AE /* Barlow-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Black.ttf"; path = "../src/assets/fonts/Barlow-Black.ttf"; sourceTree = "<group>"; };
+		45F39885D10E4CCEA9217222 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		4670F46046834EEBA7BC3316 /* FredokaOne-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FredokaOne-Regular.ttf"; path = "../src/assets/fonts/FredokaOne-Regular.ttf"; sourceTree = "<group>"; };
+		46D94161CD104F82A0FAC60C /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Thin.ttf"; path = "../src/assets/fonts/Montserrat-Thin.ttf"; sourceTree = "<group>"; };
+		475D4E9623EE4093965FB1B8 /* Raleway-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-Thin.ttf"; path = "../src/assets/fonts/Raleway-Thin.ttf"; sourceTree = "<group>"; };
+		483B9C7EFE60497D8F5C3C39 /* Montserrat-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Black.ttf"; path = "../src/assets/fonts/Montserrat-Black.ttf"; sourceTree = "<group>"; };
+		4DB1B1167D034359AF8CD71F /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		5784FBC8AFDB4771925D41F7 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		589EC7D0E38A3AC561E9F967 /* Pods-SetaraDaring-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-tvOS/Pods-SetaraDaring-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		6069B5BB53DFA936B9927D9A /* Pods-SetaraDaring-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-tvOS.release.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-tvOS/Pods-SetaraDaring-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		62A93881FD91413E872B58C3 /* Barlow-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-SemiBold.ttf"; path = "../src/assets/fonts/Barlow-SemiBold.ttf"; sourceTree = "<group>"; };
+		62BDFC45B00E49799A5EB428 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		66A27AAD0F3348CAA9D23339 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-SemiBold.ttf"; path = "../src/assets/fonts/Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		68B4867AF04F41EA981BA014 /* Nunito-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Light.ttf"; path = "../src/assets/fonts/Nunito-Light.ttf"; sourceTree = "<group>"; };
+		725ED94CA0E645838593C505 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		742329192B0347A9B49FC870 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		7B8E0D6033BC4EE4A24F5451 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		7BEB1F4CF0D144DDA48E0CC3 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		7DD57944A67F47AB8DEC8235 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-Regular.ttf"; path = "../src/assets/fonts/Raleway-Regular.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SetaraDaring/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		88DBA1E8190C45DBBE7FE5E7 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Italic.ttf"; path = "../src/assets/fonts/Poppins-Italic.ttf"; sourceTree = "<group>"; };
-		88E14DD64ED744BFB938D7E7 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
-		896C253000E09C50D10D7340 /* libPods-SetaraDaring-SetaraDaringTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SetaraDaring-SetaraDaringTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		89A3BC47E9ED4D41921BB68D /* Raleway-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-Light.ttf"; path = "../src/assets/fonts/Raleway-Light.ttf"; sourceTree = "<group>"; };
-		8A6230EC873943069A67B32B /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
-		8B7B616EAF644EF6968D029B /* Nunito-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Italic.ttf"; path = "../src/assets/fonts/Nunito-Italic.ttf"; sourceTree = "<group>"; };
-		8ED4604C471D62FC1D51071A /* libPods-SetaraDaring.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SetaraDaring.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		92392C72A8354315885A955D /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
-		9C4F7F05717E4D63A4B457A2 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../src/assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
-		AB35BEFD57EF455E93797504 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBoldItalic.ttf"; path = "../src/assets/fonts/Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		AFB5A4C9C1EA4F0DA453E216 /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Thin.ttf"; path = "../src/assets/fonts/Montserrat-Thin.ttf"; sourceTree = "<group>"; };
-		B1D141075D65D005722E8512 /* Pods-SetaraDaring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring.debug.xcconfig"; path = "Target Support Files/Pods-SetaraDaring/Pods-SetaraDaring.debug.xcconfig"; sourceTree = "<group>"; };
-		B444E825D9E9753F2EFA10F0 /* Pods-SetaraDaring-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-tvOSTests/Pods-SetaraDaring-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		B52168190AB84344AB7A9F9A /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Medium.ttf"; path = "../src/assets/fonts/Quicksand-Medium.ttf"; sourceTree = "<group>"; };
-		B65706A72C184EA69254E980 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
-		B6BF78523FC266F95F97AC03 /* libPods-SetaraDaring-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SetaraDaring-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8443AB935C64F3F8B04E95D /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		BACA1FE7234240FBB19C8A51 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-Regular.ttf"; path = "../src/assets/fonts/Raleway-Regular.ttf"; sourceTree = "<group>"; };
-		BC1DD17F8DB6C074A39FC8FC /* Pods-SetaraDaring-SetaraDaringTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-SetaraDaringTests.debug.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-SetaraDaringTests/Pods-SetaraDaring-SetaraDaringTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C517B766E1894C3BAABF9234 /* FredokaOne-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FredokaOne-Regular.ttf"; path = "../src/assets/fonts/FredokaOne-Regular.ttf"; sourceTree = "<group>"; };
-		D00493B8F7384CC2AEF4FE95 /* Nunito-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Light.ttf"; path = "../src/assets/fonts/Nunito-Light.ttf"; sourceTree = "<group>"; };
-		D422AE7F65CF432B918C6B70 /* Raleway-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-Black.ttf"; path = "../src/assets/fonts/Raleway-Black.ttf"; sourceTree = "<group>"; };
-		D52EFDA2931942BFA03CA51D /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.ttf"; path = "../src/assets/fonts/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
-		D70BB708DB254E668E434D03 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		D8D414C7983E47B7B4D095A2 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
-		DB1960D597514D2586B63642 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-SemiBold.ttf"; path = "../src/assets/fonts/Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
-		DC1C4B1F426C494D8D706E86 /* Barlow-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Regular.ttf"; path = "../src/assets/fonts/Barlow-Regular.ttf"; sourceTree = "<group>"; };
-		DD07B9022FB24D92874941DF /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		DE977AF88C6BC96CAF989A85 /* Pods-SetaraDaring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring.release.xcconfig"; path = "Target Support Files/Pods-SetaraDaring/Pods-SetaraDaring.release.xcconfig"; sourceTree = "<group>"; };
-		E0DA1D231F692AB49E781A05 /* libPods-SetaraDaring-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SetaraDaring-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E72999585B65454EADD65C86 /* Raleway-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-SemiBold.ttf"; path = "../src/assets/fonts/Raleway-SemiBold.ttf"; sourceTree = "<group>"; };
-		EB18134BAD014AC790825A22 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-LightItalic.ttf"; path = "../src/assets/fonts/Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
+		84E896E4C6744B1AA5A8656C /* Nunito-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Regular.ttf"; path = "../src/assets/fonts/Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		86CF01B6E44A462F9A9D68EB /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../src/assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		8AFEE8AF1FFF410095C030A1 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		90DC1F07E9834D7EA85B1447 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		92FA2F1582B744C48148B74C /* Nunito-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Bold.ttf"; path = "../src/assets/fonts/Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		94ADF20BB2324057B0DFD08A /* Barlow-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Regular.ttf"; path = "../src/assets/fonts/Barlow-Regular.ttf"; sourceTree = "<group>"; };
+		97E84A170A8947B19A7EAF4C /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		9A717D8862614AE0870C2E18 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Light.ttf"; path = "../src/assets/fonts/Quicksand-Light.ttf"; sourceTree = "<group>"; };
+		9D086EDF0DA442FEAEDDAE21 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-LightItalic.ttf"; path = "../src/assets/fonts/Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
+		9E4E0E3DC32947B58F51252D /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../src/assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		A0C3DA3D4A304DCBBB48EF0D /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		A60DBC9965FD2979044F72A1 /* libPods-SetaraDaring-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SetaraDaring-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC6D20535A9BB5FB9BB3AA3A /* libPods-SetaraDaring.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SetaraDaring.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B43E8751F7D6522532CF6907 /* libPods-SetaraDaring-SetaraDaringTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SetaraDaring-SetaraDaringTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B68909A38B3D4DDCBB526835 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
+		BAC71BEB88053735BF2AACA5 /* Pods-SetaraDaring-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-SetaraDaring-tvOSTests/Pods-SetaraDaring-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		CC7113EA1335416084653F50 /* Barlow-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Light.ttf"; path = "../src/assets/fonts/Barlow-Light.ttf"; sourceTree = "<group>"; };
+		CD677C9D6BBB4CC19A996E8C /* Nunito-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Italic.ttf"; path = "../src/assets/fonts/Nunito-Italic.ttf"; sourceTree = "<group>"; };
+		CE751AECF30B42B1B9F57A3B /* Barlow-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Medium.ttf"; path = "../src/assets/fonts/Barlow-Medium.ttf"; sourceTree = "<group>"; };
+		D0B6BBD9DFF70240DFF4316E /* Pods-SetaraDaring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring.debug.xcconfig"; path = "Target Support Files/Pods-SetaraDaring/Pods-SetaraDaring.debug.xcconfig"; sourceTree = "<group>"; };
+		DBD223EBCECF413C80D0D8AA /* Poppins-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Italic.ttf"; path = "../src/assets/fonts/Poppins-Italic.ttf"; sourceTree = "<group>"; };
+		DE18FB4F3F2040F5B7D40A5E /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		DF89AAFE074B4C38B7EB706D /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Regular.ttf"; path = "../src/assets/fonts/Quicksand-Regular.ttf"; sourceTree = "<group>"; };
+		ECD0652270ED47C5977BF135 /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../src/assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		ED41726FCCDB47B7B6BB28DA /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		EFAFC6ACF628402FA8FCED10 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
-		F0065DD4C161463EA8325CDD /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Bold.ttf"; path = "../src/assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; };
-		F36DDD0A4212413A8A4843F3 /* Raleway-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-Thin.ttf"; path = "../src/assets/fonts/Raleway-Thin.ttf"; sourceTree = "<group>"; };
-		F644B97A33E641208978A673 /* Raleway-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-Medium.ttf"; path = "../src/assets/fonts/Raleway-Medium.ttf"; sourceTree = "<group>"; };
-		FB757437936441DA9D403C93 /* Barlow-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Medium.ttf"; path = "../src/assets/fonts/Barlow-Medium.ttf"; sourceTree = "<group>"; };
+		EFCDD34DEDA922C6BABF7E14 /* Pods-SetaraDaring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SetaraDaring.release.xcconfig"; path = "Target Support Files/Pods-SetaraDaring/Pods-SetaraDaring.release.xcconfig"; sourceTree = "<group>"; };
+		F1D6B5183532480D9EC577A7 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		F8F16E94C03E4A1FA8917E11 /* Raleway-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Raleway-Black.ttf"; path = "../src/assets/fonts/Raleway-Black.ttf"; sourceTree = "<group>"; };
+		FA935CF45E8B4D4ABC8F7C7E /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		FBCB51F2C0394EDC97866E5B /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ThinItalic.ttf"; path = "../src/assets/fonts/Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
+		FFCCD01C168446947C9F17C0 /* libPods-SetaraDaring-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SetaraDaring-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA2127F7A519BE829F5626C4 /* libPods-SetaraDaring-SetaraDaringTests.a in Frameworks */,
+				0184139E47C5317444EBB87C /* libPods-SetaraDaring-SetaraDaringTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B864FF8A357FE8519AA74FC /* libPods-SetaraDaring.a in Frameworks */,
+				3F64877C13CC7DF73CDBCEB3 /* libPods-SetaraDaring.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,7 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				526B2DBAC1274138F9D8E2A6 /* libPods-SetaraDaring-tvOS.a in Frameworks */,
+				2C2C9E1EEE24B049862A015F /* libPods-SetaraDaring-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20683D4F96E9D715B555E905 /* libPods-SetaraDaring-tvOSTests.a in Frameworks */,
+				14603BB6B9C414C15974BF79 /* libPods-SetaraDaring-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +224,72 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0BF55157D3D44DDFA3060A26 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				45F39885D10E4CCEA9217222 /* AntDesign.ttf */,
+				DE18FB4F3F2040F5B7D40A5E /* Entypo.ttf */,
+				1219EE6A1CA242FD8C58B12D /* EvilIcons.ttf */,
+				8AFEE8AF1FFF410095C030A1 /* Feather.ttf */,
+				2EA96033BFB8460AA4710D23 /* FontAwesome.ttf */,
+				90DC1F07E9834D7EA85B1447 /* FontAwesome5_Brands.ttf */,
+				10C9C40F995C406282ECB59A /* FontAwesome5_Regular.ttf */,
+				62BDFC45B00E49799A5EB428 /* FontAwesome5_Solid.ttf */,
+				742329192B0347A9B49FC870 /* Fontisto.ttf */,
+				5784FBC8AFDB4771925D41F7 /* Foundation.ttf */,
+				3D37A82757F248938BC654B1 /* Ionicons.ttf */,
+				7BEB1F4CF0D144DDA48E0CC3 /* MaterialCommunityIcons.ttf */,
+				11BDDE16849C4D779AC1B49F /* MaterialIcons.ttf */,
+				3633D37AC4734177ABA01CB0 /* Octicons.ttf */,
+				3922074E7719426E86BB7150 /* SimpleLineIcons.ttf */,
+				A0C3DA3D4A304DCBBB48EF0D /* Zocial.ttf */,
+				42EE924CFED14021A02784AE /* Barlow-Black.ttf */,
+				CC7113EA1335416084653F50 /* Barlow-Light.ttf */,
+				CE751AECF30B42B1B9F57A3B /* Barlow-Medium.ttf */,
+				94ADF20BB2324057B0DFD08A /* Barlow-Regular.ttf */,
+				62A93881FD91413E872B58C3 /* Barlow-SemiBold.ttf */,
+				36C7D4941EDB480497F86230 /* Barlow-Thin.ttf */,
+				4670F46046834EEBA7BC3316 /* FredokaOne-Regular.ttf */,
+				483B9C7EFE60497D8F5C3C39 /* Montserrat-Black.ttf */,
+				3E4EC837D48941C1ABB03DF1 /* Montserrat-Light.ttf */,
+				7B8E0D6033BC4EE4A24F5451 /* Montserrat-Medium.ttf */,
+				725ED94CA0E645838593C505 /* Montserrat-Regular.ttf */,
+				9E4E0E3DC32947B58F51252D /* Montserrat-SemiBold.ttf */,
+				46D94161CD104F82A0FAC60C /* Montserrat-Thin.ttf */,
+				92FA2F1582B744C48148B74C /* Nunito-Bold.ttf */,
+				CD677C9D6BBB4CC19A996E8C /* Nunito-Italic.ttf */,
+				68B4867AF04F41EA981BA014 /* Nunito-Light.ttf */,
+				84E896E4C6744B1AA5A8656C /* Nunito-Regular.ttf */,
+				66A27AAD0F3348CAA9D23339 /* Nunito-SemiBold.ttf */,
+				4DB1B1167D034359AF8CD71F /* Poppins-Bold.ttf */,
+				1D2CBE3860DB4C7CA4CA6A2D /* Poppins-BoldItalic.ttf */,
+				B68909A38B3D4DDCBB526835 /* Poppins-ExtraBold.ttf */,
+				14F8BE7FF07F4D6FBFC9DD4C /* Poppins-ExtraBoldItalic.ttf */,
+				DBD223EBCECF413C80D0D8AA /* Poppins-Italic.ttf */,
+				ECD0652270ED47C5977BF135 /* Poppins-Light.ttf */,
+				9D086EDF0DA442FEAEDDAE21 /* Poppins-LightItalic.ttf */,
+				FA935CF45E8B4D4ABC8F7C7E /* Poppins-Medium.ttf */,
+				3818706464F34638BCF3841A /* Poppins-MediumItalic.ttf */,
+				97E84A170A8947B19A7EAF4C /* Poppins-Regular.ttf */,
+				F1D6B5183532480D9EC577A7 /* Poppins-SemiBold.ttf */,
+				1A0C8710DA7B4F6CB51BF6E4 /* Poppins-SemiBoldItalic.ttf */,
+				86CF01B6E44A462F9A9D68EB /* Poppins-Thin.ttf */,
+				FBCB51F2C0394EDC97866E5B /* Poppins-ThinItalic.ttf */,
+				178E0AD0EF9947A4BF8EF19E /* Quicksand-Bold.ttf */,
+				9A717D8862614AE0870C2E18 /* Quicksand-Light.ttf */,
+				14B67305FCA14361B51B85B6 /* Quicksand-Medium.ttf */,
+				DF89AAFE074B4C38B7EB706D /* Quicksand-Regular.ttf */,
+				3BB7BCDE0E154595BE2783EC /* Quicksand-SemiBold.ttf */,
+				F8F16E94C03E4A1FA8917E11 /* Raleway-Black.ttf */,
+				414E564404084C3BB52934B9 /* Raleway-Light.ttf */,
+				2263986930FE4B689AB4A1AF /* Raleway-Medium.ttf */,
+				7DD57944A67F47AB8DEC8235 /* Raleway-Regular.ttf */,
+				1FD867B846F94345BC114803 /* Raleway-SemiBold.ttf */,
+				475D4E9623EE4093965FB1B8 /* Raleway-Thin.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* SetaraDaring */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,27 +309,12 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				8ED4604C471D62FC1D51071A /* libPods-SetaraDaring.a */,
-				896C253000E09C50D10D7340 /* libPods-SetaraDaring-SetaraDaringTests.a */,
-				B6BF78523FC266F95F97AC03 /* libPods-SetaraDaring-tvOS.a */,
-				E0DA1D231F692AB49E781A05 /* libPods-SetaraDaring-tvOSTests.a */,
+				AC6D20535A9BB5FB9BB3AA3A /* libPods-SetaraDaring.a */,
+				B43E8751F7D6522532CF6907 /* libPods-SetaraDaring-SetaraDaringTests.a */,
+				FFCCD01C168446947C9F17C0 /* libPods-SetaraDaring-tvOS.a */,
+				A60DBC9965FD2979044F72A1 /* libPods-SetaraDaring-tvOSTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		7589F46B1E7B8B8933753248 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B1D141075D65D005722E8512 /* Pods-SetaraDaring.debug.xcconfig */,
-				DE977AF88C6BC96CAF989A85 /* Pods-SetaraDaring.release.xcconfig */,
-				BC1DD17F8DB6C074A39FC8FC /* Pods-SetaraDaring-SetaraDaringTests.debug.xcconfig */,
-				29BA680AEA4575292BBC1000 /* Pods-SetaraDaring-SetaraDaringTests.release.xcconfig */,
-				5C70D5DBFB96EC2E7AB2CAB4 /* Pods-SetaraDaring-tvOS.debug.xcconfig */,
-				5B43AEE1CCF40C3DF7DF5C76 /* Pods-SetaraDaring-tvOS.release.xcconfig */,
-				B444E825D9E9753F2EFA10F0 /* Pods-SetaraDaring-tvOSTests.debug.xcconfig */,
-				3FCE2CE6E1416CF39CED465D /* Pods-SetaraDaring-tvOSTests.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -281,8 +332,8 @@
 				00E356EF1AD99517003FC87E /* SetaraDaringTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				7589F46B1E7B8B8933753248 /* Pods */,
-				963A426984724202B08827D0 /* Resources */,
+				A923BE8B3201B65C1F6A0784 /* Pods */,
+				0BF55157D3D44DDFA3060A26 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -300,70 +351,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		963A426984724202B08827D0 /* Resources */ = {
+		A923BE8B3201B65C1F6A0784 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4EEB98033A864810B28EF87C /* Barlow-Black.ttf */,
-				1D248A9759434D6F98523981 /* Barlow-Light.ttf */,
-				FB757437936441DA9D403C93 /* Barlow-Medium.ttf */,
-				DC1C4B1F426C494D8D706E86 /* Barlow-Regular.ttf */,
-				4FB2B5E82C074EEA897ED099 /* Barlow-SemiBold.ttf */,
-				3EDCB44A7D2C45268E9EE0CB /* Barlow-Thin.ttf */,
-				C517B766E1894C3BAABF9234 /* FredokaOne-Regular.ttf */,
-				62D6FF702B9B462CB43BD8FE /* Montserrat-Black.ttf */,
-				399D72BE3C7E4A4A9F026FE0 /* Montserrat-Light.ttf */,
-				1C27F8B0D3A44228A4BFCE7F /* Montserrat-Medium.ttf */,
-				73FBECF458B44766B2AE844D /* Montserrat-Regular.ttf */,
-				1348B63BBDD4462A81A956A5 /* Montserrat-SemiBold.ttf */,
-				AFB5A4C9C1EA4F0DA453E216 /* Montserrat-Thin.ttf */,
-				34963019C4294AC2A56BC02D /* Nunito-Bold.ttf */,
-				8B7B616EAF644EF6968D029B /* Nunito-Italic.ttf */,
-				D00493B8F7384CC2AEF4FE95 /* Nunito-Light.ttf */,
-				09E1D2D20C5046388B76177D /* Nunito-Regular.ttf */,
-				5D46D0601F884CF2B825A2DD /* Nunito-SemiBold.ttf */,
-				92392C72A8354315885A955D /* Poppins-Bold.ttf */,
-				D52EFDA2931942BFA03CA51D /* Poppins-BoldItalic.ttf */,
-				B65706A72C184EA69254E980 /* Poppins-ExtraBold.ttf */,
-				B8443AB935C64F3F8B04E95D /* Poppins-ExtraBoldItalic.ttf */,
-				88DBA1E8190C45DBBE7FE5E7 /* Poppins-Italic.ttf */,
-				7B9DA32FBBBD4E6BB08CF49F /* Poppins-Light.ttf */,
-				EB18134BAD014AC790825A22 /* Poppins-LightItalic.ttf */,
-				559E4791E47F426F85B608C2 /* Poppins-Medium.ttf */,
-				7E4F033F4DD4439A993688E9 /* Poppins-MediumItalic.ttf */,
-				43D6B62E66B8436EB86CBC6C /* Poppins-Regular.ttf */,
-				D8D414C7983E47B7B4D095A2 /* Poppins-SemiBold.ttf */,
-				AB35BEFD57EF455E93797504 /* Poppins-SemiBoldItalic.ttf */,
-				9C4F7F05717E4D63A4B457A2 /* Poppins-Thin.ttf */,
-				0FA2D9425C2C4FA2BED5E94C /* Poppins-ThinItalic.ttf */,
-				F0065DD4C161463EA8325CDD /* Quicksand-Bold.ttf */,
-				456A8ACCF6B744FF89C4BD72 /* Quicksand-Light.ttf */,
-				B52168190AB84344AB7A9F9A /* Quicksand-Medium.ttf */,
-				0B5C2BA2D06C4A8F97B0FA0F /* Quicksand-Regular.ttf */,
-				DB1960D597514D2586B63642 /* Quicksand-SemiBold.ttf */,
-				D422AE7F65CF432B918C6B70 /* Raleway-Black.ttf */,
-				89A3BC47E9ED4D41921BB68D /* Raleway-Light.ttf */,
-				F644B97A33E641208978A673 /* Raleway-Medium.ttf */,
-				BACA1FE7234240FBB19C8A51 /* Raleway-Regular.ttf */,
-				E72999585B65454EADD65C86 /* Raleway-SemiBold.ttf */,
-				F36DDD0A4212413A8A4843F3 /* Raleway-Thin.ttf */,
-				88E14DD64ED744BFB938D7E7 /* AntDesign.ttf */,
-				6719D7E816D94335836D6B74 /* Entypo.ttf */,
-				08A3D94C4BAF46CC9917D776 /* EvilIcons.ttf */,
-				57FA4818F7514506BFDE5ABB /* Feather.ttf */,
-				29C0D651E9AA47AAA68E1EF8 /* FontAwesome.ttf */,
-				2EDB0B4C2ECA4A1C91C18447 /* FontAwesome5_Brands.ttf */,
-				8A6230EC873943069A67B32B /* FontAwesome5_Regular.ttf */,
-				ED41726FCCDB47B7B6BB28DA /* FontAwesome5_Solid.ttf */,
-				4A138321632C43798DD84EB7 /* Fontisto.ttf */,
-				D70BB708DB254E668E434D03 /* Foundation.ttf */,
-				67CA45D8974C4AECA082C8FC /* Ionicons.ttf */,
-				27F4776188E8438CB6A4B912 /* MaterialCommunityIcons.ttf */,
-				DD07B9022FB24D92874941DF /* MaterialIcons.ttf */,
-				EFAFC6ACF628402FA8FCED10 /* Octicons.ttf */,
-				30A3F283B63B418F919CB52D /* SimpleLineIcons.ttf */,
-				154D697ACB024578B12C7DC2 /* Zocial.ttf */,
+				D0B6BBD9DFF70240DFF4316E /* Pods-SetaraDaring.debug.xcconfig */,
+				EFCDD34DEDA922C6BABF7E14 /* Pods-SetaraDaring.release.xcconfig */,
+				10D8621518BA560989F0A6D9 /* Pods-SetaraDaring-SetaraDaringTests.debug.xcconfig */,
+				365729A745DBF08D8D544234 /* Pods-SetaraDaring-SetaraDaringTests.release.xcconfig */,
+				589EC7D0E38A3AC561E9F967 /* Pods-SetaraDaring-tvOS.debug.xcconfig */,
+				6069B5BB53DFA936B9927D9A /* Pods-SetaraDaring-tvOS.release.xcconfig */,
+				21F34AA78577CB7194338CD3 /* Pods-SetaraDaring-tvOSTests.debug.xcconfig */,
+				BAC71BEB88053735BF2AACA5 /* Pods-SetaraDaring-tvOSTests.release.xcconfig */,
 			);
-			name = Resources;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,11 +373,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SetaraDaringTests" */;
 			buildPhases = (
-				BE18FFD87F1D951A2198C3D5 /* [CP] Check Pods Manifest.lock */,
+				D2F9E39F2D5C5AFFFCE60570 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				6D6D93BD513A5BE3B538E94C /* [CP] Copy Pods Resources */,
+				D59D4B62A31ADF610B73694B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -393,13 +393,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SetaraDaring" */;
 			buildPhases = (
-				E1BC58515C06351411DC3AB4 /* [CP] Check Pods Manifest.lock */,
+				CFBCD9642B8979545211D2B6 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				223B0E40CA16BD081659D233 /* [CP] Copy Pods Resources */,
+				5BE14E77CA58F1B8800150D7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -414,7 +414,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SetaraDaring-tvOS" */;
 			buildPhases = (
-				F331D034FAA59D6270A7A6EE /* [CP] Check Pods Manifest.lock */,
+				1D5737EA3D586D400FB97F35 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -434,7 +434,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SetaraDaring-tvOSTests" */;
 			buildPhases = (
-				8ADA44C2FF06F022D78DCD60 /* [CP] Check Pods Manifest.lock */,
+				627B4DEB6F8237E317C6C2AF /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -510,49 +510,49 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				88168554C8944C9CB2835A56 /* Barlow-Black.ttf in Resources */,
-				19DE0B43E85B43E5B66519F7 /* Barlow-Light.ttf in Resources */,
-				EC0880E0C29E4A7196A3EDE6 /* Barlow-Medium.ttf in Resources */,
-				3532A535409541B6A51BD1F6 /* Barlow-Regular.ttf in Resources */,
-				6AAAEBA9BDC74F00988F20BB /* Barlow-SemiBold.ttf in Resources */,
-				7F725BBC656948F787E2FF94 /* Barlow-Thin.ttf in Resources */,
-				8E95E2A49B93413C9AD7747B /* FredokaOne-Regular.ttf in Resources */,
-				01AA25D577D142CDA2383294 /* Montserrat-Black.ttf in Resources */,
-				4A0E74D3DA184F7F8DE40C6E /* Montserrat-Light.ttf in Resources */,
-				A4F379AFCE7947F99C17AA2C /* Montserrat-Medium.ttf in Resources */,
-				57AA143C121E4C2BB0C39AD9 /* Montserrat-Regular.ttf in Resources */,
-				610AECD80A5E4D2FA43DBCAB /* Montserrat-SemiBold.ttf in Resources */,
-				E7EBA1BF42C646FA9577E035 /* Montserrat-Thin.ttf in Resources */,
-				706AA261B8314E2D905A6EE3 /* Nunito-Bold.ttf in Resources */,
-				AEFAF2953B7542C0ADC68B0B /* Nunito-Italic.ttf in Resources */,
-				AC404C38D7C248D78F193F7C /* Nunito-Light.ttf in Resources */,
-				CC7BCEEA476B49788FAE90FD /* Nunito-Regular.ttf in Resources */,
-				2952B3E2B7084DEDAEF05F3B /* Nunito-SemiBold.ttf in Resources */,
-				3986076FC3C546208E2F1388 /* Poppins-Bold.ttf in Resources */,
-				B26D5E16157342B9B74A9AB7 /* Poppins-BoldItalic.ttf in Resources */,
-				1C4D6FB506CB4BE0AB9144AC /* Poppins-ExtraBold.ttf in Resources */,
-				F87DC6C3B51A464A9880B3E8 /* Poppins-ExtraBoldItalic.ttf in Resources */,
-				D2D2864BC5494DC8B01EAB0B /* Poppins-Italic.ttf in Resources */,
-				5073DA7D3FAE405AA24793DF /* Poppins-Light.ttf in Resources */,
-				50FCE31C3C1148078E9AD324 /* Poppins-LightItalic.ttf in Resources */,
-				E884C05132B0436D91E38661 /* Poppins-Medium.ttf in Resources */,
-				0341C534C2014CD499C196AB /* Poppins-MediumItalic.ttf in Resources */,
-				63271A7C2E8641D3879B8A0C /* Poppins-Regular.ttf in Resources */,
-				BA6889D757574CE985857B16 /* Poppins-SemiBold.ttf in Resources */,
-				4012CAE5424849A7ADE7ADD0 /* Poppins-SemiBoldItalic.ttf in Resources */,
-				DF160EDCE90F4613AC3079B7 /* Poppins-Thin.ttf in Resources */,
-				8F365BC364464883A27B4036 /* Poppins-ThinItalic.ttf in Resources */,
-				AAB87BB8964F45D78F46F706 /* Quicksand-Bold.ttf in Resources */,
-				8033DFF41D74477FB05693FA /* Quicksand-Light.ttf in Resources */,
-				3D02ECD046F843EC91E9F16F /* Quicksand-Medium.ttf in Resources */,
-				5D6A80FE973240888B38696A /* Quicksand-Regular.ttf in Resources */,
-				F9FA16DBA2C74DEEA639BEE7 /* Quicksand-SemiBold.ttf in Resources */,
-				327DE0C57A7B4A03BBD8EF22 /* Raleway-Black.ttf in Resources */,
-				01088B2BD9A94CCDB3BE520E /* Raleway-Light.ttf in Resources */,
-				F888DE3383DA4CE594CED5FA /* Raleway-Medium.ttf in Resources */,
-				E52E921867F542C9A5D40B76 /* Raleway-Regular.ttf in Resources */,
-				2AE2E8AFFDFC47AFA0F20FB6 /* Raleway-SemiBold.ttf in Resources */,
-				08EF801BB1F5465CB6D69BC6 /* Raleway-Thin.ttf in Resources */,
+				4465A2DA53BA475B982874F7 /* Barlow-Black.ttf in Resources */,
+				956D23B8FDCF4086BA92FCF4 /* Barlow-Light.ttf in Resources */,
+				8EFD92ACA9394D408A18AFB0 /* Barlow-Medium.ttf in Resources */,
+				DB45DF96315F439E815F3688 /* Barlow-Regular.ttf in Resources */,
+				A057411FCAF34051AA0A5AB4 /* Barlow-SemiBold.ttf in Resources */,
+				946DCDFF0EFD4D8588A9FB37 /* Barlow-Thin.ttf in Resources */,
+				01E9C4F5FE0F4EEA85AEFC3E /* FredokaOne-Regular.ttf in Resources */,
+				6F7025CAACC04262B18522E9 /* Montserrat-Black.ttf in Resources */,
+				8A9630842CE74742AF28BDF7 /* Montserrat-Light.ttf in Resources */,
+				E9195DCF356C468C86EE2372 /* Montserrat-Medium.ttf in Resources */,
+				C60176079DA54A4FB67EFAE2 /* Montserrat-Regular.ttf in Resources */,
+				B2AE24B922594D03A363703C /* Montserrat-SemiBold.ttf in Resources */,
+				4E40E91A694D48638362D3B9 /* Montserrat-Thin.ttf in Resources */,
+				9C2231BFD1134716B3D8876B /* Nunito-Bold.ttf in Resources */,
+				4B8ED9914B2E4243876D44FB /* Nunito-Italic.ttf in Resources */,
+				90EDFCC7EB70480DA3ED988F /* Nunito-Light.ttf in Resources */,
+				7B4230449A5845D09898BB94 /* Nunito-Regular.ttf in Resources */,
+				A2B580C2173E4AB69A888994 /* Nunito-SemiBold.ttf in Resources */,
+				5B634403C9EF4AE98640F92A /* Poppins-Bold.ttf in Resources */,
+				7383A3BBC5E746DB9331671E /* Poppins-BoldItalic.ttf in Resources */,
+				8276A867E73E4E45970438FF /* Poppins-ExtraBold.ttf in Resources */,
+				D14E88B651084744BF6598B9 /* Poppins-ExtraBoldItalic.ttf in Resources */,
+				AED217176DE24DF7B068F329 /* Poppins-Italic.ttf in Resources */,
+				FAC34747C47A4C088EF60E43 /* Poppins-Light.ttf in Resources */,
+				B8DD4C030B19480AA2E35F57 /* Poppins-LightItalic.ttf in Resources */,
+				67761634AB594DF7B2383EB7 /* Poppins-Medium.ttf in Resources */,
+				CF1F4FFF736E4A7393EB0581 /* Poppins-MediumItalic.ttf in Resources */,
+				11DB887368004A5EA6A9210D /* Poppins-Regular.ttf in Resources */,
+				BA2879C7686F4A55B7CDB11A /* Poppins-SemiBold.ttf in Resources */,
+				8D798443F6C64DB0A5612DDA /* Poppins-SemiBoldItalic.ttf in Resources */,
+				542F82FF046C473B814C7AE5 /* Poppins-Thin.ttf in Resources */,
+				D495241A15714F93B72602B7 /* Poppins-ThinItalic.ttf in Resources */,
+				79D30E068D0F461F86E357EA /* Quicksand-Bold.ttf in Resources */,
+				F7D34A0EFBFD4C23A6DB8AC0 /* Quicksand-Light.ttf in Resources */,
+				03DEE419AD4C476EBC72BC95 /* Quicksand-Medium.ttf in Resources */,
+				FC53B69144F84F61BD89EF2A /* Quicksand-Regular.ttf in Resources */,
+				475E9FAF5D3B40DD9ACB19DA /* Quicksand-SemiBold.ttf in Resources */,
+				F8D02E92B8A04945931AAC93 /* Raleway-Black.ttf in Resources */,
+				F0D596C54BB5472F9759DE0F /* Raleway-Light.ttf in Resources */,
+				628CA1E386744160B93EECA0 /* Raleway-Medium.ttf in Resources */,
+				6D1303494DF24916908A318D /* Raleway-Regular.ttf in Resources */,
+				566D17CAAA594720B29BB072 /* Raleway-SemiBold.ttf in Resources */,
+				54A53D853C56425A9258C7DB /* Raleway-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,7 +588,43 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		223B0E40CA16BD081659D233 /* [CP] Copy Pods Resources */ = {
+		1D5737EA3D586D400FB97F35 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SetaraDaring-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		5BE14E77CA58F1B8800150D7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -638,21 +674,73 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SetaraDaring/Pods-SetaraDaring-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+		627B4DEB6F8237E317C6C2AF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "Bundle React Native Code And Images";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SetaraDaring-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
-		6D6D93BD513A5BE3B538E94C /* [CP] Copy Pods Resources */ = {
+		CFBCD9642B8979545211D2B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SetaraDaring-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2F9E39F2D5C5AFFFCE60570 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SetaraDaring-SetaraDaringTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D59D4B62A31ADF610B73694B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -700,94 +788,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SetaraDaring-SetaraDaringTests/Pods-SetaraDaring-SetaraDaringTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8ADA44C2FF06F022D78DCD60 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SetaraDaring-tvOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BE18FFD87F1D951A2198C3D5 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SetaraDaring-SetaraDaringTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E1BC58515C06351411DC3AB4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SetaraDaring-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F331D034FAA59D6270A7A6EE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SetaraDaring-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -883,7 +883,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BC1DD17F8DB6C074A39FC8FC /* Pods-SetaraDaring-SetaraDaringTests.debug.xcconfig */;
+			baseConfigurationReference = 10D8621518BA560989F0A6D9 /* Pods-SetaraDaring-SetaraDaringTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -906,7 +906,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29BA680AEA4575292BBC1000 /* Pods-SetaraDaring-SetaraDaringTests.release.xcconfig */;
+			baseConfigurationReference = 365729A745DBF08D8D544234 /* Pods-SetaraDaring-SetaraDaringTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -926,7 +926,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B1D141075D65D005722E8512 /* Pods-SetaraDaring.debug.xcconfig */;
+			baseConfigurationReference = D0B6BBD9DFF70240DFF4316E /* Pods-SetaraDaring.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -949,7 +949,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE977AF88C6BC96CAF989A85 /* Pods-SetaraDaring.release.xcconfig */;
+			baseConfigurationReference = EFCDD34DEDA922C6BABF7E14 /* Pods-SetaraDaring.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -970,7 +970,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C70D5DBFB96EC2E7AB2CAB4 /* Pods-SetaraDaring-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 589EC7D0E38A3AC561E9F967 /* Pods-SetaraDaring-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -998,7 +998,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B43AEE1CCF40C3DF7DF5C76 /* Pods-SetaraDaring-tvOS.release.xcconfig */;
+			baseConfigurationReference = 6069B5BB53DFA936B9927D9A /* Pods-SetaraDaring-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1026,7 +1026,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B444E825D9E9753F2EFA10F0 /* Pods-SetaraDaring-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 21F34AA78577CB7194338CD3 /* Pods-SetaraDaring-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1053,7 +1053,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3FCE2CE6E1416CF39CED465D /* Pods-SetaraDaring-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = BAC71BEB88053735BF2AACA5 /* Pods-SetaraDaring-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1186,7 +1186,6 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

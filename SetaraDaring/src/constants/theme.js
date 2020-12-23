@@ -86,27 +86,6 @@ export const CombinedDefaultTheme = {
     colors: {
         ...NavigationDefaultTheme.colors,
         ...PaperDefaultTheme.colors,
-        // utama: '#0090FF',
-        // kedua: '#68E1FD',
-        // acc: '#F88585',
-        
-        // bgLight: '#9FD5FF',
-        // bg: '#00CFFF',
-
-        // Warna 1
-        // bgPrimary: '#F88585',
-        // bgSecondary: '#F88585',
-        // bgAccent: '#FFBBAB',
-
-        // Warna 2
-        // bgPrimary: '#F88585',
-        // bgSecondary: '#F88585',
-        // bgAccent: '#FFBBAB',
-        
-        // Warna 3
-        // bgPrimary: '#00CFFF',
-        // bgSecondary: '#A3E3FF',
-        // bgAccent: '#E7F8FF',
 
         primary: '#40C3FD',
         accent: '#FF7676',
