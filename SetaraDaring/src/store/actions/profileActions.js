@@ -51,7 +51,7 @@ export const updateAvatar = (file, id) => {
             
             dispatch({type: UPDATE_DATA, profile: resData.data})
         } catch (error) {
-            console.log(error)
+            console.log(error.response, 'profile avatar')
             ErrorHandler(error)
         }
     }

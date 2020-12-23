@@ -94,50 +94,7 @@ const ProfileEditScreen = ({ navigation }) => {
             saveToPhotos: false
         };
 
-        const setCamera = () => launchCamera(options, async response => {
-            if (response.error) {
-                return Toast.show({
-                    type: 'error',
-                    text1: 'Gagal Unggah Foto!',
-                    text2: 'Pastikan Kamu sudah memberikan izin untuk menggunakan camera ya.'
-                });
-            } else if (response.uri) {
-                setModal(false)
-                setLoading(true)
-                await dispatch(profileAct.updateAvatar(response, profileState.profile.id))
-                setLoading(false)
-                updateData()
-                Toast.show({
-                    type: 'success',
-                    text1: 'Yey.. Unggah Foto kamu berhasil.',
-                });
-            }
-
-            setModal(false)
-        })
-
-        const setGalery = () => launchImageLibrary(options, async response => {
-            if (response.error) {
-                Toast.show({
-                    type: 'error',
-                    text1: 'Gagal Unggah Foto!',
-                    text2: 'Pastikan Kamu sudah memberikan izin untuk menggunakan camera ya.'
-                });
-            } else if (response.uri) {
-                setModal(false)
-                setLoading(true)
-                await dispatch(profileAct.updateAvatar(response, profileState.profile.id))
-                setLoading(false)
-                updateData()
-                Toast.show({
-                    type: 'success',
-                    text1: 'Yey.. Unggah Foto kamu berhasil.',
-                });
-            }
-        })        
-
         if (req === 'camera') {
-
             const granted = Platform.OS === 'android' && await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.CAMERA,
                 {
@@ -149,14 +106,50 @@ const ProfileEditScreen = ({ navigation }) => {
             );
 
             if ( Platform.OS === 'ios' || (Platform.OS === 'android' && granted === PermissionsAndroid.RESULTS.GRANTED)) {
-                setCamera()
+                launchCamera(options, async response => {
+                    if (response.errorCode) {
+                        setModal(false)
+                        return Toast.show({
+                            type: 'error',
+                            text1: 'Error!',
+                            text2: `Terjadi Keasalahan. ${response.errorMassage ? response.errorMassage : response.errorCode}`
+                        });
+                    } else if (response.uri) {
+                        try {
+                            setModal(false)
+                            setLoading(true)
+                            await dispatch(profileAct.updateAvatar(response, profileState.profile.id))
+                            setLoading(false)
+                            updateData()
+                            Toast.show({
+                                type: 'success',
+                                text1: 'Yey.. Unggah Foto kamu berhasil.',
+                            });
+                            setModal(false)
+                        } catch (error) {
+                            Toast.show({
+                                type: 'error',
+                                text1: 'Gagal Unggah Foto!',
+                                text2: error,
+                            });
+                            setLoading(false)
+                            setModal(false)
+                        }
+                        
+                    }
+        
+                    setModal(false)
+                })
             } else {
                 Toast.show({
                     type: 'error',
                     text1: 'Info Unggah Foto dengan Camera!',
                     text2: 'Kamu tidak dapat upload foto sampai kamu mengubah pengaturan perizinan applikasi.'
                 });
+                setModal(false)
             }
+
+            setModal(false)
         } 
         
         if (req === 'library') {
@@ -171,7 +164,39 @@ const ProfileEditScreen = ({ navigation }) => {
             );
 
             if ( Platform.OS === 'ios' || (Platform.OS === 'android' && granted === PermissionsAndroid.RESULTS.GRANTED)) {
-                setGalery()
+                launchImageLibrary(options, async response => {
+                    if (response.errorCode) {
+                        setModal(false)
+                        return Toast.show({
+                            type: 'error',
+                            text1: 'Error!',
+                            text2: `Terjadi Keasalahan. ${response.errorMassage ? response.errorMassage : response.errorCode}`
+                        });
+                    } else if (response.uri) {
+                        try {
+                            setModal(false)
+                            setLoading(true)
+                            await dispatch(profileAct.updateAvatar(response, profileState.profile.id))
+                            setLoading(false)
+                            updateData()
+                            Toast.show({
+                                type: 'success',
+                                text1: 'Yey.. Unggah Foto kamu berhasil.',
+                            });
+                            setModal(false)
+                        } catch (error) {
+                            Toast.show({
+                                type: 'error',
+                                text1: 'Gagal Unggah Foto!',
+                                text2: error,
+                            });
+                            setModal(false)
+                            setLoading(false)
+                        }
+                        setModal(false)
+                    }
+                    setModal(false)
+                })
             } else {
                 Toast.show({
                     type: 'error',
@@ -179,6 +204,8 @@ const ProfileEditScreen = ({ navigation }) => {
                     text2: 'Kamu tidak dapat upload foto sampai kamu mengubah pengaturan perizinan applikasi.'
                 });
             }
+
+            setModal(false)
         }
     };
 
