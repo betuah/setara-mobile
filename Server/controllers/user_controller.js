@@ -1,7 +1,8 @@
-const multer  = require('multer')
-const fs      = require('fs')
-const env     = require('../env') // Import Environment config
-const User    = require('../models/usersData.model') // Import User Model
+const fs            = require('fs')
+const env           = require('../env') // Import Environment config
+const User          = require('../models/usersData.model') // Import User Model
+const feedbackModel = require('../models/feedbackData.modal') // Import Feedback Model
+const reportModel   = require('../models/reportData.modal') // Import report data model
 
 // Start user detail function
 exports.profile = async (req, res) => {
@@ -103,6 +104,61 @@ exports.avatarUpload = (req, res) => {
                 console.log(new Error('Catch Error update firebase database. ', err))
                 res.status(500).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
             })
+        })
+    } catch (error) {
+        console.log(new Error(error))
+        res.status(500).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
+    }
+}
+
+exports.userReport = (req, res) => {
+    try {
+        const id        = req.userId
+        const judul     = req.body.judul
+        const detail   = req.body.detail
+
+        const data = {
+            id_user : id,
+            judul: judul,
+            detail: detail
+        }
+
+        reportModel.create(data).then(resData => {
+            res.status(200).json({
+                code: 'OK',
+                Status: 'Success',
+                message: 'You response are received. Thanks you!'
+            })
+        }).catch(error => {
+            console.log(new Error(error))
+            res.status(500).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
+        })
+
+    } catch (error) {
+        console.log(new Error(error))
+        res.status(500).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
+    }
+}
+
+exports.userFeedback = (req, res) => {
+    try {
+        const id        = req.userId
+        const feedback  = req.body.feedback
+
+        const data = {
+            id_user : id,
+            saran: feedback
+        }
+
+        feedbackModel.create(data).then(resData => {
+            res.status(200).json({
+                code: 'OK',
+                Status: 'Success',
+                message: 'You response are received. Thanks you!'
+            })
+        }).catch(error => {
+            console.log(new Error(error))
+            res.status(500).json({ status: 'Error', code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error' })
         })
     } catch (error) {
         console.log(new Error(error))

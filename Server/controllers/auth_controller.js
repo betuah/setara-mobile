@@ -193,8 +193,9 @@ const signOut = async (req, res) => {
 // Reset Password
 const resetPassword = async (req, res) => {
     try {
-        const oldPass = req.body.pass ? req.body.pass : ''
-        const newPass = req.body.pass ? req.body.pass : ''
+        const userId  = req.userId
+        const oldPass = req.body.oldpass ? req.body.oldpass : ''
+        const newPass = req.body.newpass ? req.body.newpass : ''
 
         const passwordHashed = await bcrypt.hash(newPass, 12)
 
@@ -203,7 +204,7 @@ const resetPassword = async (req, res) => {
             const user = await User.findOne({ _id: req.userId })
 
             // Check if user exist and password is valid
-            if (!user || !bcrypt.compareSync(password, user.password)) {
+            if (!user || !bcrypt.compareSync(oldPass, user.password)) {
                 res.status(400).json({code: 'ERR_INCORRECT_OLDPASS', message: 'Password lama Anda salah!'})
             } else {
                 User.findByIdAndUpdate(
@@ -236,11 +237,12 @@ const resetPassword = async (req, res) => {
             res.status(404).json({
                 code: 'ERR_PASS_REQUIRED',
                 status: 'Password body required',
-                error: 'Membutuhkan field password lama dan password baru.'
+                message: 'Membutuhkan field password lama dan password baru.'
             })
         }
     } catch (error) {
-        
+        console.log(new Error(error))
+        res.status(500).json({code: 'ERR_INTERNAL_SERVER', message: 'Internal Server Error'})
     }
 }
 
