@@ -25,6 +25,12 @@ const Error = err => {
                 throw('Materi tersebut tidak ditemukan.')
             case 'ERR_UPLOAD_FILE':
                 throw('Sepertinya ada yang salah dengan file kamu. Coba unggah beberapa saat lagi ya.')
+            case 'ERR_INCORRECT_OLDPASS':
+                throw('Password lama kamu salah.')
+            case 'ERR_PASS_REQUIRED':
+                throw('Kamu harus mengisi password lama dan password baru kamu terlebih dahulu.')
+            case 'ERR_UPDATE_PASS':
+                throw('Ubah password gagal.')
             default:
                 throw(errRes.message)
         }

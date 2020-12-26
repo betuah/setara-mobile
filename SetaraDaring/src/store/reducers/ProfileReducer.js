@@ -1,4 +1,4 @@
-import { LOAD_DATA, UPDATE_DATA } from '../actions/profileActions'
+import { LOAD_DATA, UPDATE_DATA, RESET_PASS } from '../actions/profileActions'
 
 const initState = {
     profile: null,
@@ -18,6 +18,11 @@ const profileReducer = (state = initState, actions) => {
             return {
                 ...state,
                 profile: actions.profile
+            }
+
+        case RESET_PASS:
+            return {
+                ...state,
             }
 
         default:

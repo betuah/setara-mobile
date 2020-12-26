@@ -7,6 +7,7 @@ import Header from '../components/common/Header';
 
 import ProfileScreen from '../screen/apps/ProfileScreen/ProfileScreen';
 import ProfileEditScreen from '../screen/apps/ProfileScreen/ProfileEditScreen';
+import AboutScreen from '../screen/apps/ProfileScreen/AboutScreen';
 
 const Stack = createStackNavigator();
 
@@ -71,6 +72,34 @@ const ProfileNav = ({ route, navigation}) => {
         ),
     }
 
+    const AboutOption = {
+        headerShown: true,
+        header: ({ scene, previous, navigation }) => (
+            <Header 
+                data={{
+                    title: 'T E N T A N G   K A M I', 
+                }} 
+                scene={scene} 
+                previous={previous} 
+                navigation={navigation} 
+                titleStyle={{fontSize: 16, ...fonts.semoBold, paddingTop: 3,}}
+                contentStyle={{alignItems: 'center', justifyContent: 'center'}}
+                style={{
+                    backgroundColor: colors.primary,
+                    elevation: 3,
+                    shadowOffset: { width: 0, height: 0 },
+                    shadowOpacity: 0,
+                    shadowRadius: 0, 
+                }}
+                action={{
+                    icon: 'information',
+                    size: 22,
+                }}
+                actionOnPress={() => {}}
+            />
+        ),
+    }
+
     return (
         <Stack.Navigator 
             initialRouteName="MainTab"
@@ -84,6 +113,11 @@ const ProfileNav = ({ route, navigation}) => {
                 name="EditProfile" 
                 component={ProfileEditScreen}
                 options={EditProfileOption}
+            />
+            <Stack.Screen 
+                name="About" 
+                component={AboutScreen}
+                options={AboutOption}
             />
         </Stack.Navigator>
     );

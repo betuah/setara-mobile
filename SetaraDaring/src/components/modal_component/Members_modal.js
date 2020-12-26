@@ -71,8 +71,7 @@ const Members_Modal = props => {
                     backgroundColor: colors.bgPrimary,
                     borderTopRightRadius: 20,
                     borderTopLeftRadius: 20,
-                    height: Dimensions.get('window').height * 0.4,
-                    elevation: 5,
+                    height: Dimensions.get('window').height * 0.5,
                 }}>
                     <SafeAreaView>
                     <View style={{

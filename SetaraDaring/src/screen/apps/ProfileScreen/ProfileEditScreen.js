@@ -4,7 +4,7 @@ import { useTheme, RadioButton, Divider, Portal, Modal, List, FAB } from 'react-
 import { useDispatch, useSelector } from 'react-redux';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Toast from 'react-native-toast-message';
-import { Text, Input, Btn } from '../../../components/common/UtilsComponent'
+import { Text, Input } from '../../../components/common/UtilsComponent'
 import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';

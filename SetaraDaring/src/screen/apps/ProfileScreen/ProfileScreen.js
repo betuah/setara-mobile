@@ -13,12 +13,15 @@ import Orientation from 'react-native-orientation-locker';
 
 import StatusBariOS from '../../../components/common/StatusBar.js';
 import Devel from '../../../components/modal_component/Development_Modal';
+import FeedBack from '../../../components/modal_component/UserFeedback_Modal';
+import Report from '../../../components/modal_component/UserReport_Modal';
+import ChangePass from '../../../components/modal_component/ChangePass_Modal';
 
 import * as authAct from '../../../store/actions/authAction';
 import * as profileAction from '../../../store/actions/profileActions';
 import * as themeAct from '../../../store/actions/themeAction';
 
-const ProfileScreen = (props) => {
+const ProfileScreen = ({ navigation }) => {
     const { colors, fonts } = useTheme()
     const dispatch = useDispatch()
 
@@ -30,6 +33,8 @@ const ProfileScreen = (props) => {
     const [ error, setError ] = useState(false);
     const [ profile, setProfile ] = useState(null)
     const [ devel, setDevel ] = useState(false)
+    const [ feedback, setFeedback ] = useState(false)
+    const [ report, setReport ] = useState(false)
     const [ passModal, setPassModal ] = useState(false)
 
     useEffect(() => {
@@ -86,6 +91,10 @@ const ProfileScreen = (props) => {
         setProfile(null)
     }
 
+    const onAboutClick = () => {
+        navigation.navigate('About')
+    }
+
     const isDarkModeSwtich = () => {
         try {
             dispatch(themeAct.setDarkMode(!darkMode))
@@ -117,19 +126,16 @@ const ProfileScreen = (props) => {
     }
 
     if (error)  {
-        console.log('eaea error')
         return (
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
-                    paddingBottom: 10,
-                    paddingHorizontal: 10,
+                    flex: 1,
                 }}
                 refreshControl={
                     <RefreshControl refreshing={refreshing} colors={[`${colors.bgPrimary}`]} onRefresh={onRefresh} />
                 }
             >
-                <StatusBariOS/>
                 <View style={{
                     flex: 1,
                     justifyContent: 'center',
@@ -181,6 +187,10 @@ const ProfileScreen = (props) => {
                 resizeMode="cover"
             >
                 <Devel visible={devel} onDismiss={setDevel} />
+                <FeedBack visible={feedback} onDismiss={setFeedback} />
+                <Report visible={report} onDismiss={setReport} />
+                <ChangePass visible={passModal} onDismiss={setPassModal} />
+
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{
@@ -519,7 +529,7 @@ const ProfileScreen = (props) => {
                         }}>
                             <Divider style={{height: 1,}} />
                             <TouchableRipple
-                                onPress={() => setDevel(true)}
+                                onPress={() => onAboutClick()}
                                 rippleColor="rgba(0, 0, 0, .32)"
                             >
                                 <View style={{
@@ -539,7 +549,7 @@ const ProfileScreen = (props) => {
                             </TouchableRipple>
                             <Divider style={{height: 1,}} />
                             <TouchableRipple
-                                onPress={() => setDevel(true)}
+                                onPress={() => setFeedback(true)}
                                 rippleColor="rgba(0, 0, 0, .32)"
                             >
                                 <View style={{
@@ -559,7 +569,7 @@ const ProfileScreen = (props) => {
                             </TouchableRipple>
                             <Divider style={{height: 1,}} />
                             <TouchableRipple
-                                onPress={() => setDevel(true)}
+                                onPress={() => setReport(true)}
                                 rippleColor="rgba(0, 0, 0, .32)"
                             >
                                 <View style={{
