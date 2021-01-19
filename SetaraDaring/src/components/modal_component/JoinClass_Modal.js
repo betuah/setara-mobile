@@ -33,9 +33,6 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                 margin: 0
             }}
         >
-            <KeyboardAvoidingView
-                behavior={Platform.OS == "ios" ? "padding" : "height"}
-            >
             <Card style={{
                 backgroundColor: colors.bgPrimary,
                 borderTopRightRadius: 20,
@@ -94,6 +91,9 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                             <Icon name='qr-code-outline' size={20} color={colors.bgPrimary} />
                         </View>
                         <View style={{flex: 10, justifyContent: 'center'}}>
+                        <KeyboardAvoidingView
+                            behavior={Platform.OS == "ios" ? "padding" : "height"}
+                        >
                             <Input
                                 label="Kode Kelas"
                                 placeholder="Masukan kode kelas"
@@ -103,6 +103,7 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                                 onChangeText={e => onChange(e)}
                                 autoCapitalize='characters'
                             />
+                        </KeyboardAvoidingView>
                         </View>
                     </View>
                     <View style={{
@@ -123,7 +124,6 @@ const JoinClass_Modal = ({visible, onDismiss, onChange, onSubmit, value}) => {
                     </View>
                 </View>
             </Card>
-            </KeyboardAvoidingView>
         </Modal>
     )
 }
