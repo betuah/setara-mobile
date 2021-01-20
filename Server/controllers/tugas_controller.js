@@ -48,6 +48,7 @@ exports.getListTugas = async (req, res) => {
                                 let tempTugas
                                 let status_kumpul
                                 let nilai_tugas
+                                let status_code
 
                                 tugasData.map( async (tugas, index, array)  => {
                                     try {
@@ -58,20 +59,22 @@ exports.getListTugas = async (req, res) => {
                                         if(tugasKumpulData) {
                                             nilai_kumpul_tugas += parseFloat(tugasKumpulData.nilai)
                                             status_kumpul = 'Sudah Mengerjakan'
+                                            status_code = 2
                                         }
 
                                     } catch (e) {
                                         let today       = new Date()
                                         let deadline    = new Date(tugas.deadline)
 
-                                        nilai_tugas = null
+                                        nilai_tugas   = null
                                         status_kumpul = ((deadline-today) > 0) ? 'Belum Mengerjakan':'Tidak Mengerjakan'
-
+                                        status_code   = ((deadline-today) > 0) ? 1 : 0
                                     } finally{
                                         tempTugas = {
                                             ...tugas._doc,
                                             nilai_tugas: nilai_tugas,
-                                            status_kumpul: status_kumpul
+                                            status_kumpul: status_kumpul,
+                                            status_code: status_code
                                         }
 
                                         listTugas.push(tempTugas)
@@ -252,7 +255,7 @@ exports.getTugasDetail = async (req, res) => {
 
 exports.kumpulkanTugas = async (req, res) => {
     try {
-        const fileData  = req.files.map(item => item.filename)
+        const fileData  = req.files ? req.files.map(item => item.filename) : null
         const userId    = req.userId
         const tugasId   = req.params.tugasId
         const isi_tugas = req.body.isi_tugas ? req.body.isi_tugas : ''
@@ -274,7 +277,11 @@ exports.kumpulkanTugas = async (req, res) => {
 
         res.status(200).json(resData)
     } catch (error) {
-        console.log(error)
-        res.status(500).json(err)
+        console.log(new Error(error))
+        res.status(500).json({
+            code: 'ERR_ADD_TUGAS',
+            status: 'Error',
+            message: 'Failed add assignment!'
+        })
     }
 }
