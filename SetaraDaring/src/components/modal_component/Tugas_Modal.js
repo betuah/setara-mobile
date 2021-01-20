@@ -175,7 +175,7 @@ const ListAcordition = ({
                                     }}>
                                         <Text
                                             style={{
-                                                backgroundColor: data.item.status_code === 2 ? colors.blue : (data.item.status_code === 1 ? colors.yellow : colors.red),
+                                                backgroundColor: data.item.status_code === 2 ? colors.darkGreen : (data.item.status_code === 1 ? colors.orange2 : colors.red),
                                                 borderRadius: 5,
                                                 paddingHorizontal: 10,
                                             }}

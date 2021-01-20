@@ -34,10 +34,12 @@ export const getDetailTugas = (tugasId) => {
     }
 }
 
-export const addTugas = (tugasId, files) => {
+export const addTugas = (tugasId, files, tugasPost) => {
     return async dispatch => {
         try {
-            await AxiosAPI.post(`${config.base_url}/api/v1/tugas/${tugasId}`, createFormData(files))
+            console.log(tugasId)
+            await AxiosAPI.post(`${config.base_url}/api/v1/tugas/${tugasId}`, createFormData(files, tugasPost) )
+            // await AxiosAPI.post(`${config.base_url}/api/v1/tugas/${tugasId}`, createFormData(files, tugasPost))
             const res = await AxiosAPI.get(`${config.base_url}/api/v1/tugas/detail/${tugasId}`)
             const resData = res.data
 
@@ -49,16 +51,24 @@ export const addTugas = (tugasId, files) => {
     }
 }
 
-const createFormData = (files) => {
+const createFormData = (files, post) => {
     const data = new FormData();
 
-    files.forEach((item, i) => {
-        data.append('files', {
-            name: item.name ,
-            type: item.type,
-            uri: Platform.OS === 'android' ? item.uri : item.uri.replace('file://', ''),
-        });
+    data.append(
+        'isi_tugas', post
+    )
+
+    files.length > 0 && files.forEach((item, i) => {
+        data.append(
+            'files', {
+                name: item.name ,
+                type: item.type,
+                uri: Platform.OS === 'android' ? item.uri : item.uri.replace('file://', ''),
+            },
+        );
     })
+
+    console.log(data)
 
     return data;
 };
