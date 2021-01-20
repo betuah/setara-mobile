@@ -134,7 +134,14 @@ const TugasScreen = ({route, navigation}) => {
     const onSavePress = async () => {
         try {
             setModalLoading(true)
-            await dispatch(tugasAct.addTugas(route.params.id, attacthment))
+            await dispatch(tugasAct.addTugas(route.params.id, attacthment, tugasPost))
+            Toast.show({
+                type: 'success',
+                text1: 'Tugas berhasil dikumpulkan!',
+                text2: 'Silahkan menunggu sampai guru kamu memberikan nilai.'
+            });
+            setAttacthment([])
+            setTugasPost('')
             setModalLoading(false)
         } catch (error) {
             if (error === 'ERR_GENERATE_TOKEN') {
