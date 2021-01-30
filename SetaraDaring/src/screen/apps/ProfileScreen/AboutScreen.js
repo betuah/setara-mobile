@@ -135,7 +135,7 @@ const AboutScreen = () => {
                                         color={colors.textWhite}
                                         size={14}
                                     >
-                                        SetaraDaring v1.1
+                                        SetaraDaring v1.1.3
                                     </Text>
                                 </View>
                             </View>
@@ -158,7 +158,7 @@ const AboutScreen = () => {
                                         size={12}
                                         color={colors.textGrey}
                                     >
-                                        Fitur Ubah Password (Pengajar dan Pelajar)
+                                        Perbaikan bug tidak dapat upload tugas
                                     </Text>
                                 </View>
                                 <View style={{
@@ -176,7 +176,7 @@ const AboutScreen = () => {
                                         size={12}
                                         color={colors.textGrey}
                                     >
-                                        Tentang Applikasi
+                                        Perbaikan filter mapel dan filter posting kelas
                                     </Text>
                                 </View>
                                 <View style={{
@@ -194,97 +194,7 @@ const AboutScreen = () => {
                                         size={12}
                                         color={colors.textGrey}
                                     >
-                                        Fitur Saran dan Masukan
-                                    </Text>
-                                </View>
-                                <View style={{
-                                    flexDirection: 'row'
-                                }}>
-                                    <View style={{
-                                        justifyContent: 'center',
-                                        marginRight: 5,
-                                    }}>
-                                        <Icon name='checkmark' size={18} color={colors.primary} />
-                                    </View>
-                                    
-                                    <Text 
-                                        fontWeight={{...fonts.regular}}
-                                        size={12}
-                                        color={colors.textGrey}
-                                    >
-                                        Fitur Laporan Permasalahan
-                                    </Text>
-                                </View>
-                                <View style={{
-                                    flexDirection: 'row'
-                                }}>
-                                    <View style={{
-                                        justifyContent: 'center',
-                                        marginRight: 5,
-                                    }}>
-                                        <Icon name='checkmark' size={18} color={colors.primary} />
-                                    </View>
-                                    
-                                    <Text 
-                                        fontWeight={{...fonts.regular}}
-                                        size={12}
-                                        color={colors.textGrey}
-                                    >
-                                        Perubahan backgound pada screen kelas
-                                    </Text>
-                                </View>
-                                <View style={{
-                                    flexDirection: 'row'
-                                }}>
-                                    <View style={{
-                                        justifyContent: 'center',
-                                        marginRight: 5,
-                                    }}>
-                                        <Icon name='checkmark' size={18} color={colors.primary} />
-                                    </View>
-                                    
-                                    <Text 
-                                        fontWeight={{...fonts.regular}}
-                                        size={12}
-                                        color={colors.textGrey}
-                                    >
-                                        Perbaikan permasalahan tidak dapat scroll pada fitur detail Kelas
-                                    </Text>
-                                </View>
-                                <View style={{
-                                    flexDirection: 'row'
-                                }}>
-                                    <View style={{
-                                        justifyContent: 'center',
-                                        marginRight: 5,
-                                    }}>
-                                        <Icon name='checkmark' size={18} color={colors.primary} />
-                                    </View>
-                                    
-                                    <Text 
-                                        fontWeight={{...fonts.regular}}
-                                        size={12}
-                                        color={colors.textGrey}
-                                    >
-                                        Perbaikan pada saat update perubahan profil yang tidak terupdate.
-                                    </Text>
-                                </View>
-                                <View style={{
-                                    flexDirection: 'row'
-                                }}>
-                                    <View style={{
-                                        justifyContent: 'center',
-                                        marginRight: 5,
-                                    }}>
-                                        <Icon name='checkmark' size={18} color={colors.primary} />
-                                    </View>
-                                    
-                                    <Text 
-                                        fontWeight={{...fonts.regular}}
-                                        size={12}
-                                        color={colors.textGrey}
-                                    >
-                                        Menambahkan tinggi Pop Up Anggota Kelas pada bagian lihat anggota detail kelas.
+                                        Perbaikan pada warna status tugas
                                     </Text>
                                 </View>
                             </View>

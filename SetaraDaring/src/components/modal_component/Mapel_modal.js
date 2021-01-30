@@ -68,10 +68,6 @@ const Mapel_Modal = props => {
         return item.nama.toLowerCase().includes(search.toLowerCase())
     })
 
-    const onSearch = value => {
-        setSearch(value)
-    }
-
     const onDismiss = () => {
         setSearch('')
         props.onDismiss('mapel')
@@ -175,7 +171,7 @@ const Mapel_Modal = props => {
                             value={search}
                             color={colors.accent}
                             defaultStyle={InputDefaultStyle}
-                            onChangeText={e => onSearch(e)}
+                            onChangeText={e => setSearch(e)}
                         />
                     </View>
                 </View>

@@ -54,9 +54,6 @@ const FilterClass = props => {
     const dispatch = useDispatch()
     const state = useSelector(state => state.class)
     const [ search, setSearch ] = useState('')
-    const onSearch = value => {
-        setSearch(value)
-    }
 
     const loadClass = async () => {
         try {
@@ -189,7 +186,7 @@ const FilterClass = props => {
                                     value={search}
                                     color={colors.accent}
                                     defaultStyle={InputDefaultStyle}
-                                    onChangeText={e => onSearch(e)}
+                                    onChangeText={e => setSearch(e)}
                                 />
                             </View>
                         </View>
