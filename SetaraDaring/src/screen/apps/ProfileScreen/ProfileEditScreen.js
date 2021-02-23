@@ -600,6 +600,7 @@ const ProfileEditScreen = ({ navigation }) => {
                                     </View>
                                     <Divider style={{height: 1, backgroundColor: colors.bgPrimary}} />
                                     <Input
+                                        disabled
                                         label="Sekolah"
                                         placeholder="Nama sekolah atau Institusi kamu"
                                         value={data.profile.sekolah}
