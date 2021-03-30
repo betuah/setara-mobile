@@ -22,11 +22,13 @@ import {
 
 // Actions
 import * as authActions from '../store/actions/authAction';
+import Alert from '../components/modal_component/Alert_Popup';
 
 const LoginScreen = ({ navigation }) => {
     const date = new Date()
     const authData = useSelector(state => state.auth)
     const [loading, setLoading] = useState(false)
+    const [alert, setAlert] = useState(false)
     const dispatch = useDispatch()
     const insets = useSafeAreaInsets();
 
@@ -86,6 +88,7 @@ const LoginScreen = ({ navigation }) => {
 
     return (
         <>
+        <Alert visible={alert} onDismiss={setAlert} />
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
             <View style={{flex: 1,}}>
                 <KeyboardAvoidingView
@@ -166,7 +169,8 @@ const LoginScreen = ({ navigation }) => {
                                 </View>
                                 <View>
                                     <Text 
-                                        onPress={() => navigation.navigate('SignUp')}
+                                        // onPress={() => navigation.navigate('SignUp')}
+                                        onPress={() => setAlert(true)}
                                         size={14}
                                         weight='bold'
                                         color={colors.white}

@@ -14,7 +14,7 @@ const EmptyComponent = props => {
             marginTop: props.top ? props.top : '50%'
         }}>
             <LottieView 
-                source={require('../assets/lottie/33173-smartphone-addicition.json')} 
+                source={require('../assets/lottie/33173-smartphone-addicition.json')}
                 autoPlay
                 style={{
                     width: props.width ? props.width : '60%',
