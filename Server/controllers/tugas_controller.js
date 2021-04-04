@@ -82,7 +82,7 @@ exports.getListTugas = async (req, res) => {
 
                                     if(index === tugasData.length-1) {
                                         resolve({
-                                            list_tugas: listTugas.map(item => !item.jenis && item),
+                                            list_tugas: listTugas.map(item => item.jenis ? (item.jenis !== '1' && item) : item),
                                             rata_nilai: nilai_kumpul_tugas/tugasData.length
                                         })
                                         // resolve(nilai_kumpul_tugas/tugasData.length)
