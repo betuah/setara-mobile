@@ -54,12 +54,12 @@ exports.getListTugas = async (req, res) => {
                                     try {
                                         const tugasKumpulData = await TugasKumpul.findOne({ id_user: userId, id_tugas: tugas._id})
 
-                                        nilai_tugas         = tugasKumpulData.nilai
+                                        nilai_tugas = tugasKumpulData.nilai
 
                                         if(tugasKumpulData) {
                                             nilai_kumpul_tugas += parseFloat(tugasKumpulData.nilai)
-                                            status_kumpul = 'Sudah Mengerjakan'
-                                            status_code = 2
+                                            status_kumpul   = 'Sudah Mengerjakan'
+                                            status_code     = 2
                                         }
 
                                     } catch (e) {
@@ -74,7 +74,7 @@ exports.getListTugas = async (req, res) => {
                                             ...tugas._doc,
                                             nilai_tugas: nilai_tugas,
                                             status_kumpul: status_kumpul,
-                                            status_code: status_code
+                                            status_code: status_code,
                                         }
 
                                         listTugas.push(tempTugas)
@@ -82,7 +82,7 @@ exports.getListTugas = async (req, res) => {
 
                                     if(index === tugasData.length-1) {
                                         resolve({
-                                            list_tugas: listTugas,
+                                            list_tugas: listTugas.map(item => !item.jenis && item),
                                             rata_nilai: nilai_kumpul_tugas/tugasData.length
                                         })
                                         // resolve(nilai_kumpul_tugas/tugasData.length)
