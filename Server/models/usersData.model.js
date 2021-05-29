@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose')
-const Schema    = mongoose.Schema
+const { mongoConnLms }  = require('../config/db_mongoDB')
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const userDataSchema = new Schema({ 
     username : { 
@@ -75,6 +76,6 @@ userDataSchema.set('toJSON', {
     }
 });
 
-const usersData = mongoose.model('user', userDataSchema)
+const usersData = mongoConnLms.model('user', userDataSchema)
 
 module.exports = usersData

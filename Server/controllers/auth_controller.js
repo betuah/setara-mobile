@@ -66,7 +66,7 @@ const signIn = async (req, res) => {
             res.status(200).json(resData) // Response success status with User and token data
         }
     } catch (error) { // Catch Error
-    // if (error) console.log(new Error(error)) // Show error in log
+    console.log(new Error(error)) // Show error in log
 
     res.status(400).json({code: 'ERR_INTERNAL_SERVER_ERROR', message: 'Ops... Ada yang salah dengan server!'}) // Give error status response to front end
 }

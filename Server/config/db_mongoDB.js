@@ -1,23 +1,31 @@
 const mongoose  = require('mongoose');
 const env       = require('../env');
 
-const mongoConn = new Promise((resolve, reject) => { // Set promise
-    mongoose.connect(`mongodb://${env.db_mongoDB.host}:${env.db_mongoDB.port}/${env.db_mongoDB.database}`, { // Mongodb URL Connect
-        auth: { "authSource": "admin" }, // Auth db
-        user: env.db_mongoDB.username, // MongoDB Server username
-        pass: env.db_mongoDB.password, // MongoDB Server password
-        useNewUrlParser: true,
-        useUnifiedTopology: true, 
-        useCreateIndex: true,
-        useFindAndModify: false,
-        autoIndex: true // Auth indexing schema
-    }).then(() => {
-        return resolve(true) // If success send resolve
-    }).catch((e) => {
-        console.log(new Error(e))
-        return reject(false) // If error rejected
-    })
-})
+// Lms Mongo Connection
+const mongoConnLms = mongoose.createConnection(`mongodb://${env.mongoDB.host}:${env.mongoDB.port}/${env.mongoDB.databaseLms.db}`, {
+    auth: { "authSource": "admin" }, // Auth db
+    user: env.mongoDB.databaseLms.username, // MongoDB LMS Server username
+    pass: env.mongoDB.databaseLms.password, // MongoDB LMS Server password
+    useNewUrlParser: true,
+    useUnifiedTopology: true, 
+    useCreateIndex: true,
+    useFindAndModify: false,
+    autoIndex: true // Auth indexing schema
+});
+
+// Log Mongo Connection
+const mongoConnLog = mongoose.createConnection(`mongodb://${env.mongoDB.host}:${env.mongoDB.port}/${env.mongoDB.databaseLog.db}`, {
+    auth: { "authSource": "admin" }, // Auth db
+    user: env.mongoDB.databaseLog.username, // MongoDB LOG Server username
+    pass: env.mongoDB.databaseLog.password, // MongoDB LOG Server password
+    useNewUrlParser: true,
+    useUnifiedTopology: true, 
+    useCreateIndex: true,
+    useFindAndModify: false,
+    autoIndex: true // Auth indexing schema
+}).catch(e => {
+    console.log('Database connection log_lms', new Error(e))
+});
 
 /**
  * Checking Object ID
@@ -28,4 +36,4 @@ const isValidId = (id) => {
 }
 // End checking object id
 
-module.exports = { mongoConn, isValidId } // Export mongo connection and isValidId function
+module.exports = { mongoConnLms, mongoConnLog, isValidId } // Export mongo connection and isValidId function

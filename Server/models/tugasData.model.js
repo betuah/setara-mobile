@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose')
-const Schema    = mongoose.Schema
+const { mongoConnLms }  = require('../config/db_mongoDB')
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const tugasSchema = new Schema({
     id_modul : {
@@ -45,6 +46,6 @@ tugasSchema.set('toJSON', {
     versionKey: false
 });
 
-const tugasData = mongoose.model('tugas', tugasSchema)
+const tugasData = mongoConnLms.model('tugas', tugasSchema)
 
 module.exports = tugasData

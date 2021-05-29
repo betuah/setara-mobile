@@ -46,9 +46,9 @@ notifRoute(app)
 /* End of Routing Import */
 
 /* MongoDB Connection Check and running Apps */
-const { mongoConn } = require('./config/db_mongoDB') // Import mongo connection from config
+const { mongoConnLms } = require('./config/db_mongoDB') // Import mongo connection from config
 
-mongoConn.then(() => // If mongodb Connected to the host server
+mongoConnLms.then(() => // If mongodb Connected to the host server
     {
         if (env.node_env === 'production') { // If Node Env set to production
             try {

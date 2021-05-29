@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose')
-const Schema    = mongoose.Schema
+const { mongoConnLms }  = require('../config/db_mongoDB');
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const kelasSchema = new Schema({ 
     nama : { 
@@ -47,6 +48,6 @@ kelasSchema.set('toJSON', {
     versionKey: false
 });
 
-const kelasData = mongoose.model('kelas', kelasSchema)
+const kelasData = mongoConnLms.model('kelas', kelasSchema)
 
 module.exports = kelasData

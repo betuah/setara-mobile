@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose')
-const Schema    = mongoose.Schema
+const { mongoConnLms }  = require('../config/db_mongoDB');
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const postingSchema = new Schema({
     isi_postingan : {
@@ -35,6 +36,6 @@ postingSchema.set('toJSON', {
     versionKey: false
 });
 
-const postingData = mongoose.model('posting', postingSchema)
+const postingData = mongoConnLms.model('posting', postingSchema)
 
 module.exports = postingData

@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { mongoConnLms }  = require('../config/db_mongoDB')
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const refreshTokenSchema = new Schema({
     user: { 
@@ -42,4 +43,4 @@ refreshTokenSchema.set('toJSON', {
     }
 })
 
-module.exports = mongoose.model('token_Data', refreshTokenSchema)
+module.exports = mongoConnLms.model('token_Data', refreshTokenSchema)

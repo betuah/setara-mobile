@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose')
-const Schema    = mongoose.Schema
+const { mongoConnLms }  = require('../config/db_mongoDB');
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const feedbackSchema = new Schema({
     id_user : {
@@ -15,6 +16,6 @@ const feedbackSchema = new Schema({
     timestamps: true,
 })
 
-const feedbackData = mongoose.model('user_feedback', feedbackSchema)
+const feedbackData = mongoConnLms.model('user_feedback', feedbackSchema)
 
 module.exports = feedbackData

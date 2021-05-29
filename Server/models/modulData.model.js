@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose')
-const Schema    = mongoose.Schema
+const { mongoConnLms }  = require('../config/db_mongoDB');
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const modulSchema = new Schema({ 
     id_mapel : { 
@@ -41,6 +42,6 @@ modulSchema.set('toJSON', {
     versionKey: false
 });
 
-const modulData = mongoose.model('modul', modulSchema)
+const modulData = mongoConnLms.model('modul', modulSchema)
 
 module.exports = modulData

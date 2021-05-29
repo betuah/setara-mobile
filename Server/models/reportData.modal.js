@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose')
-const Schema    = mongoose.Schema
+const { mongoConnLms }  = require('../config/db_mongoDB');
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const reportSchema = new Schema({
     id_user : {
@@ -18,8 +19,8 @@ const reportSchema = new Schema({
     }
 }, {
     timestamps: true,
-})
+});
 
-const reportData = mongoose.model('user_report', reportSchema)
+const reportData = mongoConnLms.model('user_report', reportSchema);
 
-module.exports = reportData
+module.exports = reportData;

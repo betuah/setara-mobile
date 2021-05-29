@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose')
-const Schema    = mongoose.Schema
+const { mongoConnLms }  = require('../config/db_mongoDB');
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const anggotaKelasSchema = new Schema({
     id_user : {
@@ -24,6 +25,6 @@ const anggotaKelasSchema = new Schema({
     collection : 'anggota_kelas'
 })
 
-const anggotaKelas = mongoose.model('anggota_kelas', anggotaKelasSchema)
+const anggotaKelas = mongoConnLms.model('anggota_kelas', anggotaKelasSchema)
 
 module.exports = anggotaKelas

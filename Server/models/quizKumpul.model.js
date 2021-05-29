@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose')
-const Schema    = mongoose.Schema
+const { mongoConnLms }  = require('../config/db_mongoDB');
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const quizKumpulSchema = new Schema({
     id_user : {
@@ -35,6 +36,6 @@ quizKumpulSchema.set('toJSON', {
     versionKey: false
 });
 
-const quizKumpulData = mongoose.model('kumpul_quiz', quizKumpulSchema)
+const quizKumpulData = mongoConnLms.model('kumpul_quiz', quizKumpulSchema)
 
 module.exports = quizKumpulData

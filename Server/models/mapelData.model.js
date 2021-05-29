@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose')
-const Schema    = mongoose.Schema
+const { mongoConnLms }  = require('../config/db_mongoDB');
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const mapelSchema = new Schema({ 
     id_kelas : { 
@@ -40,6 +41,6 @@ mapelSchema.set('toJSON', {
     versionKey: false
 });
 
-const mapelData = mongoose.model('mata_pelajaran', mapelSchema)
+const mapelData = mongoConnLms.model('mata_pelajaran', mapelSchema)
 
 module.exports = mapelData

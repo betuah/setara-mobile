@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose')
-const Schema    = mongoose.Schema
+const { mongoConnLms }  = require('../config/db_mongoDB');
+const mongoose          = require('mongoose');
+const Schema            = mongoose.Schema;
 
 const soalSchema = new Schema({
     id_paket : {
@@ -33,13 +34,13 @@ const soalSchema = new Schema({
 }, {
     timestamps: true,
     collection : 'soal'
-})
+});
 
 soalSchema.set('toJSON', {
     virtuals: true,
     versionKey: false
 });
 
-const soalData = mongoose.model('soal', soalSchema)
+const soalData = mongoConnLms.model('soal', soalSchema);
 
-module.exports = soalData
+module.exports = soalData;

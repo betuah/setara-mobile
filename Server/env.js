@@ -9,10 +9,17 @@ const env = {
     host: process.env.HOST,
     path_protocol: process.env.PATH_PROTOCOL,
     picture_path: process.env.PICTURE_PATH,
-    db_mongoDB: {
-        database: process.env.MONGO_DB,
-        username: process.env.MONGO_USERNAME,
-        password: process.env.MONGO_PASSWORD,
+    mongoDB: {
+        databaseLms: {
+            username: process.env.MONGO_USERNAME_LMS,
+            password: process.env.MONGO_PASSWORD_LMS,
+            db: process.env.MONGO_DB_LMS,
+        },
+        databaseLog: {
+            username: process.env.MONGO_USERNAME_LOG,
+            password: process.env.MONGO_PASSWORD_LOG,
+            db: process.env.MONGO_DB_LOG,
+        },
         host: process.env.MONGO_HOST,
         port: process.env.MONGO_PORT
     }    
