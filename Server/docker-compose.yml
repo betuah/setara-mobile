@@ -1,22 +1,39 @@
 version: '3.8'
 
 services:
-    api_server:
-        build: 
-            context: .
-            dockerfile: Dockerfile
-        image: setara/api_server:release
-        container_name: api_server
-        env_file: prod.env
-        networks: 
-            - setaralms_network
-        volumes: 
-            - ./public:/usr/src/app/public
-            - /etc/letsencrypt/archive/api.setara.kemdikbud.go.id/:/usr/src/app/ssl
+    # api_server:
+    #     build: 
+    #         context: .
+    #         dockerfile: Dockerfile
+    #     image: setara/api_server:release
+    #     container_name: api_server
+    #     env_file: prod.env
+    #     networks: 
+    #         - setara_lms_network
+    #     volumes: 
+    #         - ./public:/usr/src/app/public
+    #         - /etc/letsencrypt/archive/api.setara.kemdikbud.go.id/:/usr/src/app/ssl
+    #     ports:
+    #         - 8443:8443
+    #     depends_on:
+    #         - redis
+    #     command: npm run start
+    
+    redis:
+        image: redis:alpine
+        container_name: setara_redis
         ports:
-            - 8443:8443
-        command: npm run start
+            - 6379:6379
+        networks: 
+            - setara_lms_network
+        volumes: 
+            - redis_data:/data
+        command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+
+volumes: 
+    redis_data:
+        name: setara_redis_data
 
 networks: 
     setaralms_network:
-        name: setaralms_network
+        name: setara_lms_network
