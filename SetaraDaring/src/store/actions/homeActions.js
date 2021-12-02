@@ -15,6 +15,7 @@ export const initData = () => {
 
             dispatch({ type: LOAD_FEED, feed: resData.data })
         } catch (err) {
+            console.log(err)
             ErrorHandler(err)
         }
     }

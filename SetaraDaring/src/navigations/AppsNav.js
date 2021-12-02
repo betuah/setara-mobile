@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 import { useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from '../screen/apps/HomeScreen/HomeScreen';
+import QuizScreen from '../screen/apps/ClassScreen/quizScreen';
 
 import HomeNav from './HomeNav';
 import LibraryNav from './LibraryNav';
@@ -13,9 +15,10 @@ import NotifNav from './NotifNav';
 import ProfileNav from './ProfileNav';
 import ClassNav from './ClassNav';
 
+const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-const AppsNav = () => {
+const HomeTabs = () => {
     const { colors } = useTheme();
     const notifState = useSelector(state => state.notif.notif)
     const notif = notifState.map(item => item.read).filter(item => item === false)
@@ -96,6 +99,30 @@ const AppsNav = () => {
                 }}    
             />
         </Tab.Navigator>
+    )
+}
+
+const AppsNav = () => {
+
+    return (
+        <Stack.Navigator
+            initialRouteName="Home"
+        >
+            <Stack.Screen 
+                name="Home" 
+                component={HomeTabs} 
+                options={() => ({
+                    headerShown: false,
+                })}
+            />
+            <Stack.Screen 
+                name="Quiz" 
+                component={QuizScreen} 
+                options={() => ({
+                    headerShown: false,
+                })}
+            />
+        </Stack.Navigator>
     )
 };
 

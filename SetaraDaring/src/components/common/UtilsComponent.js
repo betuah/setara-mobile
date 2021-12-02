@@ -98,7 +98,7 @@ const Btn = props => {
                     </Fragment>
                 : 
                     <Fragment>
-                        { props.Icon && (props.IconType === 'ionic' ? 
+                        { props.Icon && !props.IconRight && (props.IconType === 'ionic' ? 
                             <Fragment>
                                 <IconIonic name={props.IconName} size={props.IconSize} color={props.IconColor} {...props.Icon} />
                                 <View style={{ width: 5, height: 1 }} />
@@ -120,6 +120,17 @@ const Btn = props => {
                                 {props.title}
                             </Text>
                         }
+                        { props.IconRight && (props.IconType === 'ionic' ? 
+                            <Fragment>
+                                <View style={{ width: 5, height: 1 }} />
+                                <IconIonic name={props.IconName} size={props.IconSize} color={props.IconColor} {...props.Icon} />
+                            </Fragment> 
+                            : 
+                            <Fragment>
+                            <View style={{ width: 5, height: 1 }} />
+                                <Icon name={props.IconName} size={props.IconSize} color={props.IconColor} {...props.Icon} />
+                            </Fragment>
+                            ) }
                     </Fragment>
             }
         </Button>

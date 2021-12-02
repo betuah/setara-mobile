@@ -45,7 +45,7 @@ const MateriScreen = ({route, navigation}) => {
             Toast.show({
                 type: 'error',
                 text1: 'Maaf, Terjadi Kesalah!',
-                text2: error
+                text2: `${error}`
             });
             setRefresh(false)
             setError(false)

@@ -27,7 +27,7 @@ export const detailKelas = (id) => {
 
             dispatch({type: DETAIL_CLASS, detailClass: resData})
         } catch (err) {
-            console.log(err.response.data, 'action')
+            // console.log(err.response.data, 'action')
             ErrorHandler(err)
         }
     }

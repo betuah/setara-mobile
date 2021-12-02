@@ -198,8 +198,8 @@ const AboutScreen = () => {
                                     </Text>
                                 </View>
                             </View>
-                        </View>                        
-                        <View style={{
+                        </View>                    
+                        {/* <View style={{
                             backgroundColor: colors.bgWhite,
                             marginTop: 10,
                             padding: 10,
@@ -304,7 +304,7 @@ const AboutScreen = () => {
                                     </View>
                                 </View>
                             </View>
-                        </View>
+                        </View> */}
                     </ImageBackground>
                 </View>
             </ScrollView>

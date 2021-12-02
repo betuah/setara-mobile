@@ -264,7 +264,7 @@ const Tugas_Modal = ({visible, onDismiss, id, onItemPress}) => {
                             Toast.show({
                                 type: 'error',
                                 text1: 'Maaf, Terjadi Kesalahan!',
-                                text2: error
+                                text2: `${error}`
                             });
                         }
                     }

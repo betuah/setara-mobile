@@ -20,7 +20,7 @@ export const isUserSignIn = data => {
         const data = await AsyncStorage.getItem('userData')
         const userData = JSON.parse(data)
 
-        console.log('AuthAct', userData)
+        // console.log('AuthAct', userData)
 
         dispatch({
             type: AUTHENTICATE,
@@ -84,7 +84,7 @@ export const signIn = data => {
                 status
             })
         } catch (err) {
-            console.log(err, config.base_url)
+            // console.log(err, config.base_url)
             ErrorHandler(err)
         }
     }

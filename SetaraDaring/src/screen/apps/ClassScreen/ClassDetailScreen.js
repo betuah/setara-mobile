@@ -21,6 +21,7 @@ import Devel from '../../../components/modal_component/Development_Modal';
 import MapelModal from '../../../components/modal_component/Mapel_modal';
 import MembersModal from '../../../components/modal_component/Members_modal';
 import TugasModal from '../../../components/modal_component/Tugas_Modal';
+import EvaluationModal from '../../../components/modal_component/Evaluation_Modal';
 
 const ClassDetailsScreen = ({navigation}) => {
     const { colors, fonts } = useTheme();
@@ -48,6 +49,7 @@ const ClassDetailsScreen = ({navigation}) => {
         silabus: false,
         materi: false,
         tugas: false,
+        evaluation: false,
     })
 
     const onMapelSliders = (index) => {
@@ -125,7 +127,7 @@ const ClassDetailsScreen = ({navigation}) => {
                 break;
 
             case 'nilai':
-                setDevel(true)
+                setModals('evaluation')
                 break;
         
             default:
@@ -142,6 +144,11 @@ const ClassDetailsScreen = ({navigation}) => {
     const onTugasPress = (id, title, date_created) => {
         hideModal('tugas')
         navigation.push('Tugas', { id, title, date_created })
+    }
+
+    const onEvalutionPress = (id, title, date_created) => {
+        hideModal('evaluation')
+        navigation.push('Evaluation', { id, title, date_created })
     }
 
     return (
@@ -169,6 +176,7 @@ const ClassDetailsScreen = ({navigation}) => {
             <SilabusModal visible={modal.silabus} onDismiss={hideModal} silabus={activeMapel ? activeMapel.silabus : false} />
             <MateriMapelModal visible={modal.materi} onDismiss={hideModal} id={activeMapel ? activeMapel.id : ''} onItemPress={onMateriPress} />
             <TugasModal visible={modal.tugas} onDismiss={hideModal} id={activeMapel ? activeMapel.id : ''} onItemPress={onTugasPress} />
+            <EvaluationModal navigation={navigation} visible={modal.evaluation} onDismiss={hideModal} id={activeMapel ? activeMapel.id : ''} onItemPress={onEvalutionPress} />
 
             <View style={{
                 flex: 3,

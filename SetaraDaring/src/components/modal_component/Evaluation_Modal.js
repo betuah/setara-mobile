@@ -1,7 +1,7 @@
-import React, { useEffect, useCallback, useState, useRef } from 'react';
+import React, { useEffect, useCallback, useState, useRef, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dimensions, View, TouchableOpacity, Image, FlatList, } from 'react-native';
-import { useTheme, Divider, TouchableRipple, Chip, Card } from 'react-native-paper';
+import { Dimensions, View, TouchableOpacity, Image, FlatList } from 'react-native';
+import { useTheme, Divider, TouchableRipple, Card } from 'react-native-paper';
 import { Text, Btn } from '../common/UtilsComponent';
 import { Transition, Transitioning } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -11,7 +11,7 @@ import Toast from 'react-native-toast-message';
 import LottieView from 'lottie-react-native';
 import Moment from 'moment';
 
-import * as materiAct from '../../store/actions/materiAction';
+import * as quizAct from '../../store/actions/evaluationAction';
 import * as authAct from '../../store/actions/authAction';
 
 const transition = (
@@ -27,18 +27,17 @@ const ListAcordition = ({
         onAccordionPress,
         nilai_akhir_modul, 
         status_modul ,
-        userRole, 
         colors, 
         fonts, 
         nama, 
-        materi,
+        quiz,
         onItemPress,
         onDismiss
     }) => {
 
     const onPress = () => {
         if (status_modul === 'locked') {
-            onDismiss('materi')
+            onDismiss('evaluation')
             Toast.show({
                 type: 'info',
                 text1: 'Modul Pelajaran Di Kunci.',
@@ -110,13 +109,7 @@ const ListAcordition = ({
                         alignItems: 'flex-end',
                         justifyContent: 'center',
                     }}>
-                        {/* <Animated.View style={{
-                            transform: [
-                                { rotate: transRotate },
-                            ]
-                        }}> */}
-                            <Icon name={currentIndex === index ? 'chevron-up-circle' : 'chevron-down-circle'} size={16} color={colors.bgPrimary} />
-                        {/* </Animated.View> */}
+                        <Icon name={currentIndex === index ? 'chevron-up-circle' : 'chevron-down-circle'} size={16} color={colors.bgPrimary} />
                     </View>
                 </View>
             </TouchableRipple>
@@ -124,70 +117,106 @@ const ListAcordition = ({
             {
                 currentIndex === index && 
                 <FlatList 
-                    data={materi}
+                    keyExtractor={item => item._id}
+                    data={quiz}
                     contentContainerStyle={{
                         flexDirection: 'column',
                     }}
-                    renderItem={(data) => {
-                        if (userRole === 'siswa' && data.item.status === 'draft') {
-                            return null
-                        } else {
-                            return (
-                            <>
-                                <TouchableRipple
-                                    onPress={() => onItemPress(data.item.id, data.item.judul, data.item.date_created)}
-                                    rippleColor="rgba(0, 208, 255, .20)"
-                                >
+                    renderItem={(data) => (
+                        <Fragment>
+                        <TouchableRipple
+                            onPress={() => onItemPress(data.item._id, data.item.nama, data.item.date_created)}
+                            rippleColor="rgba(0, 208, 255, .20)"
+                        >
+                            <View style={{
+                                flexDirection: 'row',
+                                paddingLeft: 40,
+                                paddingRight: 10,
+                            }}>
+                            <View style={{
+                                flex: 13,
+                                flexDirection: 'column',
+                            }}>
+                                <View style={{
+                                    paddingVertical: 5,
+                                    flexDirection: 'row',
+                                }}>
                                     <View style={{
-                                        paddingLeft: 40,
-                                        paddingVertical: 8,
-                                        paddingRight: 10,
-                                        flexDirection: 'row',
+                                        alignItems: 'flex-start',
+                                        justifyContent: 'center',
                                     }}>
-                                        <View style={{
-                                            alignItems: 'flex-start',
-                                            justifyContent: 'center',
-                                        }}>
-                                            <Icon name={'bookmark-check'} size={16} color={colors.bgPrimary} />
-                                        </View>
-                                        <View style={{
-                                            flexDirection: 'column',
-                                            flex: 13,
-                                            marginLeft: 5,
-                                            alignItems: 'flex-start',
-                                            justifyContent: 'center',
-                                        }}>
-                                            <View>
-                                                <Text
-                                                    size={12}
-                                                    color={colors.textPrimary}
-                                                    fontWeight={{...fonts.medium}}
-                                                >
-                                                    {data.item.judul}
-                                                </Text>
-                                            </View>
-                                        </View>
-                                        { data.item.status === 'draft' &&
-                                            <Chip 
-                                                style={{backgroundColor: colors.bgPrimary, alignItems: 'flex-end',}}
-                                                textStyle={{color: colors.textWhite}}
+                                        <Icon name={'bookmark-check'} size={16} color={colors.bgPrimary} />
+                                    </View>
+                                    <View style={{
+                                        flexDirection: 'column',
+                                        flex: 13,
+                                        marginLeft: 5,
+                                        alignItems: 'flex-start',
+                                        justifyContent: 'center',
+                                    }}>
+                                        <View>
+                                            <Text
+                                                size={12}
+                                                color={colors.textPrimary}
+                                                fontWeight={{...fonts.medium}}
                                             >
-                                                Draft
-                                            </Chip>
-                                        }
-                                        <View style={{
-                                            flex: 1,
-                                            alignItems: 'flex-end',
-                                            justifyContent: 'center'
-                                        }}>
-                                            <Icon name={'chevron-right'} size={18} color={colors.bgPrimary} />
+                                                {data.item.nama}
+                                            </Text>
                                         </View>
                                     </View>
-                                </TouchableRipple>
-                                {data.index === (materi.length - 1) ? null : <Divider />}
-                            </>)
-                        }
-                    }}
+                                </View>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    paddingVertical: 10,
+                                }}>
+                                    <View style={{
+                                        // flex: 1,
+                                        // flexDirection: 'row'
+                                    }}>
+                                        <Text
+                                            style={{
+                                                backgroundColor: data.item.status_code === 2 ? colors.darkGreen : (data.item.status_code === 1 ? colors.orange2 : colors.red),
+                                                borderRadius: 5,
+                                                paddingHorizontal: 10,
+                                            }}
+                                            size={12}
+                                            color={colors.textWhite}
+                                            fontWeight={{...fonts.medium}}
+                                        >
+                                            {data.item.status_kumpul}
+                                        </Text>
+                                    </View>
+                                    <View style={{
+                                        flex: 1,
+                                        alignItems: 'flex-end'
+                                    }}>
+                                        <Text
+                                            style={{
+                                                backgroundColor: colors.blue,
+                                                borderRadius: 5,
+                                                paddingHorizontal: 10,
+                                            }}
+                                            size={12}
+                                            color={colors.textWhite}
+                                            fontWeight={{...fonts.medium}}
+                                        >
+                                            {`Nilai Quiz : ${data.item.nilai_quiz ? data.item.nilai_quiz : '-'}`}
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={{
+                                flex: 1,
+                                alignItems: 'flex-end',
+                                justifyContent: 'center'
+                            }}>
+                                <Icon name={'chevron-right'} size={18} color={colors.bgPrimary} />
+                            </View>
+                            </View>
+                        </TouchableRipple>
+                        {data.index === (quiz.length - 1) ? null : <Divider />}
+                    </Fragment>
+                    )}
                 />
             }
 
@@ -196,64 +225,66 @@ const ListAcordition = ({
     )
 }
 
-const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
+const Evaluation_Modal = ({visible, onDismiss, id, onItemPress, navigation}) => {
     const { colors, fonts } = useTheme()
     const dispatch = useDispatch()
     const insets = useSafeAreaInsets();
 
     const AcordionRef = useRef()
 
-    const materiState = useSelector(state => state.materi)
+    const quizState = useSelector(state => state.evaluation)
     const authState = useSelector(state => state.auth)
     
     const [isLoading, setLoading] = useState(false)
-    const [cAccIndex, setcAccIndex] = useState(null)
-        
+    const [cAccIndex, setcAccIndex] = useState(null)    
+    
     useEffect(
         useCallback(() => {
             let isActive = true
 
-            if (visible) loadData(id)
+            const loadData = async id => {
+                try {
+                    if (isActive) {
+                        setLoading(true)
+                        await dispatch(quizAct.loadListQuiz(id))
+                        setLoading(false)
+                    }
+                } catch (error) {
+                    if (isActive) {
+                        setLoading(false)
+                        onDismiss('evaluation')
+                        if (error === 'ERR_GENERATE_TOKEN') {
+                            dispatch(authAct.signOut(true))
+                            Toast.show({
+                                type: 'error',
+                                text1: 'Maaf, Sesi kamu telah Habis!',
+                                text2: 'Silahkan masuk kembali.'
+                            });
+                        } else {
+                            Toast.show({
+                                type: 'error',
+                                text1: 'Maaf, Terjadi Kesalahan!',
+                                text2: `${error}`
+                            });
+                        }
+                    }
+                }
+            }
+
+            if (visible && isActive) loadData(id)
 
             return () => {
                 isActive = false
             }
-        }, [visible, dispatch, materiState])
+        }, [visible, dispatch, quizState])
     , [visible])
-
-    const loadData = async id => {
-        setLoading(true)
-        try {
-            await dispatch(materiAct.loadListMateri(id))
-            setLoading(false)
-        } catch (error) {
-            setLoading(false)
-            onDismiss('materi')
-            if (error === 'ERR_GENERATE_TOKEN') {
-                dispatch(authAct.signOut(true))
-                Toast.show({
-                    type: 'error',
-                    text1: 'Maaf, Sesi kamu telah Habis!',
-                    text2: 'Silahkan masuk kembali.'
-                });
-            } else {
-                Toast.show({
-                    type: 'error',
-                    text1: 'Maaf, Terjadi Kesalahan!',
-                    text2: `${error}`
-                });
-            }
-        }
-    }
 
     return (
         <Modal
             isVisible={visible}
-            onBackdropPress={() => onDismiss('materi')}
+            onBackdropPress={() => onDismiss('evaluation')}
             style={{
                 justifyContent: 'flex-end',
-                // marginHorizontal: 15,
-                // marginBottom: 15
                 margin: 0,
             }}
         >
@@ -288,13 +319,13 @@ const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
                             zIndex: 100,
                         }}
                     >
-                        <TouchableOpacity onPress={() => onDismiss('materi')}>
+                        <TouchableOpacity onPress={() => onDismiss('evaluation')}>
                             <Icon name='close' size={16} color={colors.textWhite} />
                         </TouchableOpacity>
                         
                     </View>
-                    <Text size={15} fontWeight={fonts.bold} color={colors.textWhite}>MATERI</Text>
-                    <Text size={11} fontWeight={fonts.regular} color={colors.textWhite}>Daftar materi pelajaran dalam mapel yang kamu pilih.</Text>
+                    <Text size={15} fontWeight={fonts.bold} color={colors.textWhite}>EVALUASI</Text>
+                    <Text size={11} fontWeight={fonts.regular} color={colors.textWhite}>Daftar quiz yang tersedia di setiap modul.</Text>
                 </View>
                     { 
                         isLoading ? 
@@ -311,15 +342,15 @@ const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
                                 />
                             </View>
                         :
-                        ( materiState.listMateri.length > 0 ? 
+                        ( quizState.listQuiz.length > 0 ? 
                             <Transitioning.View
                                 ref={AcordionRef}
                                 transition={transition}
                                 style={{flex: 1, }}
                             >
                             <FlatList 
-                                data={materiState.listMateri.sort((a, b) => Moment(a.date_created) - Moment(b.date_created))}
-                                extraData={materiState.listMateri.sort((a, b) => Moment(a.date_created) - Moment(b.date_created))}
+                                data={quizState.listQuiz.sort((a, b) => Moment(a.date_created) - Moment(b.date_created))}
+                                extraData={quizState.listQuiz.sort((a, b) => Moment(a.date_created) - Moment(b.date_created))}
                                 keyExtractor={item => item._id.toString()}
                                 renderItem={(data) => 
                                     <ListAcordition 
@@ -352,7 +383,7 @@ const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
                                     }}
                                     resizeMode='contain'
                                 />
-                                <Text style={{textAlign: 'center', marginTop: 10,}} fontWeight={fonts.regular} color={colors.textPrimary}>Modul Tidak Tersedia.</Text>
+                                <Text style={{textAlign: 'center', marginTop: 10,}} fontWeight={fonts.regular} color={colors.textPrimary}>Evaluasi Tidak Tersedia.</Text>
                             </View>
                         )
                     }
@@ -370,7 +401,7 @@ const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
                         }} 
                         fontColor={colors.textWhite} 
                         fontSize={14} 
-                        onPress={() => onDismiss('materi')}
+                        onPress={() => onDismiss('evaluation')}
                     />
                 </Card.Actions>
             </Card>
@@ -378,4 +409,4 @@ const MateriMapel_Modal = ({visible, onDismiss, id, onItemPress}) => {
     )
 }
 
-export default MateriMapel_Modal;
+export default Evaluation_Modal;

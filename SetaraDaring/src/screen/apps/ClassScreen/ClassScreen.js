@@ -85,6 +85,7 @@ const ClassScreen = ({ navigation }) => {
             navigation.navigate('DetailKelas')
             setLoading(false)
         } catch (error) {
+            console.log(error,'mgen')
             if (error === 'ERR_GENERATE_TOKEN') {
                 dispatch(authAct.signOut(true))
                 Toast.show({
@@ -96,7 +97,7 @@ const ClassScreen = ({ navigation }) => {
             Toast.show({
                 type: 'error',
                 text1: 'Maaf, Terjadi Kesalahan!',
-                text2: error
+                text2: `${error}`
             });
             setLoading(false)
         }
@@ -128,7 +129,7 @@ const ClassScreen = ({ navigation }) => {
             Toast.show({
                 type: 'error',
                 text1: 'Maaf, Gagal Bergabung kelas!',
-                text2: error
+                text2: `${error}`
             })
             setJoinClassInput('')
             setJoinClassModal(false)

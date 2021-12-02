@@ -15,6 +15,7 @@ const initState = {
 const auth = (state = initState, actions) => {
     switch (actions.type) {
         case AUTHENTICATE:
+            // console.log(actions)
             return {
                 ...state,
                 token: actions.token,

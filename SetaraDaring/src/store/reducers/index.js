@@ -9,6 +9,7 @@ import ProfileReducer from './ProfileReducer';
 import ClassReducer from './ClassReducer';
 import MateriReducer from './MateriReducer';
 import TugasReducer from './TugasReducer';
+import EvaluationReducer from './EvaluationReducer';
 
 const rootReducer = combineReducers({
     theme: ThemeReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     profile: ProfileReducer,
     class: ClassReducer,
     materi: MateriReducer,
-    tugas: TugasReducer
+    tugas: TugasReducer,
+    evaluation: EvaluationReducer
 });
 
 export default rootReducer
