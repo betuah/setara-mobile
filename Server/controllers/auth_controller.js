@@ -1,8 +1,10 @@
 const bcrypt  = require('bcryptjs') // Import bcrypt
+const mongoose = require('mongoose')
 const env     = require('../env') // Import Environment config
 const User    = require('../models/usersData.model') // Import User Model
 const Kelas   = require('../models/kelasData.model') // Import Kelas Model
 const AnggotaKel = require('../models/anggotaKelas.model') // Import Anggota Kelas Model
+const SekolahInd = require('../models/sekolahInduk.model') // Import Sekolah Induk Model
 
 /*
 * Start Import Auth Service
@@ -16,6 +18,7 @@ const {
     setTokenCookie,
     refreshToken
 } = require('../services/authService')
+const { Mongoose } = require('mongoose')
 /* End Import Auth Service */
 
 const index = async (req, res) => {
@@ -45,6 +48,9 @@ const signIn = async (req, res) => {
             // save refresh token to database from Auth Service
             await refreshToken.save()
 
+            // Find School Name
+            const sekolahInduk = await SekolahInd.findOne({ _id: mongoose.Types.ObjectId(user.sekolah) })
+
             // return user details and tokens
             const resData = {
                 code: 'OK',
@@ -56,7 +62,7 @@ const signIn = async (req, res) => {
                     email: user.email,
                     status: user.status,
                     picture: `${env.picture_path}${user.foto}`,
-                    sekolah: user.sekolah
+                    sekolah: sekolahInduk.nama_sekolah_induk
                 },
                 accessToken : jwtToken,
                 refreshToken: refreshToken.token

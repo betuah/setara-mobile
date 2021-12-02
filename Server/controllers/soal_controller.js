@@ -75,7 +75,7 @@ const getAllSoal = (paketId) => new Promise(async (resolve, reject) => {
                         jml_soal: soal.length,
                         soal: listDataSoal
                     }
-                    redisClient.set(paketId, JSON.stringify(tmpArr), 'EX', 60 * 60 * 24 * 7)
+                    redisClient.set(paketId, JSON.stringify(tmpArr), 'EX', 60 * 60 * 24 * 1)
                     resolve({
                         ...tmpArr,
                         soal: tmpArr.soal.map(itemSoal => {
@@ -276,23 +276,30 @@ exports.getQuizDetail = async (req, res) => {
         let status_kumpul
         let status_code
 
-        const quizData = await Quiz.findOne({ _id: id})
+        const quizData  = await Quiz.findOne({ _id: id})
+        const getSoal   = await getAllSoal(quizData.id_paket)
+        const countSoal = getSoal.soal.length
 
         QuizKumpul.findOne({ id_user: userId, id_quiz: id}).then(quizKumpulData => {
             nilai_quiz      = quizKumpulData.nilai
             status_kumpul   = 'Sudah Mengerjakan'
             status_code     = 2
+            jml_soal        = countSoal
         }).catch( e => {
             let today       = new Date()
             let deadline    = new Date(quizData && quizData.end_date)
 
+            nilai_quiz      = 0
             status_kumpul   = ((deadline-today) > 0) ? 'Belum Mengerjakan':'Tidak Mengerjakan'
             status_code     = ((deadline-today) > 0) ? 1 : 0
+            jml_soal        = countSoal
         }).finally(() => {
             tempQuiz = {
                 ...quizData ? quizData._doc : {},
+                nilai_quiz: nilai_quiz,
                 status_kumpul: status_kumpul,
-                status_code: status_code
+                status_code: status_code,
+                jml_soal: countSoal
             }
 
             if (quizData) {
@@ -363,8 +370,12 @@ exports.jawabanQuiz = async (req, res) => {
                     resolve(JSON.parse(reply))
                     return
                 } else {
-                    const storeSoal = await this.getAllSoal(key)
-                    resolve(storeSoal)
+                    try {
+                        const storeSoal = await getAllSoal(key)
+                        resolve(storeSoal)
+                    } catch (error) {
+                        reject(error)
+                    }
                 }
             })
         })
@@ -373,7 +384,8 @@ exports.jawabanQuiz = async (req, res) => {
         const listSoal       = tmpSoal.soal
         const answerData     = listSoal.length === userAnswer.length ? userAnswer : (function(){ throw ({code: 400, err: "Invalid Request! Questions and answers amount are not the same."})}()) 
         const checkAnswer    = answerData.map(answerItem => {
-            const statusOpsi = listSoal.find(listItem => listItem.id_soal === answerItem.id_soal).opsi.find(opsiItem => opsiItem.id_opsi === answerItem.id_opsi).status
+            const statusOpsiTmp = listSoal.find(listItem => listItem.id_soal === answerItem.id_soal).opsi.find(opsiItem => opsiItem.id_opsi === answerItem.id_opsi)
+            const statusOpsi    = statusOpsiTmp !== undefined ? statusOpsiTmp.status : 0
             return {
                 id_quiz: quizId,
                 id_soal: answerItem.id_soal,
@@ -418,6 +430,7 @@ exports.jawabanQuiz = async (req, res) => {
                     })
             })
         }).catch(err => {
+            console.log(err)
             res.status(500).json({
                 code: 'ERR',
                 status: 'ERROR_SAVE_ANSWER',

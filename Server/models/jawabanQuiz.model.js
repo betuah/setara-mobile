@@ -21,7 +21,6 @@ const jawabanQuiz = new Schema({
     id_opsi_soal : {
         type: String,
         trim: true,
-        required: true,
     },
     status : {
         type: String,

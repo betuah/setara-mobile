@@ -35,5 +35,5 @@ volumes:
         name: setara_redis_data
 
 networks: 
-    setaralms_network:
+    setara_lms_network:
         name: setara_lms_network

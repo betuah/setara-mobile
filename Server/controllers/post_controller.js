@@ -230,9 +230,8 @@ exports.getAllPosting = async (req, res) => {
                         }
                     })
                 }else{
-                    reject([])
+                    resolve([])
                 }
-
             } else {
                 resolve([])
             }
