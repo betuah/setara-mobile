@@ -521,7 +521,7 @@ const ClassDetailsScreen = ({navigation}) => {
                             }}
                         >
                             <Icon name='pulse' size={25} color={colors.navMapelPrimary} />
-                            <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Raport</Text>
+                            <Text fontWeight={fonts.medium} size={9} color={colors.navMapelPrimary}>Perkembangan</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={{
@@ -549,7 +549,27 @@ const ClassDetailsScreen = ({navigation}) => {
                             }}
                         >
                             <Icon name='document-text' size={25} color={colors.navMapelPrimary} />
-                            <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Tugas</Text>
+                            <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Penugasan</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => navIconHandller('nilai')}
+                            activeOpacity={0.65}
+                            style={{
+                                width: 90,
+                                height: 90,
+                                padding: 8,
+                                marginHorizontal: 5,
+                                backgroundColor: colors.navMapelBg,
+                                borderRadius: 10,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderWidth: 1,
+                                borderColor: colors.navMapelBorder,
+                                borderStyle: 'dotted',
+                            }}
+                        >
+                            <Icon name='ribbon' size={25} color={colors.navMapelPrimary} />
+                            <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Penilaian</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={() => navIconHandller('diskusi')}
@@ -570,26 +590,6 @@ const ClassDetailsScreen = ({navigation}) => {
                         >
                             <Icon name='chatbubbles' size={25} color={colors.navMapelPrimary} />
                             <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Diskusi</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => navIconHandller('nilai')}
-                            activeOpacity={0.65}
-                            style={{
-                                width: 90,
-                                height: 90,
-                                padding: 8,
-                                marginHorizontal: 5,
-                                backgroundColor: colors.navMapelBg,
-                                borderRadius: 10,
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                borderWidth: 1,
-                                borderColor: colors.navMapelBorder,
-                                borderStyle: 'dotted',
-                            }}
-                        >
-                            <Icon name='ribbon' size={25} color={colors.navMapelPrimary} />
-                            <Text fontWeight={fonts.medium} size={11} color={colors.navMapelPrimary}>Evaluasi</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
