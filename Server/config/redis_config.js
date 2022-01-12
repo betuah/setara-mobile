@@ -1,7 +1,7 @@
 const redis = require("redis")
 const env   = require('../env')
 const fs    = require("fs")
-const ssl   = {}
+let ssl     = {}
 
 const config = {
     port      : env.redis.port,             
