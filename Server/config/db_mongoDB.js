@@ -3,7 +3,7 @@ const env       = require('../env');
 
 // Lms Mongo Connection
 const mongoConnLms = mongoose.createConnection(`mongodb://${env.mongoDB.host}:${env.mongoDB.port}/${env.mongoDB.databaseLms.db}`, {
-    auth: { "authSource": "admin" }, // Auth db
+    // auth: { "authSource": "admin" }, // Auth db
     user: env.mongoDB.databaseLms.username, // MongoDB LMS Server username
     pass: env.mongoDB.databaseLms.password, // MongoDB LMS Server password
     useNewUrlParser: true,
@@ -15,7 +15,7 @@ const mongoConnLms = mongoose.createConnection(`mongodb://${env.mongoDB.host}:${
 
 // Log Mongo Connection
 const mongoConnLog = mongoose.createConnection(`mongodb://${env.mongoDB.host}:${env.mongoDB.port}/${env.mongoDB.databaseLog.db}`, {
-    auth: { "authSource": "admin" }, // Auth db
+    // auth: { "authSource": "admin" }, // Auth db
     user: env.mongoDB.databaseLog.username, // MongoDB LOG Server username
     pass: env.mongoDB.databaseLog.password, // MongoDB LOG Server password
     useNewUrlParser: true,
